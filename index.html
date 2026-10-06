@@ -625,6 +625,181 @@
       margin-bottom: 0.45rem;
     }
 
+    /* Workflow Pipeline Section */
+    .workflow-section {
+      background: rgba(15, 23, 42, 0.65);
+      border: 1px solid rgba(56, 189, 248, 0.2);
+      border-radius: 20px;
+      padding: 3rem 2.5rem;
+      margin-bottom: 3.5rem;
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.7);
+    }
+    .workflow-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      flex-wrap: wrap;
+      gap: 1.5rem;
+      margin-bottom: 2rem;
+    }
+    .workflow-title-box h2 {
+      font-size: 1.8rem;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      margin-bottom: 0.5rem;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+    .workflow-title-box p {
+      color: var(--text-muted);
+      font-size: 0.95rem;
+      max-width: 650px;
+    }
+    .pipeline-controls {
+      display: flex;
+      gap: 0.5rem;
+      align-items: center;
+    }
+    .pipeline-pulse-btn {
+      background: rgba(56, 189, 248, 0.1);
+      border: 1px solid rgba(56, 189, 248, 0.4);
+      color: var(--cyan);
+      padding: 0.5rem 1rem;
+      border-radius: 9999px;
+      font-family: var(--font-mono);
+      font-size: 0.8rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      transition: all 0.2s ease;
+    }
+    .pipeline-pulse-btn:hover {
+      background: rgba(56, 189, 248, 0.2);
+      box-shadow: 0 0 15px rgba(56, 189, 248, 0.3);
+    }
+    
+    /* Interactive Flow Nodes Container */
+    .flow-pipeline-container {
+      position: relative;
+      margin: 2.5rem 0 1.5rem;
+    }
+    
+    /* Flow SVG Overlay */
+    .flow-svg-overlay {
+      width: 100%;
+      height: 120px;
+      position: relative;
+    }
+    .flow-line-base {
+      stroke: rgba(255, 255, 255, 0.1);
+      stroke-width: 3;
+      fill: none;
+    }
+    .flow-line-pulse {
+      stroke: var(--cyan);
+      stroke-width: 3;
+      fill: none;
+      stroke-dasharray: 8 16;
+      animation: flowDash 1.2s linear infinite;
+      filter: drop-shadow(0 0 8px rgba(56, 189, 248, 0.8));
+    }
+    .flow-line-pulse-purple {
+      stroke: var(--purple);
+      stroke-width: 3;
+      fill: none;
+      stroke-dasharray: 8 16;
+      animation: flowDash 1.2s linear infinite;
+      filter: drop-shadow(0 0 8px rgba(129, 140, 248, 0.8));
+    }
+    @keyframes flowDash {
+      to {
+        stroke-dashoffset: -48;
+      }
+    }
+
+    .flow-stages-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 1rem;
+      margin-top: -1.5rem;
+      position: relative;
+      z-index: 2;
+    }
+    .flow-stage-card {
+      background: rgba(30, 41, 59, 0.85);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 12px;
+      padding: 1.2rem;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      position: relative;
+    }
+    .flow-stage-card:hover, .flow-stage-card.active {
+      border-color: var(--cyan);
+      background: rgba(30, 41, 59, 0.98);
+      transform: translateY(-4px);
+      box-shadow: 0 10px 25px -5px rgba(56, 189, 248, 0.25);
+    }
+    .flow-stage-card.active::after {
+      content: '';
+      position: absolute;
+      bottom: -6px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 40%;
+      height: 3px;
+      background: var(--cyan);
+      border-radius: 9999px;
+      box-shadow: 0 0 10px var(--cyan);
+    }
+    .stage-idx {
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      color: var(--cyan);
+      letter-spacing: 0.05em;
+      margin-bottom: 0.4rem;
+      display: block;
+    }
+    .stage-title {
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: var(--text-main);
+      margin-bottom: 0.35rem;
+    }
+    .stage-metric {
+      font-size: 0.78rem;
+      color: var(--text-dim);
+      font-family: var(--font-mono);
+    }
+
+    /* Live Pipeline Console */
+    .pipeline-console {
+      margin-top: 1.5rem;
+      background: rgba(10, 15, 29, 0.95);
+      border: 1px solid rgba(56, 189, 248, 0.25);
+      border-radius: 10px;
+      padding: 1.25rem;
+      font-family: var(--font-mono);
+      font-size: 0.85rem;
+      color: #94a3b8;
+      display: flex;
+      flex-direction: column;
+      gap: 0.4rem;
+    }
+    .console-header-row {
+      display: flex;
+      justify-content: space-between;
+      color: var(--text-dim);
+      font-size: 0.75rem;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      padding-bottom: 0.5rem;
+      margin-bottom: 0.25rem;
+    }
+
     /* Footer */
     footer {
       border-top: 1px solid rgba(255, 255, 255, 0.06);
@@ -740,6 +915,87 @@
         <div style="margin-top:1rem; display:flex; gap:0.5rem;">
           <button class="btn btn-primary" style="flex:1; justify-content:center;" onclick="triggerElyraTriage()">⚡ Run Telemetry Triage</button>
           <a href="https://github.com/freshstart2066-create/elyra" target="_blank" class="btn btn-secondary">Source Code</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Interactive System Architecture & Execution Workflow Section -->
+    <section class="workflow-section" id="architecture-pipeline">
+      <div class="workflow-header">
+        <div class="workflow-title-box">
+          <h2>⚡ System Execution &amp; Telemetry Pipeline</h2>
+          <p>
+            Real-time visual map of the on-device Edge AI ingestion, memory budgeting, local quantization routing, tool actuation, and statistical anomaly detection loops.
+          </p>
+        </div>
+        <div class="pipeline-controls">
+          <button class="pipeline-pulse-btn" onclick="simulatePipelineCycle()">
+            <span class="pulse-dot"></span> Run Pipeline Cycle
+          </button>
+        </div>
+      </div>
+
+      <!-- Flow SVG Animated Lines -->
+      <div class="flow-pipeline-container">
+        <svg class="flow-svg-overlay" viewBox="0 0 1000 80" preserveAspectRatio="none">
+          <defs>
+            <linearGradient id="cyanPurpleGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+              <stop offset="0%" stop-color="#38bdf8" />
+              <stop offset="50%" stop-color="#818cf8" />
+              <stop offset="100%" stop-color="#34d399" />
+            </linearGradient>
+          </defs>
+          <!-- Base background tracks -->
+          <path d="M 100 40 L 300 40 L 500 40 L 700 40 L 900 40" class="flow-line-base" />
+          <!-- Animated glowing pulse lines -->
+          <path d="M 100 40 L 300 40 L 500 40 L 700 40 L 900 40" class="flow-line-pulse" id="flow-pulse-track" />
+          <!-- Flowing connector arches -->
+          <path d="M 300 40 Q 400 10 500 40" class="flow-line-pulse-purple" />
+          <path d="M 500 40 Q 600 70 700 40" class="flow-line-pulse" />
+        </svg>
+
+        <!-- Stage Cards Grid -->
+        <div class="flow-stages-grid">
+          <div class="flow-stage-card active" id="stage-0" onclick="selectPipelineStage(0)">
+            <span class="stage-idx">STAGE 01</span>
+            <div class="stage-title">🎙️ Sensor Ingestion</div>
+            <div class="stage-metric">Web Audio DSP &amp; Sensors</div>
+          </div>
+
+          <div class="flow-stage-card" id="stage-1" onclick="selectPipelineStage(1)">
+            <span class="stage-idx">STAGE 02</span>
+            <div class="stage-title">🪟 Sliding Context</div>
+            <div class="stage-metric">2,048 Tokens (FIFO Evict)</div>
+          </div>
+
+          <div class="flow-stage-card" id="stage-2" onclick="selectPipelineStage(2)">
+            <span class="stage-idx">STAGE 03</span>
+            <div class="stage-title">🧠 Quantized Router</div>
+            <div class="stage-metric">Qwen 2.5 / Llama GGUF</div>
+          </div>
+
+          <div class="flow-stage-card" id="stage-3" onclick="selectPipelineStage(3)">
+            <span class="stage-idx">STAGE 04</span>
+            <div class="stage-title">🛠️ Tool Dispatch</div>
+            <div class="stage-metric">Deterministic Schema Call</div>
+          </div>
+
+          <div class="flow-stage-card" id="stage-4" onclick="selectPipelineStage(4)">
+            <span class="stage-idx">STAGE 05</span>
+            <div class="stage-title">📊 Anomaly Filter</div>
+            <div class="stage-metric">Rolling Z-Score (z &lt; 2.5)</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Live Stage Console Logs -->
+      <div class="pipeline-console" id="pipeline-console-log">
+        <div class="console-header-row">
+          <span>ACTIVE PIPELINE TRACE // ELYRA_RUNTIME</span>
+          <span id="pipeline-stage-tag" style="color:var(--cyan)">STAGE 01: SENSOR INGESTION</span>
+        </div>
+        <div id="pipeline-log-content">
+          &gt; INGESTION_BUS: Sampling Web Audio DSP &amp; Android accelerometer at 44.1 kHz. Frame buffer nominal. Sub-50ms latency locked.
         </div>
       </div>
     </section>
@@ -1331,6 +1587,60 @@ Type one of the following commands:
         body.innerHTML += `\n\n<span style="color:#f43f5e">&gt; Command '${cmd}' not recognized. Try 'elyra', 'cherub', 'opap', 'clear'.</span>`;
       }
       body.scrollTop = body.scrollHeight;
+    }
+
+    // 6. Interactive Workflow Pipeline Engine
+    const pipelineStages = [
+      {
+        tag: "STAGE 01: SENSOR INGESTION",
+        log: "> INGESTION_BUS: Sampling Web Audio DSP & Android accelerometer at 44.1 kHz. Frame buffer nominal. Sub-50ms latency locked."
+      },
+      {
+        tag: "STAGE 02: SLIDING CONTEXT",
+        log: "> MEMORY_MANAGER: Active window 412/2048 tokens. FIFO eviction threshold at 85%. Zero OOM risk detected on ARM64 host."
+      },
+      {
+        tag: "STAGE 03: QUANTIZED ROUTER",
+        log: "> INFERENCE_ROUTER: Local Ollama daemon active. Qwen 2.5 3B (Q4_K_M) dispatching at 28.4 tok/s. Zero cloud egress."
+      },
+      {
+        tag: "STAGE 04: TOOL DISPATCH",
+        log: "> TOOL_REGISTRY: Schema parsed: `get_device_telemetry()`. Polling psutil CPU load, battery thermals, and network latency."
+      },
+      {
+        tag: "STAGE 05: ANOMALY FILTER",
+        log: "> TELEMETRY_ENGINE: Rolling Z-Score matrix computed (z = 0.42 < 2.50 threshold). State: NOMINAL. Feedback delivered to APK UI."
+      }
+    ];
+
+    function selectPipelineStage(idx) {
+      document.querySelectorAll('.flow-stage-card').forEach((card, i) => {
+        card.classList.toggle('active', i === idx);
+      });
+      const tag = document.getElementById('pipeline-stage-tag');
+      const log = document.getElementById('pipeline-log-content');
+      if (tag && log && pipelineStages[idx]) {
+        tag.textContent = pipelineStages[idx].tag;
+        log.innerHTML = pipelineStages[idx].log;
+      }
+    }
+
+    let isSimulatingPipeline = false;
+    function simulatePipelineCycle() {
+      if (isSimulatingPipeline) return;
+      isSimulatingPipeline = true;
+      let currentStage = 0;
+      
+      const interval = setInterval(() => {
+        selectPipelineStage(currentStage);
+        currentStage++;
+        if (currentStage >= pipelineStages.length) {
+          clearInterval(interval);
+          setTimeout(() => {
+            isSimulatingPipeline = false;
+          }, 800);
+        }
+      }, 700);
     }
   </script>
 </body>
