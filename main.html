@@ -622,8 +622,11 @@
                 </div>
               </div>
 
-              <div style="margin-top:16px;">
+              <div style="margin-top:16px;display:flex;flex-wrap:wrap;gap:8px;">
                 <button class="btn btn-primary" type="button" onclick="simulateTelemetryTriage()">⚡ Run Live Device Triage</button>
+                <button class="btn" style="border-color:#ef4444;color:#ef4444;" type="button" onclick="injectThermalSurge()">⚠️ Inject Thermal Surge (+18&deg;C)</button>
+                <button class="btn" style="border-color:#eab308;color:#b45309;" type="button" onclick="injectRamSaturation()">🛑 Simulate RAM Saturation (+6.8 GB)</button>
+                <button class="btn" type="button" onclick="resetNominalBaseline()">🔄 Reset Baseline</button>
                 <button class="btn" type="button" onclick="openPanel('memory')">Inspect Memory Buffer</button>
               </div>
             </div>
@@ -716,6 +719,20 @@
               <h3>☁️ Cloud Reasoner Fallback</h3>
               <p>Automatically activated when prompt complexity exceeds edge parameters and external connectivity is permitted. Strictly gated by local privacy rules.</p>
             </article>
+          </div>
+
+          <!-- INTERACTIVE QUANTIZED SLM STREAMING RUNNER -->
+          <div class="terminal-card" style="margin-top:20px;">
+            <div class="terminal-card-head">
+              <span>LIVE SLM TOKEN STREAM RUNNER // ARM64 NPU EMULATOR</span>
+              <span id="slm-stream-status">STANDBY</span>
+            </div>
+            <div style="padding:14px;background:rgba(255,255,255,0.03);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;border-bottom:1px solid rgba(255,255,255,0.08);">
+              <div style="font-size:13px;color:#8fa6bd;">Prompt: <b>[Autonomous Sensor Diagnostic &amp; Conjunction Screening]</b></div>
+              <button class="btn btn-primary" id="slm-stream-btn" type="button" onclick="runTokenStreamTest()">▶ Run Quantized SLM Streaming</button>
+            </div>
+            <div class="terminal-output" id="slm-stream-output" style="min-height:110px;">[READY FOR INFERENCE BENCHMARK]
+Click "Run Quantized SLM Streaming" to test on-device token generation throughput and first-token latency...</div>
           </div>
         </section>
 
@@ -1167,8 +1184,18 @@ Type: triage, models, memory, telemetry, apk, specs, clear, help</div>
     });
 
     function checkHash() {
+      const q = location.search.toLowerCase();
       const h = (location.hash || '').replace('#', '').toLowerCase();
       if (panelIds.includes(h)) openPanel(h);
+      else if (q.includes('telemetry')) openPanel('telemetry');
+      else if (q.includes('models')) openPanel('models');
+      else if (q.includes('architecture')) openPanel('architecture');
+      else if (q.includes('memory')) openPanel('memory');
+      else if (q.includes('specs')) openPanel('specs');
+
+      if (q.includes('surge=1') || h.includes('surge')) setTimeout(injectThermalSurge, 250);
+      else if (q.includes('ram=1') || h.includes('ram')) setTimeout(injectRamSaturation, 250);
+      if (q.includes('stream=1') || h.includes('stream')) setTimeout(runTokenStreamTest, 250);
     }
     window.addEventListener('hashchange', checkHash);
     setTimeout(checkHash, 100);
@@ -1239,6 +1266,131 @@ Type: triage, models, memory, telemetry, apk, specs, clear, help</div>
       document.getElementById('telemetry-log-output').innerHTML = log;
       document.getElementById('telemetry-clock').textContent = `LIVE // ${now}`;
       say('Telemetry Triage Sample Updated');
+    }
+
+    function injectThermalSurge() {
+      playTacticalTone(350, 'sawtooth', 0.25);
+      const temp = 49.2;
+      const zScore = '+3.82';
+      document.getElementById('metric-temp-val').textContent = `${temp} °C`;
+      document.getElementById('metric-temp-fill').style.width = '100%';
+      document.getElementById('metric-temp-fill').style.background = '#ef4444';
+      document.getElementById('metric-temp-tag').textContent = 'CRITICAL';
+      document.getElementById('metric-temp-tag').style.color = '#ef4444';
+
+      const now = new Date().toTimeString().split(' ')[0];
+      const log = `[${now}] ⚠️ ANOMALY_TRIGGERED: THERMAL SURGE INJECTION
+&bull; Sensor: Battery &amp; NPU Junction Thermistor
+&bull; Current Reading: ${temp} °C (Baseline 31.2 °C, z=${zScore} CRITICAL)
+&bull; Action: Automatic thermal governor engaged
+&bull; Throttling Defense: Dynamic fallback routing to low-power Llama 3.2 1B
+&bull; Mitigation State: THERMAL PROTECTION ACTIVE`;
+
+      document.getElementById('telemetry-log-output').innerHTML = log;
+      document.getElementById('telemetry-clock').textContent = `SURGE // ${now}`;
+      say('Thermal Anomaly Injected');
+    }
+
+    function injectRamSaturation() {
+      playTacticalTone(420, 'square', 0.2);
+      const ram = 14.8;
+      document.getElementById('metric-ram-val').textContent = `${ram} GB`;
+      document.getElementById('metric-ram-fill').style.width = '92.5%';
+      document.getElementById('metric-ram-fill').style.background = '#f59e0b';
+      document.getElementById('metric-ram-tag').textContent = 'SATURATED';
+      document.getElementById('metric-ram-tag').style.color = '#f59e0b';
+
+      const now = new Date().toTimeString().split(' ')[0];
+      const log = `[${now}] ⚠️ ANOMALY_TRIGGERED: RAM MEMORY SATURATION
+&bull; Subsystem: Mobile Host Unified RAM Buffer
+&bull; Allocated: ${ram} GB / 16.0 GB (92.5% Occupancy)
+&bull; Action: Triggering SlidingWindowMemory FIFO turn eviction
+&bull; Memory Reclaimed: Pruned 4 oldest conversational turns
+&bull; OOM Risk: MITIGATED BY ROLLING WINDOW BUFFER`;
+
+      document.getElementById('telemetry-log-output').innerHTML = log;
+      document.getElementById('telemetry-clock').textContent = `RAM HIGH // ${now}`;
+      say('RAM Saturation Injected');
+    }
+
+    function resetNominalBaseline() {
+      playTacticalTone(880, 'sine', 0.15);
+      document.getElementById('metric-cpu-val').textContent = '18.4%';
+      document.getElementById('metric-cpu-fill').style.width = '18.4%';
+      document.getElementById('metric-cpu-fill').style.background = '';
+      document.getElementById('metric-cpu-tag').textContent = 'NOMINAL';
+      document.getElementById('metric-cpu-tag').style.color = '';
+
+      document.getElementById('metric-ram-val').textContent = '4.2 GB';
+      document.getElementById('metric-ram-fill').style.width = '26.3%';
+      document.getElementById('metric-ram-fill').style.background = '';
+      document.getElementById('metric-ram-tag').textContent = 'OPTIMAL';
+      document.getElementById('metric-ram-tag').style.color = '';
+
+      document.getElementById('metric-temp-val').textContent = '31.2 °C';
+      document.getElementById('metric-temp-fill').style.width = '31.2%';
+      document.getElementById('metric-temp-fill').style.background = '';
+      document.getElementById('metric-temp-tag').textContent = 'COOL';
+      document.getElementById('metric-temp-tag').style.color = '';
+
+      document.getElementById('metric-net-val').textContent = '14 ms';
+      document.getElementById('metric-net-fill').style.width = '14%';
+      document.getElementById('metric-net-tag').textContent = 'STABLE';
+
+      const now = new Date().toTimeString().split(' ')[0];
+      const log = `[${now}] NOMINAL_BASELINE_RESTORED
+&bull; All sensor baselines normalized
+&bull; Rolling z-scores reset to nominal floor (z < 0.5)
+&bull; System Health State: 100% HEALTHY
+&bull; Ready for tactical operations...`;
+
+      document.getElementById('telemetry-log-output').innerHTML = log;
+      document.getElementById('telemetry-clock').textContent = `NOMINAL // ${now}`;
+      say('Nominal Baseline Restored');
+    }
+
+    let isStreamTesting = false;
+    function runTokenStreamTest() {
+      if (isStreamTesting) return;
+      isStreamTesting = true;
+
+      const out = document.getElementById('slm-stream-output');
+      const status = document.getElementById('slm-stream-status');
+      const btn = document.getElementById('slm-stream-btn');
+      if (btn) btn.disabled = true;
+      if (status) status.textContent = 'STREAMING...';
+
+      playTacticalTone(520, 'sine', 0.1);
+      out.textContent = `[INFERENCE INITIATED // MODEL: QWEN 2.5 3B Q4_K_M]
+[TIME TO FIRST TOKEN: 118 ms]
+
+`;
+
+      const tokens = [
+        "ELYRA ", "tactical ", "sensor ", "telemetry ", "diagnostic: ", "all ", "6 ", "formation ",
+        "nodes ", "reporting ", "nominal. ", "Orbit ", "C2 ", "carrier ", "lock ", "verified ",
+        "at ", "+14.2 ", "dB ", "margin. ", "No ", "conjunction ", "hazards ", "detected ",
+        "within ", "100 km ", "ellipsoid. ", "Local ", "memory ", "headroom: ", "1,668 ", "tokens. ",
+        "Inference ", "throughput: ", "38.4 ", "tokens/sec. ", "[STATUS: ", "MISSION ", "OPTIMAL]"
+      ];
+
+      let idx = 0;
+      const interval = setInterval(() => {
+        if (idx < tokens.length) {
+          out.textContent += tokens[idx];
+          playTacticalTone(700 + Math.random() * 200, 'sine', 0.02);
+          idx++;
+        } else {
+          clearInterval(interval);
+          isStreamTesting = false;
+          if (btn) btn.disabled = false;
+          if (status) status.textContent = 'COMPLETE (38.4 tok/s)';
+          out.textContent += `
+
+[INFERENCE STREAM TERMINATED NORMALLY]`;
+          say('SLM Token Stream Benchmark Complete');
+        }
+      }, 55);
     }
 
     // 10. SYSTEM COMMAND TERMINAL (CMD+K)
@@ -1403,6 +1555,28 @@ Type "help" for a list of available diagnostic commands.`;
       document.documentElement.classList.remove('intro');
     }
     finishIntro();
+
+    // 13. URL PARAMETER ACTIONS
+    function checkElyraUrl() {
+      const q = location.search.toLowerCase();
+      const h = location.hash.toLowerCase();
+      if (h.includes('telemetry') || q.includes('telemetry')) {
+        openPanel('telemetry');
+        if (q.includes('surge=1')) setTimeout(injectThermalSurge, 250);
+        else if (q.includes('ram=1')) setTimeout(injectRamSaturation, 250);
+      } else if (h.includes('models') || q.includes('models')) {
+        openPanel('models');
+        if (q.includes('stream=1')) setTimeout(runTokenStreamTest, 250);
+      } else if (h.includes('architecture') || q.includes('architecture')) {
+        openPanel('architecture');
+      } else if (h.includes('memory') || q.includes('memory')) {
+        openPanel('memory');
+      } else if (h.includes('specs') || q.includes('specs')) {
+        openPanel('specs');
+      }
+    }
+    window.addEventListener('hashchange', checkElyraUrl);
+    setTimeout(checkElyraUrl, 100);
   </script>
 </body>
 </html>
