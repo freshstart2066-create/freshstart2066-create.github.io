@@ -2,3022 +2,1954 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Systems Architect &amp; AI Research Engineer | Interactive Portfolio</title>
-  <meta name="description" content="Next-generation systems engineering portfolio: Aerospace C2 & SGP4 Astrodynamics, Cryptographic Verification Protocols (OPAP), On-Device Mobile Edge AI (ELYRA Android APK), and Multi-Agent DAGs.">
-  <meta name="keywords" content="Aerospace C2, SGP4 Astrodynamics, Satellite Ground Station, OPAP Protocol, GS1 Digital Link 2027, EU DPP 2.0, ELYRA Android APK, Edge AI, Ollama, Quantized LLMs, React, TypeScript, WebGL, Web Audio DSP">
-  
-  <!-- Open Graph -->
-  <meta property="og:title" content="Systems Architect & AI Research Engineer">
-  <meta property="og:description" content="Aerospace C2 · Cryptographic Protocols · On-Device Mobile AI (ELYRA) · Multi-Agent Orchestration">
-  <meta property="og:url" content="https://freshstart2066-create.github.io">
-  <meta property="og:type" content="website">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="theme-color" content="#d6e6f5">
+  <title>Nival — Cyberspace Identity</title>
 
-  <!-- Favicon -->
-  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🛰️</text></svg>">
+  <!-- Preconnect and Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
 
-  <!-- 3D Motion Engine (Three.js) -->
-  <script src="js/three.min.js"></script>
+  <!-- Favicon: Inline SVG data-URI -->
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='9' fill='%2306192f'/%3E%3Cpath d='M9 23V9h3.6l7.4 9.6V9h3v14h-3.6L12 13.4V23H9z' fill='%23edf6fd'/%3E%3C/svg%3E">
+
   <script>
-    if (typeof THREE === 'undefined') {
-      document.write('<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"><\/script>');
+    // Blocking script for entrance animation
+    if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      document.documentElement.classList.add('intro');
+      setTimeout(function() {
+        document.documentElement.classList.remove('intro');
+      }, 5000);
     }
   </script>
 
   <style>
     :root {
-      --bg: #000000;
-      --bg-surface: rgba(10, 10, 15, 0.88);
-      --bg-elevated: rgba(18, 18, 26, 0.95);
-      --bg-glass: rgba(5, 5, 8, 0.88);
-      --border: rgba(255, 255, 255, 0.08);
-      --border-bright: rgba(255, 255, 255, 0.2);
-      
-      --cyan: #38bdf8;
-      --cyan-glow: rgba(56, 189, 248, 0.4);
-      --emerald: #10b981;
-      --emerald-glow: rgba(16, 185, 129, 0.35);
-      --purple: #a855f7;
-      --purple-glow: rgba(168, 85, 247, 0.35);
-      --amber: #f59e0b;
-      --rose: #f43f5e;
-      
-      --text: #f8fafc;
-      --text-muted: #94a3b8;
-      --text-dim: #64748b;
-      
-      --font-mono: "SF Mono", "Fira Code", "Cascadia Code", Consolas, monospace;
-      --font-sans: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      --ink: #06192f;
+      --muted: #77899c;
+      --ice: #d6e6f5;
+      --white: #fff;
+      --blue: #1169dc;
+      --font: 'Inter', 'Helvetica Neue', Helvetica, Arial, sans-serif;
     }
 
-    * { box-sizing: border-box; margin: 0; padding: 0; }
-
-    body {
-      background-color: #000000;
-      background-image: 
-        radial-gradient(circle at 50% -20%, rgba(56, 189, 248, 0.12) 0%, transparent 60%),
-        radial-gradient(circle at 80% 60%, rgba(168, 85, 247, 0.07) 0%, transparent 50%),
-        linear-gradient(to right, rgba(255, 255, 255, 0.02) 1px, transparent 1px),
-        linear-gradient(to bottom, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
-      background-size: 100% 100%, 100% 100%, 48px 48px, 48px 48px;
-      color: var(--text);
-      font-family: var(--font-sans);
-      line-height: 1.6;
-      min-height: 100vh;
-      overflow-x: hidden;
-      position: relative;
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
     }
 
-    /* Ambient 3D WebGL Background Canvas */
-    #three-bg-canvas {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100vw;
-      height: 100vh;
-      z-index: 0;
-      pointer-events: none;
-      opacity: 0.95;
-    }
-
-    /* Ambient 2D Particle Canvas */
-    #ambient-canvas {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100vw;
-      height: 100vh;
-      z-index: 0;
-      pointer-events: none;
-      opacity: 0.3;
-    }
-
-    /* Interactive Spotlight Overlay */
-    .spotlight {
-      position: fixed;
-      inset: 0;
-      z-index: 1;
-      pointer-events: none;
-      background: radial-gradient(800px circle at var(--mouse-x, 50vw) var(--mouse-y, 50vh), rgba(56, 189, 248, 0.12), transparent 75%);
-    }
-
-    /* Header */
-    header {
-      position: sticky;
-      top: 0;
-      z-index: 100;
-      backdrop-filter: blur(20px);
-      -webkit-backdrop-filter: blur(20px);
-      background: var(--bg-glass);
-      border-bottom: 1px solid rgba(255, 255, 255, 0.06);
-    }
-    .header-inner {
-      max-width: 1280px;
-      margin: 0 auto;
-      padding: 0.85rem 1.5rem;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-    .brand {
-      display: flex;
-      align-items: center;
-      gap: 0.75rem;
-      text-decoration: none;
-      color: var(--text);
-    }
-    .brand-icon {
-      width: 38px;
-      height: 38px;
-      border-radius: 10px;
-      background: linear-gradient(135deg, var(--cyan), var(--purple));
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 1.2rem;
-      box-shadow: 0 0 15px var(--cyan-glow);
-    }
-    .brand-text h1 {
-      font-size: 1.1rem;
-      font-weight: 800;
-      letter-spacing: -0.02em;
-    }
-    .brand-text p {
-      font-size: 0.7rem;
-      color: var(--cyan);
-      font-family: var(--font-mono);
-      letter-spacing: 0.05em;
-    }
-    .nav-actions {
-      display: flex;
-      align-items: center;
-      gap: 1rem;
-    }
-    .cmd-trigger {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.5rem;
-      background: linear-gradient(135deg, rgba(30, 41, 59, 0.6) 0%, rgba(15, 23, 42, 0.8) 100%);
-      border: 1px solid rgba(255, 255, 255, 0.15);
-      color: var(--cyan);
-      padding: 0.5rem 0.95rem;
-      border-radius: 10px;
-      font-size: 0.78rem;
-      font-family: var(--font-mono);
-      font-weight: 700;
-      cursor: pointer;
-      backdrop-filter: blur(16px) saturate(180%);
-      -webkit-backdrop-filter: blur(16px) saturate(180%);
-      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.4), inset 0 1px 1px 0 rgba(255, 255, 255, 0.25);
-      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-    }
-    .cmd-trigger:hover {
-      border-color: rgba(56, 189, 248, 0.6);
-      color: #ffffff;
-      transform: translateY(-2px);
-      box-shadow: 0 8px 24px rgba(56, 189, 248, 0.35), 0 0 15px rgba(56, 189, 248, 0.2);
-    }
-    .btn-github {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.5rem;
-      background: linear-gradient(135deg, rgba(51, 65, 85, 0.75) 0%, rgba(15, 23, 42, 0.9) 100%);
-      border: 1px solid rgba(255, 255, 255, 0.22);
-      color: #ffffff;
-      padding: 0.5rem 1.15rem;
-      border-radius: 10px;
-      font-size: 0.84rem;
-      font-weight: 700;
-      text-decoration: none;
-      backdrop-filter: blur(16px) saturate(180%);
-      -webkit-backdrop-filter: blur(16px) saturate(180%);
-      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4), inset 0 1px 1px 0 rgba(255, 255, 255, 0.35);
-      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-    }
-    .btn-github:hover {
-      border-color: rgba(56, 189, 248, 0.7);
-      transform: translateY(-2px);
-      box-shadow: 0 8px 24px rgba(56, 189, 248, 0.4), 0 0 20px rgba(56, 189, 248, 0.25);
-      color: var(--cyan);
-    }
-
-    /* Main Container */
-    .container {
-      position: relative;
-      z-index: 10;
-      max-width: 1280px;
-      margin: 0 auto;
-      padding: 2.5rem 1.5rem 4rem;
-    }
-
-    /* Hero Section */
-    .hero {
-      padding: 3rem 0 2rem;
-      display: grid;
-      grid-template-columns: 1.15fr 0.85fr;
-      gap: 2.5rem;
-      align-items: center;
-    }
-    @media (max-width: 960px) {
-      .hero {
-        grid-template-columns: 1fr;
-      }
-    }
-    .hero-badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.5rem;
-      background: rgba(16, 185, 129, 0.12);
-      border: 1px solid rgba(16, 185, 129, 0.3);
-      color: var(--emerald);
-      padding: 0.3rem 0.85rem;
-      border-radius: 20px;
-      font-size: 0.75rem;
-      font-family: var(--font-mono);
-      font-weight: 600;
-      margin-bottom: 1.25rem;
-    }
-    .hero-badge .pulse-dot {
-      width: 8px;
-      height: 8px;
-      background: var(--emerald);
-      border-radius: 50%;
-      box-shadow: 0 0 8px var(--emerald);
-      animation: pulse 2s infinite;
-    }
-    @keyframes pulse {
-      0%, 100% { opacity: 1; transform: scale(1); }
-      50% { opacity: 0.4; transform: scale(0.8); }
-    }
-    .hero-title {
-      font-size: 3.2rem;
-      font-weight: 900;
-      letter-spacing: -0.035em;
-      line-height: 1.1;
-      margin-bottom: 1.25rem;
-    }
-    .gradient-text {
-      background: linear-gradient(135deg, #ffffff 30%, var(--cyan) 75%, var(--purple) 100%);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-    }
-    .hero-desc {
-      font-size: 1.15rem;
-      color: var(--text-muted);
-      line-height: 1.6;
-      margin-bottom: 2rem;
-    }
-    .hero-metrics {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 1rem;
-      margin-top: 1.5rem;
-    }
-    .metric-card {
-      background: var(--bg-surface);
-      border: 1px solid var(--border);
-      border-radius: 8px;
-      padding: 0.85rem;
-      text-align: left;
-    }
-    .metric-val {
-      font-size: 1.4rem;
-      font-weight: 800;
-      font-family: var(--font-mono);
-      color: var(--cyan);
-    }
-    .metric-label {
-      font-size: 0.72rem;
-      color: var(--text-muted);
-      text-transform: uppercase;
-      letter-spacing: 0.05em;
-    }
-
-    /* Showcase Tabs in Hero */
-    .showcase-nav-tabs {
-      display: flex;
-      gap: 0.4rem;
-      background: rgba(5, 8, 17, 0.8);
-      padding: 0.3rem;
-      border-radius: 10px;
-      border: 1px solid var(--border);
-      margin-bottom: 1.25rem;
-    }
-    .showcase-tab-btn {
-      flex: 1;
-      background: transparent;
-      border: none;
-      color: var(--text-muted);
-      padding: 0.45rem 0.6rem;
-      font-size: 0.78rem;
-      font-family: var(--font-mono);
-      font-weight: 600;
-      border-radius: 7px;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 0.4rem;
-      transition: all 0.2s ease;
-    }
-    .showcase-tab-btn.active {
-      background: var(--bg-elevated);
-      color: var(--cyan);
-      border: 1px solid rgba(56, 189, 248, 0.4);
-      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.6);
-    }
-
-    /* 3D Holographic Spatial Matrix Viewport */
-    .hologram-container {
-      position: relative;
-      width: 100%;
-      height: 220px;
-      background: radial-gradient(circle at center, rgba(14, 16, 24, 0.95) 0%, #000000 85%);
-      border: 1px solid rgba(255, 255, 255, 0.12);
-      border-radius: 12px;
-      overflow: hidden;
-      margin-bottom: 1rem;
-      cursor: grab;
-      box-shadow: inset 0 0 35px rgba(0, 0, 0, 0.9);
-    }
-    .hologram-container:active {
-      cursor: grabbing;
-    }
-    #three-hologram-canvas {
+    html, body {
       width: 100%;
       height: 100%;
-      display: block;
-    }
-    .hologram-hud-top {
-      position: absolute;
-      top: 8px;
-      left: 12px;
-      right: 12px;
-      display: flex;
-      justify-content: space-between;
-      pointer-events: none;
-      font-family: var(--font-mono);
-      font-size: 0.68rem;
-      color: var(--cyan);
-      text-shadow: 0 0 8px rgba(56, 189, 248, 0.7);
-    }
-    .hologram-hud-bottom {
-      position: absolute;
-      bottom: 8px;
-      left: 12px;
-      right: 12px;
-      display: flex;
-      justify-content: space-between;
-      pointer-events: none;
-      font-family: var(--font-mono);
-      font-size: 0.65rem;
-      color: var(--text-dim);
-    }
-    .hologram-hud-tag {
-      background: rgba(0, 0, 0, 0.85);
-      padding: 0.15rem 0.45rem;
-      border-radius: 4px;
-      border: 1px solid rgba(255, 255, 255, 0.1);
-    }
-
-    /* ELYRA Mobile Phone Interactive Showcase */
-    .hero-interactive-card {
-      background: rgba(8, 8, 12, 0.9);
-      border: 1px solid rgba(255, 255, 255, 0.12);
-      border-radius: 20px;
-      padding: 1.5rem;
-      box-shadow: 0 25px 60px rgba(0, 0, 0, 0.9), 0 0 35px rgba(56, 189, 248, 0.08);
-      position: relative;
+      margin: 0;
       overflow: hidden;
-      perspective: 1000px;
-      backdrop-filter: blur(20px);
-      -webkit-backdrop-filter: blur(20px);
-    }
-    .phone-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      border-bottom: 1px solid var(--border);
-      padding-bottom: 0.85rem;
-      margin-bottom: 1rem;
-    }
-    .phone-title {
-      font-size: 0.95rem;
-      font-weight: 700;
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-    }
-    .apk-badge {
-      background: rgba(34, 197, 94, 0.15);
-      color: #22c55e;
-      border: 1px solid rgba(34, 197, 94, 0.3);
-      font-size: 0.65rem;
-      font-family: var(--font-mono);
-      padding: 0.15rem 0.5rem;
-      border-radius: 4px;
-      font-weight: 700;
-    }
-    .live-visualizer {
-      height: 70px;
-      background: #030610;
-      border: 1px solid var(--border);
-      border-radius: 8px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 4px;
-      padding: 0 1rem;
-      margin-bottom: 1rem;
-      position: relative;
-    }
-    .wave-bar {
-      flex: 1;
-      background: var(--cyan);
-      border-radius: 2px;
-      height: 20%;
-      transition: height 0.08s ease;
-      box-shadow: 0 0 8px var(--cyan-glow);
-    }
-    .model-toggles {
-      display: flex;
-      gap: 0.4rem;
-      margin-bottom: 1rem;
-    }
-    .model-btn {
-      flex: 1;
-      background: var(--bg-elevated);
-      border: 1px solid var(--border);
-      color: var(--text-muted);
-      padding: 0.35rem 0.5rem;
-      border-radius: 6px;
-      font-size: 0.72rem;
-      font-family: var(--font-mono);
-      cursor: pointer;
-      text-align: center;
-      transition: all 0.2s;
-    }
-    .model-btn.active {
-      background: var(--cyan);
-      color: #030814;
-      font-weight: 700;
-      border-color: var(--cyan);
-    }
-    .terminal-output {
-      background: #02040a;
-      border: 1px solid var(--border);
-      border-radius: 8px;
-      padding: 0.75rem;
-      font-family: var(--font-mono);
-      font-size: 0.75rem;
-      color: #38bdf8;
-      min-height: 85px;
-      white-space: pre-wrap;
-      line-height: 1.4;
+      background: var(--ice);
+      font-family: var(--font);
+      color: var(--ink);
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
     }
 
-    /* Filter Controls - Liquid Glass Pills */
-    .filter-bar {
-      display: flex;
-      gap: 0.65rem;
-      flex-wrap: wrap;
-      margin: 3.5rem 0 2rem;
-      padding-bottom: 1.25rem;
-      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-    }
-    .filter-btn {
-      background: linear-gradient(135deg, rgba(30, 41, 59, 0.5) 0%, rgba(15, 23, 42, 0.7) 100%);
-      border: 1px solid rgba(255, 255, 255, 0.12);
-      color: var(--text-muted);
-      padding: 0.5rem 1.2rem;
-      border-radius: 9999px;
-      font-size: 0.82rem;
-      font-weight: 700;
+    button, a {
+      font-family: inherit;
+      color: inherit;
+      border: none;
+      background: none;
       cursor: pointer;
-      backdrop-filter: blur(14px) saturate(160%);
-      -webkit-backdrop-filter: blur(14px) saturate(160%);
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.35), inset 0 1px 1px 0 rgba(255, 255, 255, 0.15);
-      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-    }
-    .filter-btn:hover {
-      border-color: rgba(56, 189, 248, 0.5);
-      color: #ffffff;
-      transform: translateY(-2px);
-      background: linear-gradient(135deg, rgba(51, 65, 85, 0.7) 0%, rgba(30, 41, 59, 0.85) 100%);
-      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.45), 0 0 15px rgba(56, 189, 248, 0.2);
-    }
-    .filter-btn.active {
-      background: linear-gradient(135deg, #38bdf8 0%, #818cf8 100%);
-      color: #ffffff;
-      border-color: rgba(255, 255, 255, 0.5);
-      box-shadow: 0 6px 22px rgba(56, 189, 248, 0.5), inset 0 1px 2px rgba(255, 255, 255, 0.8);
-      text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
-      transform: translateY(-1px);
+      text-decoration: none;
+      outline: none;
     }
 
-    /* Projects Grid with 3D Perspective */
-    .projects-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(380px, 1fr));
-      gap: 1.75rem;
-      perspective: 1200px;
+    button:focus-visible, a:focus-visible {
+      outline: 2px solid var(--blue);
+      outline-offset: 2px;
     }
-    .project-card {
-      background: rgba(8, 8, 12, 0.88);
-      border: 1px solid rgba(255, 255, 255, 0.08);
-      border-radius: 16px;
-      padding: 1.75rem;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      transition: transform 0.1s ease-out, box-shadow 0.25s ease, border-color 0.25s ease;
-      position: relative;
+
+    /* Fullscreen Viewport Container */
+    .viewport {
+      position: fixed;
+      inset: 0;
       overflow: hidden;
-      transform-style: preserve-3d;
-      will-change: transform;
-      backdrop-filter: blur(16px);
-      -webkit-backdrop-filter: blur(16px);
+      isolation: isolate;
+      background: radial-gradient(circle at 44% 28%, #e8f3fb 0 6%, #d9e9f6 30%, #d6e6f5 68%, #d4e5f4 100%);
     }
-    .project-card::before {
+
+    /* Grain Texture Overlay */
+    .viewport:after {
       content: "";
       position: absolute;
       inset: 0;
-      border-radius: 16px;
-      padding: 1px;
-      background: radial-gradient(400px circle at var(--card-x, 0px) var(--card-y, 0px), rgba(56, 189, 248, 0.5), transparent 70%);
-      -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-      -webkit-mask-composite: xor;
-      mask-composite: exclude;
+      opacity: 0.13;
+      mix-blend-mode: soft-light;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.82' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.32'/%3E%3C/svg%3E");
       pointer-events: none;
-      opacity: 0;
-      transition: opacity 0.3s;
-    }
-    .project-card:hover::before {
-      opacity: 1;
-    }
-    .project-card:hover {
-      border-color: rgba(56, 189, 248, 0.55);
-      box-shadow: 0 25px 60px -10px rgba(0, 0, 0, 0.95), 0 0 35px rgba(56, 189, 248, 0.2);
-    }
-    .project-card.featured {
-      grid-column: span 2;
-      background: linear-gradient(180deg, rgba(14, 14, 20, 0.95) 0%, rgba(6, 6, 10, 0.98) 100%);
-      border-color: rgba(255, 255, 255, 0.14);
-    }
-    @media (max-width: 900px) {
-      .project-card.featured {
-        grid-column: span 1;
-      }
+      z-index: 50;
     }
 
-    .project-card .card-top,
-    .project-card .card-desc,
-    .project-card .key-features,
-    .project-card .tech-tags,
-    .project-card .card-actions {
-      transform: translateZ(20px);
-      transform-style: preserve-3d;
-    }
-    .project-card .badge {
-      transform: translateZ(30px);
-    }
-
-    .card-top {
-      margin-bottom: 1.25rem;
-    }
-    .card-header-row {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 0.85rem;
-    }
-    .card-title {
-      font-size: 1.3rem;
-      font-weight: 800;
-      color: #fff;
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-    }
-    .badge {
-      font-size: 0.68rem;
-      font-family: var(--font-mono);
-      font-weight: 700;
-      padding: 0.25rem 0.6rem;
-      border-radius: 4px;
-      text-transform: uppercase;
-      letter-spacing: 0.05em;
-    }
-    .badge-aerospace { background: rgba(56, 189, 248, 0.15); color: var(--cyan); border: 1px solid rgba(56, 189, 248, 0.3); }
-    .badge-crypto { background: rgba(16, 185, 129, 0.15); color: var(--emerald); border: 1px solid rgba(16, 185, 129, 0.3); }
-    .badge-ai { background: rgba(168, 85, 247, 0.15); color: var(--purple); border: 1px solid rgba(168, 85, 247, 0.3); }
-    .badge-fintech { background: rgba(245, 158, 11, 0.15); color: var(--amber); border: 1px solid rgba(245, 158, 11, 0.3); }
-    .badge-systems { background: rgba(244, 63, 94, 0.15); color: var(--rose); border: 1px solid rgba(244, 63, 94, 0.3); }
-
-    .card-desc {
-      font-size: 0.9rem;
-      color: var(--text-muted);
-      line-height: 1.6;
-      margin-bottom: 1rem;
-    }
-
-    .key-features {
-      list-style: none;
-      margin-bottom: 1.25rem;
-      font-size: 0.84rem;
-      color: var(--text-muted);
-    }
-    .key-features li {
-      margin-bottom: 0.4rem;
-      display: flex;
-      align-items: baseline;
-      gap: 0.5rem;
-    }
-    .key-features li::before {
-      content: "▹";
-      color: var(--cyan);
-      font-weight: bold;
-    }
-
-    .tech-row {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.4rem;
-      margin-bottom: 1.25rem;
-    }
-    .tech-pill {
-      font-size: 0.72rem;
-      font-family: var(--font-mono);
-      background: var(--bg-elevated);
-      color: var(--text-dim);
-      padding: 0.2rem 0.55rem;
-      border-radius: 4px;
-      border: 1px solid rgba(255, 255, 255, 0.05);
-    }
-
-    .card-actions {
-      display: flex;
-      gap: 0.75rem;
-      align-items: center;
-      padding-top: 1.2rem;
-      border-top: 1px solid rgba(255, 255, 255, 0.06);
-    }
-    /* Prominent Liquid Glass Buttons */
-    .btn {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.5rem;
-      font-size: 0.84rem;
-      font-weight: 700;
-      padding: 0.65rem 1.25rem;
-      border-radius: 12px;
-      text-decoration: none;
-      cursor: pointer;
-      position: relative;
+    /* Fixed-size Canvas Stage (1536x1024 base) */
+    .stage {
+      container-type: inline-size;
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      width: 1536px;
+      height: 1024px;
+      --fx: 0px;
+      transform-origin: center;
       overflow: hidden;
-      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-      letter-spacing: 0.02em;
-      border: 1px solid transparent;
-      user-select: none;
-      -webkit-user-select: none;
-    }
-    .btn-primary {
-      background: linear-gradient(135deg, rgba(56, 189, 248, 0.92) 0%, rgba(14, 165, 233, 0.8) 50%, rgba(99, 102, 241, 0.9) 100%);
-      color: #ffffff;
-      border: 1px solid rgba(255, 255, 255, 0.45);
-      backdrop-filter: blur(16px) saturate(180%);
-      -webkit-backdrop-filter: blur(16px) saturate(180%);
-      box-shadow: 
-        0 8px 24px -4px rgba(56, 189, 248, 0.45),
-        0 2px 6px 0 rgba(0, 0, 0, 0.4),
-        inset 0 1px 1px 0 rgba(255, 255, 255, 0.7),
-        inset 0 -2px 4px 0 rgba(0, 0, 0, 0.2);
-      text-shadow: 0 1px 2px rgba(0, 0, 0, 0.35);
-    }
-    .btn-primary::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: -100%;
-      width: 100%;
-      height: 100%;
-      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
-      transition: left 0.6s ease;
-    }
-    .btn-primary:hover {
-      transform: translateY(-2px) scale(1.02);
-      box-shadow: 
-        0 14px 32px -4px rgba(56, 189, 248, 0.65),
-        0 0 25px rgba(56, 189, 248, 0.45),
-        inset 0 1px 2px 0 rgba(255, 255, 255, 0.9);
-      border-color: rgba(255, 255, 255, 0.8);
-      color: #ffffff;
-    }
-    .btn-primary:hover::before {
-      left: 100%;
-    }
-    .btn-primary:active {
-      transform: translateY(1px) scale(0.98);
-      box-shadow: 0 4px 12px rgba(56, 189, 248, 0.35), inset 0 2px 4px rgba(0, 0, 0, 0.3);
+      background: radial-gradient(circle at 43% 35%, rgba(246, 251, 255, 0.74), transparent 31%),
+                  linear-gradient(112deg, #d6e6f5 0%, #d9e9f6 44%, #d4e5f4 100%);
     }
 
-    .btn-secondary {
-      background: linear-gradient(135deg, rgba(30, 41, 59, 0.75) 0%, rgba(15, 23, 42, 0.88) 100%);
-      color: var(--text);
-      border: 1px solid rgba(255, 255, 255, 0.18);
-      backdrop-filter: blur(16px) saturate(180%);
-      -webkit-backdrop-filter: blur(16px) saturate(180%);
-      box-shadow: 
-        0 4px 16px rgba(0, 0, 0, 0.5),
-        inset 0 1px 1px 0 rgba(255, 255, 255, 0.25);
-    }
-    .btn-secondary::before {
-      content: '';
+    .stage:before {
+      content: "";
       position: absolute;
-      top: 0;
-      left: -100%;
-      width: 100%;
-      height: 100%;
-      background: linear-gradient(90deg, transparent, rgba(56, 189, 248, 0.25), transparent);
-      transition: left 0.6s ease;
-    }
-    .btn-secondary:hover {
-      transform: translateY(-2px) scale(1.02);
-      border-color: rgba(56, 189, 248, 0.5);
-      background: linear-gradient(135deg, rgba(51, 65, 85, 0.85) 0%, rgba(30, 41, 59, 0.95) 100%);
-      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.6), 0 0 18px rgba(56, 189, 248, 0.2);
-      color: #ffffff;
-    }
-    .btn-secondary:hover::before {
-      left: 100%;
-    }
-    .btn-secondary:active {
-      transform: translateY(1px) scale(0.98);
-    }
-
-    /* Interactive Command Modal */
-    .modal-backdrop {
-      position: fixed;
       inset: 0;
-      background: rgba(0, 0, 0, 0.75);
-      backdrop-filter: blur(8px);
-      z-index: 1000;
-      display: none;
-      align-items: center;
-      justify-content: center;
-      padding: 1rem;
-    }
-    .modal-content {
-      background: #080d1a;
-      border: 1px solid var(--cyan);
-      border-radius: 12px;
-      width: 100%;
-      max-width: 650px;
-      box-shadow: 0 25px 60px rgba(0, 0, 0, 0.8), 0 0 40px var(--cyan-glow);
-      overflow: hidden;
-    }
-    .cmd-header {
-      display: flex;
-      align-items: center;
-      padding: 0.85rem 1.2rem;
-      background: var(--bg-surface);
-      border-bottom: 1px solid var(--border);
-      gap: 0.75rem;
-    }
-    .cmd-input {
-      flex: 1;
-      background: transparent;
-      border: none;
-      outline: none;
-      color: #fff;
-      font-family: var(--font-mono);
-      font-size: 0.95rem;
-    }
-    .cmd-body {
-      padding: 1.25rem;
-      max-height: 380px;
-      overflow-y: auto;
-      font-family: var(--font-mono);
-      font-size: 0.8rem;
-      color: var(--text-muted);
-      line-height: 1.5;
-    }
-
-    /* Skills Grid */
-    .skills-section {
-      margin: 4.5rem 0 2rem;
-      background: var(--bg-surface);
-      border: 1px solid var(--border);
-      border-radius: 16px;
-      padding: 3rem 2.5rem;
-    }
-    .skills-header h2 {
-      font-size: 1.8rem;
-      font-weight: 800;
-      letter-spacing: -0.02em;
-    }
-    .skills-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-      gap: 2rem;
-      margin-top: 2rem;
-    }
-    .skill-col h3 {
-      font-size: 1rem;
-      color: var(--cyan);
-      font-family: var(--font-mono);
-      margin-bottom: 0.85rem;
-    }
-    .skill-col ul {
-      list-style: none;
-      font-size: 0.88rem;
-      color: var(--text-muted);
-    }
-    .skill-col li {
-      margin-bottom: 0.45rem;
-    }
-
-    /* System Architecture Workflow Canvas & Blueprint System */
-    .workflow-section {
-      background: rgba(8, 8, 12, 0.92);
-      border: 1px solid rgba(255, 255, 255, 0.1);
-      border-radius: 20px;
-      padding: 3rem 2rem;
-      margin-bottom: 3.5rem;
-      position: relative;
-      overflow: hidden;
-      box-shadow: 0 25px 60px rgba(0, 0, 0, 0.9), 0 0 35px rgba(56, 189, 248, 0.08);
-      backdrop-filter: blur(20px);
-      -webkit-backdrop-filter: blur(20px);
-    }
-    .workflow-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: flex-start;
-      flex-wrap: wrap;
-      gap: 1.5rem;
-      margin-bottom: 1.5rem;
-    }
-    .workflow-title-box h2 {
-      font-size: 1.8rem;
-      font-weight: 800;
-      letter-spacing: -0.02em;
-      margin-bottom: 0.5rem;
-      display: flex;
-      align-items: center;
-      gap: 0.75rem;
-    }
-    .workflow-title-box p {
-      color: var(--text-muted);
-      font-size: 0.95rem;
-      max-width: 650px;
-    }
-    .pipeline-controls {
-      display: flex;
-      gap: 0.5rem;
-      align-items: center;
-    }
-
-    /* Blueprint Navigation Tabs */
-    .blueprint-tabs {
-      display: flex;
-      gap: 0.5rem;
-      flex-wrap: wrap;
-      margin-bottom: 1.75rem;
-      background: rgba(4, 4, 8, 0.85);
-      padding: 0.35rem;
-      border-radius: 12px;
-      border: 1px solid rgba(255, 255, 255, 0.06);
-    }
-    .blueprint-tab-btn {
-      background: transparent;
-      border: 1px solid transparent;
-      color: var(--text-muted);
-      padding: 0.45rem 0.9rem;
-      border-radius: 8px;
-      font-size: 0.78rem;
-      font-family: var(--font-mono);
-      font-weight: 700;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      gap: 0.45rem;
-      transition: all 0.25s ease;
-    }
-    .blueprint-tab-btn:hover {
-      color: #ffffff;
-      background: rgba(255, 255, 255, 0.04);
-    }
-    .blueprint-tab-btn.active {
-      background: var(--bg-elevated);
-      color: var(--cyan);
-      border-color: rgba(56, 189, 248, 0.4);
-      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.6);
-    }
-
-    /* Master Architecture Flow Canvas */
-    .blueprint-canvas-container {
-      position: relative;
-      background: radial-gradient(circle at center, rgba(14, 16, 24, 0.95) 0%, rgba(3, 3, 6, 0.98) 90%);
-      border: 1px solid rgba(255, 255, 255, 0.08);
-      border-radius: 16px;
-      padding: 1.75rem 1.25rem;
-      margin-bottom: 1.5rem;
-    }
-
-    /* Subgraph Clusters */
-    .clusters-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-      gap: 1.25rem;
-      position: relative;
-      z-index: 2;
-    }
-    .cluster-box {
-      background: rgba(12, 12, 18, 0.88);
-      border: 1px solid rgba(255, 255, 255, 0.1);
-      border-radius: 14px;
-      padding: 1.25rem;
-      display: flex;
-      flex-direction: column;
-      gap: 0.75rem;
-      position: relative;
-      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.6);
-      transition: all 0.3s ease;
-    }
-    .cluster-box:hover {
-      border-color: rgba(56, 189, 248, 0.4);
-      transform: translateY(-2px);
-      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.8), 0 0 20px rgba(56, 189, 248, 0.15);
-    }
-    .cluster-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      border-bottom: 1px solid rgba(255, 255, 255, 0.06);
-      padding-bottom: 0.6rem;
-    }
-    .cluster-title {
-      font-size: 0.86rem;
-      font-weight: 800;
-      color: #ffffff;
-      display: flex;
-      align-items: center;
-      gap: 0.4rem;
-    }
-    .cluster-tag {
-      font-size: 0.65rem;
-      font-family: var(--font-mono);
-      padding: 0.15rem 0.45rem;
-      border-radius: 4px;
-      font-weight: 700;
-    }
-
-    /* Rectangular System Node Boxes */
-    .nodes-step-list {
-      display: flex;
-      flex-direction: column;
-      gap: 0.5rem;
-    }
-    .node-box {
-      background: rgba(18, 18, 26, 0.95);
-      border: 1px solid rgba(255, 255, 255, 0.08);
-      border-radius: 8px;
-      padding: 0.6rem 0.75rem;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 0.5rem;
-      cursor: pointer;
-      font-family: var(--font-mono);
-      font-size: 0.76rem;
-      color: #e2e8f0;
-      transition: all 0.25s ease;
-      position: relative;
-    }
-    .node-box:hover, .node-box.active {
-      background: rgba(28, 30, 42, 0.98);
-      border-color: var(--cyan);
-      transform: translateX(4px);
-      box-shadow: 0 4px 15px rgba(56, 189, 248, 0.25);
-      color: #ffffff;
-    }
-    .node-idx {
-      font-size: 0.66rem;
-      color: var(--cyan);
-      font-weight: 700;
-    }
-    .node-wire-arrow {
-      text-align: center;
-      color: var(--cyan);
-      font-size: 0.75rem;
-      line-height: 0.5;
-      opacity: 0.7;
-    }
-
-    /* Connecting String Wire Banners Between Clusters */
-    .cluster-wire-banner {
-      background: linear-gradient(90deg, rgba(56, 189, 248, 0.08), rgba(168, 85, 247, 0.08));
-      border: 1px dashed rgba(56, 189, 248, 0.35);
-      border-radius: 8px;
-      padding: 0.45rem 0.85rem;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 0.5rem;
-      font-family: var(--font-mono);
-      font-size: 0.72rem;
-      color: var(--cyan);
-      letter-spacing: 0.04em;
-      margin: 1rem 0;
-      position: relative;
-      overflow: hidden;
-    }
-    .cluster-wire-banner::after {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: -100%;
-      width: 100%;
-      height: 100%;
-      background: linear-gradient(90deg, transparent, rgba(56, 189, 248, 0.3), transparent);
-      animation: wireStream 2.5s infinite linear;
-    }
-    @keyframes wireStream {
-      to { left: 100%; }
-    }
-
-    /* Live Pipeline Console */
-    .pipeline-console {
-      margin-top: 1.5rem;
-      background: rgba(4, 4, 8, 0.95);
-      border: 1px solid rgba(255, 255, 255, 0.1);
-      border-radius: 10px;
-      padding: 1.25rem;
-      font-family: var(--font-mono);
-      font-size: 0.85rem;
-      color: #94a3b8;
-      display: flex;
-      flex-direction: column;
-      gap: 0.4rem;
-    }
-    .console-header-row {
-      display: flex;
-      justify-content: space-between;
-      color: var(--text-dim);
-      font-size: 0.75rem;
-      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-      padding-bottom: 0.5rem;
-      margin-bottom: 0.25rem;
-    }
-
-    /* 3D Animated AI Tour Bot Widget */
-    .tour-bot-dock {
-      position: fixed;
-      bottom: 24px;
-      right: 28px;
-      z-index: 1000;
-      display: flex;
-      flex-direction: column;
-      align-items: flex-end;
-      gap: 0.75rem;
+      z-index: 1;
       pointer-events: none;
+      background: linear-gradient(90deg, rgba(255, 255, 255, 0.08), transparent 35%, rgba(255, 255, 255, 0.04));
     }
-    .bot-speech-bubble {
-      background: rgba(10, 10, 16, 0.94);
-      border: 1px solid rgba(56, 189, 248, 0.4);
-      border-radius: 16px;
-      padding: 1.25rem 1.4rem;
-      max-width: 340px;
-      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.85), 0 0 25px rgba(56, 189, 248, 0.2);
-      backdrop-filter: blur(20px) saturate(180%);
-      -webkit-backdrop-filter: blur(20px) saturate(180%);
-      pointer-events: auto;
-      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-      position: relative;
-    }
-    .bot-bubble-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 0.5rem;
-      padding-right: 1.2rem;
-    }
-    .bot-badge {
-      display: flex;
-      align-items: center;
-      gap: 0.4rem;
-      font-family: var(--font-mono);
-      font-size: 0.72rem;
-      color: var(--cyan);
-      font-weight: 700;
-    }
-    .bot-step-badge {
-      font-family: var(--font-mono);
-      font-size: 0.65rem;
-      color: var(--text-dim);
-      background: rgba(255, 255, 255, 0.06);
-      padding: 0.15rem 0.45rem;
-      border-radius: 4px;
-    }
-    .bot-message-text {
-      font-size: 0.86rem;
-      color: var(--text);
-      line-height: 1.5;
-      margin-bottom: 1rem;
-      min-height: 44px;
-    }
-    .bot-action-row {
-      display: flex;
-      gap: 0.5rem;
-      align-items: center;
-      flex-wrap: wrap;
-    }
-    .bot-close-btn {
-      position: absolute;
-      top: 10px;
-      right: 12px;
+
+    .stage.is-fit {
       background: transparent;
-      border: none;
-      color: var(--text-dim);
-      cursor: pointer;
-      font-size: 0.95rem;
-      line-height: 1;
-      padding: 0.2rem;
-      transition: color 0.2s;
     }
-    .bot-close-btn:hover {
-      color: #ffffff;
+    .stage.is-fit:before {
+      display: none;
     }
-    .bot-canvas-wrapper {
-      width: 110px;
-      height: 110px;
-      position: relative;
-      cursor: grab;
-      pointer-events: auto;
-      filter: drop-shadow(0 10px 20px rgba(0, 0, 0, 0.8)) drop-shadow(0 0 15px rgba(56, 189, 248, 0.4));
-      transition: transform 0.2s ease;
+
+    /* Header & Brand */
+    .header {
+      position: absolute;
+      inset: 0 0 auto 0;
+      height: 82px;
+      z-index: 20;
     }
-    .bot-canvas-wrapper:hover {
-      transform: scale(1.08);
+
+    .brand {
+      position: absolute;
+      left: calc(var(--fx) + 46px);
+      top: 29px;
+      width: 57px;
+      height: 21px;
+      display: block;
     }
-    .bot-canvas-wrapper:active {
-      cursor: grabbing;
-    }
-    #elyra-bot-3d-canvas {
+    .brand svg {
       width: 100%;
       height: 100%;
       display: block;
+      fill: var(--ink);
     }
-    .bot-status-ring {
+
+    /* Hamburger Menu Button */
+    .menu {
       position: absolute;
-      bottom: 2px;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 50px;
-      height: 12px;
-      background: radial-gradient(ellipse at center, rgba(56, 189, 248, 0.8) 0%, transparent 70%);
+      left: calc(var(--fx) + 136px);
+      top: 31px;
+      width: 46px;
+      height: 19px;
+      display: block;
+      padding: 0;
+    }
+    .menu span {
+      position: absolute;
+      left: 0;
+      width: 45px;
+      height: 2px;
+      background: var(--ink);
+      border-radius: 1px;
+      transition: transform 0.25s ease, opacity 0.25s ease;
+    }
+    .menu span:nth-child(1) { top: 2px; }
+    .menu span:nth-child(2) { top: 8px; }
+    .menu span:nth-child(3) { top: 14px; }
+
+    .stage.menu-open .menu span:nth-child(1) {
+      transform: translateY(6px) rotate(38deg);
+    }
+    .stage.menu-open .menu span:nth-child(2) {
+      opacity: 0;
+    }
+    .stage.menu-open .menu span:nth-child(3) {
+      transform: translateY(-6px) rotate(-38deg);
+    }
+
+    /* Nav Glass Pill */
+    .nav {
+      position: absolute;
+      left: calc(50% - 277px);
+      top: 20px;
+      width: 524px;
+      height: 40px;
+      padding: 3px;
+      display: grid;
+      grid-template-columns: 148px 125px 115px 130px;
+      border: 1px solid rgba(255, 255, 255, 0.5);
+      border-radius: 22px;
+      background: rgba(245, 249, 255, 0.23);
+      box-shadow: 0 0 12px rgba(255, 255, 255, 0.7), inset 0 0 12px rgba(255, 255, 255, 0.42);
+      backdrop-filter: blur(17px);
+      -webkit-backdrop-filter: blur(17px);
+      z-index: 22;
+    }
+    .nav a {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 32px;
+      font-size: 16px;
+      font-weight: 500;
+      color: var(--ink);
+      border-radius: 18px;
+      transition: background 0.2s ease, box-shadow 0.2s ease;
+    }
+    .nav a.active {
+      background: rgba(255, 255, 255, 0.78);
+      box-shadow: 0 2px 12px rgba(26, 48, 78, 0.06);
+    }
+    .nav a:hover, .nav a:focus-visible {
+      background: rgba(255, 255, 255, 0.58);
+    }
+
+    /* Join Us Button */
+    .join {
+      position: absolute;
+      right: calc(var(--fx) + 43px);
+      top: 17px;
+      width: 205px;
+      height: 46px;
+      border-radius: 25px;
+      background: rgba(246, 250, 255, 0.38);
+      box-shadow: 0 0 18px rgba(255, 255, 255, 0.46), inset 0 0 10px rgba(255, 255, 255, 0.45);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      display: flex;
+      align-items: center;
+      padding: 2px 2px 2px 2px;
+      transition: background 0.2s ease, box-shadow 0.2s ease;
+      z-index: 22;
+    }
+    .join:hover {
+      background: rgba(255, 255, 255, 0.55);
+    }
+    .join-icon {
+      width: 42px;
+      height: 42px;
       border-radius: 50%;
-      animation: botRingPulse 1.8s infinite ease-in-out;
+      background: rgba(255, 255, 255, 0.82);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
     }
-    @keyframes botRingPulse {
-      0%, 100% { opacity: 0.4; transform: translateX(-50%) scale(0.9); }
-      50% { opacity: 1; transform: translateX(-50%) scale(1.2); }
+    .join-icon svg {
+      width: 23px;
+      height: 23px;
+      stroke: var(--ink);
+      stroke-width: 1.8;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      fill: none;
+    }
+    .join-label {
+      font-size: 16px;
+      font-weight: 500;
+      margin-left: 12px;
+      color: #5e7082;
     }
 
-    /* Footer */
-    footer {
-      border-top: 1px solid rgba(255, 255, 255, 0.06);
-      padding: 3rem 1.5rem;
-      text-align: center;
-      color: var(--text-dim);
-      font-size: 0.82rem;
-      font-family: var(--font-mono);
-      position: relative;
+    /* Headline */
+    .headline {
+      position: absolute;
+      left: calc(var(--fx) + 45px);
+      top: 98px;
+      width: 960px;
+      font-size: var(--hf, 79px);
+      line-height: 0.99;
+      letter-spacing: -0.019em;
+      word-spacing: 0.0633em;
+      font-weight: 400;
+      z-index: 8;
+    }
+    .headline-line {
+      display: block;
+      white-space: nowrap;
+    }
+    .headline-line:first-child {
+      letter-spacing: -0.02975em;
+    }
+    .headline-line2 {
+      display: flex;
+      align-items: center;
+      gap: 0.2658em;
+      margin-top: 2px;
+    }
+    .chain {
+      width: 1.9114em;
+      height: 0.6076em;
+      flex: 0 0 1.9114em;
+      overflow: visible;
+      display: inline-block;
+    }
+    .chain path {
+      fill: var(--ink);
+    }
+
+    /* Features list */
+    .features {
+      position: absolute;
+      right: calc(var(--fx) + 44px);
+      top: 157px;
+      width: 190px;
+      display: grid;
+      gap: 11px;
       z-index: 10;
+      font-size: 20px;
+      line-height: 1.1;
+      text-align: right;
     }
-    footer a { color: var(--cyan); text-decoration: none; }
+    .feature {
+      display: flex;
+      justify-content: flex-end;
+      gap: 18px;
+      white-space: nowrap;
+    }
+    .feature b {
+      font-weight: 400;
+    }
 
-    .hidden { display: none !important; }
+    /* Creator metadata */
+    .creator {
+      position: absolute;
+      right: calc(var(--fx) + 390px);
+      top: 311px;
+      z-index: 12;
+      display: flex;
+      align-items: flex-start;
+      color: #77899b;
+    }
+    .verified {
+      width: 19px;
+      height: 19px;
+      border-radius: 50%;
+      background: var(--ink);
+      margin-right: 10px;
+      margin-top: 1px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+    .verified svg {
+      width: 11px;
+      height: 11px;
+    }
+    .creator-copy {
+      font-size: 16px;
+      line-height: 1.25;
+    }
+    .creator-copy .series {
+      display: block;
+      margin-top: 9px;
+      color: #8496a8;
+    }
+
+    /* Glass Card */
+    .glass-card {
+      position: absolute;
+      left: calc(var(--fx) + 46px);
+      top: 344px;
+      width: 365px;
+      height: 211px;
+      padding: 9px 25px 18px 25px;
+      border: 1px solid rgba(255, 255, 255, 0.45);
+      border-radius: 24px;
+      z-index: 14;
+      background: linear-gradient(135deg, rgba(255, 255, 255, 0.55), rgba(239, 247, 253, 0.42));
+      box-shadow: inset 0 0 22px rgba(255, 255, 255, 0.32), 0 7px 26px rgba(65, 94, 123, 0.045);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+    }
+    .card-top {
+      height: 60px;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+    }
+    .count {
+      margin-left: -20px;
+      padding: 8px 21px 7px;
+      border-radius: 26px;
+      color: white;
+      background: linear-gradient(135deg, #0b2b50, #06192f);
+      min-width: 124px;
+      text-align: center;
+    }
+    .count strong {
+      display: block;
+      font-size: 20px;
+      line-height: 19px;
+      font-weight: 500;
+    }
+    .count small {
+      display: block;
+      font-size: 12px;
+      margin-top: 3px;
+      opacity: 0.9;
+    }
+    .eye {
+      width: 38px;
+      height: 38px;
+      margin-right: -6px;
+      margin-top: 10px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background 0.2s;
+    }
+    .eye:hover {
+      background: rgba(255, 255, 255, 0.5);
+    }
+    .eye svg {
+      width: 33px;
+      height: 23px;
+      stroke: var(--ink);
+      stroke-width: 1.8;
+      fill: none;
+    }
+    .card-copy {
+      margin: 15px 0 0;
+      font-size: 18px;
+      line-height: 1.32;
+      letter-spacing: -0.14px;
+      color: var(--ink);
+    }
+    .card-bottom {
+      position: absolute;
+      left: 25px;
+      right: 18px;
+      bottom: 15px;
+      height: 60px;
+      display: flex;
+      align-items: center;
+    }
+    .start {
+      font-size: 18px;
+      line-height: 18px;
+      color: var(--ink);
+    }
+    .start strong {
+      font-size: 21px;
+      font-weight: 700;
+    }
+    .shuffle {
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      margin-left: auto;
+      margin-right: 26px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background 0.2s;
+    }
+    .shuffle:hover {
+      background: rgba(255, 255, 255, 0.58);
+    }
+    .shuffle svg {
+      width: 27px;
+      height: 27px;
+      stroke: var(--ink);
+      stroke-width: 1.5;
+      stroke-linecap: round;
+      fill: none;
+    }
+    .play {
+      width: 58px;
+      height: 58px;
+      border-radius: 50%;
+      background: var(--ink);
+      box-shadow: 0 5px 14px rgba(8, 26, 46, 0.12);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: transform 0.25s ease, box-shadow 0.25s ease;
+    }
+    .play:hover {
+      transform: scale(1.05);
+    }
+    .play.active {
+      box-shadow: 0 0 0 7px rgba(17, 105, 220, 0.12), 0 0 32px rgba(17, 105, 220, 0.38);
+    }
+    .play svg {
+      width: 24px;
+      height: 26px;
+      margin-left: 4px;
+      fill: white;
+    }
+
+    /* Ghost Typography */
+    .ghost {
+      position: absolute;
+      z-index: 2;
+      color: rgba(255, 255, 255, 0.43);
+      font-weight: 700;
+      letter-spacing: -9px;
+      line-height: 0.8;
+      user-select: none;
+      pointer-events: none;
+    }
+    .ghost-one {
+      left: calc(var(--fx) + 31px);
+      top: 594px;
+      font-size: 189px;
+      transform: scaleX(1.23);
+      transform-origin: left center;
+    }
+    .o-gap {
+      display: inline-block;
+      width: 105px;
+      font-style: normal;
+    }
+    .ghost-two {
+      left: calc(50% - 16px);
+      top: 745px;
+      font-size: 164px;
+    }
+
+    /* Robo-O Avatar Thumbnail */
+    .robo-o-avatar {
+      position: absolute;
+      left: calc(var(--fx) + 174px);
+      top: 600px;
+      width: 143px;
+      height: 143px;
+      border: 8px solid rgba(255, 255, 255, 0.56);
+      border-radius: 50%;
+      overflow: hidden;
+      background: rgba(146, 178, 209, 0.13);
+      z-index: 4;
+      pointer-events: none;
+    }
+    .robo-o-avatar img {
+      position: absolute;
+      left: -4px;
+      top: 5px;
+      width: 116px;
+      height: 147px;
+      object-fit: contain;
+      filter: drop-shadow(3px 5px 8px rgba(35, 57, 79, 0.12));
+    }
+
+    /* Adaptive Materials Widget */
+    .material {
+      position: absolute;
+      right: calc(var(--fx) + 44px);
+      top: 413px;
+      width: 345px;
+      height: 140px;
+      z-index: 13;
+    }
+    .material-pill {
+      position: absolute;
+      right: 0;
+      bottom: 1px;
+      width: 345px;
+      height: 76px;
+      border-radius: 41px;
+      background: var(--ink);
+      display: flex;
+      align-items: center;
+      overflow: visible;
+    }
+    .material-thumb {
+      position: absolute;
+      left: 0;
+      bottom: 1px;
+      width: 141px;
+      height: 180px;
+      overflow: hidden;
+      border-radius: 0 0 0 38px;
+      z-index: 2;
+      pointer-events: none;
+    }
+    .material-thumb img {
+      position: absolute;
+      left: -25px;
+      top: 35px;
+      width: 168px;
+      height: 153px;
+      object-fit: contain;
+    }
+    .material-copy {
+      margin-left: 146px;
+      color: white;
+      font-size: 17px;
+      line-height: 1.25;
+      width: 95px;
+    }
+    .material-next {
+      margin-left: auto;
+      margin-right: 6px;
+      width: 65px;
+      height: 65px;
+      border-radius: 50%;
+      background: #f5f9fc;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: transform 0.2s ease;
+    }
+    .material-next:hover {
+      transform: scale(1.06);
+    }
+    .material-next svg {
+      width: 30px;
+      height: 30px;
+      stroke: var(--ink);
+      stroke-width: 2.4;
+      fill: none;
+    }
+
+    /* Avatar Gallery */
+    .gallery {
+      position: absolute;
+      right: calc(var(--fx) + 43px);
+      bottom: 46px;
+      width: 439px;
+      height: 296px;
+      z-index: 12;
+    }
+    .avatar {
+      position: absolute;
+      width: 138px;
+      height: 138px;
+      border: 8px solid rgba(247, 251, 255, 0.72);
+      border-radius: 50%;
+      overflow: hidden;
+      background: rgba(240, 247, 252, 0.56);
+      padding: 0;
+      transition: border-color 0.22s, box-shadow 0.22s, transform 0.22s;
+    }
+    .avatar:hover, .avatar:focus-visible, .avatar.active {
+      border-color: rgba(255, 255, 255, 0.97);
+      box-shadow: 0 0 0 2px rgba(17, 105, 220, 0.18), 0 8px 20px rgba(46, 74, 101, 0.12);
+    }
+    .avatar.active {
+      transform: scale(1.02);
+    }
+    .avatar img {
+      width: var(--iw, 112%);
+      height: var(--iw, 112%);
+      object-fit: contain;
+      transform: translate(var(--il, -6%), var(--it, -3%));
+      display: block;
+      pointer-events: none;
+    }
+    .avatar:nth-child(1) { left: 160px; top: 1px; }
+    .avatar:nth-child(2) { left: 312px; top: 0; }
+    .avatar:nth-child(3) { left: 0; top: 158px; }
+    .avatar:nth-child(4) { left: 155px; top: 157px; }
+    .avatar:nth-child(5) { left: 310px; top: 158px; }
+
+    /* Social Media Icons */
+    .socials {
+      position: absolute;
+      left: calc(var(--fx) + 46px);
+      bottom: 35px;
+      display: flex;
+      gap: 17px;
+      z-index: 18;
+    }
+    .social {
+      width: 43px;
+      height: 43px;
+      border-radius: 50%;
+      background: rgba(245, 249, 253, 0.55);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background 0.2s ease, transform 0.2s ease;
+    }
+    .social:hover {
+      background: white;
+      outline: 2px solid rgba(17, 105, 220, 0.18);
+      transform: translateY(-2px);
+    }
+    .social svg {
+      width: 24px;
+      height: 24px;
+      fill: var(--ink);
+    }
+
+    /* Toast Notification */
+    .toast {
+      position: absolute;
+      left: 50%;
+      bottom: 30px;
+      z-index: 40;
+      transform: translate(-50%, 18px);
+      padding: 11px 18px;
+      border-radius: 22px;
+      color: white;
+      background: rgba(6, 25, 47, 0.9);
+      font-size: 14px;
+      font-weight: 500;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.24s ease, transform 0.24s ease;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+      white-space: nowrap;
+    }
+    .toast.show {
+      opacity: 1;
+      transform: translate(-50%, 0);
+    }
+
+    /* Compact Menu Panel */
+    .menu-panel {
+      position: absolute;
+      left: calc(var(--fx) + 46px);
+      top: 86px;
+      width: 304px;
+      padding: 14px;
+      display: grid;
+      gap: 6px;
+      z-index: 30;
+      border: 1px solid rgba(255, 255, 255, 0.6);
+      border-radius: 26px;
+      background: linear-gradient(135deg, rgba(255, 255, 255, 0.94), rgba(237, 246, 253, 0.89));
+      box-shadow: 0 0 18px rgba(255, 255, 255, 0.5), inset 0 0 22px rgba(255, 255, 255, 0.5), 0 14px 34px rgba(65, 94, 123, 0.13);
+      backdrop-filter: blur(24px);
+      -webkit-backdrop-filter: blur(24px);
+      visibility: hidden;
+      opacity: 0;
+      transform: translateY(-12px);
+      transition: opacity 0.22s ease, transform 0.25s ease, visibility 0.25s;
+    }
+    .stage.nav-compact.menu-open .menu-panel {
+      visibility: visible;
+      opacity: 1;
+      transform: none;
+    }
+    .menu-panel a {
+      display: flex;
+      align-items: center;
+      height: 60px;
+      padding: 0 20px;
+      border-radius: 20px;
+      font-size: 19px;
+      font-weight: 500;
+      color: var(--ink);
+      transition: background 0.2s;
+    }
+    .menu-panel a.active {
+      background: rgba(214, 230, 245, 0.85);
+      box-shadow: 0 0 0 2px rgba(17, 105, 220, 0.18);
+    }
+    .menu-panel a:hover {
+      background: rgba(214, 230, 245, 0.5);
+    }
+    .menu-join {
+      width: 100%;
+      height: 64px;
+      margin-top: 8px;
+      border-radius: 32px;
+      background: rgba(246, 250, 255, 0.38);
+      box-shadow: 0 0 18px rgba(255, 255, 255, 0.46), inset 0 0 10px rgba(255, 255, 255, 0.45);
+      backdrop-filter: blur(16px);
+      display: flex;
+      align-items: center;
+      padding: 4px;
+    }
+    .menu-join .join-icon {
+      width: 48px;
+      height: 48px;
+    }
+    .menu-join .join-icon svg {
+      width: 26px;
+      height: 26px;
+    }
+    .menu-join .join-label {
+      font-size: 19px;
+    }
+    .stage.nav-compact .nav,
+    .stage.nav-compact .join {
+      display: none;
+    }
+
+    /* ★ 5. THE SPOTLIGHT REVEAL ★ */
+    .hero {
+      position: absolute;
+      left: calc(50% - 373px);
+      top: 265px;
+      width: 600px;
+      height: 759px;
+      z-index: 7;
+      pointer-events: none;
+    }
+    .hero-stack {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      pointer-events: auto;
+    }
+    .hero img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      display: block;
+    }
+    .hero-front, .hero-back {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      display: block;
+      pointer-events: none;
+    }
+    .hero-front {
+      z-index: 1;
+      filter: drop-shadow(12px 17px 24px rgba(35, 57, 79, 0.12))
+              hue-rotate(var(--hero-hue, 0deg)) saturate(var(--hero-sat, 1));
+      transition: filter 0.4s ease;
+    }
+    .hero-back {
+      z-index: 2;
+      mask-repeat: no-repeat;
+      -webkit-mask-repeat: no-repeat;
+      mask-size: 100% 100%;
+      -webkit-mask-size: 100% 100%;
+      mask-mode: alpha;
+      -webkit-mask-mode: alpha;
+    }
+    .hero-mask-canvas {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      display: none;
+    }
+
+    /* Awake breathing animation */
+    .hero.awake {
+      animation: breathe 3.5s ease-in-out infinite;
+    }
+    @keyframes breathe {
+      50% { transform: translateY(-5px); }
+    }
+    .hero.awake .hero-front {
+      animation: breatheGlow 3.5s ease-in-out infinite;
+    }
+    @keyframes breatheGlow {
+      50% {
+        filter: drop-shadow(10px 15px 34px rgba(16, 105, 220, 0.2))
+                hue-rotate(var(--hero-hue, 0deg)) saturate(var(--hero-sat, 1.08));
+      }
+    }
+
+    /* ★ 7. ENTRANCE ANIMATION (Pre-states) ★ */
+    html.intro .headline-line {
+      clip-path: inset(0 -0.12em 100% -0.12em);
+    }
+    html.intro .headline-line > * {
+      transform: translateY(0.9em);
+    }
+    html.intro .brand,
+    html.intro .menu,
+    html.intro .nav,
+    html.intro .join,
+    html.intro .feature,
+    html.intro .hero,
+    html.intro .ghost,
+    html.intro .robo-o-avatar,
+    html.intro .glass-card,
+    html.intro .creator,
+    html.intro .material,
+    html.intro .avatar,
+    html.intro .social {
+      opacity: 0;
+    }
+    html.intro .hero {
+      transform: translateY(22px) scale(0.99);
+    }
+    html.intro .robo-o-avatar {
+      transform: scale(0.88);
+    }
+    html.intro .glass-card {
+      transform: translateY(18px);
+    }
+    html.intro .creator {
+      transform: translateY(10px);
+    }
+    html.intro .material-pill {
+      transform: translateX(16px);
+    }
+    html.intro .avatar {
+      transform: scale(0.9);
+    }
+    .hl-rv {
+      display: block;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      * {
+        scroll-behavior: auto !important;
+        animation: none !important;
+        transition: none !important;
+      }
+    }
+
+    /* ★ 8. RESPONSIVE TIER B: .stage.is-mobile (Portrait-ish, w/h < 1.05) ★ */
+    .stage.is-mobile {
+      width: 640px;
+      height: 1366px;
+      background: radial-gradient(circle at 63% 38%, rgba(249, 253, 255, 0.87), transparent 26%),
+                  linear-gradient(140deg, #d8e9f6, #d3e4f3);
+    }
+    .stage.is-mobile .header { height: 88px; }
+    .stage.is-mobile .brand { left: 24px; top: 31px; width: 56px; }
+    .stage.is-mobile .menu { left: 96px; top: 36px; width: 42px; }
+    .stage.is-mobile .menu span { width: 41px; }
+    .stage.is-mobile .join { right: 16px; top: 23px; width: 120px; }
+    .stage.is-mobile .join-label { font-size: 13px; margin-left: 7px; }
+    .stage.is-mobile .headline {
+      left: 24px;
+      top: 112px;
+      width: calc(100% - 48px);
+      font-size: 60px;
+      line-height: 1.02;
+      letter-spacing: -1.8px;
+      word-spacing: 1px;
+    }
+    .stage.is-mobile .headline-line:first-child { letter-spacing: -2px; }
+    .stage.is-mobile .headline-line2 {
+      margin-top: 14px;
+      gap: 14px;
+      white-space: normal;
+    }
+    .stage.is-mobile .chain { width: 100px; height: 32px; flex: 0 0 100px; }
+    .stage.is-mobile .headline-line2 > span {
+      display: block;
+      width: calc(100% - 116px);
+    }
+    .stage.is-mobile .features {
+      right: 24px;
+      top: 299px;
+      width: 194px;
+      font-size: 16px;
+      gap: 8px;
+    }
+    .stage.is-mobile .feature { gap: 13px; }
+    .stage.is-mobile .creator {
+      left: 24px;
+      right: auto;
+      top: 322px;
+    }
+    .stage.is-mobile .creator-copy { font-size: 14px; }
+    .stage.is-mobile .ghost-one {
+      left: 13px;
+      top: 621px;
+      font-size: 142px;
+    }
+    .stage.is-mobile .o-gap { width: 79px; }
+    .stage.is-mobile .ghost-two {
+      left: 364px;
+      top: 804px;
+      font-size: 104px;
+    }
+    .stage.is-mobile .robo-o-avatar {
+      left: 120px;
+      top: 623px;
+      width: 112px;
+      height: 112px;
+      border-width: 6px;
+    }
+    .stage.is-mobile .robo-o-avatar img {
+      left: -3px;
+      top: 4px;
+      width: 91px;
+      height: 116px;
+    }
+    .stage.is-mobile .hero {
+      left: calc(50% - 284px);
+      top: 339px;
+      width: 568px;
+      height: 719px;
+    }
+    .stage.is-mobile .material {
+      right: 16px;
+      top: 775px;
+      transform: scale(0.78);
+      transform-origin: right center;
+    }
+    .stage.is-mobile .gallery {
+      right: 16px;
+      bottom: 278px;
+      width: 394px;
+      height: 132px;
+      display: flex;
+      gap: 12px;
+    }
+    .stage.is-mobile .avatar {
+      position: relative !important;
+      inset: auto !important;
+      width: 70px;
+      height: 70px;
+      border-width: 5px;
+      flex: 0 0 70px;
+    }
+    .stage.is-mobile .glass-card {
+      left: 24px;
+      top: auto;
+      bottom: 90px;
+      width: calc(100% - 48px);
+      height: 214px;
+      padding-left: 27px;
+    }
+    .stage.is-mobile .card-copy {
+      font-size: 17px;
+      max-width: 340px;
+    }
+    .stage.is-mobile .count { margin-left: -22px; }
+    .stage.is-mobile .card-bottom {
+      left: auto;
+      right: 19px;
+      bottom: 72px;
+      width: 230px;
+    }
+    .stage.is-mobile .start { margin-right: auto; }
+    .stage.is-mobile .socials { left: 24px; bottom: 28px; }
+    .stage.is-mobile .toast { bottom: 28px; }
+
+    @container (min-width: 900px) {
+      .stage.is-mobile .glass-card {
+        width: clamp(360px, 45%, 520px);
+        padding-left: 25px;
+      }
+      .stage.is-mobile .card-copy {
+        max-width: none;
+      }
+      .stage.is-mobile .card-bottom {
+        left: 25px;
+        right: 18px;
+        bottom: 15px;
+        width: auto;
+      }
+      .stage.is-mobile .count { margin-left: -20px; }
+      .stage.is-mobile .gallery {
+        right: 24px;
+        bottom: 162px;
+        height: 70px;
+        align-items: center;
+      }
+    }
+
+    /* ★ 8. RESPONSIVE TIER C: Real Phones (max-width: 520px and orientation: portrait) ★ */
+    @media (max-width: 520px) and (orientation: portrait) {
+      html, body {
+        height: auto;
+        min-height: 100%;
+        overflow-x: hidden;
+        overflow-y: auto;
+      }
+      .viewport {
+        position: relative;
+        inset: auto;
+        min-height: 100svh;
+        overflow: visible;
+      }
+      .stage.is-phone {
+        position: relative;
+        left: auto;
+        top: auto;
+        width: 100%;
+        height: auto;
+        min-height: 100svh;
+        transform: none;
+        background: transparent;
+        --gf: clamp(56px, 16.5vw, 84px);
+        --gm: clamp(112px, 33vw, 186px);
+        display: grid;
+        grid-template-columns: 1fr auto;
+        grid-template-areas:
+          "head head"
+          "title title"
+          "creator features"
+          "art art"
+          "mat mat"
+          "gal gal"
+          "card card"
+          "soc soc";
+        align-content: start;
+        row-gap: clamp(14px, 4vw, 22px);
+        column-gap: 16px;
+        padding: 0 clamp(16px, 5vw, 24px) clamp(22px, 6vw, 32px);
+      }
+      .stage.is-phone > * {
+        position: static;
+        inset: auto;
+        margin: 0;
+      }
+      .is-phone .header {
+        grid-area: head;
+        position: relative;
+        height: auto;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: clamp(14px, 4vw, 20px) 0 0;
+      }
+      .is-phone .brand {
+        position: static;
+        width: clamp(56px, 16vw, 68px);
+        height: auto;
+        aspect-ratio: 58 / 21;
+      }
+      .is-phone .menu {
+        position: relative;
+        width: 45px;
+        height: 19px;
+      }
+      .is-phone .menu:after {
+        content: "";
+        position: absolute;
+        inset: -13px -4px;
+      }
+      .is-phone .menu-panel {
+        left: 0;
+        right: 0;
+        top: calc(100% + 12px);
+        width: auto;
+      }
+      .is-phone .headline {
+        grid-area: title;
+        width: auto;
+        font-size: clamp(24px, 7.3vw, 38px);
+        line-height: 1.1;
+        margin-top: clamp(4px, 2vw, 10px);
+      }
+      .is-phone .headline-line {
+        white-space: normal;
+      }
+      .is-phone .headline-line2 {
+        display: block;
+        gap: 0;
+        margin-top: 0.04em;
+      }
+      .is-phone .chain {
+        display: inline-block;
+        vertical-align: -0.055em;
+        margin-right: 0.2em;
+        width: 1.9114em;
+        height: 0.6076em;
+      }
+      .is-phone .creator {
+        grid-area: creator;
+        align-self: start;
+      }
+      .is-phone .verified {
+        width: 17px;
+        height: 17px;
+      }
+      .is-phone .creator-copy {
+        font-size: 13px;
+      }
+      .is-phone .creator-copy .series {
+        font-size: 12px;
+        margin-top: 6px;
+      }
+      .is-phone .features {
+        grid-area: features;
+        font-size: 13px;
+        gap: 7px;
+        justify-self: end;
+        align-self: start;
+        width: auto;
+      }
+      .is-phone .feature {
+        gap: 12px;
+      }
+
+      /* Art Layer inside grid-area: art */
+      .is-phone .art-container {
+        grid-area: art;
+        position: relative;
+        display: grid;
+        width: 100%;
+      }
+      .is-phone .hero {
+        grid-area: art;
+        position: relative;
+        left: auto;
+        top: auto;
+        width: 100%;
+        height: auto;
+        max-width: 430px;
+        justify-self: center;
+        z-index: 7;
+      }
+      .is-phone .hero img {
+        height: auto;
+      }
+      .is-phone .ghost {
+        letter-spacing: -0.0476em;
+      }
+      .is-phone .o-gap {
+        width: 0.5556em;
+      }
+      .is-phone .ghost-one {
+        grid-area: art;
+        position: relative;
+        left: auto;
+        top: auto;
+        font-size: var(--gf);
+        justify-self: start;
+        align-self: start;
+        margin-top: var(--gm);
+        transform: none;
+      }
+      .is-phone .ghost-two {
+        grid-area: art;
+        position: relative;
+        left: auto;
+        top: auto;
+        font-size: calc(var(--gf) * 0.87);
+        justify-self: end;
+        align-self: end;
+        margin-bottom: clamp(24px, 8vw, 52px);
+      }
+      .is-phone .robo-o-avatar {
+        grid-area: art;
+        position: relative;
+        left: auto;
+        top: auto;
+        font-size: var(--gf);
+        justify-self: start;
+        align-self: start;
+        margin-top: calc(var(--gm) + 0.0317em);
+        margin-left: 0.7566em;
+        width: 0.7566em;
+        height: 0.7566em;
+        border-width: 0.0423em;
+      }
+      .is-phone .robo-o-avatar img {
+        left: -0.0212em;
+        top: 0.0265em;
+        width: 0.6138em;
+        height: 0.7778em;
+      }
+
+      .is-phone .material {
+        grid-area: mat;
+        width: 100%;
+        height: auto;
+        margin-top: clamp(30px, 10vw, 56px);
+      }
+      .is-phone .material-pill {
+        position: relative;
+        width: 100%;
+        height: clamp(64px, 18vw, 76px);
+      }
+      .is-phone .material-thumb {
+        width: clamp(96px, 28vw, 126px);
+        height: clamp(122px, 36vw, 161px);
+        bottom: 0;
+      }
+      .is-phone .material-thumb img {
+        left: -17.7%;
+        top: 19.4%;
+        width: 119.1%;
+        height: auto;
+      }
+      .is-phone .material-copy {
+        margin-left: clamp(102px, 30vw, 134px);
+        width: auto;
+        font-size: clamp(14px, 4vw, 16px);
+      }
+      .is-phone .material-next {
+        width: clamp(48px, 14vw, 58px);
+        height: clamp(48px, 14vw, 58px);
+        margin-right: 6px;
+      }
+
+      .is-phone .gallery {
+        grid-area: gal;
+        width: 100%;
+        height: auto;
+        display: flex;
+        gap: clamp(6px, 2.2vw, 12px);
+        justify-content: space-between;
+      }
+      .is-phone .avatar {
+        position: static;
+        width: auto;
+        height: auto;
+        flex: 1 1 0;
+        min-width: 0;
+        aspect-ratio: 1;
+        border-width: clamp(3px, 1.2vw, 5px);
+      }
+
+      .is-phone .glass-card {
+        grid-area: card;
+        width: auto;
+        height: auto;
+        padding: 14px 20px 20px;
+      }
+      .is-phone .card-top {
+        height: auto;
+        align-items: center;
+      }
+      .is-phone .count {
+        margin-left: -14px;
+        min-width: 0;
+        padding: 8px 18px 7px;
+      }
+      .is-phone .eye {
+        width: 40px;
+        height: 40px;
+        margin: 0;
+      }
+      .is-phone .card-copy {
+        margin-top: clamp(12px, 4vw, 16px);
+        font-size: clamp(14px, 4.1vw, 16px);
+      }
+      .is-phone .card-bottom {
+        position: static;
+        height: auto;
+        margin-top: clamp(14px, 4.5vw, 20px);
+      }
+      .is-phone .start {
+        font-size: clamp(13px, 3.8vw, 15px);
+        line-height: 1.2;
+      }
+      .is-phone .start strong {
+        font-size: clamp(16px, 4.6vw, 19px);
+      }
+      .is-phone .shuffle {
+        width: 40px;
+        height: 40px;
+        margin-right: clamp(10px, 4vw, 18px);
+      }
+      .is-phone .play {
+        width: clamp(48px, 14vw, 56px);
+        height: clamp(48px, 14vw, 56px);
+      }
+
+      .is-phone .socials {
+        grid-area: soc;
+        display: flex;
+        gap: clamp(12px, 4vw, 17px);
+      }
+      .is-phone .social {
+        width: 44px;
+        height: 44px;
+      }
+
+      .is-phone .toast {
+        position: absolute;
+        left: 50%;
+        top: auto;
+        bottom: clamp(18px, 5vw, 26px);
+      }
+    }
   </style>
 </head>
 <body>
 
-  <!-- Ambient 3D WebGL Space Warp Canvas & Ambient Particle Canvas -->
-  <canvas id="three-bg-canvas"></canvas>
-  <canvas id="ambient-canvas"></canvas>
-  <div class="spotlight"></div>
+  <main class="viewport" aria-label="Nival cyberspace identity experience">
+    <div class="stage" id="stage">
 
-  <!-- Header -->
-  <header>
-    <div class="header-inner">
-      <a href="#" class="brand">
-        <div class="brand-icon">⚡</div>
-        <div class="brand-text">
-          <h1>Systems Architect</h1>
-          <p>ENGINEERING PORTFOLIO</p>
-        </div>
-      </a>
-      <div class="nav-actions">
-        <button class="cmd-trigger" onclick="toggleCommandPalette()">
-          <span>⌘K / Terminal</span>
-        </button>
-        <a href="https://github.com/freshstart2066-create" target="_blank" class="btn-github">
-          <svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
-          GitHub
+      <!-- Header -->
+      <header class="header">
+        <!-- Brand Glyph -->
+        <a href="#" class="brand" aria-label="Nival Home">
+          <svg viewBox="0 0 58 21" aria-hidden="true">
+            <path d="M0 0h7v21H0zM21 0h7v21h-7zM0 0h12l16 21H16zM30 0h8l12 21h-8zM51 0h7v21h-7z"/>
+          </svg>
         </a>
-      </div>
-    </div>
-  </header>
 
-  <!-- Container -->
-  <main class="container">
+        <!-- Hamburger Button -->
+        <button class="menu" id="menu-btn" aria-label="Toggle Navigation Menu" aria-expanded="false" aria-controls="menu-panel">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
 
-    <!-- Hero -->
-    <section class="hero">
-      <div>
-        <div class="hero-badge">
-          <span class="pulse-dot"></span> Live Systems &amp; Autonomous AI Architectures
-        </div>
-        <h1 class="hero-title">
-          Mission-Critical <span class="gradient-text">Systems Architecture</span> &amp; Edge AI Runtimes
-        </h1>
-        <p class="hero-desc">
-          Engineering real-time satellite command &amp; control (C2), high-assurance cryptographic verification layers, on-device mobile AI runtimes (Android APK), and multi-agent DAG state machines.
-        </p>
-        <div class="hero-metrics">
-          <div class="metric-card">
-            <div class="metric-val">100%</div>
-            <div class="metric-label">Offline V-Pass Security</div>
-          </div>
-          <div class="metric-card">
-            <div class="metric-val">1ms</div>
-            <div class="metric-label">Local Edge Latency</div>
-          </div>
-          <div class="metric-card">
-            <div class="metric-val">32/32</div>
-            <div class="metric-label">Cryptographic Tests</div>
-          </div>
-        </div>
-      </div>
+        <!-- Desktop Navigation Glass Pill -->
+        <nav class="nav" aria-label="Primary Navigation">
+          <a href="#home" class="active">Home page</a>
+          <a href="#pricing">Pricing</a>
+          <a href="#about">About</a>
+          <a href="#contact">Contact</a>
+        </nav>
 
-      <!-- Interactive Hero Showcase (ELYRA Mobile APK & 3D Holographic Studio) -->
-      <div class="hero-interactive-card">
-        
-        <!-- Showcase Mode Tabs (3D Spatial Studio First) -->
-        <div class="showcase-nav-tabs">
-          <button class="showcase-tab-btn active" id="tab-3d-btn" onclick="switchShowcaseTab('3d')">
-            🪐 3D Spatial Studio
-          </button>
-          <button class="showcase-tab-btn" id="tab-elyra-btn" onclick="switchShowcaseTab('elyra')">
-            📱 ELYRA Mobile APK
+        <!-- Join Us Button -->
+        <button class="join" id="join-btn" aria-label="Join Nival Community">
+          <span class="join-icon">
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <circle cx="12" cy="7" r="4"/>
+              <path d="M4.5 21c.4-5 3.1-7.3 7.5-7.3s7.1 2.3 7.5 7.3"/>
+            </svg>
+          </span>
+          <span class="join-label">Join us</span>
+        </button>
+
+        <!-- Compact Navigation Menu Panel -->
+        <div class="menu-panel" id="menu-panel" aria-hidden="true">
+          <a href="#home" class="active">Home page</a>
+          <a href="#pricing">Pricing</a>
+          <a href="#about">About</a>
+          <a href="#contact">Contact</a>
+          <button class="menu-join" id="menu-join-btn" aria-label="Join Nival Community">
+            <span class="join-icon">
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <circle cx="12" cy="7" r="4"/>
+                <path d="M4.5 21c.4-5 3.1-7.3 7.5-7.3s7.1 2.3 7.5 7.3"/>
+              </svg>
+            </span>
+            <span class="join-label">Join us</span>
           </button>
         </div>
+      </header>
 
-        <!-- TAB 1: 3D Holographic Spatial Matrix Viewport (Default First) -->
-        <div id="showcase-view-3d" style="display:block;">
-          <div class="phone-header">
-            <div class="phone-title">
-              <span>🪐 3D Spatial Matrix</span>
-              <span class="apk-badge" style="background:rgba(56,189,248,0.15); color:var(--cyan); border-color:rgba(56,189,248,0.3);">WebGL 60FPS</span>
-            </div>
-            <span style="font-size:0.75rem; color:var(--cyan); font-family:var(--font-mono);" id="hologram-fps-counter">● 60.0 FPS</span>
-          </div>
+      <!-- Headline -->
+      <h1 class="headline" id="home">
+        <span class="headline-line"><span class="hl-rv">Cyberspace — reality</span></span>
+        <span class="headline-line headline-line2">
+          <svg class="chain" viewBox="0 0 151 48" aria-hidden="true">
+            <!-- 3 interlinked horizontal rings -->
+            <path d="M24 0C10.745 0 0 10.745 0 24s10.745 24 24 24c8.47 0 15.935-4.41 20.24-11.08C42.06 33.72 40.03 29.07 40 24c.03-5.07 2.06-9.72 4.24-12.92C39.935 4.41 32.47 0 24 0zm0 8c8.837 0 16 7.163 16 16s-7.163 16-16 16S8 32.837 8 24s7.163-16 16-16z"/>
+            <path d="M75.5 0C62.245 0 51.5 10.745 51.5 24s10.745 24 24 24c13.255 0 24-10.745 24-24s-10.745-24-24-24zm0 8c8.837 0 16 7.163 16 16s-7.163 16-16 16-16-7.163-16-16 7.163-16 16-16z"/>
+            <path d="M127 0c-8.47 0-15.935 4.41-20.24 11.08 2.18 3.2 4.21 7.85 4.24 12.92-.03 5.07-2.06 9.72-4.24 12.92C111.065 43.59 118.53 48 127 48c13.255 0 24-10.745 24-24S140.255 0 127 0zm0 8c8.837 0 16 7.163 16 16s-7.163 16-16 16-16-7.163-16-16 7.163-16 16-16z"/>
+          </svg>
+          <span>merge with the virtual</span>
+        </span>
+      </h1>
 
-          <!-- 3D WebGL Canvas Container -->
-          <div class="hologram-container" id="hologram-canvas-container">
-            <div class="hologram-hud-top">
-              <span id="hologram-target-label">TARGET: SGP4 ORBITAL SWARM</span>
-              <span id="hologram-quaternion">QUAT: [0.707, 0.000, 0.707, 0.000]</span>
-            </div>
-            <canvas id="three-hologram-canvas"></canvas>
-            <div class="hologram-hud-bottom">
-              <span class="hologram-hud-tag" id="hologram-poly-count">TRIANGLES: 1,420</span>
-              <span class="hologram-hud-tag">DRAG TO ROTATE 3D</span>
-            </div>
-          </div>
-
-          <!-- 3D Model Switcher -->
-          <div class="model-toggles">
-            <button class="model-btn active" id="btn-3d-orbit" onclick="switch3DScene('orbit')">🪐 Orbit Swarm</button>
-            <button class="model-btn" id="btn-3d-neural" onclick="switch3DScene('neural')">🧠 Neural Core</button>
-            <button class="model-btn" id="btn-3d-crypto" onclick="switch3DScene('crypto')">🔐 Merkle Prism</button>
-          </div>
-
-          <div style="margin-top:0.75rem; display:flex; gap:0.5rem;">
-            <button class="btn btn-primary" style="flex:1; justify-content:center;" onclick="pulse3DEnergyWave()">⚡ Pulse 3D Warp Field</button>
-            <button class="btn btn-secondary" onclick="reset3DCamera()">Reset View</button>
-          </div>
-        </div>
-
-        <!-- TAB 2: ELYRA Mobile Android APK Emulator -->
-        <div id="showcase-view-elyra" style="display:none;">
-          <div class="phone-header">
-            <div class="phone-title">
-              <span>📱 ELYRA Android</span>
-              <span class="apk-badge">ARM64 APK</span>
-            </div>
-            <span style="font-size:0.75rem; color:var(--emerald); font-family:var(--font-mono);">● ON-DEVICE</span>
-          </div>
-
-          <p style="font-size:0.8rem; color:var(--text-muted); margin-bottom:0.75rem;">
-            Autonomous Edge AI &amp; Telemetry Triage Engine with on-device quantized model routing (Qwen, Llama on Ollama / GGUF).
-          </p>
-
-          <!-- Live Waveform -->
-          <div class="live-visualizer" id="audio-visualizer">
-            <!-- 16 dynamic waveform bars -->
-            <div class="wave-bar"></div><div class="wave-bar"></div><div class="wave-bar"></div><div class="wave-bar"></div>
-            <div class="wave-bar"></div><div class="wave-bar"></div><div class="wave-bar"></div><div class="wave-bar"></div>
-            <div class="wave-bar"></div><div class="wave-bar"></div><div class="wave-bar"></div><div class="wave-bar"></div>
-            <div class="wave-bar"></div><div class="wave-bar"></div><div class="wave-bar"></div><div class="wave-bar"></div>
-          </div>
-
-          <!-- Model Selectors -->
-          <div class="model-toggles">
-            <button class="model-btn active" onclick="switchMobileModel('qwen')">Qwen 2.5 (3B)</button>
-            <button class="model-btn" onclick="switchMobileModel('llama')">Llama 3.2 (GGUF)</button>
-            <button class="model-btn" onclick="switchMobileModel('cloud')">Cloud API</button>
-          </div>
-
-          <!-- Terminal Output -->
-          <div class="terminal-output" id="elyra-terminal">[ELYRA_RUNTIME: ACTIVE]
-• Target: Android ARM64 APK
-• Token Buffer: 2,048 (Sliding-Window)
-• Telemetry Triage: Nominal (0 Anomaly)
-• Voice DSP Synthesizer: Ready</div>
-
-          <div style="margin-top:1rem; display:flex; gap:0.5rem;">
-            <button class="btn btn-primary" style="flex:1; justify-content:center;" onclick="triggerElyraTriage()">⚡ Run Telemetry Triage</button>
-            <a href="https://github.com/freshstart2066-create/elyra" target="_blank" class="btn btn-secondary">Source Code</a>
-          </div>
-        </div>
-
+      <!-- Features List -->
+      <div class="features">
+        <div class="feature"><b>Web based</b> <span>/01</span></div>
+        <div class="feature"><b>Collaborative</b> <span>/02</span></div>
+        <div class="feature"><b>Real-time</b> <span>/03</span></div>
       </div>
-    </section>
 
-    <!-- Interactive System Architecture & Execution Workflow Section -->
-    <section class="workflow-section" id="architecture-pipeline">
-      <div class="workflow-header">
-        <div class="workflow-title-box">
-          <h2>⚡ Distributed Systems &amp; Edge AI Architecture Blueprint</h2>
-          <p>
-            Interactive multi-cluster execution flow: from on-device sensor ingestion and quantized LLM routing to cryptographic attestation, swarm consensus, and aerospace telemetry dispatch.
-          </p>
+      <!-- Creator Information -->
+      <div class="creator">
+        <div class="verified" aria-hidden="true">
+          <svg viewBox="0 0 12 12" fill="none">
+            <path d="M2.2 6.2 4.7 8.5 9.8 3" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
         </div>
-        <div class="pipeline-controls">
-          <button class="pipeline-pulse-btn" onclick="simulateFullPipelineTrace()">
-            <span class="pulse-dot"></span> Run Full Pipeline Trace
+        <div class="creator-copy">
+          <div>By Nival_02</div>
+          <span class="series">Identity series · 02</span>
+        </div>
+      </div>
+
+      <!-- Glass Card -->
+      <div class="glass-card">
+        <div class="card-top">
+          <div class="count">
+            <strong>+105</strong>
+            <small>kinds of avatars</small>
+          </div>
+          <button class="eye" id="eye-btn" aria-label="Preview Live Identity">
+            <svg viewBox="0 0 32 22">
+              <path d="M1 11C4.5 4 10.5 1 16 1s11.5 3 15 10c-3.5 7-9.5 10-15 10S4.5 18 1 11z"/>
+              <circle cx="16" cy="11" r="3.5"/>
+            </svg>
+          </button>
+        </div>
+        <p class="card-copy">Explore digital identities, crafted<br>for a new kind of presence.</p>
+        <div class="card-bottom">
+          <div class="start">
+            Start<br><strong>creating</strong>
+          </div>
+          <button class="shuffle" id="shuffle-btn" aria-label="Shuffle Avatars">
+            <svg viewBox="0 0 30 30">
+              <path d="M21 5h4v4M25 5l-7 7M4 5h4l4 5M21 25h4v-4M25 25l-13-15H4M18 18l7 7"/>
+            </svg>
+          </button>
+          <button class="play" id="play-btn" aria-label="Activate Cybernetic Identity" aria-pressed="false">
+            <svg viewBox="0 0 24 26">
+              <path d="m3 2 19 12L3 26z"/>
+            </svg>
           </button>
         </div>
       </div>
 
-      <!-- Blueprint Navigation Tabs -->
-      <div class="blueprint-tabs">
-        <button class="blueprint-tab-btn active" id="tab-bp-all" onclick="switchBlueprintView('all')">
-          🌐 Full Architecture Pipeline
-        </button>
-        <button class="blueprint-tab-btn" id="tab-bp-edge" onclick="switchBlueprintView('edge')">
-          📱 Cluster 1: Edge AI (ELYRA)
-        </button>
-        <button class="blueprint-tab-btn" id="tab-bp-crypto" onclick="switchBlueprintView('crypto')">
-          🔐 Cluster 2: Cryptographic Layer (OPAP)
-        </button>
-        <button class="blueprint-tab-btn" id="tab-bp-swarms" onclick="switchBlueprintView('swarms')">
-          🤖 Cluster 3: Multi-Agent Swarms
-        </button>
-        <button class="blueprint-tab-btn" id="tab-bp-aero" onclick="switchBlueprintView('aero')">
-          🛰️ Cluster 4: Astrodynamics C2
-        </button>
+      <!-- Ghost Typography Background Elements -->
+      <div class="ghost ghost-one" aria-hidden="true">R<i class="o-gap"></i>BO</div>
+      <div class="ghost ghost-two" aria-hidden="true">FORM</div>
+
+      <!-- Robo O Avatar circular badge -->
+      <div class="robo-o-avatar" aria-hidden="true">
+        <img data-hero-front src="" alt="">
       </div>
 
-      <!-- Master Architecture Flow Canvas -->
-      <div class="blueprint-canvas-container">
-        <!-- Subgraph Clusters Grid -->
-        <div class="clusters-grid">
-
-          <!-- Cluster 1: Edge AI (ELYRA) -->
-          <div class="cluster-box" id="cluster-box-edge" style="border-top: 3px solid #38bdf8;">
-            <div class="cluster-header">
-              <div class="cluster-title">
-                <span>📱 CLUSTER 1: EDGE AI</span>
-              </div>
-              <span class="cluster-tag" style="background:rgba(56,189,248,0.15); color:#38bdf8;">ARM64 APK</span>
-            </div>
-            <div class="nodes-step-list">
-              <div class="node-box active" id="node-1-1" onclick="selectBlueprintNode('node-1-1', '01. SENSOR INGESTION', 'Sampling Web Audio DSP and Android accelerometer at 44.1 kHz with sub-50ms ring buffer lock.')">
-                <span class="node-idx">NODE 1.1</span>
-                <span>🎙️ Sensor Ingestion (44.1kHz)</span>
-              </div>
-              <div class="node-wire-arrow">▼</div>
-              <div class="node-box" id="node-1-2" onclick="selectBlueprintNode('node-1-2', '02. SLIDING CONTEXT', 'Sliding context window allocating 412/2048 tokens with active FIFO eviction to eliminate OOM.')">
-                <span class="node-idx">NODE 1.2</span>
-                <span>🪟 Sliding Window (2048 Tok)</span>
-              </div>
-              <div class="node-wire-arrow">▼</div>
-              <div class="node-box" id="node-1-3" onclick="selectBlueprintNode('node-1-3', '03. QUANTIZED ROUTER', 'Local Ollama runtime executing Qwen 2.5 3B (Q4_K_M) at 28.4 tok/s with zero cloud egress.')">
-                <span class="node-idx">NODE 1.3</span>
-                <span>🧠 Quantized Router (Qwen 2.5)</span>
-              </div>
-              <div class="node-wire-arrow">▼</div>
-              <div class="node-box" id="node-1-4" onclick="selectBlueprintNode('node-1-4', '04. TOOL DISPATCH', 'Deterministic function dispatcher invoking psutil hardware sensors and battery thermals.')">
-                <span class="node-idx">NODE 1.4</span>
-                <span>🛠️ Tool Dispatch (psutil)</span>
-              </div>
-            </div>
-          </div>
-
-          <!-- Cluster 2: Cryptography & Standards (OPAP) -->
-          <div class="cluster-box" id="cluster-box-crypto" style="border-top: 3px solid #10b981;">
-            <div class="cluster-header">
-              <div class="cluster-title">
-                <span>🔐 CLUSTER 2: ATTESTATION</span>
-              </div>
-              <span class="cluster-tag" style="background:rgba(16,185,129,0.15); color:#10b981;">RFC 8037</span>
-            </div>
-            <div class="nodes-step-list">
-              <div class="node-box" id="node-2-1" onclick="selectBlueprintNode('node-2-1', '05. GS1 DIGITAL LINK', 'Generating GS1 Sunrise 2027 compliant URI: /01/00012345678905/21/SER-99 with canonical GTIN encoding.')">
-                <span class="node-idx">NODE 2.1</span>
-                <span>🏷️ GS1 Digital Link 2027</span>
-              </div>
-              <div class="node-wire-arrow">▼</div>
-              <div class="node-box" id="node-2-2" onclick="selectBlueprintNode('node-2-2', '06. ED25519 MERKLE PROOF', 'Ed25519 asymmetric signature tree generating sub-millisecond cryptographic inclusion proofs.')">
-                <span class="node-idx">NODE 2.2</span>
-                <span>🛡️ Ed25519 Merkle Proof</span>
-              </div>
-              <div class="node-wire-arrow">▼</div>
-              <div class="node-box" id="node-2-3" onclick="selectBlueprintNode('node-2-3', '07. ANTI-COUNTERFEIT PASS', 'Zero-knowledge verification validating authentic manufacture seal without leaking serial keys.')">
-                <span class="node-idx">NODE 2.3</span>
-                <span>📜 Anti-Counterfeit Proof</span>
-              </div>
-              <div class="node-wire-arrow">▼</div>
-              <div class="node-box" id="node-2-4" onclick="selectBlueprintNode('node-2-4', '08. EU DPP 2.0 COMPLIANCE', 'Minting EU Ecodesign ESPR & Battery Passport payload for offline decentralized inspection.')">
-                <span class="node-idx">NODE 2.4</span>
-                <span>🇪🇺 EU DPP 2.0 Mint</span>
-              </div>
-            </div>
-          </div>
-
-          <!-- Cluster 3: Autonomous Multi-Agent Swarms (CortexFlow) -->
-          <div class="cluster-box" id="cluster-box-swarms" style="border-top: 3px solid #a855f7;">
-            <div class="cluster-header">
-              <div class="cluster-title">
-                <span>🤖 CLUSTER 3: SWARM CONSENSUS</span>
-              </div>
-              <span class="cluster-tag" style="background:rgba(168,85,247,0.15); color:#a855f7;">DAG STATE</span>
-            </div>
-            <div class="nodes-step-list">
-              <div class="node-box" id="node-3-1" onclick="selectBlueprintNode('node-3-1', '09. MISSION TASK INGESTION', 'Multi-tenant task dispatcher ingesting priority telemetry alerts and agent goal constraints.')">
-                <span class="node-idx">NODE 3.1</span>
-                <span>🤖 Mission Task Ingestion</span>
-              </div>
-              <div class="node-wire-arrow">▼</div>
-              <div class="node-box" id="node-3-2" onclick="selectBlueprintNode('node-3-2', '10. DAG GRAPH STATE MACHINE', 'State graph computing dependency resolution and cycle-free topological node scheduling.')">
-                <span class="node-idx">NODE 3.2</span>
-                <span>🕸️ DAG Graph State</span>
-              </div>
-              <div class="node-wire-arrow">▼</div>
-              <div class="node-box" id="node-3-3" onclick="selectBlueprintNode('node-3-3', '11. PARALLEL SWARM CONSENSUS', 'Peer agents executing Raft-inspired state reconciliation across distributed worker nodes.')">
-                <span class="node-idx">NODE 3.3</span>
-                <span>⚖️ Swarm Consensus</span>
-              </div>
-              <div class="node-wire-arrow">▼</div>
-              <div class="node-box" id="node-3-4" onclick="selectBlueprintNode('node-3-4', '12. ATOMIC ACTION EXECUTION', 'Dispatching verified sub-task instructions to target ground and edge runtime actuators.')">
-                <span class="node-idx">NODE 3.4</span>
-                <span>⚡ Action Execution</span>
-              </div>
-            </div>
-          </div>
-
-          <!-- Cluster 4: Aerospace Astrodynamics & C2 (Cherub) -->
-          <div class="cluster-box" id="cluster-box-aero" style="border-top: 3px solid #f59e0b;">
-            <div class="cluster-header">
-              <div class="cluster-title">
-                <span>🛰️ CLUSTER 4: ASTRODYNAMICS</span>
-              </div>
-              <span class="cluster-tag" style="background:rgba(245,158,11,0.15); color:#f59e0b;">SGP4 / WGS84</span>
-            </div>
-            <div class="nodes-step-list">
-              <div class="node-box" id="node-4-1" onclick="selectBlueprintNode('node-4-1', '13. NORAD TLE INGESTION', 'Ingesting real-time Two-Line Element (TLE) orbital vectors from Space-Track catalog.')">
-                <span class="node-idx">NODE 4.1</span>
-                <span>🛰️ NORAD TLE Ingestion</span>
-              </div>
-              <div class="node-wire-arrow">▼</div>
-              <div class="node-box" id="node-4-2" onclick="selectBlueprintNode('node-4-2', '14. SGP4 ORBIT PROPAGATOR', 'High-precision orbital mechanics solver computing ECI/ECEF coordinates with WGS-84 oblate Earth model.')">
-                <span class="node-idx">NODE 4.2</span>
-                <span>🧮 SGP4 Orbit Propagator</span>
-              </div>
-              <div class="node-wire-arrow">▼</div>
-              <div class="node-box" id="node-4-3" onclick="selectBlueprintNode('node-4-3', '15. CONJUNCTION RISK (CAM)', 'Collision Avoidance Maneuver risk calculator: Miss Distance 4.82km (Pc &lt; 1e-7 nominal).')">
-                <span class="node-idx">NODE 4.3</span>
-                <span>⚠️ CAM Avoidance Risk</span>
-              </div>
-              <div class="node-wire-arrow">▼</div>
-              <div class="node-box" id="node-4-4" onclick="selectBlueprintNode('node-4-4', '16. GROUND STATION C2', 'CCSDS compliant telemetry frame uplink calculating Azimuth/Elevation/Range (AER) passes.')">
-                <span class="node-idx">NODE 4.4</span>
-                <span>📡 Ground Station AER C2</span>
-              </div>
-            </div>
-          </div>
-
-        </div>
-
-        <!-- Animated Connecting Wire Banners Between Clusters -->
-        <div class="cluster-wire-banner" style="margin-top: 1.25rem;">
-          <span>⚡ VERIFIED EDGE TELEMETRY</span>
-          <span>───────▶</span>
-          <span>🔐 IMMUTABLE MERKLE AUDIT LOG</span>
-          <span>───────▶</span>
-          <span>🤖 SWARM CONSENSUS</span>
-          <span>───────▶</span>
-          <span>🛰️ CCSDS GROUND C2 FRAME</span>
+      <!-- ★ 5. THE SPOTLIGHT REVEAL HERO ★ -->
+      <div class="hero" id="hero">
+        <div class="hero-stack" id="hero-stack">
+          <img class="hero-front" data-hero-front src="" alt="White and silver female android">
+          <img class="hero-back" data-hero-back src="" aria-hidden="true" alt="">
+          <canvas class="hero-mask-canvas" id="hero-mask-canvas" aria-hidden="true"></canvas>
         </div>
       </div>
 
-      <!-- Live Pipeline Console Trace -->
-      <div class="pipeline-console" id="pipeline-console-log">
-        <div class="console-header-row">
-          <span>ACTIVE PIPELINE TRACE // SYSTEM BLUEPRINT</span>
-          <span id="pipeline-stage-tag" style="color:var(--cyan)">NODE 1.1: SENSOR INGESTION</span>
-        </div>
-        <div id="pipeline-log-content">
-          &gt; INGESTION_BUS: Sampling Web Audio DSP &amp; Android accelerometer at 44.1 kHz. Frame buffer nominal. Sub-50ms latency locked.
+      <!-- Adaptive Materials Widget -->
+      <div class="material">
+        <div class="material-pill">
+          <div class="material-thumb">
+            <img data-material src="" alt="Adaptive material texture thumbnail">
+          </div>
+          <div class="material-copy">Adaptive<br>materials</div>
+          <button class="material-next" id="mat-next-btn" aria-label="Next Material Variant">
+            <svg viewBox="0 0 32 32">
+              <path d="M7 8 24 25M12 25h12V13"/>
+            </svg>
+          </button>
         </div>
       </div>
-    </section>
 
-    <!-- Filter Bar -->
-    <div class="filter-bar" id="projects">
-      <button class="filter-btn active" onclick="filterCategory('all')">All Systems (14)</button>
-      <button class="filter-btn" onclick="filterCategory('ai')">Edge AI &amp; Agents</button>
-      <button class="filter-btn" onclick="filterCategory('aerospace')">Aerospace &amp; Defense</button>
-      <button class="filter-btn" onclick="filterCategory('crypto')">Cryptography &amp; Standards</button>
-      <button class="filter-btn" onclick="filterCategory('fintech')">Fintech &amp; Distributed</button>
-      <button class="filter-btn" onclick="filterCategory('creative')">Creative &amp; Web Platforms</button>
-    </div>
+      <!-- Avatar Selection Gallery -->
+      <div class="gallery" role="region" aria-label="Avatar Identity Gallery">
+        <button class="avatar active" data-av-idx="0" data-hue="2" data-sat="1.2" style="--iw:112.3%;--il:-5.84%;--it:-3.65%;background:#1e3048;" aria-label="Select Avatar 01">
+          <img data-av1 src="" alt="Avatar Identity 01">
+        </button>
+        <button class="avatar" data-av-idx="1" data-hue="0" data-sat=".42" style="--iw:111.5%;--il:-8.82%;--it:-4.41%;" aria-label="Select Avatar 02">
+          <img data-av2 src="" alt="Avatar Identity 02">
+        </button>
+        <button class="avatar" data-av-idx="2" data-hue="6" data-sat="1.3" style="--iw:113.1%;--il:-4.35%;--it:-0.72%;" aria-label="Select Avatar 03">
+          <img data-av3 src="" alt="Avatar Identity 03">
+        </button>
+        <button class="avatar" data-av-idx="3" data-hue="0" data-sat=".2" style="--iw:108.2%;--il:-6.82%;--it:0.76%;" aria-label="Select Avatar 04">
+          <img data-av4 src="" alt="Avatar Identity 04">
+        </button>
+        <button class="avatar" data-av-idx="4" data-hue="0" data-sat=".68" style="--iw:114.8%;--il:-10.71%;--it:-2.14%;" aria-label="Select Avatar 05">
+          <img data-av5 src="" alt="Avatar Identity 05">
+        </button>
+      </div>
 
-    <!-- Projects Grid -->
-    <div class="projects-grid" id="projects-grid">
+      <!-- Social Links -->
+      <div class="socials">
+        <button class="social" data-name="Instagram" aria-label="Nival on Instagram">
+          <svg viewBox="0 0 24 24">
+            <rect x="2" y="2" width="20" height="20" rx="5" fill="none" stroke="currentColor" stroke-width="2"/>
+            <circle cx="12" cy="12" r="4" fill="none" stroke="currentColor" stroke-width="2"/>
+            <circle cx="17.5" cy="6.5" r="1.5" fill="currentColor"/>
+          </svg>
+        </button>
+        <button class="social" data-name="Facebook" aria-label="Nival on Facebook">
+          <svg viewBox="0 0 24 24">
+            <path d="M22 12c0-5.52-4.48-10-10-10S2 6.48 2 12c0 4.84 3.44 8.87 8 9.8V15H8v-3h2V9.5C10 7.57 11.57 6 13.5 6H16v3h-2c-.55 0-1 .45-1 1v2h3v3h-3v6.95c5.05-.5 9-4.76 9-9.95z"/>
+          </svg>
+        </button>
+        <button class="social" data-name="Telegram" aria-label="Nival on Telegram">
+          <svg viewBox="0 0 24 24">
+            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.58-1.38-.94-2.23-1.5-.99-.65-.35-1.01.22-1.59.15-.15 2.71-2.48 2.76-2.69a.2.2 0 00-.05-.18c-.06-.05-.14-.03-.21-.02-.09.02-1.49.95-4.22 2.79-.4.27-.76.41-1.08.4-.36-.01-1.04-.2-1.55-.37-.63-.2-1.12-.31-1.08-.66.02-.18.27-.36.75-.55 2.92-1.27 4.86-2.11 5.83-2.52 2.78-1.16 3.35-1.36 3.73-1.36.08 0 .27.02.39.12.1.08.13.19.14.27-.01.06.01.24 0 .38z"/>
+          </svg>
+        </button>
+      </div>
 
-      <!-- 1. ELYRA Mobile (Featured) -->
-      <article class="project-card featured" data-cat="ai">
-        <div class="card-top">
-          <div class="card-header-row">
-            <h2 class="card-title">📱 ELYRA Mobile (Android APK)</h2>
-            <div style="display:flex; gap:0.4rem;">
-              <span class="badge" style="background:rgba(34,197,94,0.15); color:#22c55e; border:1px solid rgba(34,197,94,0.3);">Android APK</span>
-              <span class="badge badge-ai">On-Device Edge AI</span>
-            </div>
-          </div>
-          <p class="card-desc">
-            Autonomous Mobile Edge AI Assistant &amp; Telemetry Diagnostic Runtime compiled into a standalone <b>Android APK</b>. Designed for air-gapped field operations, cross-platform mobile telemetry triage, and low-latency quantized model routing.
-          </p>
-          <ul class="key-features">
-            <li><b>Native Android APK Architecture:</b> Cross-platform React Native / Expo production build with hardware sensor access, dark cyber glassmorphic UI, and on-device voice feedback.</li>
-            <li><b>Adaptive Edge Routing:</b> Dynamic triage engine switching between local quantized models (Qwen, Llama on Ollama / GGUF) and cloud API fallbacks based on latency and network availability.</li>
-            <li><b>Sliding-Window Memory:</b> Custom token buffer management preventing mobile OOM crashes and maintaining multi-turn conversational context on resource-constrained hardware.</li>
-            <li><b>Autonomous Tool Execution:</b> Structured JSON schema parsing, sub-second telemetry diagnostics, device state inspection, and streaming updates over WebSockets and SSE.</li>
-          </ul>
-          <div class="tech-row">
-            <span class="tech-pill">Android APK</span>
-            <span class="tech-pill">React Native / Expo</span>
-            <span class="tech-pill">FastAPI</span>
-            <span class="tech-pill">Python AsyncIO</span>
-            <span class="tech-pill">Ollama / GGUF</span>
-            <span class="tech-pill">Quantized LLMs</span>
-            <span class="tech-pill">WebSockets</span>
-          </div>
-        </div>
-        <div class="card-actions">
-          <a href="https://github.com/freshstart2066-create/elyra" target="_blank" class="btn btn-primary">⭐ GitHub Repository</a>
-          <button class="btn btn-secondary" onclick="runCommand('elyra')">Launch In Terminal</button>
-        </div>
-      </article>
-
-      <!-- 2. Project Cherub (Featured) -->
-      <article class="project-card featured" data-cat="aerospace">
-        <div class="card-top">
-          <div class="card-header-row">
-            <h2 class="card-title">🛰️ Project Cherub</h2>
-            <span class="badge badge-aerospace">Aerospace C2</span>
-          </div>
-          <p class="card-desc">
-            Autonomous Satellite Mission Planning, Astrodynamics &amp; Space Command &amp; Control (C2) Platform. High-precision SGP4/SDP4 orbital propagation, real-time 3D WGS84 sensor swath modeling, ground station pass scheduling, and CCSDS packet stream handling.
-          </p>
-          <ul class="key-features">
-            <li><b>Collision Avoidance (CAM):</b> Miss distance &amp; probability of collision calculations ($P_c$) with automated burn sequencing.</li>
-            <li><b>Link Budget &amp; AER Engine:</b> Dynamic Azimuth, Elevation, Range tracking with Rain/Atmospheric attenuation models.</li>
-            <li><b>26/26 Unit &amp; Integration Tests:</b> Complete mathematical test coverage across orbital mechanics and C2 REST APIs.</li>
-          </ul>
-          <div class="tech-row">
-            <span class="tech-pill">FastAPI</span>
-            <span class="tech-pill">SGP4 / SDP4</span>
-            <span class="tech-pill">WGS84</span>
-            <span class="tech-pill">React 18</span>
-            <span class="tech-pill">TypeScript</span>
-            <span class="tech-pill">Vite</span>
-            <span class="tech-pill">CCSDS Telemetry</span>
-          </div>
-        </div>
-        <div class="card-actions">
-          <a href="https://github.com/freshstart2066-create/project-cherub" target="_blank" class="btn btn-primary">⭐ GitHub Repository</a>
-          <button class="btn btn-secondary" onclick="runCommand('cherub')">Simulate SGP4</button>
-        </div>
-      </article>
-
-      <!-- 3. OPAP Protocol (Featured) -->
-      <article class="project-card featured" data-cat="crypto">
-        <div class="card-top">
-          <div class="card-header-row">
-            <h2 class="card-title">🛡️ OPAP Protocol</h2>
-            <span class="badge badge-crypto">Anti-Counterfeiting</span>
-          </div>
-          <p class="card-desc">
-            Open Product Authentication Protocol — Commercial-grade open standard bridging GS1 Digital Link (Sunrise 2027), EU ESPR Digital Product Passport (DPP 2.0), air-gapped Offline V-Pass verification, and AI forensic surveillance.
-          </p>
-          <ul class="key-features">
-            <li><b>Offline Cryptographic V-Pass:</b> URL-safe self-contained verification tokens allowing customs agents to verify products 100% offline.</li>
-            <li><b>Key Transparency &amp; Merkle Ledger:</b> RFC 7517/8037 JWKS key registry, CRL revoked key tracking, and SHA-256 Merkle root hash.</li>
-            <li><b>Multi-Sector EU DPP 2.0:</b> Tailored models for EU Battery Regulation (EU 2023/1542), Textiles (ESPR), Electronics, and Pharma.</li>
-            <li><b>32/32 Tests Passed:</b> Complete test coverage for KMS/HSM signing, GS1 Digital Link, and EPCIS 2.0 bulk ingest.</li>
-          </ul>
-          <div class="tech-row">
-            <span class="tech-pill">Ed25519</span>
-            <span class="tech-pill">GS1 Digital Link 2027</span>
-            <span class="tech-pill">EU CIRPASS DPP</span>
-            <span class="tech-pill">EPCIS 2.0</span>
-            <span class="tech-pill">FastAPI</span>
-            <span class="tech-pill">Python 3.12</span>
-            <span class="tech-pill">AWS KMS / HSM</span>
-          </div>
-        </div>
-        <div class="card-actions">
-          <a href="https://github.com/freshstart2066-create/opap-protocol" target="_blank" class="btn btn-primary">⭐ GitHub Repository</a>
-          <button class="btn btn-secondary" onclick="runCommand('opap')">Test Verification</button>
-        </div>
-      </article>
-
-      <!-- 4. Project Seraph -->
-      <article class="project-card" data-cat="aerospace">
-        <div class="card-top">
-          <div class="card-header-row">
-            <h2 class="card-title">⚔️ Project Seraph</h2>
-            <span class="badge badge-aerospace">Defense C4ISR</span>
-          </div>
-          <p class="card-desc">
-            Sovereign Multi-Domain C4ISR &amp; Tactical Air/Missile Defense Command Platform. Real-time 3D planetary geospatial intelligence, kinetic ballistic/hypersonic trajectory prediction, and Weapon-Target Assignment (WTA).
-          </p>
-          <div class="tech-row">
-            <span class="tech-pill">React 18</span>
-            <span class="tech-pill">TypeScript</span>
-            <span class="tech-pill">Three.js / WebGL</span>
-            <span class="tech-pill">FastAPI</span>
-            <span class="tech-pill">Geospatial Math</span>
-          </div>
-        </div>
-        <div class="card-actions">
-          <a href="https://github.com/freshstart2066-create/project-seraph" target="_blank" class="btn btn-secondary">GitHub Repository</a>
-        </div>
-      </article>
-
-      <!-- 5. CortexFlow -->
-      <article class="project-card" data-cat="ai">
-        <div class="card-top">
-          <div class="card-header-row">
-            <h2 class="card-title">🌊 CortexFlow</h2>
-            <span class="badge badge-ai">Multi-Agent DAG</span>
-          </div>
-          <p class="card-desc">
-            Autonomous Multi-Agent Directed Acyclic Graph (DAG) Orchestration Engine with real-time vector canvas, live token streaming, and distributed AI agent state machines.
-          </p>
-          <div class="tech-row">
-            <span class="tech-pill">React</span>
-            <span class="tech-pill">TypeScript</span>
-            <span class="tech-pill">DAG Engine</span>
-            <span class="tech-pill">LLM Streaming</span>
-            <span class="tech-pill">Tailwind CSS</span>
-          </div>
-        </div>
-        <div class="card-actions">
-          <a href="https://github.com/freshstart2066-create/cortexflow" target="_blank" class="btn btn-secondary">GitHub Repository</a>
-        </div>
-      </article>
-
-      <!-- 6. ApexTrade -->
-      <article class="project-card" data-cat="fintech">
-        <div class="card-top">
-          <div class="card-header-row">
-            <h2 class="card-title">📈 ApexTrade</h2>
-            <span class="badge badge-fintech">HFT Terminal</span>
-          </div>
-          <p class="card-desc">
-            High-frequency financial trading terminal with real-time candlestick charts, live L2 order book, TradingView technical indicators, and Web Audio DSP execution synthesis.
-          </p>
-          <div class="tech-row">
-            <span class="tech-pill">React</span>
-            <span class="tech-pill">TypeScript</span>
-            <span class="tech-pill">TradingView</span>
-            <span class="tech-pill">Web Audio DSP</span>
-            <span class="tech-pill">L2 Order Book</span>
-          </div>
-        </div>
-        <div class="card-actions">
-          <a href="https://github.com/freshstart2066-create/apextrade" target="_blank" class="btn btn-secondary">GitHub Repository</a>
-        </div>
-      </article>
-
-      <!-- 7. PrismDEX -->
-      <article class="project-card" data-cat="fintech">
-        <div class="card-top">
-          <div class="card-header-row">
-            <h2 class="card-title">🔀 PrismDEX</h2>
-            <span class="badge badge-fintech">Cross-Chain DEX</span>
-          </div>
-          <p class="card-desc">
-            Cross-Chain Multi-Hop Liquidity Routing Engine &amp; Concentrated Liquidity Visualizer with slippage optimization, gas route simulation, and MEV protection.
-          </p>
-          <div class="tech-row">
-            <span class="tech-pill">DeFi</span>
-            <span class="tech-pill">DEX Aggregator</span>
-            <span class="tech-pill">AMM Routing</span>
-            <span class="tech-pill">React</span>
-            <span class="tech-pill">TypeScript</span>
-          </div>
-        </div>
-        <div class="card-actions">
-          <a href="https://github.com/freshstart2066-create/prismdex" target="_blank" class="btn btn-secondary">GitHub Repository</a>
-        </div>
-      </article>
-
-      <!-- 8. RaftConsensus -->
-      <article class="project-card" data-cat="fintech">
-        <div class="card-top">
-          <div class="card-header-row">
-            <h2 class="card-title">🏛️ RaftConsensus</h2>
-            <span class="badge badge-systems">Distributed Systems</span>
-          </div>
-          <p class="card-desc">
-            Visual Distributed State Machine &amp; Raft Consensus Protocol Simulator. Simulates leader election, log replication, network partitions, split votes, and heartbeat failures.
-          </p>
-          <div class="tech-row">
-            <span class="tech-pill">Raft Protocol</span>
-            <span class="tech-pill">State Machines</span>
-            <span class="tech-pill">Fault Tolerance</span>
-            <span class="tech-pill">React</span>
-            <span class="tech-pill">TypeScript</span>
-          </div>
-        </div>
-        <div class="card-actions">
-          <a href="https://github.com/freshstart2066-create/raftconsensus" target="_blank" class="btn btn-secondary">GitHub Repository</a>
-        </div>
-      </article>
-
-      <!-- 9. Horizon Vault -->
-      <article class="project-card" data-cat="creative">
-        <div class="card-top">
-          <div class="card-header-row">
-            <h2 class="card-title">💎 Horizon Vault</h2>
-            <span class="badge badge-crypto">Luxury E-Commerce</span>
-          </div>
-          <p class="card-desc">
-            Next-generation luxury streetwear &amp; sneaker marketplace featuring interactive 360 3D product view, custom colorway studio, authentic luxury layout, and multi-currency engine.
-          </p>
-          <div class="tech-row">
-            <span class="tech-pill">Three.js / WebGL</span>
-            <span class="tech-pill">3D Model Viewer</span>
-            <span class="tech-pill">React</span>
-            <span class="tech-pill">TypeScript</span>
-            <span class="tech-pill">Tailwind CSS</span>
-          </div>
-        </div>
-        <div class="card-actions">
-          <a href="https://github.com/freshstart2066-create/horizonvault" target="_blank" class="btn btn-secondary">GitHub Repository</a>
-        </div>
-      </article>
-
-      <!-- 10. SyncCanvas -->
-      <article class="project-card" data-cat="creative">
-        <div class="card-top">
-          <div class="card-header-row">
-            <h2 class="card-title">🎨 SyncCanvas</h2>
-            <span class="badge badge-systems">Realtime Canvas</span>
-          </div>
-          <p class="card-desc">
-            Real-time collaborative infinite whiteboard with live multi-cursor presence, vector shape drawing, spatial pan-zoom, and optimistic CRDT synchronization.
-          </p>
-          <div class="tech-row">
-            <span class="tech-pill">CRDT / WebSockets</span>
-            <span class="tech-pill">HTML5 Canvas</span>
-            <span class="tech-pill">Multi-Cursor</span>
-            <span class="tech-pill">React</span>
-            <span class="tech-pill">TypeScript</span>
-          </div>
-        </div>
-        <div class="card-actions">
-          <a href="https://github.com/freshstart2066-create/synccanvas" target="_blank" class="btn btn-secondary">GitHub Repository</a>
-        </div>
-      </article>
-
-      <!-- 11. BeatForge -->
-      <article class="project-card" data-cat="creative">
-        <div class="card-top">
-          <div class="card-header-row">
-            <h2 class="card-title">🎵 BeatForge</h2>
-            <span class="badge badge-systems">Web Audio DAW</span>
-          </div>
-          <p class="card-desc">
-            Web Audio DSP Digital Audio Workstation (DAW) &amp; Synthesizer with 16-track polyphonic step sequencer and real-time FFT frequency oscilloscope.
-          </p>
-          <div class="tech-row">
-            <span class="tech-pill">Web Audio API</span>
-            <span class="tech-pill">DSP Synthesis</span>
-            <span class="tech-pill">FFT Visualizer</span>
-            <span class="tech-pill">React</span>
-            <span class="tech-pill">TypeScript</span>
-          </div>
-        </div>
-        <div class="card-actions">
-          <a href="https://github.com/freshstart2066-create/beatforge" target="_blank" class="btn btn-secondary">GitHub Repository</a>
-        </div>
-      </article>
-
-      <!-- 12. CloudPulse -->
-      <article class="project-card" data-cat="fintech">
-        <div class="card-top">
-          <div class="card-header-row">
-            <h2 class="card-title">🌐 CloudPulse</h2>
-            <span class="badge badge-systems">Infrastructure</span>
-          </div>
-          <p class="card-desc">
-            Real-time cloud infrastructure telemetry, global edge node health monitor, live log streamer, SLA reliability metrics, and automated incident self-healing.
-          </p>
-          <div class="tech-row">
-            <span class="tech-pill">Observability</span>
-            <span class="tech-pill">Kubernetes</span>
-            <span class="tech-pill">Telemetry</span>
-            <span class="tech-pill">React</span>
-            <span class="tech-pill">TypeScript</span>
-          </div>
-        </div>
-        <div class="card-actions">
-          <a href="https://github.com/freshstart2066-create/cloudpulse" target="_blank" class="btn btn-secondary">GitHub Repository</a>
-        </div>
-      </article>
-
-      <!-- 13. ManFlix -->
-      <article class="project-card" data-cat="creative">
-        <div class="card-top">
-          <div class="card-header-row">
-            <h2 class="card-title">🎬 ManFlix</h2>
-            <span class="badge badge-systems">Streaming Media</span>
-          </div>
-          <p class="card-desc">
-            Production-grade Netflix-tier streaming platform with custom 4K responsive video player, subtitle selector, genre explorer, and keyboard navigation.
-          </p>
-          <div class="tech-row">
-            <span class="tech-pill">Media Player</span>
-            <span class="tech-pill">HLS Streaming</span>
-            <span class="tech-pill">React</span>
-            <span class="tech-pill">TypeScript</span>
-            <span class="tech-pill">Tailwind CSS</span>
-          </div>
-        </div>
-        <div class="card-actions">
-          <a href="https://github.com/freshstart2066-create/manflix" target="_blank" class="btn btn-secondary">GitHub Repository</a>
-        </div>
-      </article>
+      <!-- Toast Notification Alert -->
+      <div class="toast" id="toast" role="status" aria-live="polite"></div>
 
     </div>
-
-    <!-- Skills Section -->
-    <section class="skills-section" id="skills">
-      <div class="skills-header">
-        <h2>Technical Competencies &amp; Core Architecture</h2>
-        <p style="color:var(--text-muted); font-size: 0.95rem; margin-top:0.4rem;">Cross-disciplinary engineering spanning mission-critical aerospace, cryptographic protocols, and AI infrastructure.</p>
-      </div>
-      <div class="skills-grid">
-        <div class="skill-col">
-          <h3>🛰️ Aerospace &amp; C2</h3>
-          <ul>
-            <li>SGP4 / SDP4 Orbital Propagation</li>
-            <li>3D WGS84 Swath Footprints</li>
-            <li>Conjunction Analysis &amp; CAM</li>
-            <li>Ground Station AER Tracking</li>
-            <li>CCSDS Packet Stream Ingest</li>
-          </ul>
-        </div>
-        <div class="skill-col">
-          <h3>🛡️ Cryptography &amp; Standards</h3>
-          <ul>
-            <li>Ed25519 &amp; Canonical UTF-8 JSON</li>
-            <li>GS1 Digital Link 2027 Syntax</li>
-            <li>EU ESPR Digital Product Passport</li>
-            <li>RFC 7517 JWKS &amp; Merkle Logs</li>
-            <li>GS1 EPCIS 2.0 / CBV Ingest</li>
-          </ul>
-        </div>
-        <div class="skill-col">
-          <h3>🧠 Edge AI &amp; Agents</h3>
-          <ul>
-            <li>Local Quantized LLMs (Ollama)</li>
-            <li>Android APK Build Systems</li>
-            <li>Multi-Agent DAG Workflows</li>
-            <li>Sliding-Window Memory Buffers</li>
-            <li>Autonomous Tool Execution</li>
-          </ul>
-        </div>
-        <div class="skill-col">
-          <h3>⚡ Distributed &amp; Frontend</h3>
-          <ul>
-            <li>Raft Distributed State Machines</li>
-            <li>High-Frequency Trading Web Audio</li>
-            <li>Three.js / WebGL 3D Rendering</li>
-            <li>React 18, TypeScript, Vite, Tailwind</li>
-            <li>FastAPI, Python AsyncIO, Pytest</li>
-          </ul>
-        </div>
-      </div>
-    </section>
-
   </main>
 
-  <!-- Command Palette Modal -->
-  <div class="modal-backdrop" id="cmd-modal" onclick="if(event.target===this) toggleCommandPalette()">
-    <div class="modal-content">
-      <div class="cmd-header">
-        <span style="color:var(--cyan); font-family:var(--font-mono); font-weight:bold;">&gt;</span>
-        <input type="text" class="cmd-input" id="cmd-input" placeholder="Type a command: elyra, cherub, opap, clear, help..." onkeydown="handleCmdKey(event)">
-        <span style="font-size:0.75rem; color:var(--text-dim); font-family:var(--font-mono);">ESC to close</span>
-      </div>
-      <div class="cmd-body" id="cmd-body">
-[SYSTEM TERMINAL - READY]
-Type one of the following commands:
-  • elyra    : Trigger on-device Edge AI diagnostic triage
-  • cherub   : Calculate SGP4 orbital propagation matrix
-  • opap     : Verify GS1 Digital Link & EU DPP cryptographic seal
-  • matrix   : Toggle live ambient matrix particles
-  • help     : List all available system routines
-      </div>
-    </div>
-  </div>
-
-  <!-- 3D Animated AI Tour Bot Companion Dock -->
-  <div class="tour-bot-dock" id="tour-bot-dock">
-    <!-- Interactive Speech Bubble -->
-    <div class="bot-speech-bubble" id="bot-speech-bubble">
-      <button class="bot-close-btn" onclick="toggleTourBubble()" title="Minimize Guide">✕</button>
-      <div class="bot-bubble-header">
-        <div class="bot-badge">
-          <span class="pulse-dot"></span> ELYRA-BOT // 3D TOUR GUIDE
-        </div>
-        <span class="bot-step-badge" id="bot-step-badge">STEP 1/5</span>
-      </div>
-      <div class="bot-message-text" id="bot-message-text">
-        "Greetings! I am ELYRA-3D, your on-device Systems Guide. Click below to take an interactive flight tour through our live engineering architectures!"
-      </div>
-      <div class="bot-action-row" id="bot-action-row">
-        <button class="btn btn-primary" style="padding:0.45rem 0.9rem; font-size:0.78rem;" onclick="startInteractiveTour()">
-          🚀 Launch Guided Tour
-        </button>
-        <button class="btn btn-secondary" style="padding:0.45rem 0.8rem; font-size:0.78rem;" onclick="toggleTourBubble()">
-          Dismiss
-        </button>
-      </div>
-    </div>
-
-    <!-- 3D WebGL Bot Canvas -->
-    <div class="bot-canvas-wrapper" id="bot-canvas-wrapper" onclick="handleBotClick()">
-      <canvas id="elyra-bot-3d-canvas"></canvas>
-      <div class="bot-status-ring"></div>
-    </div>
-  </div>
-
-  <!-- Footer -->
-  <footer>
-    <p>Constructed with high-assurance standards. Hosted freely via <a href="https://pages.github.com" target="_blank">GitHub Pages</a>.</p>
-    <p style="margin-top:0.4rem;">© 2026 Systems Engineering Portfolio · <a href="https://github.com/freshstart2066-create" target="_blank">GitHub: freshstart2066-create</a></p>
-  </footer>
-
   <script>
-    // 0. Ambient 3D WebGL Space Warp Field Engine (Three.js)
-    (function init3DBackground() {
-      const bgCanvas = document.getElementById('three-bg-canvas');
-      if (!bgCanvas || typeof THREE === 'undefined') return;
+    // ════════════════════════════════════════════════════════════════════
+    // 1. ASSETS INJECTION (Runtime assignment via data-attributes)
+    // ════════════════════════════════════════════════════════════════════
+    const ASSETS = {
+      HERO_FRONT: "https://d2ol7oe51mr4n9.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/658f62c6-fdb2-41b9-aa0f-10837f9e72cb.png",
+      HERO_BACK: "https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260914_123603_5ac5732a-900b-4919-9d9c-3c454194b0a5.png",
+      MATERIAL: "https://d2ol7oe51mr4n9.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/96ef2bcd-ed69-4b7e-ab83-8a18d2129d99.png",
+      AVATARS: [
+        "https://d2ol7oe51mr4n9.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/caf08036-c63c-4d0c-9b81-43c5a7a49343.png",
+        "https://d2ol7oe51mr4n9.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/599a5a28-c9f1-44f9-b01b-adb8b22e8c12.png",
+        "https://d2ol7oe51mr4n9.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/fc804805-b23c-40ba-97b0-9ab2ba3efb5d.png",
+        "https://d2ol7oe51mr4n9.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/0cb0c1f0-f84a-47bb-bfa1-43b6c7f1575d.png",
+        "https://d2ol7oe51mr4n9.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/64e651b1-a8ba-44e8-8fbe-e85fcd6e5cf0.png"
+      ]
+    };
 
-      const bgScene = new THREE.Scene();
-      const bgCamera = new THREE.PerspectiveCamera(60, window.innerWidth / window.innerHeight, 1, 1000);
-      bgCamera.position.z = 1;
+    document.querySelectorAll('[data-hero-front]').forEach(img => { img.src = ASSETS.HERO_FRONT; });
+    document.querySelectorAll('[data-hero-back]').forEach(img => { img.src = ASSETS.HERO_BACK; });
+    document.querySelectorAll('[data-material]').forEach(img => { img.src = ASSETS.MATERIAL; });
+    ASSETS.AVATARS.forEach((url, i) => {
+      document.querySelectorAll(`[data-av${i + 1}]`).forEach(img => { img.src = url; });
+    });
 
-      const bgRenderer = new THREE.WebGLRenderer({ canvas: bgCanvas, alpha: true, antialias: true });
-      bgRenderer.setSize(window.innerWidth, window.innerHeight);
-      bgRenderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+    // ════════════════════════════════════════════════════════════════════
+    // 3. CORE LAYOUT MODEL (Canvas scaling & responsive tiers)
+    // ════════════════════════════════════════════════════════════════════
+    const stage = document.getElementById('stage');
+    const menuBtn = document.getElementById('menu-btn');
+    const menuPanel = document.getElementById('menu-panel');
 
-      // 1,200 3D Warp Stars
-      const starGeo = new THREE.BufferGeometry();
-      const starCount = 1200;
-      const positions = new Float32Array(starCount * 3);
-      const velocities = new Float32Array(starCount);
-
-      for (let i = 0; i < starCount * 3; i += 3) {
-        positions[i] = (Math.random() - 0.5) * 600;
-        positions[i + 1] = (Math.random() - 0.5) * 600;
-        positions[i + 2] = (Math.random() - 0.5) * 600;
-        velocities[i / 3] = 0.4 + Math.random() * 0.8;
-      }
-
-      starGeo.setAttribute('position', new THREE.BufferAttribute(positions, 3));
-      const starMat = new THREE.PointsMaterial({
-        color: 0x38bdf8,
-        size: 1.4,
-        transparent: true,
-        opacity: 0.75,
-        blending: THREE.AdditiveBlending
-      });
-
-      const starField = new THREE.Points(starGeo, starMat);
-      bgScene.add(starField);
-
-      let scrollVelocity = 0;
-      let lastScrollY = window.scrollY;
-      window.addEventListener('scroll', () => {
-        const delta = Math.abs(window.scrollY - lastScrollY);
-        scrollVelocity = Math.min(delta * 0.15, 8.0);
-        lastScrollY = window.scrollY;
-      });
-
-      let mouseBg = { x: 0, y: 0 };
-      window.addEventListener('pointermove', (e) => {
-        mouseBg.x = (e.clientX / window.innerWidth - 0.5) * 0.5;
-        mouseBg.y = (e.clientY / window.innerHeight - 0.5) * 0.5;
-      });
-
-      function animate3DBG() {
-        requestAnimationFrame(animate3DBG);
-        scrollVelocity *= 0.92; // smooth decay
-
-        const pos = starGeo.attributes.position.array;
-        const currentSpeed = 0.5 + scrollVelocity;
-
-        for (let i = 0; i < starCount * 3; i += 3) {
-          pos[i + 2] += (velocities[i / 3] * currentSpeed);
-          if (pos[i + 2] > 200) {
-            pos[i + 2] = -400;
-            pos[i] = (Math.random() - 0.5) * 600;
-            pos[i + 1] = (Math.random() - 0.5) * 600;
-          }
-        }
-        starGeo.attributes.position.needsUpdate = true;
-
-        // Subtle camera tilt on mouse move
-        bgCamera.position.x += (mouseBg.x - bgCamera.position.x) * 0.05;
-        bgCamera.position.y += (-mouseBg.y - bgCamera.position.y) * 0.05;
-        bgCamera.lookAt(bgScene.position);
-
-        bgRenderer.render(bgScene, bgCamera);
-      }
-      animate3DBG();
-
-      window.addEventListener('resize', () => {
-        bgCamera.aspect = window.innerWidth / window.innerHeight;
-        bgCamera.updateProjectionMatrix();
-        bgRenderer.setSize(window.innerWidth, window.innerHeight);
-      });
-    })();
-
-    // 1. Ambient Constellation / Particle Canvas Engine
-    const canvas = document.getElementById('ambient-canvas');
-    const ctx = canvas.getContext('2d');
-    let particles = [];
-    let mouse = { x: null, y: null, radius: 120 };
-
-    function resizeCanvas() {
-      canvas.width = window.innerWidth * window.devicePixelRatio;
-      canvas.height = window.innerHeight * window.devicePixelRatio;
-      ctx.scale(window.devicePixelRatio, window.devicePixelRatio);
+    function closeMenu() {
+      stage.classList.remove('menu-open');
+      menuBtn.setAttribute('aria-expanded', 'false');
+      menuPanel.setAttribute('aria-hidden', 'true');
     }
-    window.addEventListener('resize', resizeCanvas);
-    resizeCanvas();
 
-    class Particle {
-      constructor() {
-        this.x = Math.random() * window.innerWidth;
-        this.y = Math.random() * window.innerHeight;
-        this.vx = (Math.random() - 0.5) * 0.4;
-        this.vy = (Math.random() - 0.5) * 0.4;
-        this.radius = Math.random() * 1.5 + 0.8;
+    function layout() {
+      const PHONE = window.matchMedia('(max-width:520px) and (orientation:portrait)');
+      if (PHONE.matches) {
+        stage.classList.remove('is-mobile', 'is-fit');
+        stage.classList.add('is-phone', 'nav-compact');
+        stage.style.width = '';
+        stage.style.height = '';
+        stage.style.transform = '';
+        document.documentElement.style.removeProperty('--hf');
+        return;
       }
-      update() {
-        this.x += this.vx;
-        this.y += this.vy;
-        if (this.x < 0 || this.x > window.innerWidth) this.vx *= -1;
-        if (this.y < 0 || this.y > window.innerHeight) this.vy *= -1;
+
+      stage.classList.remove('is-phone');
+      const w = window.innerWidth;
+      const h = window.innerHeight;
+      const mobile = (w / h) < 1.05;
+
+      stage.classList.toggle('is-mobile', mobile);
+      const bh = mobile ? 1366 : 1024;
+      const ideal = Math.round(bh * w / h);
+      const lo = mobile ? 560 : 1060;
+      const hi = mobile ? 1450 : 2600;
+      const bw = Math.max(lo, Math.min(hi, ideal));
+      const s = Math.min(w / bw, h / bh);
+
+      const hf = Math.min(79, 79 * (bw - 295) / 965).toFixed(2) + 'px';
+      document.documentElement.style.setProperty('--hf', hf);
+
+      stage.classList.toggle('is-fit', Math.abs(ideal - bw) > 1);
+      const compact = mobile || s < 0.52;
+      stage.classList.toggle('nav-compact', compact);
+
+      if (!compact && stage.classList.contains('menu-open')) {
+        closeMenu();
       }
-      draw() {
+
+      stage.style.width = bw + 'px';
+      stage.style.height = bh + 'px';
+      stage.style.transform = `translate(-50%, -50%) scale(${s})`;
+    }
+
+    window.addEventListener('load', layout);
+    window.addEventListener('resize', layout, { passive: true });
+
+    // ════════════════════════════════════════════════════════════════════
+    // 5. ★ THE SPOTLIGHT REVEAL (Canvas Alpha Radial Mask Engine) ★
+    // ════════════════════════════════════════════════════════════════════
+    (function initSpotlightReveal() {
+      const stack = document.getElementById('hero-stack');
+      const back = stack.querySelector('.hero-back');
+      const canvas = document.getElementById('hero-mask-canvas');
+      if (!stack || !back || !canvas) return;
+
+      const ctx = canvas.getContext('2d');
+      const SPOTLIGHT_R = 185;
+      const mouse = { x: -9999, y: -9999 };
+      const smooth = { x: -9999, y: -9999 };
+
+      function resizeCanvas() {
+        canvas.width = stack.offsetWidth || 600;
+        canvas.height = stack.offsetHeight || 759;
+      }
+      resizeCanvas();
+      window.addEventListener('resize', resizeCanvas, { passive: true });
+
+      stack.addEventListener('pointermove', e => {
+        const r = stack.getBoundingClientRect();
+        // Scale correction from transform-scaled stage
+        const sx = (stack.offsetWidth || 600) / r.width;
+        const sy = (stack.offsetHeight || 759) / r.height;
+        mouse.x = (e.clientX - r.left) * sx;
+        mouse.y = (e.clientY - r.top) * sy;
+      });
+
+      stack.addEventListener('pointerleave', () => {
+        mouse.x = -9999;
+        mouse.y = -9999;
+      });
+
+      function render(x, y) {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        const grad = ctx.createRadialGradient(x, y, 0, x, y, SPOTLIGHT_R);
+        grad.addColorStop(0, 'rgba(255,255,255,1)');
+        grad.addColorStop(0.62, 'rgba(255,255,255,1)');    // solid core
+        grad.addColorStop(0.8, 'rgba(255,255,255,0.5)');   // soft falloff
+        grad.addColorStop(1, 'rgba(255,255,255,0)');
+        ctx.fillStyle = grad;
         ctx.beginPath();
-        ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
-        ctx.fillStyle = 'rgba(56, 189, 248, 0.5)';
+        ctx.arc(x, y, SPOTLIGHT_R, 0, Math.PI * 2);
         ctx.fill();
+
+        const url = canvas.toDataURL();
+        back.style.maskImage = `url(${url})`;
+        back.style.webkitMaskImage = `url(${url})`;
       }
-    }
 
-    function initParticles() {
-      particles = [];
-      const count = Math.min(Math.floor(window.innerWidth / 18), 70);
-      for (let i = 0; i < count; i++) {
-        particles.push(new Particle());
+      function loop() {
+        smooth.x += (mouse.x - smooth.x) * 0.1;
+        smooth.y += (mouse.y - smooth.y) * 0.1;
+        render(smooth.x, smooth.y);
+        requestAnimationFrame(loop);
       }
-    }
-    initParticles();
-
-    function animate() {
-      ctx.clearRect(0, 0, window.innerWidth, window.innerHeight);
-      for (let i = 0; i < particles.length; i++) {
-        particles[i].update();
-        particles[i].draw();
-
-        for (let j = i + 1; j < particles.length; j++) {
-          const dx = particles[i].x - particles[j].x;
-          const dy = particles[i].y - particles[j].y;
-          const dist = Math.sqrt(dx * dx + dy * dy);
-          if (dist < 110) {
-            ctx.beginPath();
-            ctx.strokeStyle = `rgba(56, 189, 248, ${0.15 * (1 - dist / 110)})`;
-            ctx.lineWidth = 0.6;
-            ctx.moveTo(particles[i].x, particles[i].y);
-            ctx.lineTo(particles[j].x, particles[j].y);
-            ctx.stroke();
-          }
-        }
-      }
-      requestAnimationFrame(animate);
-    }
-    animate();
-
-    // 2. Interactive Spotlight & Card Glow
-    window.addEventListener('pointermove', (e) => {
-      document.documentElement.style.setProperty('--mouse-x', `${e.clientX}px`);
-      document.documentElement.style.setProperty('--mouse-y', `${e.clientY}px`);
-
-      document.querySelectorAll('.project-card').forEach(card => {
-        const rect = card.getBoundingClientRect();
-        card.style.setProperty('--card-x', `${e.clientX - rect.left}px`);
-        card.style.setProperty('--card-y', `${e.clientY - rect.top}px`);
-      });
-    });
-
-    // 3. Audio Waveform Simulator for ELYRA
-    setInterval(() => {
-      document.querySelectorAll('.wave-bar').forEach(bar => {
-        const h = Math.floor(Math.random() * 80) + 15;
-        bar.style.height = `${h}%`;
-      });
-    }, 100);
-
-    function switchMobileModel(model) {
-      document.querySelectorAll('.model-btn').forEach(btn => btn.classList.remove('active'));
-      event.target.classList.add('active');
-      const terminal = document.getElementById('elyra-terminal');
-      if (model === 'qwen') {
-        terminal.textContent = `[MODEL_SWITCH: Qwen 2.5 3B (Ollama)]\n• Quantization: Q4_K_M (1.9 GB VRAM)\n• Latency: ~14ms per token\n• Edge Status: Loaded in RAM`;
-      } else if (model === 'llama') {
-        terminal.textContent = `[MODEL_SWITCH: Llama 3.2 1B (GGUF)]\n• Quantization: Q8_0 (1.1 GB VRAM)\n• Latency: ~9ms per token\n• On-Device ARM64 Engine Active`;
-      } else {
-        terminal.textContent = `[MODEL_SWITCH: Cloud API Fallback]\n• Endpoint: https://api.openai.com/v1\n• Latency: ~180ms network RTT\n• Auto-routing on complex prompts`;
-      }
-    }
-
-    function triggerElyraTriage() {
-      const terminal = document.getElementById('elyra-terminal');
-      terminal.textContent = `[RUNNING HARDWARE TRIAGE...]\n• psutil: CPU Load 18.4% | RAM 4.2/16GB\n• Battery Thermal: 31.2°C (Optimal)\n• Sliding-Window Context: 380/2048 Tokens\n• Result: All Edge Telemetry Channels Healthy ✅`;
-    }
-
-    // 4. Project Filtering
-    function filterCategory(cat) {
-      document.querySelectorAll('.filter-btn').forEach(btn => btn.classList.remove('active'));
-      event.target.classList.add('active');
-      document.querySelectorAll('.project-card').forEach(card => {
-        if (cat === 'all' || card.getAttribute('data-cat') === cat) {
-          card.classList.remove('hidden');
-        } else {
-          card.classList.add('hidden');
-        }
-      });
-    }
-
-    // 5. Command Palette
-    function toggleCommandPalette() {
-      const modal = document.getElementById('cmd-modal');
-      const input = document.getElementById('cmd-input');
-      const isVisible = modal.style.display === 'flex';
-      modal.style.display = isVisible ? 'none' : 'flex';
-      if (!isVisible) {
-        input.value = '';
-        input.focus();
-      }
-    }
-
-    window.addEventListener('keydown', (e) => {
-      if ((e.metaKey || e.ctrlKey) && e.key === 'k') {
-        e.preventDefault();
-        toggleCommandPalette();
-      } else if (e.key === 'Escape') {
-        document.getElementById('cmd-modal').style.display = 'none';
-      }
-    });
-
-    function handleCmdKey(e) {
-      if (e.key === 'Enter') {
-        const val = e.target.value.trim().toLowerCase();
-        runCommand(val);
-        e.target.value = '';
-      }
-    }
-
-    function runCommand(cmd) {
-      const body = document.getElementById('cmd-body');
-      document.getElementById('cmd-modal').style.display = 'flex';
-      
-      if (cmd === 'elyra') {
-        body.innerHTML += `\n\n<span style="color:#38bdf8">&gt; elyra --triage</span>\n[ELYRA ANDROID RUNTIME]\n• Routing: Local Qwen 2.5 3B\n• Context: 412 tokens\n• Tools: Battery, CPU, Network Sensors Active\n• Status: Air-Gapped APK Operational ✅`;
-      } else if (cmd === 'cherub') {
-        body.innerHTML += `\n\n<span style="color:#38bdf8">&gt; cherub --sgp4</span>\n[PROJECT CHERUB ASTRODYNAMICS]\n• Satellite: NORAD 25544 (ISS)\n• Altitude: 418.2 km | Velocity: 7.66 km/s\n• CAM Miss Distance: 4.82 km (Pc < 1e-7)\n• 26/26 Unit Tests Validated ✅`;
-      } else if (cmd === 'opap') {
-        body.innerHTML += `\n\n<span style="color:#38bdf8">&gt; opap --verify</span>\n[OPAP CRYPTOGRAPHIC ENGINE]\n• Algorithm: Ed25519 (RFC 8037)\n• GS1 Digital Link: /01/00012345678905/21/SER-99\n• EU DPP 2.0: Battery & ESPR Sealed\n• 32/32 Tests Passed ✅`;
-      } else if (cmd === 'clear') {
-        body.innerHTML = `[TERMINAL CLEARED]`;
-      } else {
-        body.innerHTML += `\n\n<span style="color:#f43f5e">&gt; Command '${cmd}' not recognized. Try 'elyra', 'cherub', 'opap', 'clear'.</span>`;
-      }
-      body.scrollTop = body.scrollHeight;
-    }
-
-    // 6. Interactive Multi-Cluster Architecture Blueprint Controller
-    const blueprintNodeList = [
-      { id: 'node-1-1', title: 'NODE 1.1: SENSOR INGESTION', log: '> INGESTION_BUS: Sampling Web Audio DSP & Android accelerometer at 44.1 kHz. Sub-50ms ring buffer nominal. Zero jitter.' },
-      { id: 'node-1-2', title: 'NODE 1.2: SLIDING CONTEXT', log: '> MEMORY_MANAGER: Allocated 412/2048 tokens. FIFO eviction threshold at 85%. Zero memory fragmentation on ARM64 host.' },
-      { id: 'node-1-3', title: 'NODE 1.3: QUANTIZED ROUTER', log: '> INFERENCE_ROUTER: Local Ollama daemon active. Qwen 2.5 3B (Q4_K_M) dispatching at 28.4 tok/s. Zero cloud egress.' },
-      { id: 'node-1-4', title: 'NODE 1.4: TOOL DISPATCH', log: '> TOOL_REGISTRY: Schema parsed: `get_device_telemetry()`. Polling psutil CPU load, thermals, and battery charge level.' },
-      { id: 'node-2-1', title: 'NODE 2.1: GS1 DIGITAL LINK', log: '> GS1_ENCODER: Canonical URI generated: `https://id.gs1.org/01/00012345678905/21/SER-99` (GS1 Sunrise 2027 standard).' },
-      { id: 'node-2-2', title: 'NODE 2.2: MERKLE SIGNATURE', log: '> CRYPTO_CORE: Ed25519 asymmetric root tree sealed. SHA-256 inclusion proof validated in 0.48ms.' },
-      { id: 'node-2-3', title: 'NODE 2.3: ANTI-COUNTERFEIT', log: '> ATTESTATION_ENGINE: Offline V-Pass verification PASSED. Cryptographic authenticity stamp validated.' },
-      { id: 'node-2-4', title: 'NODE 2.4: EU DPP 2.0 MINT', log: '> COMPLIANCE_MINT: EU Ecodesign ESPR battery passport payload created. JSON-LD schema validated.' },
-      { id: 'node-3-1', title: 'NODE 3.1: TASK INGESTION', log: '> SWARM_DISPATCH: Priority goal ingested: [SURVEILLANCE_SWARM_ALPHA]. Cost constraints & SLA attached.' },
-      { id: 'node-3-2', title: 'NODE 3.2: DAG GRAPH STATE', log: '> GRAPH_ENGINE: Dynamic topological sort resolved. 6 sub-agents scheduled across 3 parallel execution branches.' },
-      { id: 'node-3-3', title: 'NODE 3.3: SWARM CONSENSUS', log: '> RAFT_CONSENSUS: Quorum reached (3/3 peer nodes). Distributed lock acquired for ground sensor actuator.' },
-      { id: 'node-3-4', title: 'NODE 3.4: ACTION EXECUTION', log: '> ACTUATOR_BUS: Verified sub-task dispatched to target runtime. Execution completed in 12ms.' },
-      { id: 'node-4-1', title: 'NODE 4.1: NORAD TLE INGEST', log: '> TLE_ORBIT_CATALOG: Ingested NORAD 25544 (ISS). Epoch: 2026-10-06T07:00:00Z. BSTAR drag term: 0.000128.' },
-      { id: 'node-4-2', title: 'NODE 4.2: SGP4 PROPAGATOR', log: '> ASTRODYNAMICS_CORE: Propagated orbit 1440 mins forward. Current Altitude: 418.2 km, Velocity: 7.66 km/s.' },
-      { id: 'node-4-3', title: 'NODE 4.3: CAM AVOIDANCE', log: '> CONJUNCTION_ENGINE: Miss distance 4.82 km computed. Probability of Collision Pc < 1e-7 (GREEN: Nominal).' },
-      { id: 'node-4-4', title: 'NODE 4.4: GROUND STATION C2', log: '> C2_GROUND_UPLINK: CCSDS frame sealed. Azimuth: 142.4°, Elevation: 58.2°, Slant Range: 642.1 km. Tracking locked.' }
-    ];
-
-    function selectBlueprintNode(nodeId, title, logText) {
-      document.querySelectorAll('.node-box').forEach(node => node.classList.remove('active'));
-      const activeEl = document.getElementById(nodeId);
-      if (activeEl) activeEl.classList.add('active');
-
-      const tagEl = document.getElementById('pipeline-stage-tag');
-      const logEl = document.getElementById('pipeline-log-content');
-      if (tagEl) tagEl.textContent = title;
-      if (logEl) logEl.innerHTML = `&gt; ${logText}`;
-
-      playCyberChime(740, 'sine', 0.1);
-    }
-
-    function switchBlueprintView(mode) {
-      document.querySelectorAll('.blueprint-tab-btn').forEach(btn => btn.classList.remove('active'));
-      const activeTab = document.getElementById(`tab-bp-${mode}`);
-      if (activeTab) activeTab.classList.add('active');
-
-      const edgeBox = document.getElementById('cluster-box-edge');
-      const cryptoBox = document.getElementById('cluster-box-crypto');
-      const swarmsBox = document.getElementById('cluster-box-swarms');
-      const aeroBox = document.getElementById('cluster-box-aero');
-
-      if (mode === 'all') {
-        if (edgeBox) edgeBox.style.display = 'flex';
-        if (cryptoBox) cryptoBox.style.display = 'flex';
-        if (swarmsBox) swarmsBox.style.display = 'flex';
-        if (aeroBox) aeroBox.style.display = 'flex';
-      } else if (mode === 'edge') {
-        if (edgeBox) edgeBox.style.display = 'flex';
-        if (cryptoBox) cryptoBox.style.display = 'none';
-        if (swarmsBox) swarmsBox.style.display = 'none';
-        if (aeroBox) aeroBox.style.display = 'none';
-      } else if (mode === 'crypto') {
-        if (edgeBox) edgeBox.style.display = 'none';
-        if (cryptoBox) cryptoBox.style.display = 'flex';
-        if (swarmsBox) swarmsBox.style.display = 'none';
-        if (aeroBox) aeroBox.style.display = 'none';
-      } else if (mode === 'swarms') {
-        if (edgeBox) edgeBox.style.display = 'none';
-        if (cryptoBox) cryptoBox.style.display = 'none';
-        if (swarmsBox) swarmsBox.style.display = 'flex';
-        if (aeroBox) aeroBox.style.display = 'none';
-      } else if (mode === 'aero') {
-        if (edgeBox) edgeBox.style.display = 'none';
-        if (cryptoBox) cryptoBox.style.display = 'none';
-        if (swarmsBox) swarmsBox.style.display = 'none';
-        if (aeroBox) aeroBox.style.display = 'flex';
-      }
-      playCyberChime(600, 'sine', 0.1);
-    }
-
-    let isSimulatingBlueprint = false;
-    function simulateFullPipelineTrace() {
-      if (isSimulatingBlueprint) return;
-      isSimulatingBlueprint = true;
-      switchBlueprintView('all');
-
-      let currentIdx = 0;
-      const interval = setInterval(() => {
-        const item = blueprintNodeList[currentIdx];
-        if (item) {
-          selectBlueprintNode(item.id, item.title, item.log);
-        }
-        currentIdx++;
-        if (currentIdx >= blueprintNodeList.length) {
-          clearInterval(interval);
-          setTimeout(() => {
-            isSimulatingBlueprint = false;
-          }, 600);
-        }
-      }, 550);
-    }
-
-    // Legacy alias
-    function simulatePipelineCycle() {
-      simulateFullPipelineTrace();
-    }
-
-    // 7. Showcase Tab Switcher (ELYRA vs 3D Spatial Studio)
-    function switchShowcaseTab(tab) {
-      const elyraView = document.getElementById('showcase-view-elyra');
-      const view3D = document.getElementById('showcase-view-3d');
-      const tabElyraBtn = document.getElementById('tab-elyra-btn');
-      const tab3DBtn = document.getElementById('tab-3d-btn');
-
-      if (tab === 'elyra') {
-        elyraView.style.display = 'block';
-        view3D.style.display = 'none';
-        tabElyraBtn.classList.add('active');
-        tab3DBtn.classList.remove('active');
-      } else {
-        elyraView.style.display = 'none';
-        view3D.style.display = 'block';
-        tabElyraBtn.classList.remove('active');
-        tab3DBtn.classList.add('active');
-        if (typeof init3DStudio === 'function') {
-          init3DStudio();
-        }
-        if (typeof on3DResize === 'function') {
-          setTimeout(on3DResize, 50);
-        }
-      }
-    }
-
-    // 8. Three.js 3D Holographic Spatial Engine
-    let scene3D, camera3D, renderer3D;
-    let orbitGroup, neuralGroup, cryptoGroup;
-    let current3DMode = 'orbit';
-    let is3DDragging = false;
-    let prev3DMouse = { x: 0, y: 0 };
-    let targetRotation = { x: 0.3, y: 0.4 };
-    let currentRotation = { x: 0.3, y: 0.4 };
-    let satelliteMesh, orbitRing;
-    let lastTime = performance.now(), frameCount = 0;
-    let is3DInitialized = false;
-
-    function init3DStudio() {
-      if (is3DInitialized) return;
-      const canvas = document.getElementById('three-hologram-canvas');
-      const container = document.getElementById('hologram-canvas-container');
-      if (!canvas || !container || typeof THREE === 'undefined') return;
-
-      is3DInitialized = true;
-
-      // Scene, Camera, Renderer
-      scene3D = new THREE.Scene();
-      camera3D = new THREE.PerspectiveCamera(45, container.clientWidth / container.clientHeight, 0.1, 1000);
-      camera3D.position.z = 4.8;
-
-      renderer3D = new THREE.WebGLRenderer({ canvas: canvas, alpha: true, antialias: true });
-      renderer3D.setSize(container.clientWidth, container.clientHeight);
-      renderer3D.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-
-      // Ambient & Directional Lights
-      const ambientLight = new THREE.AmbientLight(0x38bdf8, 0.8);
-      scene3D.add(ambientLight);
-
-      const pointLight = new THREE.PointLight(0x818cf8, 2, 50);
-      pointLight.position.set(5, 5, 5);
-      scene3D.add(pointLight);
-
-      // --- 1. ORBIT GROUP (SGP4 Astrodynamics) ---
-      orbitGroup = new THREE.Group();
-      
-      // Wireframe Earth Sphere
-      const earthGeo = new THREE.SphereGeometry(1.2, 24, 24);
-      const earthMat = new THREE.MeshBasicMaterial({ color: 0x38bdf8, wireframe: true, transparent: true, opacity: 0.35 });
-      const earthMesh = new THREE.Mesh(earthGeo, earthMat);
-      orbitGroup.add(earthMesh);
-
-      // Inner Core Glow
-      const coreGeo = new THREE.SphereGeometry(1.0, 16, 16);
-      const coreMat = new THREE.MeshBasicMaterial({ color: 0x0284c7, transparent: true, opacity: 0.25 });
-      orbitGroup.add(new THREE.Mesh(coreGeo, coreMat));
-
-      // Orbit Ring
-      const ringGeo = new THREE.TorusGeometry(1.9, 0.015, 16, 100);
-      const ringMat = new THREE.MeshBasicMaterial({ color: 0x38bdf8, transparent: true, opacity: 0.7 });
-      orbitRing = new THREE.Mesh(ringGeo, ringMat);
-      orbitRing.rotation.x = Math.PI / 3;
-      orbitGroup.add(orbitRing);
-
-      // Satellite Mesh
-      const satGeo = new THREE.BoxGeometry(0.12, 0.12, 0.12);
-      const satMat = new THREE.MeshBasicMaterial({ color: 0x22c55e });
-      satelliteMesh = new THREE.Mesh(satGeo, satMat);
-
-      // Solar Panels
-      const panelGeo = new THREE.BoxGeometry(0.35, 0.02, 0.08);
-      const panelMat = new THREE.MeshBasicMaterial({ color: 0x38bdf8 });
-      satelliteMesh.add(new THREE.Mesh(panelGeo, panelMat));
-      orbitGroup.add(satelliteMesh);
-
-      // Swarm Particle Nodes
-      const swarmGeo = new THREE.BufferGeometry();
-      const swarmCount = 40;
-      const swarmPos = new Float32Array(swarmCount * 3);
-      for (let i = 0; i < swarmCount * 3; i += 3) {
-        const theta = Math.random() * Math.PI * 2;
-        const phi = Math.acos(Math.random() * 2 - 1);
-        const rad = 1.6 + Math.random() * 0.5;
-        swarmPos[i] = rad * Math.sin(phi) * Math.cos(theta);
-        swarmPos[i + 1] = rad * Math.sin(phi) * Math.sin(theta);
-        swarmPos[i + 2] = rad * Math.cos(phi);
-      }
-      swarmGeo.setAttribute('position', new THREE.BufferAttribute(swarmPos, 3));
-      const swarmMat = new THREE.PointsMaterial({ color: 0x818cf8, size: 0.05, transparent: true, opacity: 0.8 });
-      orbitGroup.add(new THREE.Points(swarmGeo, swarmMat));
-
-      scene3D.add(orbitGroup);
-
-      // --- 2. NEURAL GROUP (ELYRA Quantum Synapse) ---
-      neuralGroup = new THREE.Group();
-      neuralGroup.visible = false;
-
-      const icoGeo = new THREE.IcosahedronGeometry(1.3, 1);
-      const icoMat = new THREE.MeshBasicMaterial({ color: 0xa855f7, wireframe: true, transparent: true, opacity: 0.5 });
-      const icoMesh = new THREE.Mesh(icoGeo, icoMat);
-      neuralGroup.add(icoMesh);
-
-      const innerIcoGeo = new THREE.IcosahedronGeometry(0.8, 0);
-      const innerIcoMat = new THREE.MeshBasicMaterial({ color: 0x38bdf8, wireframe: true, transparent: true, opacity: 0.8 });
-      neuralGroup.add(new THREE.Mesh(innerIcoGeo, innerIcoMat));
-
-      // Synapse Floating Nodes
-      const synGeo = new THREE.BufferGeometry();
-      const synCount = 80;
-      const synPos = new Float32Array(synCount * 3);
-      for (let i = 0; i < synCount * 3; i += 3) {
-        synPos[i] = (Math.random() - 0.5) * 3;
-        synPos[i + 1] = (Math.random() - 0.5) * 3;
-        synPos[i + 2] = (Math.random() - 0.5) * 3;
-      }
-      synGeo.setAttribute('position', new THREE.BufferAttribute(synPos, 3));
-      const synMat = new THREE.PointsMaterial({ color: 0x34d399, size: 0.045, transparent: true, opacity: 0.9 });
-      neuralGroup.add(new THREE.Points(synGeo, synMat));
-
-      scene3D.add(neuralGroup);
-
-      // --- 3. CRYPTO GROUP (OPAP Merkle Prism) ---
-      cryptoGroup = new THREE.Group();
-      cryptoGroup.visible = false;
-
-      const dodecaGeo = new THREE.DodecahedronGeometry(1.2, 0);
-      const dodecaMat = new THREE.MeshBasicMaterial({ color: 0x10b981, wireframe: true, transparent: true, opacity: 0.6 });
-      const dodecaMesh = new THREE.Mesh(dodecaGeo, dodecaMat);
-      cryptoGroup.add(dodecaMesh);
-
-      const ringOuterGeo = new THREE.TorusGeometry(1.7, 0.02, 16, 60);
-      const ringOuterMat = new THREE.MeshBasicMaterial({ color: 0x818cf8, transparent: true, opacity: 0.65 });
-      const ring1 = new THREE.Mesh(ringOuterGeo, ringOuterMat);
-      ring1.rotation.y = Math.PI / 4;
-      cryptoGroup.add(ring1);
-
-      const ring2 = new THREE.Mesh(ringOuterGeo, ringOuterMat);
-      ring2.rotation.x = Math.PI / 3;
-      cryptoGroup.add(ring2);
-
-      scene3D.add(cryptoGroup);
-
-      // Mouse Drag Controls
-      container.addEventListener('mousedown', (e) => {
-        is3DDragging = true;
-        prev3DMouse = { x: e.clientX, y: e.clientY };
-      });
-      window.addEventListener('mouseup', () => { is3DDragging = false; });
-      window.addEventListener('mousemove', (e) => {
-        if (!is3DDragging) return;
-        const dx = e.clientX - prev3DMouse.x;
-        const dy = e.clientY - prev3DMouse.y;
-        targetRotation.y += dx * 0.008;
-        targetRotation.x += dy * 0.008;
-        prev3DMouse = { x: e.clientX, y: e.clientY };
-      });
-
-      // Touch Drag
-      container.addEventListener('touchstart', (e) => {
-        if (e.touches.length === 1) {
-          is3DDragging = true;
-          prev3DMouse = { x: e.touches[0].clientX, y: e.touches[0].clientY };
-        }
-      });
-      window.addEventListener('touchend', () => { is3DDragging = false; });
-      window.addEventListener('touchmove', (e) => {
-        if (!is3DDragging || e.touches.length !== 1) return;
-        const dx = e.touches[0].clientX - prev3DMouse.x;
-        const dy = e.touches[0].clientY - prev3DMouse.y;
-        targetRotation.y += dx * 0.01;
-        targetRotation.x += dy * 0.01;
-        prev3DMouse = { x: e.touches[0].clientX, y: e.touches[0].clientY };
-      });
-
-      // Render Loop
-      function render3D(time) {
-        requestAnimationFrame(render3D);
-
-        // FPS Calculation
-        frameCount++;
-        if (time - lastTime >= 1000) {
-          const fps = ((frameCount * 1000) / (time - lastTime)).toFixed(1);
-          const fpsEl = document.getElementById('hologram-fps-counter');
-          if (fpsEl) fpsEl.textContent = `● ${fps} FPS`;
-          frameCount = 0;
-          lastTime = time;
-        }
-
-        // Auto-rotation & damping
-        if (!is3DDragging) {
-          targetRotation.y += 0.006;
-        }
-        currentRotation.x += (targetRotation.x - currentRotation.x) * 0.08;
-        currentRotation.y += (targetRotation.y - currentRotation.y) * 0.08;
-
-        const activeGroup = current3DMode === 'orbit' ? orbitGroup : (current3DMode === 'neural' ? neuralGroup : cryptoGroup);
-        if (activeGroup) {
-          activeGroup.rotation.x = currentRotation.x;
-          activeGroup.rotation.y = currentRotation.y;
-
-          // Update Quaternion Telemetry HUD
-          const qEl = document.getElementById('hologram-quaternion');
-          if (qEl && activeGroup.quaternion) {
-            qEl.textContent = `QUAT: [${activeGroup.quaternion.w.toFixed(2)}, ${activeGroup.quaternion.x.toFixed(2)}, ${activeGroup.quaternion.y.toFixed(2)}, ${activeGroup.quaternion.z.toFixed(2)}]`;
-          }
-        }
-
-        // Orbit satellite motion
-        if (satelliteMesh && current3DMode === 'orbit') {
-          const t = time * 0.0018;
-          const r = 1.9;
-          satelliteMesh.position.x = r * Math.cos(t);
-          satelliteMesh.position.y = r * Math.sin(t) * Math.cos(Math.PI / 3);
-          satelliteMesh.position.z = r * Math.sin(t) * Math.sin(Math.PI / 3);
-          satelliteMesh.rotation.y = t * 2;
-        }
-
-        renderer3D.render(scene3D, camera3D);
-      }
-      render3D(performance.now());
-    }
-
-    // Initialize 3D Spatial Studio immediately since it's the primary default view
-    if (document.readyState === 'loading') {
-      window.addEventListener('DOMContentLoaded', init3DStudio);
-    } else {
-      init3DStudio();
-    }
-
-    function on3DResize() {
-      const container = document.getElementById('hologram-canvas-container');
-      if (renderer3D && camera3D && container) {
-        camera3D.aspect = container.clientWidth / container.clientHeight;
-        camera3D.updateProjectionMatrix();
-        renderer3D.setSize(container.clientWidth, container.clientHeight);
-      }
-    }
-    window.addEventListener('resize', on3DResize);
-
-    function switch3DScene(mode) {
-      current3DMode = mode;
-      document.querySelectorAll('#showcase-view-3d .model-btn').forEach(btn => btn.classList.remove('active'));
-      const activeBtn = document.getElementById(`btn-3d-${mode}`);
-      if (activeBtn) activeBtn.classList.add('active');
-
-      if (orbitGroup) orbitGroup.visible = (mode === 'orbit');
-      if (neuralGroup) neuralGroup.visible = (mode === 'neural');
-      if (cryptoGroup) cryptoGroup.visible = (mode === 'crypto');
-
-      const targetLabel = document.getElementById('hologram-target-label');
-      const polyCount = document.getElementById('hologram-poly-count');
-
-      if (mode === 'orbit') {
-        if (targetLabel) targetLabel.textContent = "TARGET: SGP4 ORBITAL SWARM";
-        if (polyCount) polyCount.textContent = "TRIANGLES: 1,420";
-      } else if (mode === 'neural') {
-        if (targetLabel) targetLabel.textContent = "TARGET: QUANTUM NEURAL SYNAPSE";
-        if (polyCount) polyCount.textContent = "SYNAPSE NODES: 80";
-      } else {
-        if (targetLabel) targetLabel.textContent = "TARGET: OPAP MERKLE PRISM";
-        if (polyCount) polyCount.textContent = "HEX FACETS: 12";
-      }
-    }
-
-    function pulse3DEnergyWave() {
-      const activeGroup = current3DMode === 'orbit' ? orbitGroup : (current3DMode === 'neural' ? neuralGroup : cryptoGroup);
-      if (!activeGroup) return;
-
-      let scale = 1.0;
-      let growing = true;
-      const pulseInterval = setInterval(() => {
-        if (growing) {
-          scale += 0.05;
-          if (scale >= 1.25) growing = false;
-        } else {
-          scale -= 0.04;
-          if (scale <= 1.0) {
-            scale = 1.0;
-            clearInterval(pulseInterval);
-          }
-        }
-        activeGroup.scale.set(scale, scale, scale);
-      }, 25);
-    }
-
-    function reset3DCamera() {
-      targetRotation = { x: 0.3, y: 0.4 };
-      if (camera3D) camera3D.position.z = 4.8;
-    }
-
-    // 9. Interactive 3D Card Parallax Physics
-    document.querySelectorAll('.project-card').forEach(card => {
-      card.addEventListener('mousemove', (e) => {
-        const rect = card.getBoundingClientRect();
-        const x = e.clientX - rect.left;
-        const y = e.clientY - rect.top;
-        const centerX = rect.width / 2;
-        const centerY = rect.height / 2;
-        const rotateX = -((y - centerY) / centerY) * 7.5;
-        const rotateY = ((x - centerX) / centerX) * 7.5;
-
-        card.style.transform = `perspective(1000px) rotateX(${rotateX.toFixed(2)}deg) rotateY(${rotateY.toFixed(2)}deg) scale3d(1.02, 1.02, 1.02)`;
-      });
-
-      card.addEventListener('mouseleave', () => {
-        card.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)';
-      });
-    });
-
-    // 10. Web Audio Sound Synthesizer
-    let audioCtx = null;
-    function playCyberChime(freq = 660, type = 'sine', duration = 0.12) {
-      try {
-        if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-        if (audioCtx.state === 'suspended') audioCtx.resume();
-        const osc = audioCtx.createOscillator();
-        const gain = audioCtx.createGain();
-        osc.type = type;
-        osc.frequency.setValueAtTime(freq, audioCtx.currentTime);
-        gain.gain.setValueAtTime(0.08, audioCtx.currentTime);
-        gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + duration);
-        osc.connect(gain);
-        gain.connect(audioCtx.destination);
-        osc.start();
-        osc.stop(audioCtx.currentTime + duration);
-      } catch (e) {}
-    }
-
-    // 11. 3D Animated AI Bot Character Engine (Three.js)
-    let botScene, botCamera, botRenderer;
-    let botGroup, botHead, botVisor, botRing, botLeftHand, botRightHand, botAntennaLed;
-    let mouseGlobal = { x: 0, y: 0 };
-    let isBotWaving = false;
-
-    window.addEventListener('pointermove', (e) => {
-      mouseGlobal.x = (e.clientX / window.innerWidth) * 2 - 1;
-      mouseGlobal.y = -(e.clientY / window.innerHeight) * 2 + 1;
-    });
-
-    (function init3DBot() {
-      const canvas = document.getElementById('elyra-bot-3d-canvas');
-      const wrapper = document.getElementById('bot-canvas-wrapper');
-      if (!canvas || !wrapper || typeof THREE === 'undefined') return;
-
-      botScene = new THREE.Scene();
-      botCamera = new THREE.PerspectiveCamera(45, 1, 0.1, 100);
-      botCamera.position.set(0, 0, 3.2);
-
-      botRenderer = new THREE.WebGLRenderer({ canvas: canvas, alpha: true, antialias: true });
-      botRenderer.setSize(110, 110);
-      botRenderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-
-      // Lighting
-      const ambLight = new THREE.AmbientLight(0xffffff, 0.9);
-      botScene.add(ambLight);
-
-      const pLight = new THREE.PointLight(0x38bdf8, 3, 20);
-      pLight.position.set(2, 3, 4);
-      botScene.add(pLight);
-
-      const pLightViolet = new THREE.PointLight(0xc084fc, 2, 20);
-      pLightViolet.position.set(-2, -2, 3);
-      botScene.add(pLightViolet);
-
-      botGroup = new THREE.Group();
-
-      // Bot Head Capsule
-      const headGeo = new THREE.SphereGeometry(0.65, 32, 32);
-      headGeo.scale(1, 0.9, 0.95);
-      const headMat = new THREE.MeshStandardMaterial({
-        color: 0x0f172a,
-        metalness: 0.9,
-        roughness: 0.2,
-        wireframe: false
-      });
-      botHead = new THREE.Mesh(headGeo, headMat);
-      botGroup.add(botHead);
-
-      // Cyber Glow Visor
-      const visorGeo = new THREE.SphereGeometry(0.55, 32, 16, 0, Math.PI);
-      visorGeo.scale(1, 0.45, 0.8);
-      const visorMat = new THREE.MeshBasicMaterial({
-        color: 0x38bdf8,
-        transparent: true,
-        opacity: 0.9
-      });
-      botVisor = new THREE.Mesh(visorGeo, visorMat);
-      botVisor.position.set(0, 0.05, 0.25);
-      botVisor.rotation.x = Math.PI / 2;
-      botHead.add(botVisor);
-
-      // Visor Eye Dots
-      const eyeMat = new THREE.MeshBasicMaterial({ color: 0xffffff });
-      const eyeGeo = new THREE.SphereGeometry(0.06, 16, 16);
-      const leftEye = new THREE.Mesh(eyeGeo, eyeMat);
-      leftEye.position.set(-0.2, 0.05, 0.58);
-      botHead.add(leftEye);
-
-      const rightEye = new THREE.Mesh(eyeGeo, eyeMat);
-      rightEye.position.set(0.2, 0.05, 0.58);
-      botHead.add(rightEye);
-
-      // Antenna & Flashing LED
-      const antStalkGeo = new THREE.CylinderGeometry(0.02, 0.02, 0.35, 8);
-      const antStalkMat = new THREE.MeshStandardMaterial({ color: 0x64748b, metalness: 0.8 });
-      const antStalk = new THREE.Mesh(antStalkGeo, antStalkMat);
-      antStalk.position.set(0, 0.72, 0);
-      botHead.add(antStalk);
-
-      const ledGeo = new THREE.SphereGeometry(0.08, 16, 16);
-      const ledMat = new THREE.MeshBasicMaterial({ color: 0x38bdf8 });
-      botAntennaLed = new THREE.Mesh(ledGeo, ledMat);
-      botAntennaLed.position.set(0, 0.9, 0);
-      botHead.add(botAntennaLed);
-
-      // Anti-Gravity Thruster Ring
-      const ringGeo = new THREE.TorusGeometry(0.48, 0.04, 16, 32);
-      const ringMat = new THREE.MeshBasicMaterial({ color: 0x38bdf8, wireframe: true });
-      botRing = new THREE.Mesh(ringGeo, ringMat);
-      botRing.position.set(0, -0.65, 0);
-      botRing.rotation.x = Math.PI / 2;
-      botGroup.add(botRing);
-
-      // Left Mechanical Hand
-      const handGeo = new THREE.CapsuleGeometry ? new THREE.CapsuleGeometry(0.08, 0.25, 4, 8) : new THREE.CylinderGeometry(0.08, 0.08, 0.25, 8);
-      const handMat = new THREE.MeshStandardMaterial({ color: 0x334155, metalness: 0.7 });
-      
-      botLeftHand = new THREE.Mesh(handGeo, handMat);
-      botLeftHand.position.set(-0.85, -0.15, 0);
-      botLeftHand.rotation.z = Math.PI / 6;
-      botGroup.add(botLeftHand);
-
-      // Right Mechanical Hand (Waving Hand)
-      botRightHand = new THREE.Mesh(handGeo, handMat);
-      botRightHand.position.set(0.85, -0.15, 0);
-      botRightHand.rotation.z = -Math.PI / 6;
-      botGroup.add(botRightHand);
-
-      botScene.add(botGroup);
-
-      // Animation Loop
-      function animateBot(time) {
-        requestAnimationFrame(animateBot);
-
-        const t = time * 0.003;
-
-        // Hover bobbing motion
-        botGroup.position.y = Math.sin(t) * 0.08;
-
-        // Follow mouse pointer with head
-        const targetRotY = mouseGlobal.x * 0.55;
-        const targetRotX = -mouseGlobal.y * 0.35;
-        botHead.rotation.y += (targetRotY - botHead.rotation.y) * 0.1;
-        botHead.rotation.x += (targetRotX - botHead.rotation.x) * 0.1;
-
-        // Spin anti-gravity thruster ring
-        if (botRing) {
-          botRing.rotation.z = t * 1.5;
-        }
-
-        // Flashing LED pulse
-        if (botAntennaLed) {
-          botAntennaLed.scale.setScalar(0.9 + Math.sin(t * 3) * 0.25);
-        }
-
-        // Waving Hand Animation
-        if (isBotWaving && botRightHand) {
-          botRightHand.position.y = 0.3 + Math.sin(t * 8) * 0.1;
-          botRightHand.rotation.z = -Math.PI / 3 + Math.sin(t * 12) * 0.4;
-        } else if (botRightHand) {
-          botRightHand.position.y = -0.15 + Math.sin(t) * 0.04;
-          botRightHand.rotation.z = -Math.PI / 6 + Math.sin(t) * 0.05;
-        }
-
-        botRenderer.render(botScene, botCamera);
-      }
-      animateBot(performance.now());
+      loop();
     })();
 
-    // 12. Interactive Guided Portfolio Tour Engine
-    let currentTourStep = 0;
-    const tourSteps = [
-      {
-        badge: "STEP 1/6: ARCHITECT MISSION",
-        title: "Welcome to Systems Architecture",
-        text: "I am ELYRA, your 3D autonomous guide! We engineer mission-critical Aerospace C2, Applied Cryptography (OPAP), and On-Device Mobile AI.",
-        action: () => {
-          window.scrollTo({ top: 0, behavior: 'smooth' });
-          playCyberChime(520, 'sine', 0.15);
-        }
-      },
-      {
-        badge: "STEP 2/6: 3D SPATIAL STUDIO",
-        title: "3D Holographic Spatial Studio",
-        text: "Inspect our WebGL 3D Spatial Matrix! Switch between SGP4 satellite orbital tracks, neural quantum synapses, and Merkle cryptography crystals.",
-        action: () => {
-          switchShowcaseTab('3d');
-          switch3DScene('orbit');
-          pulse3DEnergyWave();
-          playCyberChime(660, 'sine', 0.15);
-        }
-      },
-      {
-        badge: "STEP 3/6: ON-DEVICE ELYRA APK",
-        title: "ELYRA Android Edge AI",
-        text: "Explore the standalone Android APK runtime! Features sub-second local LLM routing (Qwen 2.5), sliding-window memory buffers, and live sensor triage.",
-        action: () => {
-          switchShowcaseTab('elyra');
-          triggerElyraTriage();
-          playCyberChime(780, 'sine', 0.15);
-        }
-      },
-      {
-        badge: "STEP 4/6: ARCHITECTURE BLUEPRINT",
-        title: "Distributed Systems Blueprint",
-        text: "Inspect our multi-cluster execution flow! Trace data across Edge AI, RFC 8037 Cryptography, Multi-Agent Swarms, and SGP4 Astrodynamics C2.",
-        action: () => {
-          const el = document.getElementById('architecture-pipeline');
-          if (el) el.scrollIntoView({ behavior: 'smooth', block: 'center' });
-          simulateFullPipelineTrace();
-          playCyberChime(880, 'sine', 0.15);
-        }
-      },
-      {
-        badge: "STEP 5/6: PRODUCTION REPOSITORIES",
-        title: "High-Assurance Systems Portfolio",
-        text: "Browse 14 production-grade open-source repositories with true 3D parallax tilt, GS1 Sunrise 2027 compliance, and Astrodynamics C2.",
-        action: () => {
-          const el = document.getElementById('projects');
-          if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
-          playCyberChime(960, 'sine', 0.15);
-        }
-      },
-      {
-        badge: "STEP 6/6: COMMAND PALETTE",
-        title: "Interactive System Terminal [⌘K]",
-        text: "You can trigger commands anytime! Try typing 'elyra', 'cherub', or 'opap' to run instant live system simulations.",
-        action: () => {
-          toggleCommandPalette();
-          runCommand('elyra');
-          playCyberChime(1100, 'triangle', 0.2);
-        }
-      }
-    ];
+    // ════════════════════════════════════════════════════════════════════
+    // 6. INTERACTIONS & TOAST SYSTEM
+    // ════════════════════════════════════════════════════════════════════
+    const toastEl = document.getElementById('toast');
+    let toastTimer = null;
 
-    function renderTourStep(idx) {
-      currentTourStep = idx;
-      const step = tourSteps[idx];
-      const bubble = document.getElementById('bot-speech-bubble');
-      const badge = document.getElementById('bot-step-badge');
-      const text = document.getElementById('bot-message-text');
-      const actionRow = document.getElementById('bot-action-row');
+    function say(msg) {
+      if (!toastEl) return;
+      toastEl.textContent = msg;
+      toastEl.classList.add('show');
+      clearTimeout(toastTimer);
+      toastTimer = setTimeout(() => {
+        toastEl.classList.remove('show');
+      }, 1700);
+    }
 
-      if (!bubble || !step) return;
+    // Navigation links synchronization
+    document.querySelectorAll('.nav a, .menu-panel a').forEach(link => {
+      link.addEventListener('click', (e) => {
+        e.preventDefault();
+        const text = link.textContent.trim();
+        document.querySelectorAll('.nav a, .menu-panel a').forEach(l => {
+          l.classList.toggle('active', l.textContent.trim() === text);
+        });
+        closeMenu();
+        say(text);
+      });
+    });
 
-      bubble.style.display = 'block';
-      badge.textContent = step.badge;
-      
-      // Typewriter animation
-      text.textContent = "";
-      let charIdx = 0;
-      const fullText = `"${step.text}"`;
-      clearInterval(window.botTypeInterval);
-      window.botTypeInterval = setInterval(() => {
-        text.textContent += fullText[charIdx];
-        charIdx++;
-        if (charIdx >= fullText.length) {
-          clearInterval(window.botTypeInterval);
-        }
-      }, 16);
-
-      // Buttons
-      if (idx === 0) {
-        actionRow.innerHTML = `
-          <button class="btn btn-primary" style="padding:0.45rem 0.9rem; font-size:0.78rem;" onclick="nextTourStep()">
-            🚀 Start Flight Tour
-          </button>
-          <button class="btn btn-secondary" style="padding:0.45rem 0.8rem; font-size:0.78rem;" onclick="toggleTourBubble()">
-            Dismiss
-          </button>
-        `;
-      } else if (idx === tourSteps.length - 1) {
-        actionRow.innerHTML = `
-          <button class="btn btn-secondary" style="padding:0.45rem 0.75rem; font-size:0.75rem;" onclick="prevTourStep()">❮ Prev</button>
-          <button class="btn btn-primary" style="padding:0.45rem 0.9rem; font-size:0.78rem;" onclick="exitTour()">
-            ✨ Finish Tour
-          </button>
-        `;
+    // Hamburger button
+    menuBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      const isOpen = stage.classList.toggle('menu-open');
+      menuBtn.setAttribute('aria-expanded', String(isOpen));
+      menuPanel.setAttribute('aria-hidden', String(!isOpen));
+      if (isOpen) {
+        requestAnimationFrame(() => {
+          const firstLink = menuPanel.querySelector('a');
+          if (firstLink) firstLink.focus();
+        });
+        say("Menu ready");
       } else {
-        actionRow.innerHTML = `
-          <button class="btn btn-secondary" style="padding:0.45rem 0.75rem; font-size:0.75rem;" onclick="prevTourStep()">❮ Prev</button>
-          <button class="btn btn-primary" style="padding:0.45rem 0.9rem; font-size:0.78rem;" onclick="nextTourStep()">
-            Next Step ❯
-          </button>
-          <button class="btn btn-secondary" style="padding:0.45rem 0.75rem; font-size:0.75rem;" onclick="exitTour()">✕</button>
-        `;
+        say("Menu closed");
+      }
+    });
+
+    // Escape key closes menu
+    window.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && stage.classList.contains('menu-open')) {
+        closeMenu();
+        menuBtn.focus();
+      }
+    });
+
+    // Outside click closes menu (capture phase)
+    document.addEventListener('pointerdown', (e) => {
+      if (stage.classList.contains('menu-open')) {
+        if (!menuPanel.contains(e.target) && !menuBtn.contains(e.target)) {
+          closeMenu();
+        }
+      }
+    }, true);
+
+    // Join buttons
+    const joinBtn = document.getElementById('join-btn');
+    const menuJoinBtn = document.getElementById('menu-join-btn');
+    function toggleJoin() {
+      const isJoined = joinBtn.querySelector('.join-label').textContent.trim() === 'Joined';
+      const newLabel = isJoined ? 'Join us' : 'Joined';
+      document.querySelectorAll('.join-label').forEach(lbl => { lbl.textContent = newLabel; });
+      say(isJoined ? 'See you soon' : 'Welcome to Nival');
+    }
+    if (joinBtn) joinBtn.addEventListener('click', toggleJoin);
+    if (menuJoinBtn) menuJoinBtn.addEventListener('click', toggleJoin);
+
+    // Hero Awake & Play / Eye buttons
+    const heroEl = document.getElementById('hero');
+    const playBtn = document.getElementById('play-btn');
+    const eyeBtn = document.getElementById('eye-btn');
+
+    if (playBtn) {
+      playBtn.addEventListener('click', () => {
+        const active = playBtn.classList.toggle('active');
+        playBtn.setAttribute('aria-pressed', String(active));
+        heroEl.classList.toggle('awake', active);
+        say(active ? 'Identity activated' : 'Identity paused');
+      });
+    }
+
+    if (eyeBtn) {
+      eyeBtn.addEventListener('click', () => {
+        const isAwake = heroEl.classList.toggle('awake');
+        if (playBtn) {
+          playBtn.classList.toggle('active', isAwake);
+          playBtn.setAttribute('aria-pressed', String(isAwake));
+        }
+        say(isAwake ? 'Previewing live identity' : 'Preview paused');
+      });
+    }
+
+    // Avatar Gallery selection
+    const avatars = document.querySelectorAll('.gallery .avatar');
+    let currentAvatarIdx = 0;
+
+    function choose(i) {
+      currentAvatarIdx = ((i % avatars.length) + avatars.length) % avatars.length;
+      avatars.forEach((av, idx) => {
+        av.classList.toggle('active', idx === currentAvatarIdx);
+      });
+      const selected = avatars[currentAvatarIdx];
+      const hue = selected.getAttribute('data-hue') || '0';
+      const sat = selected.getAttribute('data-sat') || '1';
+      heroEl.style.setProperty('--hero-hue', hue + 'deg');
+      heroEl.style.setProperty('--hero-sat', sat);
+      const numStr = String(currentAvatarIdx + 1).padStart(2, '0');
+      say(`Identity ${numStr}`);
+    }
+
+    avatars.forEach((av, idx) => {
+      av.addEventListener('click', () => { choose(idx); });
+    });
+
+    const shuffleBtn = document.getElementById('shuffle-btn');
+    if (shuffleBtn) {
+      shuffleBtn.addEventListener('click', () => { choose(currentAvatarIdx + 1); });
+    }
+
+    const matNextBtn = document.getElementById('mat-next-btn');
+    if (matNextBtn) {
+      matNextBtn.addEventListener('click', () => { choose(currentAvatarIdx + 1); });
+    }
+
+    // Socials toast
+    document.querySelectorAll('.social').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const name = btn.getAttribute('data-name') || 'Social';
+        say(`${name} selected`);
+      });
+    });
+
+    // ════════════════════════════════════════════════════════════════════
+    // 7. ENTRANCE ANIMATION (Web Animations API)
+    // ════════════════════════════════════════════════════════════════════
+    (function runEntranceTimeline() {
+      if (!document.documentElement.classList.contains('intro') || !Element.prototype.animate) {
+        document.documentElement.classList.remove('intro');
+        return;
       }
 
-      // Execute Step Action
-      if (step.action) step.action();
+      const near = window.innerWidth < 640 ? 0.6 : 1;
+      const px = v => (v * near).toFixed(2) + 'px';
+      const TYPE = 'cubic-bezier(0.16, 1, 0.3, 1)';
+      const SOFT = 'cubic-bezier(0.22, 0.61, 0.36, 1)';
 
-      // Trigger bot waving
-      isBotWaving = true;
-      setTimeout(() => { isBotWaving = false; }, 1800);
-    }
+      const allAnimations = [];
 
-    function startInteractiveTour() {
-      playCyberChime(700, 'sine', 0.15);
-      renderTourStep(0);
-    }
-
-    function nextTourStep() {
-      if (currentTourStep < tourSteps.length - 1) {
-        renderTourStep(currentTourStep + 1);
-      } else {
-        exitTour();
+      function run(els, keyframes, durSec, atSec, staggerSec = 0, easing = TYPE) {
+        const list = Array.isArray(els) ? els : (els instanceof NodeList ? Array.from(els) : [els]);
+        list.forEach((el, i) => {
+          if (!el) return;
+          const anim = el.animate(keyframes, {
+            duration: durSec * 1000,
+            delay: (atSec + i * staggerSec) * 1000,
+            fill: 'both',
+            easing: easing
+          });
+          allAnimations.push({ anim, totalTime: (atSec + i * staggerSec + durSec) * 1000 });
+        });
       }
-    }
 
-    function prevTourStep() {
-      if (currentTourStep > 0) {
-        renderTourStep(currentTourStep - 1);
+      const fade = fromTransform => [
+        { opacity: 0, transform: fromTransform },
+        { opacity: 1, transform: 'none' }
+      ];
+
+      // 1. Header controls
+      run(document.querySelector('.brand'), fade('translateY(-10px)'), 0.50, 0.04);
+      run(document.querySelector('.menu'), fade('translateY(-10px)'), 0.50, 0.09);
+      run(document.querySelector('.nav'), fade('none'), 0.55, 0.13);
+      run(document.querySelector('.join'), fade('none'), 0.55, 0.18);
+
+      // 2. Headline reveals
+      document.querySelectorAll('.headline-line').forEach((line, idx) => {
+        const at = 0.22 + idx * 0.11;
+        run(line, [
+          { clipPath: 'inset(0 -0.12em 100% -0.12em)' },
+          { clipPath: 'inset(-0.34em -0.12em -0.34em -0.12em)' }
+        ], 0.95, at, 0, TYPE);
+
+        const children = Array.from(line.children);
+        children.forEach(child => {
+          run(child, [
+            { transform: 'translateY(0.9em)' },
+            { transform: 'none' }
+          ], 0.95, at, 0, TYPE);
+        });
+      });
+
+      // 3. Hero
+      run(document.querySelector('.hero'), [
+        { opacity: 0, transform: `translateY(${px(22)}) scale(0.99)` },
+        { opacity: 1, transform: 'none' }
+      ], 1.05, 0.48, 0, TYPE);
+
+      // 4. Features list
+      run(document.querySelectorAll('.feature'), fade(`translateX(${px(12)})`), 0.55, 0.52, 0.07);
+
+      // 5. Ghost and Robo-O Avatar
+      run(document.querySelectorAll('.ghost'), [
+        { opacity: 0 },
+        { opacity: 1 }
+      ], 0.90, 0.62, 0.09);
+
+      run(document.querySelector('.robo-o-avatar'), fade('scale(0.88)'), 0.62, 0.80, 0, TYPE);
+
+      // 6. Glass card & Creator
+      run(document.querySelector('.glass-card'), fade(`translateY(${px(18)})`), 0.78, 0.70, 0, TYPE);
+      run(document.querySelector('.creator'), fade(`translateY(${px(10)})`), 0.60, 0.82, 0);
+
+      // 7. Material & Gallery & Socials
+      run(document.querySelector('.material'), [{ opacity: 0 }, { opacity: 1 }], 0.72, 0.86);
+      run(document.querySelector('.material-pill'), [{ transform: `translateX(${px(16)})` }, { transform: 'none' }], 0.72, 0.86, 0, TYPE);
+      run(document.querySelectorAll('.avatar'), fade('scale(0.9)'), 0.55, 0.94, 0.06, TYPE);
+      run(document.querySelectorAll('.social'), fade(`translateY(${px(9)})`), 0.50, 1.08, 0.05);
+
+      if (allAnimations.length === 0) {
+        document.documentElement.classList.remove('intro');
+        return;
       }
-    }
 
-    function exitTour() {
-      playCyberChime(440, 'sine', 0.12);
-      const bubble = document.getElementById('bot-speech-bubble');
-      if (bubble) bubble.style.display = 'none';
-    }
+      let maxTime = 0;
+      let lastAnim = allAnimations[0].anim;
+      allAnimations.forEach(item => {
+        if (item.totalTime > maxTime) {
+          maxTime = item.totalTime;
+          lastAnim = item.anim;
+        }
+      });
 
-    function toggleTourBubble() {
-      const bubble = document.getElementById('bot-speech-bubble');
-      if (!bubble) return;
-      const isHidden = bubble.style.display === 'none';
-      bubble.style.display = isHidden ? 'block' : 'none';
-      if (isHidden) {
-        playCyberChime(600, 'sine', 0.12);
-        renderTourStep(currentTourStep);
-      }
-    }
-
-    function handleBotClick() {
-      isBotWaving = true;
-      playCyberChime(800, 'sine', 0.15);
-      setTimeout(() => { isBotWaving = false; }, 2000);
-      toggleTourBubble();
-    }
+      lastAnim.onfinish = () => {
+        document.documentElement.classList.remove('intro');
+        allAnimations.forEach(item => { item.anim.cancel(); });
+        allAnimations.length = 0;
+      };
+    })();
   </script>
 </body>
 </html>
