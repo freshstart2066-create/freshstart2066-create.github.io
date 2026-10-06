@@ -1,0 +1,1577 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <title>SERAPH — Autonomous Aerospace Command & Control (C2) | Emmanuel Oyewole</title>
+  <meta name="description" content="SERAPH: Flagship Autonomous Aerospace Command & Control (C2), Real-Time SGP4 Orbital Propagation, Conjunction Matrix Tracking, and Interplanetary Telemetry Mesh by Emmanuel Oyewole.">
+  <link rel="icon" type="image/svg+xml" href="https://d2ol7oe51mr4n9.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/eb7e0f53-50cd-4af5-abc4-8b9a52cdc01b.svg">
+  
+  <style>
+    @font-face {
+      font-family: 'SF Pro';
+      src: local('SF Pro Text'), local('SF Pro'), local('SFPro'), local('-apple-system');
+      font-weight: 400;
+      font-style: normal;
+    }
+    @font-face {
+      font-family: 'SF Pro';
+      src: local('SF Pro Display Bold'), local('SF Pro Bold'), local('SFPro-Bold');
+      font-weight: 700;
+      font-style: normal;
+    }
+    @font-face {
+      font-family: 'SF Pro Thin';
+      src: local('SF Pro Display Thin'), local('SF Pro Thin'), local('SFPro-Thin');
+      font-weight: 100;
+      font-style: normal;
+    }
+    @font-face {
+      font-family: 'Aalto';
+      src: local('Aalto'), local('Arial Narrow Bold'), local('Arial Narrow');
+      font-weight: 400;
+      font-style: normal;
+    }
+
+    :root {
+      font-family: 'SF Pro', Arial, sans-serif;
+      color: #fff;
+      background: #090807;
+      font-synthesis: none;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    * { box-sizing: border-box; }
+    html, body {
+      margin: 0;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      background: #090807;
+    }
+
+    /* 1. LAYOUT & VIEWPORT */
+    .experience {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      min-height: 540px;
+      overflow: hidden;
+      background: #0a0908;
+    }
+    .backgrounds, .background, .shade, .transition-layer, .transition-layer video {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+    }
+    .background {
+      object-fit: cover;
+      opacity: 0;
+      transition: opacity 0.8s ease;
+    }
+    .background.is-visible {
+      opacity: 1;
+    }
+    .shade {
+      z-index: 1;
+      background: linear-gradient(to bottom, transparent 52%, rgba(0,0,0,0.88) 100%);
+      pointer-events: none;
+    }
+    .chrome {
+      position: absolute;
+      z-index: 4;
+      transition: opacity 0.45s ease, filter 0.45s ease;
+    }
+    .experience.is-transitioning .chrome {
+      opacity: 0;
+      filter: blur(8px);
+      pointer-events: none;
+    }
+
+    /* 2. HEADER */
+    .header {
+      left: clamp(18px, 1.95vw, 28px);
+      right: clamp(18px, 1.95vw, 28px);
+      top: clamp(18px, 3.1vh, 28px);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+    }
+    .header-actions {
+      margin-left: auto;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .nav {
+      display: flex;
+      align-items: center;
+      height: 42px;
+      padding: 4px 5px;
+      border: 1px solid rgba(255, 255, 255, 0.45);
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-radius: 999px;
+    }
+    .nav a {
+      color: #fff;
+      text-decoration: none;
+      padding: 8px 19px;
+      border-radius: 999px;
+      line-height: 1;
+      font-size: 14.5px;
+      font-weight: 500;
+      transition: background 0.2s, color 0.2s;
+    }
+    .nav a.active {
+      background: #fff;
+      color: #000;
+      font-weight: 600;
+    }
+    .nav a:hover:not(.active) {
+      background: rgba(255, 255, 255, 0.18);
+    }
+    .menu {
+      height: 42px;
+      padding: 0 20px;
+      border: 0;
+      border-radius: 999px;
+      background: #fff;
+      color: #000;
+      cursor: pointer;
+      font-weight: 700;
+      font-size: 14px;
+      letter-spacing: 0.02em;
+      transition: transform 0.2s, background 0.2s;
+    }
+    .menu:hover {
+      transform: scale(1.03);
+      background: #f0f4f8;
+    }
+
+    .project-badge {
+      margin-left: 48px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 6px 14px 6px 8px;
+      border: 1px solid rgba(255, 255, 255, 0.25);
+      border-radius: 999px;
+      background: rgba(10, 16, 26, 0.65);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      text-decoration: none;
+      color: #fff;
+      font-size: 12.5px;
+      letter-spacing: 0.05em;
+    }
+    .project-badge-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: #79dce8;
+      box-shadow: 0 0 10px #79dce8;
+    }
+
+    /* 3. SIDEBAR PLANET LIST */
+    .planet-list {
+      left: clamp(18px, 1.95vw, 28px);
+      top: 50%;
+      transform: translateY(-43%);
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      font-size: 16px;
+      user-select: none;
+    }
+    .planet-item {
+      display: flex;
+      align-items: center;
+      min-height: 20px;
+      color: #b0c0d0;
+      font-family: 'SF Pro', Arial, sans-serif;
+      transition: color 0.2s, transform 0.2s;
+      cursor: pointer;
+    }
+    .planet-item:hover {
+      color: #fff;
+      transform: translateX(4px);
+    }
+    .planet-item.active {
+      font-size: 18px;
+      font-weight: 700;
+      gap: 8px;
+      color: #fff;
+    }
+    .planet-item.active:before {
+      content: '';
+      width: 16px;
+      height: 16px;
+      border-radius: 50%;
+      background: #fff;
+      box-shadow: 0 0 12px rgba(255, 255, 255, 0.6);
+      flex-shrink: 0;
+    }
+
+    /* 4. 3D PORTAL */
+    .portal-wrap {
+      left: 50%;
+      top: 50%;
+      width: min(320px, 31vw);
+      transform: translate(-50%, -54%);
+      perspective: none;
+    }
+    .portal-heading {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 12px;
+      font-size: 16px;
+      opacity: 0;
+      letter-spacing: 0.04em;
+    }
+    .portal-heading strong {
+      font-size: 18px;
+      margin-left: 8px;
+      font-weight: 700;
+    }
+    .portal {
+      position: relative;
+      display: block;
+      width: 100%;
+      aspect-ratio: 320/350;
+      padding: 0;
+      overflow: visible;
+      border: 0;
+      border-radius: 90px;
+      background: transparent;
+      cursor: pointer;
+      box-shadow: none;
+      transform: none !important;
+    }
+    .portal video, .portal img {
+      visibility: hidden;
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      pointer-events: none;
+    }
+    .portal-canvas {
+      position: fixed;
+      inset: 0;
+      z-index: 3;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+    }
+
+    /* 5. CONTENT BOTTOM */
+    .planet-content {
+      left: clamp(28px, 4vw, 58px);
+      right: clamp(28px, 3vw, 44px);
+      bottom: clamp(24px, 3vh, 30px);
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      gap: 40px;
+    }
+    .planet-content h1 {
+      font-family: Aalto, 'Arial Narrow', sans-serif;
+      font-size: clamp(128px, 21.8vw, 314px);
+      font-weight: 400;
+      line-height: 0.72;
+      margin: 0 0 -0.04em;
+      letter-spacing: 0;
+      transform: translateX(-32px);
+      opacity: 0;
+      text-transform: uppercase;
+      text-shadow: 0 10px 40px rgba(0, 0, 0, 0.4);
+    }
+    .planet-content dl {
+      width: min(447px, 34vw);
+      margin: 0;
+      font-size: 16px;
+    }
+    .fact {
+      display: grid;
+      grid-template-columns: 138px 1fr;
+      gap: 18px;
+      padding: 8px 0;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.48);
+      opacity: 0;
+    }
+    .fact:last-child {
+      border-bottom: 0;
+    }
+    .fact dt {
+      font-weight: 700;
+      color: #fff;
+    }
+    .fact dd {
+      margin: 0;
+      color: #cfd9e4;
+      line-height: 1.35;
+    }
+
+    /* 6. PRELOADER */
+    .preloader {
+      position: absolute;
+      inset: 0;
+      z-index: 20;
+      background: #000;
+      overflow: hidden;
+    }
+    .preloader video {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    .preloader-shade {
+      position: absolute;
+      inset: auto 0 0;
+      height: 35%;
+      background: linear-gradient(to bottom, transparent, #000);
+    }
+    .preloader.is-background {
+      z-index: 0;
+    }
+    .preloader.is-background .preloader-shade {
+      opacity: 0;
+    }
+
+    .floating-logo {
+      position: fixed;
+      z-index: 22;
+      left: 50%;
+      top: 50%;
+      width: 59px;
+      height: 58px;
+      transform: translate(-50%, -50%);
+      will-change: left, top, width, height, transform;
+      transition: left 2s cubic-bezier(0.16, 1, 0.3, 1),
+                  top 2s cubic-bezier(0.16, 1, 0.3, 1),
+                  width 2s cubic-bezier(0.16, 1, 0.3, 1),
+                  height 2s cubic-bezier(0.16, 1, 0.3, 1),
+                  transform 2s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .floating-logo.is-docked {
+      left: clamp(18px, 1.95vw, 28px);
+      top: clamp(18px, 3.1vh, 28px);
+      width: 37px;
+      height: 36px;
+      transform: none;
+    }
+    .floating-logo.is-settled {
+      z-index: 5;
+    }
+
+    .preloader-count {
+      position: fixed;
+      z-index: 22;
+      left: 50%;
+      bottom: clamp(22px, 3.1vh, 28px);
+      display: flex;
+      align-items: flex-end;
+      gap: 4px;
+      transform: translateX(-50%);
+      font-family: 'SF Pro', Arial, sans-serif;
+      line-height: 1;
+    }
+    .preloader-count > span:first-child {
+      font-family: 'SF Pro Thin', 'SF Pro', Arial, sans-serif;
+      font-size: 64px;
+      font-weight: 100;
+    }
+    .preloader-count .percent {
+      font-size: 24px;
+      padding-bottom: 4px;
+    }
+    .preloader-count.is-leaving {
+      animation: preload-count-out 0.75s cubic-bezier(0.22, 1, 0.36, 1) both;
+    }
+    @keyframes preload-count-out {
+      to {
+        opacity: 0;
+        filter: blur(7px);
+        transform: translate(-50%, -34px);
+      }
+    }
+    body:not(.preload-complete) .custom-cursor {
+      opacity: 0 !important;
+    }
+
+    /* 7. CUSTOM CURSOR */
+    html, body, button, a, .portal {
+      cursor: none !important;
+    }
+    .custom-cursor {
+      display: block;
+      position: fixed;
+      left: 0;
+      top: 0;
+      z-index: 100;
+      width: 1px;
+      height: 1px;
+      pointer-events: none;
+      opacity: 0;
+      transition: opacity 0.2s ease;
+    }
+    .custom-cursor.is-visible {
+      opacity: 1;
+    }
+    .cursor-dot, .cursor-orbit {
+      position: absolute;
+      left: 0;
+      top: 0;
+      border-radius: 50%;
+      transform: translate(-50%, -50%);
+    }
+    .cursor-dot {
+      width: 12px;
+      height: 12px;
+      background: #fff;
+    }
+    .cursor-orbit {
+      width: 36px;
+      height: 36px;
+      border: 1px solid #fff;
+      background: rgba(255, 255, 255, 0.4);
+      transition: transform 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+    .custom-cursor.is-enter .cursor-orbit {
+      transform: translate(-50%, -50%) scale(1.16);
+    }
+    .cursor-label {
+      position: absolute;
+      top: 26px;
+      left: 0;
+      transform: translateX(-50%) translateY(-4px);
+      font: 16px/1.2 'SF Pro', Arial, sans-serif;
+      white-space: nowrap;
+      opacity: 0;
+      transition: opacity 0.2s ease, transform 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+      letter-spacing: 0.05em;
+    }
+    .custom-cursor.is-enter .cursor-label {
+      opacity: 1;
+      transform: translateX(-50%) translateY(0);
+    }
+
+    /* 8. ANIMATIONS & REVEAL */
+    body:not(.intro-ready) .header,
+    body:not(.intro-ready) .planet-list,
+    body:not(.intro-ready) .planet-content h1,
+    body:not(.intro-ready) .planet-content .fact {
+      opacity: 0;
+    }
+    .intro-ready .header {
+      animation: reveal-down 0.9s cubic-bezier(0.22, 1, 0.36, 1) 0.1s both;
+    }
+    .intro-ready .planet-list {
+      animation: reveal-side 0.9s cubic-bezier(0.22, 1, 0.36, 1) 0.65s both;
+    }
+    .content-revealing h1 {
+      animation: title-rise 1.05s cubic-bezier(0.16, 1, 0.3, 1) both;
+    }
+    .content-revealing .fact {
+      animation: fact-rise 0.72s cubic-bezier(0.22, 1, 0.36, 1) both;
+    }
+    .content-revealing .fact:nth-child(1) { animation-delay: 0.52s; }
+    .content-revealing .fact:nth-child(2) { animation-delay: 0.68s; }
+    .content-revealing .fact:nth-child(3) { animation-delay: 0.84s; }
+    .content-revealing .fact:nth-child(4) { animation-delay: 1.00s; }
+
+    .mask-revealing .portal-heading {
+      animation: portal-caption 0.85s cubic-bezier(0.22, 1, 0.36, 1) both;
+    }
+    .planet-list.is-switching .planet-item {
+      animation: menu-row 0.58s cubic-bezier(0.22, 1, 0.36, 1) both;
+    }
+    .planet-list.is-switching .planet-item:nth-child(1) { animation-delay: 0.02s; }
+    .planet-list.is-switching .planet-item:nth-child(2) { animation-delay: 0.05s; }
+    .planet-list.is-switching .planet-item:nth-child(3) { animation-delay: 0.08s; }
+    .planet-list.is-switching .planet-item:nth-child(4) { animation-delay: 0.11s; }
+    .planet-list.is-switching .planet-item:nth-child(5) { animation-delay: 0.14s; }
+    .planet-list.is-switching .planet-item:nth-child(6) { animation-delay: 0.17s; }
+    .planet-list.is-switching .planet-item:nth-child(7) { animation-delay: 0.20s; }
+    .planet-list.is-switching .planet-item:nth-child(8) { animation-delay: 0.23s; }
+    .planet-list.is-switching .planet-item.active:before {
+      animation: active-dot 0.55s cubic-bezier(0.22, 1, 0.36, 1) 0.18s both;
+    }
+
+    @keyframes reveal-down {
+      from { opacity: 0; filter: blur(8px); transform: translateY(-18px); }
+      to   { opacity: 1; filter: blur(0); transform: translateY(0); }
+    }
+    @keyframes reveal-side {
+      from { opacity: 0; filter: blur(8px); transform: translate(-20px, -43%); }
+      to   { opacity: 1; filter: blur(0); transform: translate(0, -43%); }
+    }
+    @keyframes title-rise {
+      from { opacity: 0; filter: blur(12px); transform: translate(-32px, 42px); }
+      to   { opacity: 1; filter: blur(0); transform: translate(-32px, 0); }
+    }
+    @keyframes fact-rise {
+      from { opacity: 0; filter: blur(7px); transform: translateY(18px); }
+      to   { opacity: 1; filter: blur(0); transform: translateY(0); }
+    }
+    @keyframes portal-caption {
+      from { opacity: 0; filter: blur(7px); transform: translateY(22px); }
+      to   { opacity: 1; filter: blur(0); transform: translateY(0); }
+    }
+    @keyframes menu-row {
+      from { opacity: 0.35; transform: translateX(-8px); }
+      to   { opacity: 1; transform: translateX(0); }
+    }
+    @keyframes active-dot {
+      from { opacity: 0; transform: scale(0); }
+      to   { opacity: 1; transform: scale(1); }
+    }
+
+    /* 9. MISC & TRANSITIONS */
+    .transition-layer { display: none; }
+    .scene-canvas { display: none; }
+    .loading {
+      position: absolute;
+      z-index: 12;
+      left: 50%;
+      bottom: 30px;
+      transform: translateX(-50%);
+      opacity: 0;
+      font-size: 12px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      transition: opacity 0.2s;
+    }
+    .experience.is-loading .loading { opacity: 0.8; }
+    .experience.is-transitioning .header,
+    .experience.is-transitioning .planet-list {
+      opacity: 1;
+      filter: none;
+      pointer-events: auto;
+    }
+    .experience.is-transitioning .shade { opacity: 1; }
+    .experience.is-committing .background { transition: none !important; }
+
+    /* 10. PROJECT SERAPH ARCHITECTURAL BRIEFING DRAWER (BIGGEST PITCH) */
+    .seraph-modal {
+      position: fixed;
+      inset: 0;
+      z-index: 150;
+      display: none;
+      background: rgba(3, 7, 14, 0.78);
+      backdrop-filter: blur(24px);
+      -webkit-backdrop-filter: blur(24px);
+      overflow-y: auto;
+      padding: clamp(20px, 4vh, 60px) clamp(20px, 4vw, 80px);
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+    .seraph-modal.is-open {
+      display: block;
+      opacity: 1;
+    }
+    .seraph-sheet {
+      max-width: 1040px;
+      margin: 0 auto;
+      background: linear-gradient(145deg, rgba(16, 26, 42, 0.92), rgba(8, 14, 24, 0.96));
+      border: 1px solid rgba(121, 220, 232, 0.3);
+      border-radius: 28px;
+      padding: clamp(24px, 4vw, 48px);
+      box-shadow: 0 24px 80px rgba(0, 0, 0, 0.6), inset 0 1px 0 rgba(255, 255, 255, 0.15);
+      position: relative;
+    }
+    .seraph-close {
+      position: absolute;
+      right: clamp(18px, 3vw, 32px);
+      top: clamp(18px, 3vw, 32px);
+      width: 44px;
+      height: 44px;
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.08);
+      color: #fff;
+      font-size: 24px;
+      line-height: 1;
+      cursor: pointer;
+      display: grid;
+      place-items: center;
+      transition: background 0.2s, transform 0.2s;
+    }
+    .seraph-close:hover {
+      background: #fff;
+      color: #000;
+      transform: scale(1.05);
+    }
+    .seraph-kicker {
+      font-family: 'SF Pro', Arial, sans-serif;
+      font-size: 12px;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: #79dce8;
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+    .seraph-title {
+      font-size: clamp(32px, 5vw, 56px);
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      line-height: 1.08;
+      margin: 0 0 16px;
+      color: #fff;
+    }
+    .seraph-lede {
+      font-size: clamp(16px, 1.8vw, 19px);
+      line-height: 1.55;
+      color: #b8c8d8;
+      margin: 0 0 36px;
+      max-width: 860px;
+    }
+
+    .seraph-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+      margin-bottom: 36px;
+    }
+    .seraph-box {
+      padding: 24px;
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      border-radius: 20px;
+      transition: border-color 0.2s;
+    }
+    .seraph-box:hover {
+      border-color: rgba(121, 220, 232, 0.5);
+    }
+    .seraph-box h3 {
+      margin: 0 0 10px;
+      font-size: 19px;
+      font-weight: 700;
+      color: #fff;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .seraph-box p {
+      margin: 0;
+      font-size: 14px;
+      line-height: 1.6;
+      color: #9cb0c4;
+    }
+
+    .seraph-telemetry-hud {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+      padding: 24px;
+      border-radius: 20px;
+      background: rgba(4, 9, 18, 0.85);
+      border: 1px solid rgba(121, 220, 232, 0.25);
+      margin-bottom: 36px;
+    }
+    .hud-stat {
+      padding: 12px;
+    }
+    .hud-label {
+      font-size: 11px;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: #6d88a2;
+      margin-bottom: 6px;
+    }
+    .hud-value {
+      font-size: 26px;
+      font-weight: 700;
+      color: #79dce8;
+      font-family: 'SF Pro', Arial, sans-serif;
+    }
+    .hud-sub {
+      font-size: 11px;
+      color: #22c55e;
+      margin-top: 4px;
+      font-weight: 600;
+    }
+
+    .seraph-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+      align-items: center;
+    }
+    .seraph-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 12px 24px;
+      border-radius: 999px;
+      font-size: 14px;
+      font-weight: 700;
+      text-decoration: none;
+      cursor: pointer;
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      color: #fff;
+      background: rgba(255, 255, 255, 0.08);
+      transition: background 0.2s, transform 0.2s;
+    }
+    .seraph-btn:hover {
+      background: rgba(255, 255, 255, 0.2);
+      transform: translateY(-1px);
+    }
+    .seraph-btn.primary {
+      background: #fff;
+      color: #000;
+      border-color: #fff;
+    }
+    .seraph-btn.primary:hover {
+      background: #79dce8;
+      border-color: #79dce8;
+    }
+
+    .seraph-toast {
+      position: fixed;
+      bottom: 28px;
+      left: 50%;
+      transform: translate(-50%, 20px);
+      z-index: 100;
+      padding: 11px 24px;
+      border-radius: 999px;
+      background: rgba(8, 18, 30, 0.88);
+      border: 1px solid rgba(121, 220, 232, 0.45);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      color: #79dce8;
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      box-shadow: 0 10px 32px rgba(0, 0, 0, 0.55);
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.25s, transform 0.25s;
+    }
+    .seraph-toast.show {
+      opacity: 1;
+      transform: translate(-50%, 0);
+    }
+
+    /* 11. RESPONSIVE */
+    @media(max-width:900px){
+      .nav { display: none; }
+      .portal-wrap { width: min(300px, 48vw); }
+      .planet-content h1 { font-size: clamp(105px, 24vw, 190px); }
+      .planet-content dl { width: 43vw; }
+      .fact { grid-template-columns: 110px 1fr; }
+      .planet-list { font-size: 14px; }
+      .planet-item.active { font-size: 16px; }
+      .seraph-grid { grid-template-columns: 1fr; }
+      .seraph-telemetry-hud { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media(max-width:640px){
+      .experience { min-height: 600px; }
+      .planet-list { display: none; }
+      .portal-wrap { top: 44%; width: min(260px, 66vw); }
+      .planet-content { left: 18px; right: 18px; bottom: 18px; display: block; }
+      .planet-content h1 { font-size: clamp(98px, 30vw, 160px); margin-bottom: 20px; }
+      .planet-content dl { width: 100%; font-size: 13px; }
+      .fact { grid-template-columns: 92px 1fr; padding: 5px 0; }
+      .portal-heading { font-size: 14px; }
+      .portal-heading strong { font-size: 16px; }
+      .menu { height: 38px; }
+      .portal { border-radius: 70px; }
+      .seraph-telemetry-hud { grid-template-columns: 1fr; }
+      .project-badge { display: none; }
+    }
+    @media(prefers-reduced-motion:reduce){
+      * { transition-duration: 0.01ms !important; }
+      .portal { transform: none !important; }
+    }
+  </style>
+</head>
+<body>
+
+  <main class="experience" data-planet="mars">
+    <!-- BACKGROUND VIDEOS -->
+    <div class="backgrounds" aria-hidden="true">
+      <video id="mars-background"  class="background is-visible" muted playsinline preload="auto" src="https://d2ol7oe51mr4n9.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/3c83091e-4046-4fd6-adbb-2edb728be79a.mp4"></video>
+      <video id="earth-background" class="background"            muted playsinline preload="auto" src="https://d2ol7oe51mr4n9.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/fc3ded42-e845-41f3-a830-5cab512d79cd.mp4"></video>
+      <video id="venus-background" class="background"            muted playsinline preload="auto" src="https://d2ol7oe51mr4n9.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/b30f64d9-1637-477a-83df-d0fc6461a422.mp4"></video>
+    </div>
+
+    <!-- PRELOADER -->
+    <div class="preloader" id="preloader" aria-label="Loading Mars">
+      <video id="preloader-video" muted playsinline preload="auto" src="https://d2ol7oe51mr4n9.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/5fc5651c-3b5d-4171-b507-87f7e635d1b4.mp4"></video>
+      <div class="preloader-shade"></div>
+    </div>
+    
+    <img class="floating-logo" id="floating-logo" src="https://d2ol7oe51mr4n9.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/eb7e0f53-50cd-4af5-abc4-8b9a52cdc01b.svg" alt="SERAPH">
+    
+    <div class="preloader-count" id="preloader-count" aria-live="polite">
+      <span id="preloader-value">0</span><span class="percent">%</span>
+    </div>
+
+    <canvas id="scene-canvas" class="scene-canvas" aria-hidden="true"></canvas>
+    <div class="shade" aria-hidden="true"></div>
+
+    <!-- HEADER -->
+    <header class="header chrome">
+      <a href="#about" class="project-badge" onclick="openSeraphBriefing(); return false;" aria-label="SERAPH Mission Architecture">
+        <span class="project-badge-dot"></span>
+        <span>SERAPH &bull; ORBITAL C2</span>
+      </a>
+
+      <div class="header-actions">
+        <nav class="nav" aria-label="Primary navigation">
+          <a class="active" href="#about" onclick="openSeraphBriefing(); return false;">About</a>
+          <a href="#explore" onclick="openSeraphBriefing(); return false;">Explore</a>
+          <a href="#planets" onclick="cyclePlanet(); return false;">Planets</a>
+          <a href="main.html" aria-label="ELYRA Edge AI">ELYRA AI &rarr;</a>
+        </nav>
+        <button class="menu" id="menu-btn" type="button" onclick="openSeraphBriefing()">Pitch</button>
+      </div>
+    </header>
+
+    <!-- PLANET LIST SIDEBAR -->
+    <aside class="planet-list chrome" aria-label="Planets"></aside>
+
+    <!-- 3D PORTAL CANVAS & BUTTON -->
+    <canvas id="portal-canvas" class="portal-canvas" aria-hidden="true"></canvas>
+    
+    <section class="portal-wrap chrome" aria-label="Next destination">
+      <div class="portal-heading">
+        <span>Next:</span>
+        <span><span id="next-number">[03]</span> <strong id="next-name">Earth</strong></span>
+      </div>
+      <button class="portal" id="portal" type="button" aria-label="Travel to Earth">
+        <video id="portal-video" muted playsinline preload="auto" src="https://d2ol7oe51mr4n9.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/fc3ded42-e845-41f3-a830-5cab512d79cd.mp4"></video>
+        <img id="portal-image" src="https://d2ol7oe51mr4n9.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/d6fb8b6b-c15e-4aaa-9cf7-45bbb5e33372.jpg" alt="Mercury">
+      </button>
+    </section>
+
+    <!-- CONTENT -->
+    <section class="planet-content chrome" aria-live="polite">
+      <h1 id="planet-title">MARS</h1>
+      <dl id="facts"></dl>
+    </section>
+
+    <div class="transition-layer" aria-hidden="true"><video id="transition-video" muted playsinline preload="auto"></video></div>
+    <div class="loading" aria-hidden="true">Preparing orbit…</div>
+
+    <!-- CUSTOM CURSOR -->
+    <div class="custom-cursor" aria-hidden="true">
+      <span class="cursor-orbit"></span>
+      <span class="cursor-dot"></span>
+      <span class="cursor-label">Enter</span>
+    </div>
+
+    <!-- SERAPH TOAST NOTIFICATION -->
+    <div class="seraph-toast" id="seraph-toast" role="status" aria-live="polite"></div>
+  </main>
+
+  <!-- ============================================================== -->
+  <!-- PROJECT SERAPH ARCHITECTURAL BRIEFING DRAWER (BIGGEST PITCH) -->
+  <!-- ============================================================== -->
+  <aside class="seraph-modal" id="seraph-modal" role="dialog" aria-modal="true" aria-labelledby="seraph-pitch-title" onclick="if(event.target===this)closeSeraphBriefing()">
+    <div class="seraph-sheet">
+      <button class="seraph-close" type="button" onclick="closeSeraphBriefing()" aria-label="Close Seraph briefing">&times;</button>
+      
+      <p class="seraph-kicker">MISSION SYSTEMS &bull; AUTONOMOUS AEROSPACE C2</p>
+      <h2 class="seraph-title" id="seraph-pitch-title">PROJECT SERAPH</h2>
+      <p class="seraph-lede">Autonomous orbital command &amp; control (C2), real-time SGP4/SDP4 satellite propagation, automated conjunction matrix avoidance, and interplanetary mesh telemetry streaming. Designed for sovereign space architectures, megaconstellations, and deep-space trajectory optimization.</p>
+
+      <!-- LIVE TELEMETRY MATRIX HUD -->
+      <div class="seraph-telemetry-hud">
+        <div class="hud-stat">
+          <div class="hud-label">ORBITAL VELOCITY</div>
+          <div class="hud-value" id="hud-vel">7.66 km/s</div>
+          <div class="hud-sub">LEO Nominal Vector</div>
+        </div>
+        <div class="hud-stat">
+          <div class="hud-label">APOGEE / PERIGEE</div>
+          <div class="hud-value">540 &times; 525 km</div>
+          <div class="hud-sub">Circularity: 99.8%</div>
+        </div>
+        <div class="hud-stat">
+          <div class="hud-label">CONJUNCTION RISK (Pc)</div>
+          <div class="hud-value" style="color:#22c55e;">2.1 &times; 10<sup>-7</sup></div>
+          <div class="hud-sub">&lt; 10<sup>-4</sup> Avoidance Floor</div>
+        </div>
+        <div class="hud-stat">
+          <div class="hud-label">DSN LINK MARGIN</div>
+          <div class="hud-value">+14.2 dB</div>
+          <div class="hud-sub">Ka-Band Carrier Lock</div>
+        </div>
+      </div>
+
+      <!-- 3 CORE PILLARS OF SERAPH -->
+      <div class="seraph-grid">
+        <article class="seraph-box">
+          <h3>🛰️ SGP4 Analytical Propagation</h3>
+          <p>High-throughput orbit estimation processing over 100,000 resident space objects (RSOs). Implements WGS-84 oblate Earth J2/J3/J4 gravitational harmonics, Jacchia-Roberts atmospheric drag decay, and third-body lunisolar perturbations with SIMD vectorization.</p>
+        </article>
+        <article class="seraph-box">
+          <h3>⚡ Conjunction Matrix Triage</h3>
+          <p>Continuous screening against two-line element (TLE) and high-precision orbit ephemeris (OEM) message catalogs. Evaluates 3D covariance ellipsoids in radial/in-track/cross-track frames, triggering autonomous impulsive &Delta;v collision maneuvers.</p>
+        </article>
+        <article class="seraph-box">
+          <h3>🌌 Interplanetary Telemetry Mesh</h3>
+          <p>Resilient store-and-forward delay-tolerant networking (DTN) for interplanetary transits. Compensates for relativistic Doppler shifts, handles 4-to-20 minute light-time latency over Mars-Earth uplinks, and manages optical inter-satellite laser links (OISL).</p>
+        </article>
+      </div>
+
+      <div class="seraph-actions">
+        <a class="seraph-btn primary" href="main.html">Inspect ELYRA Edge AI Companion &rarr;</a>
+        <button class="seraph-btn" type="button" onclick="cyclePlanet(); closeSeraphBriefing();">Next Destination Orbit &rarr;</button>
+        <a class="seraph-btn" href="index.html">Return to Portal Home</a>
+        <button class="seraph-btn" type="button" onclick="closeSeraphBriefing()">Continue Space Portal Tour</button>
+      </div>
+    </div>
+  </aside>
+
+  <!-- ============================================================== -->
+  <!-- COMPLETE SCRIPT: 3D PORTAL, PRELOADER, TRAIN TRANSITION -->
+  <!-- ============================================================== -->
+  <script>
+    'use strict';
+
+    // 1. ASSET DEFINITIONS
+    const BASE = 'https://d2ol7oe51mr4n9.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P';
+    const MARS_BG   = `${BASE}/3c83091e-4046-4fd6-adbb-2edb728be79a.mp4`;
+    const TO_EARTH  = `${BASE}/fc3ded42-e845-41f3-a830-5cab512d79cd.mp4`;
+    const TO_VENUS  = `${BASE}/b30f64d9-1637-477a-83df-d0fc6461a422.mp4`;
+    const TO_MARS   = `${BASE}/5fc5651c-3b5d-4171-b507-87f7e635d1b4.mp4`;
+    const MERCURY   = `${BASE}/d6fb8b6b-c15e-4aaa-9cf7-45bbb5e33372.jpg`;
+    const LOGO      = `${BASE}/eb7e0f53-50cd-4af5-abc4-8b9a52cdc01b.svg`;
+
+    // 2. DATA MODEL
+    const planets = ['Mercury', 'Venus', 'Earth', 'Mars', 'Jupiter', 'Saturn', 'Uranus', 'Neptune'];
+
+    const states = {
+      mars: {
+        name: 'Mars',
+        next: 'Earth',
+        number: '[03]',
+        portal: TO_EARTH,
+        background: 'mars-background',
+        facts: [
+          ['Distance:', 'About 228 million km (1.5 astronomical units).'],
+          ['Year:', 'One Martian year is equal to 687 Earth days.'],
+          ['Temperature:', 'Around -60 °C, dropping to -125 °C at the poles in winter.'],
+          ['Atmosphere:', 'Very thin, consisting of 95% carbon dioxide, with frequent dust storms.']
+        ]
+      },
+      earth: {
+        name: 'Earth',
+        next: 'Venus',
+        number: '[02]',
+        portal: TO_VENUS,
+        background: 'earth-background',
+        facts: [
+          ['Distance:', '149.6 million km from the Sun.'],
+          ['Year:', '365.25 Earth days.'],
+          ['Temperature:', 'Average surface temperature around 15 °C.'],
+          ['Atmosphere:', 'Mostly nitrogen and oxygen, supporting life and liquid water.']
+        ]
+      },
+      venus: {
+        name: 'Venus',
+        next: 'Mercury',
+        number: '[06]',
+        image: MERCURY,
+        background: 'venus-background',
+        facts: [
+          ['Distance:', '108.2 million km from the Sun.'],
+          ['Year:', '225 Earth days.'],
+          ['Temperature:', 'Around 465 °C — the hottest planet in the Solar System.'],
+          ['Atmosphere:', 'Extremely dense, mostly carbon dioxide, with clouds of sulfuric acid.']
+        ]
+      }
+    };
+
+    // 3. APPLICATION STATE
+    let current = 'mars';
+    let busy = false;
+    let expansion = 0;
+    let maskScale = 1;
+    let canvasOpacity = 1;
+    let transitionActive = false;
+    let hasFrozenScene = false;
+    let isFirstRender = true;
+
+    // Pointer tilt
+    let rotX = 0, rotY = 0;
+    let targetX = 0, targetY = 0;
+    let lastTime = 0;
+
+    // Elements
+    const experience = document.querySelector('.experience');
+    const portalCanvas = document.getElementById('portal-canvas');
+    const portalCtx = portalCanvas.getContext('2d');
+    const sceneCanvas = document.getElementById('scene-canvas');
+    const sceneCtx = sceneCanvas.getContext('2d');
+
+    const portalBtn = document.getElementById('portal');
+    const portalVideo = document.getElementById('portal-video');
+    const portalImg = document.getElementById('portal-image');
+    const transitionVideo = document.getElementById('transition-video');
+
+    // 4. CANVAS RESIZE & DRAW COVER
+    function resizeCanvas() {
+      const d = Math.min(window.devicePixelRatio || 1, 2);
+      const w = window.innerWidth;
+      const h = window.innerHeight;
+
+      portalCanvas.width = w * d;
+      portalCanvas.height = h * d;
+      portalCanvas.style.width = w + 'px';
+      portalCanvas.style.height = h + 'px';
+      portalCtx.setTransform(d, 0, 0, d, 0, 0);
+
+      if (!hasFrozenScene) {
+        sceneCanvas.width = w * d;
+        sceneCanvas.height = h * d;
+        sceneCanvas.style.width = w + 'px';
+        sceneCanvas.style.height = h + 'px';
+        sceneCtx.setTransform(d, 0, 0, d, 0, 0);
+      }
+    }
+    window.addEventListener('resize', resizeCanvas, { passive: true });
+
+    function drawCover(ctx, media) {
+      if (!media) return;
+      const mw = media.videoWidth || media.naturalWidth || media.width || 1920;
+      const mh = media.videoHeight || media.naturalHeight || media.height || 1080;
+      if (!mw || !mh) return;
+
+      const scale = Math.max(window.innerWidth / mw, window.innerHeight / mh);
+      const w = mw * scale;
+      const h = mh * scale;
+      const x = (window.innerWidth - w) / 2;
+      const y = (window.innerHeight - h) / 2;
+      ctx.drawImage(media, x, y, w, h);
+    }
+
+    function drawShade(ctx) {
+      const grad = ctx.createLinearGradient(0, window.innerHeight * 0.52, 0, window.innerHeight);
+      grad.addColorStop(0, 'rgba(0,0,0,0)');
+      grad.addColorStop(1, 'rgba(0,0,0,0.88)');
+      ctx.fillStyle = grad;
+      ctx.fillRect(0, window.innerHeight * 0.52, window.innerWidth, window.innerHeight * 0.48);
+    }
+
+    // 5. POINTER TILT
+    window.addEventListener('pointermove', (e) => {
+      if (busy) return;
+      targetY = (e.clientX / window.innerWidth - 0.5) * 37.4;
+      targetX = (e.clientY / window.innerHeight - 0.5) * -33;
+    }, { passive: true });
+
+    window.addEventListener('pointerleave', () => {
+      targetX = 0;
+      targetY = 0;
+    });
+
+    // 6. ROUNDED RECT POINT SAMPLING & PERSPECTIVE PROJECTION
+    function sampleRoundedRect(w, h, r) {
+      r = Math.min(r, w / 2, h / 2);
+      const points = [];
+      const arcs = [
+        [ w / 2 - r, -h / 2 + r, -Math.PI / 2, 0 ],
+        [ w / 2 - r,  h / 2 - r, 0, Math.PI / 2 ],
+        [-w / 2 + r,  h / 2 - r, Math.PI / 2, Math.PI ],
+        [-w / 2 + r, -h / 2 + r, Math.PI, Math.PI * 1.5 ]
+      ];
+      for (let i = 0; i < 4; i++) {
+        const [cx, cy, a0, a1] = arcs[i];
+        for (let s = 0; s <= 10; s++) {
+          const a = a0 + (a1 - a0) * (s / 10);
+          points.push([cx + r * Math.cos(a), cy + r * Math.sin(a)]);
+        }
+      }
+      return points;
+    }
+
+    function projectPoints(points, cx, cy, rx, ry) {
+      const ax = rx * Math.PI / 180;
+      const ay = ry * Math.PI / 180;
+      const cosAx = Math.cos(ax), sinAx = Math.sin(ax);
+      const cosAy = Math.cos(ay), sinAy = Math.sin(ay);
+
+      return points.map(([x, y]) => {
+        const xx = x * cosAy;
+        const yy = y * cosAx;
+        const z = x * sinAy - y * sinAx;
+        const p = 850 / (850 + z);
+        return [cx + xx * p, cy + yy * p];
+      });
+    }
+
+    // 7. CANVAS FRAME LOOP
+    function draw(time) {
+      const dt = Math.min(40, time - (lastTime || time));
+      lastTime = time;
+
+      if (!busy) {
+        const factor = Math.min(1, dt * 0.009);
+        rotX += (targetX - rotX) * factor;
+        rotY += (targetY - rotY) * factor;
+      }
+
+      portalCtx.clearRect(0, 0, window.innerWidth, window.innerHeight);
+
+      if (hasFrozenScene) {
+        portalCtx.drawImage(sceneCanvas, 0, 0, window.innerWidth, window.innerHeight);
+        drawShade(portalCtx);
+      }
+
+      const rect = portalBtn.getBoundingClientRect();
+      const e = expansion;
+      const rectCx = rect.left + rect.width / 2;
+      const rectCy = rect.top + rect.height / 2;
+
+      const cx = rectCx + (window.innerWidth / 2 - rectCx) * e;
+      const cy = rectCy + (window.innerHeight / 2 - rectCy) * e;
+
+      const baseW = rect.width + (window.innerWidth - rect.width) * e;
+      const baseH = rect.height + (window.innerHeight - rect.height) * e;
+
+      const scale = e ? 1 : maskScale;
+      const w = baseW * scale;
+      const h = baseH * scale;
+
+      const r = 90 * (1 - e) * scale;
+      const rx = rotX * (1 - e);
+      const ry = rotY * (1 - e);
+
+      if (w > 1 && h > 1) {
+        const localPoints = sampleRoundedRect(w, h, r);
+        const screenPoints = projectPoints(localPoints, cx, cy, rx, ry);
+
+        portalCtx.save();
+        portalCtx.globalAlpha = canvasOpacity;
+        portalCtx.beginPath();
+        portalCtx.moveTo(screenPoints[0][0], screenPoints[0][1]);
+        for (let i = 1; i < screenPoints.length; i++) {
+          portalCtx.lineTo(screenPoints[i][0], screenPoints[i][1]);
+        }
+        portalCtx.closePath();
+        portalCtx.clip();
+
+        portalCtx.fillStyle = '#030303';
+        portalCtx.fillRect(0, 0, window.innerWidth, window.innerHeight);
+
+        const activeMedia = transitionActive ? transitionVideo : (states[current].image ? portalImg : portalVideo);
+        drawCover(portalCtx, activeMedia);
+
+        if (transitionActive) {
+          drawShade(portalCtx);
+        }
+
+        portalCtx.restore();
+      }
+
+      requestAnimationFrame(draw);
+    }
+
+    // 8. EASING & INTERPOLATION
+    function easeInOutCubic(t) {
+      return t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
+    }
+
+    function animateValue(setter, duration) {
+      return new Promise(resolve => {
+        const start = performance.now();
+        function frame(now) {
+          const elapsed = now - start;
+          const progress = Math.min(1, elapsed / duration);
+          setter(easeInOutCubic(progress));
+          if (progress < 1) {
+            requestAnimationFrame(frame);
+          } else {
+            resolve();
+          }
+        }
+        requestAnimationFrame(frame);
+      });
+    }
+
+    // 9. REVEAL & SWITCH DRIVERS
+    function revealMask() {
+      experience.classList.remove('mask-revealing');
+      void experience.offsetWidth;
+      experience.classList.add('mask-revealing');
+      maskScale = 0;
+      return animateValue(v => maskScale = v, 1050);
+    }
+
+    function revealPlanetContent() {
+      experience.classList.remove('content-revealing');
+      void experience.offsetWidth;
+      experience.classList.add('content-revealing');
+    }
+
+    // 10. TRAVEL TRANSITION (PORTAL CLICK)
+    async function travel() {
+      if (busy || current === 'venus') return;
+      busy = true;
+      targetX = 0; targetY = 0;
+
+      const next = current === 'mars' ? 'earth' : 'venus';
+      transitionVideo.src = states[current].portal;
+      transitionVideo.load();
+      experience.classList.add('is-loading');
+
+      await new Promise(resolve => {
+        let done = false;
+        const finishWait = () => { if (!done) { done = true; resolve(); } };
+        transitionVideo.addEventListener('canplaythrough', finishWait, { once: true });
+        transitionVideo.addEventListener('error', finishWait, { once: true });
+        setTimeout(finishWait, 1600);
+      });
+
+      experience.classList.remove('is-loading', 'content-revealing', 'mask-revealing');
+      experience.classList.add('is-transitioning');
+      transitionVideo.currentTime = 0;
+      transitionVideo.playbackRate = 1.3;
+      canvasOpacity = 1;
+      transitionActive = true;
+
+      try {
+        await transitionVideo.play();
+      } catch (err) {}
+
+      await animateValue(v => expansion = v, 1100);
+
+      await new Promise(resolve => {
+        transitionVideo.addEventListener('ended', resolve, { once: true });
+      });
+
+      // Freeze frame into sceneCanvas
+      sceneCtx.clearRect(0, 0, window.innerWidth, window.innerHeight);
+      drawCover(sceneCtx, transitionVideo);
+      hasFrozenScene = true;
+
+      current = next;
+      experience.classList.add('is-committing');
+      render();
+      await new Promise(r => requestAnimationFrame(() => requestAnimationFrame(r)));
+
+      transitionActive = false;
+      expansion = 0;
+      maskScale = 0;
+      canvasOpacity = 1;
+      experience.classList.remove('is-transitioning', 'is-committing');
+
+      const maskRevealPromise = revealMask();
+      setTimeout(revealPlanetContent, 100);
+      await maskRevealPromise;
+
+      setTimeout(() => {
+        transitionVideo.removeAttribute('src');
+        transitionVideo.load();
+        busy = false;
+        hasFrozenScene = false;
+      }, 450);
+    }
+
+    portalBtn.addEventListener('click', travel);
+
+    async function jumpToPlanet(targetPlanet) {
+      if (busy) return;
+      targetPlanet = targetPlanet.toLowerCase();
+      if (!states[targetPlanet]) {
+        showSeraphToast(`${targetPlanet.toUpperCase()} • DEEP SPACE EXTENSION IN PHASE 2`);
+        return;
+      }
+      if (targetPlanet === current) {
+        showSeraphToast(`${targetPlanet.toUpperCase()} • ORBIT CURRENTLY ACTIVE`);
+        return;
+      }
+      busy = true;
+      targetX = 0; targetY = 0;
+
+      const targetVideoSrc = (targetPlanet === 'mars') ? TO_MARS : (targetPlanet === 'venus' ? TO_VENUS : TO_EARTH);
+      transitionVideo.src = targetVideoSrc;
+      transitionVideo.load();
+      experience.classList.add('is-loading');
+
+      await new Promise(resolve => {
+        let done = false;
+        const finishWait = () => { if (!done) { done = true; resolve(); } };
+        transitionVideo.addEventListener('canplaythrough', finishWait, { once: true });
+        transitionVideo.addEventListener('error', finishWait, { once: true });
+        setTimeout(finishWait, 1500);
+      });
+
+      experience.classList.remove('is-loading', 'content-revealing', 'mask-revealing');
+      experience.classList.add('is-transitioning');
+      transitionVideo.currentTime = 0;
+      transitionVideo.playbackRate = 1.3;
+      canvasOpacity = 1;
+      transitionActive = true;
+
+      try {
+        await transitionVideo.play();
+      } catch (err) {}
+
+      await animateValue(v => expansion = v, 1000);
+
+      await new Promise(resolve => {
+        transitionVideo.addEventListener('ended', resolve, { once: true });
+      });
+
+      // Freeze frame into sceneCanvas
+      sceneCtx.clearRect(0, 0, window.innerWidth, window.innerHeight);
+      drawCover(sceneCtx, transitionVideo);
+      hasFrozenScene = true;
+
+      current = targetPlanet;
+      experience.classList.add('is-committing');
+      render();
+      await new Promise(r => requestAnimationFrame(() => requestAnimationFrame(r)));
+
+      transitionActive = false;
+      expansion = 0;
+      maskScale = 0;
+      canvasOpacity = 1;
+      experience.classList.remove('is-transitioning', 'is-committing');
+
+      const maskRevealPromise = revealMask();
+      setTimeout(revealPlanetContent, 100);
+      await maskRevealPromise;
+
+      showSeraphToast(`ORBIT REACHED: ${targetPlanet.toUpperCase()}`);
+
+      setTimeout(() => {
+        transitionVideo.removeAttribute('src');
+        transitionVideo.load();
+        busy = false;
+        hasFrozenScene = false;
+      }, 450);
+    }
+
+    function cyclePlanet() {
+      if (busy) return;
+      if (current === 'mars') jumpToPlanet('earth');
+      else if (current === 'earth') jumpToPlanet('venus');
+      else jumpToPlanet('mars');
+    }
+
+    function showSeraphToast(msg) {
+      const t = document.getElementById('seraph-toast');
+      if (!t) return;
+      t.textContent = msg;
+      t.classList.add('show');
+      clearTimeout(showSeraphToast.timer);
+      showSeraphToast.timer = setTimeout(() => t.classList.remove('show'), 2200);
+    }
+
+    // 11. DATA RENDER FUNCTION
+    function render() {
+      const state = states[current];
+      experience.setAttribute('data-planet', current);
+      document.getElementById('planet-title').textContent = state.name.toUpperCase();
+      document.getElementById('next-name').textContent = state.next;
+      document.getElementById('next-number').textContent = state.number;
+      portalBtn.setAttribute('aria-label', `Travel to ${state.next}`);
+
+      // #facts
+      const dl = document.getElementById('facts');
+      dl.innerHTML = state.facts.map(([k, v]) => `
+        <div class="fact">
+          <dt>${k}</dt>
+          <dd>${v}</dd>
+        </div>
+      `).join('');
+
+      // .planet-list
+      const listEl = document.querySelector('.planet-list');
+      listEl.innerHTML = planets.map(p => `
+        <span class="planet-item${p.toLowerCase() === state.name.toLowerCase() ? ' active' : ''}"
+              role="button"
+              tabindex="0"
+              aria-label="Orbit ${p}"
+              onclick="jumpToPlanet('${p.toLowerCase()}')"
+              onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();jumpToPlanet('${p.toLowerCase()}');}">${p}</span>
+      `).join('');
+
+      if (!isFirstRender) {
+        listEl.classList.remove('is-switching');
+        void listEl.offsetWidth;
+        listEl.classList.add('is-switching');
+      }
+
+      // Background video toggle
+      document.querySelectorAll('.backgrounds .background').forEach(bg => {
+        const isMatch = bg.id === state.background;
+        bg.classList.toggle('is-visible', isMatch);
+        if (isMatch) {
+          bg.currentTime = 0;
+          bg.play().catch(() => {});
+        } else {
+          bg.pause();
+        }
+      });
+
+      // Portal media
+      if (state.image) {
+        portalImg.style.visibility = 'hidden';
+        portalVideo.style.visibility = 'hidden';
+      } else {
+        if (portalVideo.getAttribute('src') !== state.portal) {
+          portalVideo.src = state.portal;
+          portalVideo.load();
+        }
+        portalVideo.play().catch(() => {});
+      }
+
+      isFirstRender = false;
+    }
+
+    // 12. PRELOADER DRIVER
+    function runPreloader() {
+      const preloaderVideo = document.getElementById('preloader-video');
+      const preloaderCount = document.getElementById('preloader-count');
+      const preloaderVal = document.getElementById('preloader-value');
+      const preloader = document.getElementById('preloader');
+      const floatingLogo = document.getElementById('floating-logo');
+
+      let finished = false;
+
+      function finish() {
+        if (finished) return;
+        finished = true;
+        preloaderVal.textContent = '100';
+        preloaderCount.classList.add('is-leaving');
+        floatingLogo.classList.add('is-docked');
+        preloader.classList.add('is-background');
+        document.body.classList.add('preload-complete');
+        startExperience();
+        setTimeout(() => {
+          if (preloaderCount && preloaderCount.parentNode) preloaderCount.remove();
+        }, 750);
+        setTimeout(() => {
+          floatingLogo.classList.add('is-settled');
+        }, 2000);
+      }
+
+      if (location.search.includes('skip_preload') || location.hash.includes('skip_preload')) {
+        finish();
+        return;
+      }
+
+      function updateProgress() {
+        if (finished) return;
+        if (preloaderVideo.duration) {
+          const pct = Math.min(99, Math.round((preloaderVideo.currentTime / preloaderVideo.duration) * 100));
+          preloaderVal.textContent = String(pct);
+        }
+        requestAnimationFrame(updateProgress);
+      }
+
+      preloaderVideo.addEventListener('loadedmetadata', () => {
+        preloaderVideo.playbackRate = Math.max(0.25, preloaderVideo.duration / 3);
+        const p = preloaderVideo.play();
+        if (p && typeof p.catch === 'function') {
+          p.catch(() => finish());
+        }
+        requestAnimationFrame(updateProgress);
+      });
+
+      preloaderVideo.addEventListener('ended', finish);
+      setTimeout(() => { if (!finished) finish(); }, 3800);
+    }
+
+    async function startExperience() {
+      const state = states[current];
+      const media = state.image ? portalImg : portalVideo;
+      if (media.tagName === 'VIDEO') {
+        try { await media.play(); } catch(e){}
+      }
+      await revealMask();
+      document.body.classList.add('intro-ready');
+      setTimeout(revealPlanetContent, 850);
+    }
+
+    // 13. CUSTOM CURSOR DRIVER
+    let cursorX = -100, cursorY = -100;
+    let orbitX = -100, orbitY = -100;
+    const customCursor = document.querySelector('.custom-cursor');
+    const cursorOrbit = document.querySelector('.cursor-orbit');
+
+    window.addEventListener('pointermove', (e) => {
+      cursorX = e.clientX;
+      cursorY = e.clientY;
+      if (!customCursor.classList.contains('is-visible')) {
+        customCursor.classList.add('is-visible');
+        orbitX = cursorX;
+        orbitY = cursorY;
+      }
+    }, { passive: true });
+
+    document.addEventListener('mouseleave', () => {
+      customCursor.classList.remove('is-visible');
+    });
+
+    portalBtn.addEventListener('pointerenter', () => {
+      customCursor.classList.add('is-enter');
+    });
+    portalBtn.addEventListener('pointerleave', () => {
+      customCursor.classList.remove('is-enter');
+    });
+
+    function cursorLoop() {
+      orbitX += (cursorX - orbitX) * 0.2;
+      orbitY += (cursorY - orbitY) * 0.2;
+      customCursor.style.transform = `translate3d(${cursorX}px, ${cursorY}px, 0)`;
+      cursorOrbit.style.transform = `translate3d(${orbitX - cursorX}px, ${orbitY - cursorY}px, 0) translate(-50%, -50%)`;
+      requestAnimationFrame(cursorLoop);
+    }
+
+    // 14. SERAPH BRIEFING MODAL CONTROLS
+    function openSeraphBriefing() {
+      const modal = document.getElementById('seraph-modal');
+      modal.classList.add('is-open');
+    }
+    function closeSeraphBriefing() {
+      const modal = document.getElementById('seraph-modal');
+      modal.classList.remove('is-open');
+      if (location.hash && (location.hash === '#about' || location.hash === '#explore' || location.hash === '#pitch')) {
+        history.replaceState(null, '', location.pathname + location.search);
+      }
+    }
+    window.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') closeSeraphBriefing();
+    });
+
+    function checkHash() {
+      const h = location.hash.toLowerCase();
+      if (h === '#about' || h === '#explore' || h === '#pitch' || h === '#briefing' || location.search.includes('modal=1')) {
+        openSeraphBriefing();
+      } else if (h === '#planets') {
+        cyclePlanet();
+      } else if (h === '#mars' || h === '#earth' || h === '#venus') {
+        jumpToPlanet(h.replace('#', ''));
+      }
+    }
+    window.addEventListener('hashchange', checkHash);
+    setTimeout(checkHash, 150);
+
+    // 15. BOOT ORDER
+    document.querySelectorAll('.backgrounds .background').forEach(v => {
+      v.pause();
+      v.currentTime = 0;
+    });
+    resizeCanvas();
+    render();
+    requestAnimationFrame(draw);
+    requestAnimationFrame(cursorLoop);
+    runPreloader();
+  </script>
+</body>
+</html>
