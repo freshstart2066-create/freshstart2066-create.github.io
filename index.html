@@ -455,10 +455,10 @@
         },
         cherub: {
           planetKey: 'venus',
-          eyebrow: 'DEEP SPACE &bull; PLANETARY MESH',
+          eyebrow: 'DEEP SPACE &bull; VENUSIAN PROBE MESH',
           name: 'CHERUB',
           still: 'https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260827_202133_cf55d1d8-7b59-4a64-80da-d72052ae974e.png',
-          lede: 'Next-generation planetary observation architecture, autonomous sensor mesh integration, <br>and extreme-environment deep-space atmospheric probe telemetry.'
+          lede: 'Coordinated Heterogeneous Environmental Reconnaissance Under-cloud Balloon &amp; Probe Mesh.<br>Autonomous aerostat super-rotation station-keeping, SiC avionics, and extreme-environment planetary observation.'
         },
         elyra: {
           planetKey: 'mars',
@@ -551,11 +551,14 @@
         const ctaBtn = document.getElementById('cta-button');
         if (ctaBtn) {
           if (next === 'seraph') {
-            ctaBtn.href = 'project-seraph.html';
+            ctaBtn.href = 'project-seraph.html#seraph';
             ctaBtn.textContent = 'EXPLORE SERAPH';
           } else if (next === 'elyra') {
             ctaBtn.href = 'main.html';
             ctaBtn.textContent = 'ENTER ELYRA AI';
+          } else if (next === 'cherub') {
+            ctaBtn.href = 'project-seraph.html#cherub';
+            ctaBtn.textContent = 'EXPLORE CHERUB';
           } else {
             ctaBtn.href = 'project-seraph.html';
             ctaBtn.textContent = 'VIEW MISSION C2';

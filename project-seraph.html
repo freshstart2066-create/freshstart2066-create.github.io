@@ -3,8 +3,8 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-  <title>SERAPH — Autonomous Aerospace Command & Control (C2) | Emmanuel Oyewole</title>
-  <meta name="description" content="SERAPH: Flagship Autonomous Aerospace Command & Control (C2), Real-Time SGP4 Orbital Propagation, Conjunction Matrix Tracking, and Interplanetary Telemetry Mesh by Emmanuel Oyewole.">
+  <title>SERAPH & CHERUB — Autonomous Aerospace C2 & Planetary Deep-Space Mesh | Emmanuel Oyewole</title>
+  <meta name="description" content="SERAPH & CHERUB: Flagship Autonomous Aerospace Command & Control (C2), Real-Time SGP4 Orbital Propagation, Venusian Aerostat Probe Mesh, and Interplanetary Telemetry by Emmanuel Oyewole.">
   <link rel="icon" type="image/svg+xml" href="https://d2ol7oe51mr4n9.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/eb7e0f53-50cd-4af5-abc4-8b9a52cdc01b.svg">
   
   <style>
@@ -76,7 +76,7 @@
     }
     .shade {
       z-index: 1;
-      background: linear-gradient(to bottom, transparent 52%, rgba(0,0,0,0.88) 100%);
+      background: linear-gradient(to bottom, transparent 48%, rgba(0, 0, 0, 0.92) 100%);
       pointer-events: none;
     }
     .chrome {
@@ -120,7 +120,7 @@
     .nav a {
       color: #fff;
       text-decoration: none;
-      padding: 8px 19px;
+      padding: 8px 18px;
       border-radius: 999px;
       line-height: 1;
       font-size: 14.5px;
@@ -168,6 +168,12 @@
       color: #fff;
       font-size: 12.5px;
       letter-spacing: 0.05em;
+      cursor: pointer;
+      transition: border-color 0.2s, background 0.2s;
+    }
+    .project-badge:hover {
+      border-color: rgba(121, 220, 232, 0.6);
+      background: rgba(14, 24, 38, 0.85);
     }
     .project-badge-dot {
       width: 8px;
@@ -196,9 +202,10 @@
       font-family: 'SF Pro', Arial, sans-serif;
       transition: color 0.2s, transform 0.2s;
       cursor: pointer;
+      outline: none;
     }
-    .planet-item:hover {
-      color: #fff;
+    .planet-item:hover, .planet-item:focus-visible {
+      color: #79dce8;
       transform: translateX(4px);
     }
     .planet-item.active {
@@ -269,19 +276,43 @@
       pointer-events: none;
     }
 
-    /* 5. CONTENT BOTTOM */
+    /* 5. CONTENT BOTTOM (ENHANCED PLANETARY MISSION DOSSIER) */
     .planet-content {
       left: clamp(28px, 4vw, 58px);
       right: clamp(28px, 3vw, 44px);
-      bottom: clamp(24px, 3vh, 30px);
+      bottom: clamp(24px, 3vh, 32px);
       display: flex;
       justify-content: space-between;
       align-items: flex-end;
-      gap: 40px;
+      gap: 36px;
+    }
+    .planet-headline {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 10px;
+    }
+    .mission-tag {
+      font-family: 'SF Pro', Arial, sans-serif;
+      font-size: 12.5px;
+      font-weight: 700;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: #79dce8;
+      padding: 5px 14px;
+      border-radius: 999px;
+      background: rgba(121, 220, 232, 0.12);
+      border: 1px solid rgba(121, 220, 232, 0.35);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      display: inline-block;
+      transform: translateX(-24px);
+      opacity: 0;
+      transition: opacity 0.45s ease, transform 0.45s ease;
     }
     .planet-content h1 {
       font-family: Aalto, 'Arial Narrow', sans-serif;
-      font-size: clamp(128px, 21.8vw, 314px);
+      font-size: clamp(100px, 18.5vw, 270px);
       font-weight: 400;
       line-height: 0.72;
       margin: 0 0 -0.04em;
@@ -291,17 +322,24 @@
       text-transform: uppercase;
       text-shadow: 0 10px 40px rgba(0, 0, 0, 0.4);
     }
+    .planet-dossier {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 12px;
+      margin-bottom: 4px;
+    }
     .planet-content dl {
-      width: min(447px, 34vw);
+      width: min(530px, 42vw);
       margin: 0;
-      font-size: 16px;
+      font-size: 15px;
     }
     .fact {
       display: grid;
-      grid-template-columns: 138px 1fr;
-      gap: 18px;
-      padding: 8px 0;
-      border-bottom: 1px solid rgba(255, 255, 255, 0.48);
+      grid-template-columns: 148px 1fr;
+      gap: 16px;
+      padding: 7px 0;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.32);
       opacity: 0;
     }
     .fact:last-child {
@@ -310,11 +348,37 @@
     .fact dt {
       font-weight: 700;
       color: #fff;
+      font-size: 13.5px;
+      letter-spacing: 0.02em;
     }
     .fact dd {
       margin: 0;
       color: #cfd9e4;
-      line-height: 1.35;
+      line-height: 1.4;
+      font-size: 14px;
+    }
+    .mission-dossier-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 22px;
+      border-radius: 999px;
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      cursor: pointer;
+      border: 1px solid rgba(121, 220, 232, 0.45);
+      background: rgba(121, 220, 232, 0.12);
+      color: #79dce8;
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      transition: background 0.2s, color 0.2s, transform 0.2s;
+      opacity: 0;
+    }
+    .mission-dossier-btn:hover {
+      background: #79dce8;
+      color: #030810;
+      transform: translateY(-2px);
     }
 
     /* 6. PRELOADER */
@@ -350,227 +414,189 @@
       z-index: 22;
       left: 50%;
       top: 50%;
-      width: 59px;
-      height: 58px;
+      width: 208px;
       transform: translate(-50%, -50%);
-      will-change: left, top, width, height, transform;
+      pointer-events: none;
       transition: left 2s cubic-bezier(0.16, 1, 0.3, 1),
                   top 2s cubic-bezier(0.16, 1, 0.3, 1),
                   width 2s cubic-bezier(0.16, 1, 0.3, 1),
-                  height 2s cubic-bezier(0.16, 1, 0.3, 1),
                   transform 2s cubic-bezier(0.16, 1, 0.3, 1);
     }
     .floating-logo.is-docked {
       left: clamp(18px, 1.95vw, 28px);
       top: clamp(18px, 3.1vh, 28px);
-      width: 37px;
-      height: 36px;
-      transform: none;
+      width: 32px;
+      transform: translate(0, 0);
+      pointer-events: auto;
+      cursor: pointer;
     }
     .floating-logo.is-settled {
-      z-index: 5;
+      position: absolute;
     }
 
     .preloader-count {
-      position: fixed;
-      z-index: 22;
+      position: absolute;
+      z-index: 21;
       left: 50%;
-      bottom: clamp(22px, 3.1vh, 28px);
-      display: flex;
-      align-items: flex-end;
-      gap: 4px;
-      transform: translateX(-50%);
-      font-family: 'SF Pro', Arial, sans-serif;
-      line-height: 1;
-    }
-    .preloader-count > span:first-child {
-      font-family: 'SF Pro Thin', 'SF Pro', Arial, sans-serif;
-      font-size: 64px;
+      top: 50%;
+      transform: translate(-50%, calc(-50% + 140px));
+      font-family: 'SF Pro Thin', Arial, sans-serif;
+      font-size: 58px;
       font-weight: 100;
-    }
-    .preloader-count .percent {
-      font-size: 24px;
-      padding-bottom: 4px;
+      letter-spacing: -0.04em;
+      opacity: 1;
+      transition: opacity 0.75s ease;
+      color: #fff;
     }
     .preloader-count.is-leaving {
-      animation: preload-count-out 0.75s cubic-bezier(0.22, 1, 0.36, 1) both;
+      opacity: 0;
     }
-    @keyframes preload-count-out {
-      to {
-        opacity: 0;
-        filter: blur(7px);
-        transform: translate(-50%, -34px);
-      }
-    }
-    body:not(.preload-complete) .custom-cursor {
-      opacity: 0 !important;
+    .preloader-count .percent {
+      font-size: 26px;
+      margin-left: 2px;
+      opacity: 0.7;
     }
 
-    /* 7. CUSTOM CURSOR */
-    html, body, button, a, .portal {
-      cursor: none !important;
+    .scene-canvas {
+      position: fixed;
+      inset: 0;
+      z-index: 2;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      display: none;
     }
+
+    /* 7. LOADING INDICATOR */
+    .loading {
+      position: fixed;
+      left: 50%;
+      bottom: 24px;
+      transform: translateX(-50%);
+      z-index: 6;
+      font-size: 14px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: #79dce8;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s ease;
+      font-weight: 600;
+    }
+    .experience.is-loading .loading {
+      opacity: 1;
+    }
+
+    /* 8. CUSTOM CURSOR */
     .custom-cursor {
-      display: block;
       position: fixed;
       left: 0;
       top: 0;
-      z-index: 100;
-      width: 1px;
-      height: 1px;
+      z-index: 50;
       pointer-events: none;
+      transform: translate3d(-100px, -100px, 0);
       opacity: 0;
-      transition: opacity 0.2s ease;
+      transition: opacity 0.25s ease;
     }
     .custom-cursor.is-visible {
       opacity: 1;
     }
-    .cursor-dot, .cursor-orbit {
+    .cursor-dot {
       position: absolute;
       left: 0;
       top: 0;
+      width: 10px;
+      height: 10px;
       border-radius: 50%;
+      background: #79dce8;
+      box-shadow: 0 0 10px #79dce8;
       transform: translate(-50%, -50%);
     }
-    .cursor-dot {
-      width: 12px;
-      height: 12px;
-      background: #fff;
-    }
     .cursor-orbit {
+      position: absolute;
+      left: 0;
+      top: 0;
       width: 36px;
       height: 36px;
-      border: 1px solid #fff;
-      background: rgba(255, 255, 255, 0.4);
-      transition: transform 0.3s cubic-bezier(0.22, 1, 0.36, 1);
-    }
-    .custom-cursor.is-enter .cursor-orbit {
-      transform: translate(-50%, -50%) scale(1.16);
+      border-radius: 50%;
+      border: 1px solid rgba(121, 220, 232, 0.6);
+      transform: translate(-50%, -50%);
+      transition: width 0.25s ease, height 0.25s ease, border-color 0.25s ease;
     }
     .cursor-label {
       position: absolute;
-      top: 26px;
-      left: 0;
-      transform: translateX(-50%) translateY(-4px);
-      font: 16px/1.2 'SF Pro', Arial, sans-serif;
+      left: 20px;
+      top: -10px;
+      font-size: 10.5px;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      font-weight: 700;
+      color: #79dce8;
       white-space: nowrap;
       opacity: 0;
-      transition: opacity 0.2s ease, transform 0.3s cubic-bezier(0.22, 1, 0.36, 1);
-      letter-spacing: 0.05em;
+      transition: opacity 0.2s ease;
+    }
+    .custom-cursor.is-enter .cursor-orbit {
+      width: 48px;
+      height: 48px;
+      border-color: #79dce8;
+      background: rgba(121, 220, 232, 0.1);
     }
     .custom-cursor.is-enter .cursor-label {
       opacity: 1;
-      transform: translateX(-50%) translateY(0);
     }
 
-    /* 8. ANIMATIONS & REVEAL */
-    body:not(.intro-ready) .header,
-    body:not(.intro-ready) .planet-list,
-    body:not(.intro-ready) .planet-content h1,
-    body:not(.intro-ready) .planet-content .fact {
-      opacity: 0;
-    }
-    .intro-ready .header {
-      animation: reveal-down 0.9s cubic-bezier(0.22, 1, 0.36, 1) 0.1s both;
-    }
-    .intro-ready .planet-list {
-      animation: reveal-side 0.9s cubic-bezier(0.22, 1, 0.36, 1) 0.65s both;
-    }
-    .content-revealing h1 {
-      animation: title-rise 1.05s cubic-bezier(0.16, 1, 0.3, 1) both;
-    }
-    .content-revealing .fact {
-      animation: fact-rise 0.72s cubic-bezier(0.22, 1, 0.36, 1) both;
-    }
-    .content-revealing .fact:nth-child(1) { animation-delay: 0.52s; }
-    .content-revealing .fact:nth-child(2) { animation-delay: 0.68s; }
-    .content-revealing .fact:nth-child(3) { animation-delay: 0.84s; }
-    .content-revealing .fact:nth-child(4) { animation-delay: 1.00s; }
-
-    .mask-revealing .portal-heading {
-      animation: portal-caption 0.85s cubic-bezier(0.22, 1, 0.36, 1) both;
-    }
-    .planet-list.is-switching .planet-item {
-      animation: menu-row 0.58s cubic-bezier(0.22, 1, 0.36, 1) both;
-    }
-    .planet-list.is-switching .planet-item:nth-child(1) { animation-delay: 0.02s; }
-    .planet-list.is-switching .planet-item:nth-child(2) { animation-delay: 0.05s; }
-    .planet-list.is-switching .planet-item:nth-child(3) { animation-delay: 0.08s; }
-    .planet-list.is-switching .planet-item:nth-child(4) { animation-delay: 0.11s; }
-    .planet-list.is-switching .planet-item:nth-child(5) { animation-delay: 0.14s; }
-    .planet-list.is-switching .planet-item:nth-child(6) { animation-delay: 0.17s; }
-    .planet-list.is-switching .planet-item:nth-child(7) { animation-delay: 0.20s; }
-    .planet-list.is-switching .planet-item:nth-child(8) { animation-delay: 0.23s; }
-    .planet-list.is-switching .planet-item.active:before {
-      animation: active-dot 0.55s cubic-bezier(0.22, 1, 0.36, 1) 0.18s both;
-    }
-
-    @keyframes reveal-down {
-      from { opacity: 0; filter: blur(8px); transform: translateY(-18px); }
-      to   { opacity: 1; filter: blur(0); transform: translateY(0); }
-    }
-    @keyframes reveal-side {
-      from { opacity: 0; filter: blur(8px); transform: translate(-20px, -43%); }
-      to   { opacity: 1; filter: blur(0); transform: translate(0, -43%); }
-    }
-    @keyframes title-rise {
-      from { opacity: 0; filter: blur(12px); transform: translate(-32px, 42px); }
-      to   { opacity: 1; filter: blur(0); transform: translate(-32px, 0); }
-    }
-    @keyframes fact-rise {
-      from { opacity: 0; filter: blur(7px); transform: translateY(18px); }
-      to   { opacity: 1; filter: blur(0); transform: translateY(0); }
-    }
-    @keyframes portal-caption {
-      from { opacity: 0; filter: blur(7px); transform: translateY(22px); }
-      to   { opacity: 1; filter: blur(0); transform: translateY(0); }
-    }
-    @keyframes menu-row {
-      from { opacity: 0.35; transform: translateX(-8px); }
-      to   { opacity: 1; transform: translateX(0); }
-    }
-    @keyframes active-dot {
-      from { opacity: 0; transform: scale(0); }
-      to   { opacity: 1; transform: scale(1); }
-    }
-
-    /* 9. MISC & TRANSITIONS */
-    .transition-layer { display: none; }
-    .scene-canvas { display: none; }
-    .loading {
-      position: absolute;
-      z-index: 12;
-      left: 50%;
-      bottom: 30px;
-      transform: translateX(-50%);
-      opacity: 0;
-      font-size: 12px;
-      letter-spacing: 0.14em;
-      text-transform: uppercase;
-      transition: opacity 0.2s;
-    }
-    .experience.is-loading .loading { opacity: 0.8; }
-    .experience.is-transitioning .header,
-    .experience.is-transitioning .planet-list {
+    /* 9. ENTRANCE & TRANSITION PHASES */
+    body.intro-ready .portal-heading {
       opacity: 1;
-      filter: none;
-      pointer-events: auto;
+      transition: opacity 0.6s ease;
     }
-    .experience.is-transitioning .shade { opacity: 1; }
-    .experience.is-committing .background { transition: none !important; }
+    .experience.content-revealing .planet-content h1,
+    body.intro-ready .planet-content h1 {
+      opacity: 1;
+      transform: translateX(0);
+      transition: opacity 0.75s cubic-bezier(0.16, 1, 0.3, 1), transform 0.75s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .experience.content-revealing .mission-tag,
+    body.intro-ready .mission-tag {
+      opacity: 1;
+      transform: translateX(0);
+    }
+    .experience.content-revealing .mission-dossier-btn,
+    body.intro-ready .mission-dossier-btn {
+      opacity: 1;
+      transition: opacity 0.65s ease 0.3s;
+    }
+    .experience.content-revealing .fact,
+    body.intro-ready .fact {
+      opacity: 1;
+      transition: opacity 0.65s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .experience.content-revealing .fact:nth-child(1), body.intro-ready .fact:nth-child(1) { transition-delay: 0.15s; }
+    .experience.content-revealing .fact:nth-child(2), body.intro-ready .fact:nth-child(2) { transition-delay: 0.25s; }
+    .experience.content-revealing .fact:nth-child(3), body.intro-ready .fact:nth-child(3) { transition-delay: 0.35s; }
+    .experience.content-revealing .fact:nth-child(4), body.intro-ready .fact:nth-child(4) { transition-delay: 0.45s; }
 
-    /* 10. PROJECT SERAPH ARCHITECTURAL BRIEFING DRAWER (BIGGEST PITCH) */
+    .planet-list.is-switching .planet-item {
+      animation: switchTwitch 0.45s ease;
+    }
+    @keyframes switchTwitch {
+      0% { opacity: 0.4; transform: translateX(-6px); }
+      100% { opacity: 1; transform: translateX(0); }
+    }
+
+    /* 10. ARCHITECTURAL BRIEFING DRAWER / MODAL */
     .seraph-modal {
       position: fixed;
       inset: 0;
-      z-index: 150;
+      z-index: 80;
+      background: rgba(3, 8, 16, 0.78);
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
       display: none;
-      background: rgba(3, 7, 14, 0.78);
-      backdrop-filter: blur(24px);
-      -webkit-backdrop-filter: blur(24px);
-      overflow-y: auto;
-      padding: clamp(20px, 4vh, 60px) clamp(20px, 4vw, 80px);
       opacity: 0;
+      overflow-y: auto;
+      padding: clamp(24px, 4vw, 56px) 20px;
       transition: opacity 0.3s ease;
     }
     .seraph-modal.is-open {
@@ -578,13 +604,13 @@
       opacity: 1;
     }
     .seraph-sheet {
-      max-width: 1040px;
+      max-width: 1060px;
       margin: 0 auto;
-      background: linear-gradient(145deg, rgba(16, 26, 42, 0.92), rgba(8, 14, 24, 0.96));
-      border: 1px solid rgba(121, 220, 232, 0.3);
+      background: linear-gradient(145deg, rgba(16, 26, 42, 0.94), rgba(8, 14, 24, 0.98));
+      border: 1px solid rgba(121, 220, 232, 0.35);
       border-radius: 28px;
       padding: clamp(24px, 4vw, 48px);
-      box-shadow: 0 24px 80px rgba(0, 0, 0, 0.6), inset 0 1px 0 rgba(255, 255, 255, 0.15);
+      box-shadow: 0 24px 80px rgba(0, 0, 0, 0.65), inset 0 1px 0 rgba(255, 255, 255, 0.15);
       position: relative;
     }
     .seraph-close {
@@ -609,6 +635,57 @@
       color: #000;
       transform: scale(1.05);
     }
+
+    /* MISSION SELECTOR TABS */
+    .mission-tabs {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 24px;
+      padding: 6px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid rgba(255, 255, 255, 0.14);
+      width: fit-content;
+    }
+    .mission-tab {
+      padding: 10px 22px;
+      border-radius: 999px;
+      border: 1px solid transparent;
+      background: transparent;
+      color: #9cb0c4;
+      cursor: pointer;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 2px;
+      transition: all 0.22s ease;
+      font-family: 'SF Pro', Arial, sans-serif;
+    }
+    .mission-tab span {
+      font-size: 13.5px;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+    }
+    .mission-tab small {
+      font-size: 10.5px;
+      opacity: 0.8;
+      letter-spacing: 0.02em;
+    }
+    .mission-tab:hover {
+      color: #fff;
+      background: rgba(255, 255, 255, 0.09);
+    }
+    .mission-tab.active {
+      background: #fff;
+      color: #050a12;
+      box-shadow: 0 4px 18px rgba(0, 0, 0, 0.4);
+    }
+    .mission-tab.active small {
+      color: #1a2a3a;
+      opacity: 0.95;
+    }
+
     .seraph-kicker {
       font-family: 'SF Pro', Arial, sans-serif;
       font-size: 12px;
@@ -630,8 +707,8 @@
       font-size: clamp(16px, 1.8vw, 19px);
       line-height: 1.55;
       color: #b8c8d8;
-      margin: 0 0 36px;
-      max-width: 860px;
+      margin: 0 0 32px;
+      max-width: 890px;
     }
 
     .seraph-grid {
@@ -672,9 +749,9 @@
       gap: 16px;
       padding: 24px;
       border-radius: 20px;
-      background: rgba(4, 9, 18, 0.85);
+      background: rgba(4, 9, 18, 0.88);
       border: 1px solid rgba(121, 220, 232, 0.25);
-      margin-bottom: 36px;
+      margin-bottom: 32px;
     }
     .hud-stat {
       padding: 12px;
@@ -764,22 +841,25 @@
     @media(max-width:900px){
       .nav { display: none; }
       .portal-wrap { width: min(300px, 48vw); }
-      .planet-content h1 { font-size: clamp(105px, 24vw, 190px); }
-      .planet-content dl { width: 43vw; }
-      .fact { grid-template-columns: 110px 1fr; }
+      .planet-content { flex-direction: column; align-items: flex-start; gap: 20px; }
+      .planet-content h1 { font-size: clamp(90px, 20vw, 170px); }
+      .planet-content dl { width: 100%; max-width: 500px; }
+      .fact { grid-template-columns: 120px 1fr; }
       .planet-list { font-size: 14px; }
       .planet-item.active { font-size: 16px; }
       .seraph-grid { grid-template-columns: 1fr; }
       .seraph-telemetry-hud { grid-template-columns: repeat(2, 1fr); }
+      .mission-tabs { border-radius: 18px; width: 100%; }
+      .mission-tab { width: 100%; }
     }
     @media(max-width:640px){
       .experience { min-height: 600px; }
       .planet-list { display: none; }
-      .portal-wrap { top: 44%; width: min(260px, 66vw); }
+      .portal-wrap { top: 40%; width: min(250px, 64vw); }
       .planet-content { left: 18px; right: 18px; bottom: 18px; display: block; }
-      .planet-content h1 { font-size: clamp(98px, 30vw, 160px); margin-bottom: 20px; }
+      .planet-content h1 { font-size: clamp(80px, 24vw, 140px); margin-bottom: 12px; }
       .planet-content dl { width: 100%; font-size: 13px; }
-      .fact { grid-template-columns: 92px 1fr; padding: 5px 0; }
+      .fact { grid-template-columns: 100px 1fr; padding: 4px 0; }
       .portal-heading { font-size: 14px; }
       .portal-heading strong { font-size: 16px; }
       .menu { height: 38px; }
@@ -809,7 +889,7 @@
       <div class="preloader-shade"></div>
     </div>
     
-    <img class="floating-logo" id="floating-logo" src="https://d2ol7oe51mr4n9.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/eb7e0f53-50cd-4af5-abc4-8b9a52cdc01b.svg" alt="SERAPH">
+    <img class="floating-logo" id="floating-logo" src="https://d2ol7oe51mr4n9.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/eb7e0f53-50cd-4af5-abc4-8b9a52cdc01b.svg" alt="SERAPH & CHERUB" onclick="openCurrentDossier()" title="Click for Mission Architecture Dossier">
     
     <div class="preloader-count" id="preloader-count" aria-live="polite">
       <span id="preloader-value">0</span><span class="percent">%</span>
@@ -820,19 +900,19 @@
 
     <!-- HEADER -->
     <header class="header chrome">
-      <a href="#about" class="project-badge" onclick="openSeraphBriefing(); return false;" aria-label="SERAPH Mission Architecture">
+      <a href="#about" class="project-badge" onclick="openSeraphBriefing('seraph'); return false;" aria-label="SERAPH Mission Architecture">
         <span class="project-badge-dot"></span>
         <span>SERAPH &bull; ORBITAL C2</span>
       </a>
 
       <div class="header-actions">
         <nav class="nav" aria-label="Primary navigation">
-          <a class="active" href="#about" onclick="openSeraphBriefing(); return false;">About</a>
-          <a href="#explore" onclick="openSeraphBriefing(); return false;">Explore</a>
+          <a class="active" href="#seraph" onclick="openSeraphBriefing('seraph'); return false;">SERAPH C2</a>
+          <a href="#cherub" onclick="openSeraphBriefing('cherub'); return false;">CHERUB Mesh</a>
           <a href="#planets" onclick="cyclePlanet(); return false;">Planets</a>
           <a href="main.html" aria-label="ELYRA Edge AI">ELYRA AI &rarr;</a>
         </nav>
-        <button class="menu" id="menu-btn" type="button" onclick="openSeraphBriefing()">Pitch</button>
+        <button class="menu" id="menu-btn" type="button" onclick="openCurrentDossier()">Dossier</button>
       </div>
     </header>
 
@@ -853,10 +933,18 @@
       </button>
     </section>
 
-    <!-- CONTENT -->
+    <!-- CONTENT (DYNAMIC MISSION DOSSIER FOR EACH PLANET) -->
     <section class="planet-content chrome" aria-live="polite">
-      <h1 id="planet-title">MARS</h1>
-      <dl id="facts"></dl>
+      <div class="planet-headline">
+        <div class="mission-tag" id="mission-tag">MISSION SYSTEMS &bull; ORBITAL C2</div>
+        <h1 id="planet-title">MARS</h1>
+      </div>
+      <div class="planet-dossier">
+        <dl id="facts"></dl>
+        <button class="mission-dossier-btn" id="dossier-btn" type="button" onclick="openCurrentDossier()">
+          <span id="dossier-btn-text">Inspect Mission Architecture Dossier</span> &rarr;
+        </button>
+      </div>
     </section>
 
     <div class="transition-layer" aria-hidden="true"><video id="transition-video" muted playsinline preload="auto"></video></div>
@@ -874,55 +962,30 @@
   </main>
 
   <!-- ============================================================== -->
-  <!-- PROJECT SERAPH ARCHITECTURAL BRIEFING DRAWER (BIGGEST PITCH) -->
+  <!-- MISSION ARCHITECTURAL BRIEFING DRAWER (SERAPH & CHERUB) -->
   <!-- ============================================================== -->
   <aside class="seraph-modal" id="seraph-modal" role="dialog" aria-modal="true" aria-labelledby="seraph-pitch-title" onclick="if(event.target===this)closeSeraphBriefing()">
     <div class="seraph-sheet">
-      <button class="seraph-close" type="button" onclick="closeSeraphBriefing()" aria-label="Close Seraph briefing">&times;</button>
+      <button class="seraph-close" type="button" onclick="closeSeraphBriefing()" aria-label="Close mission briefing">&times;</button>
       
-      <p class="seraph-kicker">MISSION SYSTEMS &bull; AUTONOMOUS AEROSPACE C2</p>
-      <h2 class="seraph-title" id="seraph-pitch-title">PROJECT SERAPH</h2>
-      <p class="seraph-lede">Autonomous orbital command &amp; control (C2), real-time SGP4/SDP4 satellite propagation, automated conjunction matrix avoidance, and interplanetary mesh telemetry streaming. Designed for sovereign space architectures, megaconstellations, and deep-space trajectory optimization.</p>
-
-      <!-- LIVE TELEMETRY MATRIX HUD -->
-      <div class="seraph-telemetry-hud">
-        <div class="hud-stat">
-          <div class="hud-label">ORBITAL VELOCITY</div>
-          <div class="hud-value" id="hud-vel">7.66 km/s</div>
-          <div class="hud-sub">LEO Nominal Vector</div>
-        </div>
-        <div class="hud-stat">
-          <div class="hud-label">APOGEE / PERIGEE</div>
-          <div class="hud-value">540 &times; 525 km</div>
-          <div class="hud-sub">Circularity: 99.8%</div>
-        </div>
-        <div class="hud-stat">
-          <div class="hud-label">CONJUNCTION RISK (Pc)</div>
-          <div class="hud-value" style="color:#22c55e;">2.1 &times; 10<sup>-7</sup></div>
-          <div class="hud-sub">&lt; 10<sup>-4</sup> Avoidance Floor</div>
-        </div>
-        <div class="hud-stat">
-          <div class="hud-label">DSN LINK MARGIN</div>
-          <div class="hud-value">+14.2 dB</div>
-          <div class="hud-sub">Ka-Band Carrier Lock</div>
-        </div>
+      <!-- MISSION SELECTOR TABS -->
+      <div class="mission-tabs" role="tablist" aria-label="Aerospace Mission Architecture Dossiers">
+        <button class="mission-tab active" id="tab-btn-seraph" type="button" role="tab" aria-selected="true" onclick="switchDossier('seraph')">
+          <span>🛰️ PROJECT SERAPH</span>
+          <small>Earth Orbital C2 &amp; SGP4</small>
+        </button>
+        <button class="mission-tab" id="tab-btn-cherub" type="button" role="tab" aria-selected="false" onclick="switchDossier('cherub')">
+          <span>🎈 PROJECT CHERUB</span>
+          <small>Venusian Atmospheric Mesh</small>
+        </button>
+        <button class="mission-tab" id="tab-btn-elyra" type="button" role="tab" aria-selected="false" onclick="switchDossier('elyra')">
+          <span>🤖 PROJECT ELYRA</span>
+          <small>Mars Tactical Edge AI</small>
+        </button>
       </div>
 
-      <!-- 3 CORE PILLARS OF SERAPH -->
-      <div class="seraph-grid">
-        <article class="seraph-box">
-          <h3>🛰️ SGP4 Analytical Propagation</h3>
-          <p>High-throughput orbit estimation processing over 100,000 resident space objects (RSOs). Implements WGS-84 oblate Earth J2/J3/J4 gravitational harmonics, Jacchia-Roberts atmospheric drag decay, and third-body lunisolar perturbations with SIMD vectorization.</p>
-        </article>
-        <article class="seraph-box">
-          <h3>⚡ Conjunction Matrix Triage</h3>
-          <p>Continuous screening against two-line element (TLE) and high-precision orbit ephemeris (OEM) message catalogs. Evaluates 3D covariance ellipsoids in radial/in-track/cross-track frames, triggering autonomous impulsive &Delta;v collision maneuvers.</p>
-        </article>
-        <article class="seraph-box">
-          <h3>🌌 Interplanetary Telemetry Mesh</h3>
-          <p>Resilient store-and-forward delay-tolerant networking (DTN) for interplanetary transits. Compensates for relativistic Doppler shifts, handles 4-to-20 minute light-time latency over Mars-Earth uplinks, and manages optical inter-satellite laser links (OISL).</p>
-        </article>
-      </div>
+      <!-- DYNAMIC DOSSIER CONTENT -->
+      <div id="dossier-content"></div>
 
       <div class="seraph-actions">
         <a class="seraph-btn primary" href="main.html">Inspect ELYRA Edge AI Companion &rarr;</a>
@@ -948,47 +1011,203 @@
     const MERCURY   = `${BASE}/d6fb8b6b-c15e-4aaa-9cf7-45bbb5e33372.jpg`;
     const LOGO      = `${BASE}/eb7e0f53-50cd-4af5-abc4-8b9a52cdc01b.svg`;
 
-    // 2. DATA MODEL
+    // 2. DATA MODEL & COMPREHENSIVE MISSION DOSSIERS
     const planets = ['Mercury', 'Venus', 'Earth', 'Mars', 'Jupiter', 'Saturn', 'Uranus', 'Neptune'];
+
+    const missionDossiers = {
+      seraph: {
+        kicker: 'MISSION SYSTEMS • AUTONOMOUS AEROSPACE C2',
+        title: 'PROJECT SERAPH',
+        lede: 'Autonomous orbital command & control (C2), real-time SGP4/SDP4 satellite propagation, automated conjunction matrix avoidance, and sovereign megaconstellation coordination. Designed for complex LEO, MEO, and GEO regimes with sub-millisecond propagation vectorization.',
+        hud: [
+          { label: 'ORBITAL VELOCITY', val: '7.66 km/s', sub: 'LEO Nominal Vector', color: '#79dce8' },
+          { label: 'APOGEE / PERIGEE', val: '540 × 525 km', sub: 'Circularity: 99.8%', color: '#79dce8' },
+          { label: 'CONJUNCTION RISK (Pc)', val: '2.1 × 10⁻⁷', sub: '< 10⁻⁴ Avoidance Floor', color: '#22c55e' },
+          { label: 'DSN LINK MARGIN', val: '+14.2 dB', sub: 'Ka-Band Carrier Lock', color: '#79dce8' }
+        ],
+        pillars: [
+          {
+            icon: '🛰️',
+            title: 'SGP4 Analytical Propagation',
+            desc: 'High-throughput orbit estimation processing over 100,000 resident space objects (RSOs). Implements WGS-84 oblate Earth J2/J3/J4 gravitational harmonics, Jacchia-Roberts atmospheric drag decay, and third-body lunisolar perturbations with SIMD vectorization.'
+          },
+          {
+            icon: '⚡',
+            title: 'Conjunction Matrix Triage',
+            desc: 'Continuous screening against two-line element (TLE) and high-precision orbit ephemeris (OEM) message catalogs. Evaluates 3D covariance ellipsoids in radial/in-track/cross-track frames, triggering autonomous impulsive Δv collision maneuvers.'
+          },
+          {
+            icon: '🌌',
+            title: 'Sovereign Constellation Management',
+            desc: 'Automated phase-keeping, cross-plane station-keeping, and RF slot deconfliction for sovereign megaconstellations in LEO, MEO, and GEO regimes without operator fatigue or cloud dependency.'
+          }
+        ]
+      },
+      cherub: {
+        kicker: 'DEEP-SPACE SYSTEMS • EXTREME ENVIRONMENT PROBE MESH',
+        title: 'PROJECT CHERUB',
+        lede: 'Coordinated Heterogeneous Environmental Reconnaissance Under-cloud Balloon & Probe Mesh. Designed for extreme-environment planetary observation, autonomous super-rotation aerostat station-keeping, and resilient delay-tolerant sensor networks in the dense Venusian atmosphere.',
+        hud: [
+          { label: 'FLOAT ALTITUDE LAYER', val: '54.2 km', sub: 'Temperate Cloud Zone (1.0 atm / 25 °C)', color: '#79dce8' },
+          { label: 'ZONAL SUPER-ROTATION', val: '360 km/h', sub: 'Zonal Wind Lock (96h Circumnavigation)', color: '#79dce8' },
+          { label: 'CORROSION SHIELDING', val: '99.98%', sub: 'Fluoropolymer / PBI Sulfuric Acid Barrier', color: '#22c55e' },
+          { label: 'LASER LINK MARGIN (OISL)', val: '+18.4 dB', sub: 'Orbiter Optical Relay Lock', color: '#79dce8' }
+        ],
+        pillars: [
+          {
+            icon: '🎈',
+            title: 'Aerostat Super-Rotation Dynamics',
+            desc: 'Autonomous altitude buoyancy trim using dual-chamber helium & phase-change gas reservoirs inside the benign 50–65 km cloud deck, riding Venus’s 4-day zonal super-rotation winds while sounding vertical wind shear.'
+          },
+          {
+            icon: '🛡️',
+            title: 'Silicon Carbide (SiC) Avionics',
+            desc: 'Radiation-hardened wide-bandgap SiC semiconductor logic and GaN power stages capable of deep descent probe deployments into 465 °C, 92 bar supercritical CO₂ and concentrated sulfuric acid haze layers.'
+          },
+          {
+            icon: '📡',
+            title: 'Delay-Tolerant Sensor Mesh',
+            desc: 'Decentralized acoustic, mass-spectrometric, and polarimetric sensor nodes communicating via optical inter-probe laser relays to high-apogee orbiters, utilizing delay-tolerant networking (DTN) to stream science telemetry to Earth.'
+          }
+        ]
+      },
+      elyra: {
+        kicker: 'TACTICAL EDGE AI • INTERPLANETARY OPERATIONAL AUTONOMY',
+        title: 'PROJECT ELYRA',
+        lede: 'Private, air-gapped on-device neural reasoning companion and distributed robotic formation controller. Operates with zero cloud latency under a strict 2.0 GB memory envelope during interplanetary transit and Martian surface operations.',
+        hud: [
+          { label: 'LIGHT-TIME DELAY (RTT)', val: '14.6 min', sub: 'Store-and-Forward DTN Buffer', color: '#79dce8' },
+          { label: 'ON-DEVICE INFERENCE', val: '38.2 tok/s', sub: 'Quantized Qwen 2.5 / Llama 3.2', color: '#79dce8' },
+          { label: 'SLIDING MEMORY BUDGET', val: '2,048 Tok', sub: 'FIFO Rolling Context / Zero OOM', color: '#22c55e' },
+          { label: 'FORMATION NODES', val: '6 Units', sub: 'Decentralized Mesh Healthy', color: '#79dce8' }
+        ],
+        pillars: [
+          {
+            icon: '⚡',
+            title: 'Local Quantized Model Routing',
+            desc: 'Adaptive thresholding between Qwen 2.5 3B (Q4_K_M) and Llama 3.2 1B (Q8_0) running on ARM64 NPU with zero cloud dependency and sub-50ms initial token latency.'
+          },
+          {
+            icon: '🧠',
+            title: 'Sliding-Window Token Memory',
+            desc: 'Bounded 2,048-token context buffer preserving mission commands while pruning older conversational turns to prevent mobile device out-of-memory (OOM) fatal crashes.'
+          },
+          {
+            icon: '📊',
+            title: 'Sensor Anomaly Telemetry Triage',
+            desc: 'Real-time rolling z-score monitoring of thermal dissipation, battery discharge curves, and RF carrier SNR, isolating hardware anomalies before telemetry failure.'
+          }
+        ]
+      }
+    };
 
     const states = {
       mars: {
         name: 'Mars',
+        missionTag: 'PROJECT ELYRA // TACTICAL EDGE AI',
+        dossierKey: 'elyra',
+        dossierBtnText: 'Inspect ELYRA Edge AI Dossier',
         next: 'Earth',
         number: '[03]',
         portal: TO_EARTH,
         background: 'mars-background',
         facts: [
-          ['Distance:', 'About 228 million km (1.5 astronomical units).'],
-          ['Year:', 'One Martian year is equal to 687 Earth days.'],
-          ['Temperature:', 'Around -60 °C, dropping to -125 °C at the poles in winter.'],
-          ['Atmosphere:', 'Very thin, consisting of 95% carbon dioxide, with frequent dust storms.']
+          ['Mission:', 'PROJECT ELYRA — Air-Gapped Edge AI & Surface Ops.'],
+          ['Inference:', 'Quantized Qwen 2.5 3B & Llama 3.2 1B (~38 tok/s).'],
+          ['Latency Buffer:', 'Store-and-Forward DTN (4 to 20 min light-time RTT).'],
+          ['Memory Guard:', '2,048-Token Sliding Buffer with FIFO turn eviction.']
         ]
       },
       earth: {
         name: 'Earth',
+        missionTag: 'PROJECT SERAPH // ORBITAL C2',
+        dossierKey: 'seraph',
+        dossierBtnText: 'Inspect SERAPH Mission Dossier',
         next: 'Venus',
         number: '[02]',
         portal: TO_VENUS,
         background: 'earth-background',
         facts: [
-          ['Distance:', '149.6 million km from the Sun.'],
-          ['Year:', '365.25 Earth days.'],
-          ['Temperature:', 'Average surface temperature around 15 °C.'],
-          ['Atmosphere:', 'Mostly nitrogen and oxygen, supporting life and liquid water.']
+          ['Mission:', 'PROJECT SERAPH — Autonomous Aerospace C2.'],
+          ['Propagation:', 'SGP4/SDP4 Analytical Vectorization (100k+ RSOs).'],
+          ['Hazard Floor:', 'Autonomous Conjunction Screening (Floor Pc < 10⁻⁴).'],
+          ['Physics Model:', 'WGS-84 J2/J3/J4 Oblate Harmonics & Jacchia Drag.']
         ]
       },
       venus: {
         name: 'Venus',
+        missionTag: 'PROJECT CHERUB // ATMOSPHERIC MESH',
+        dossierKey: 'cherub',
+        dossierBtnText: 'Inspect CHERUB Deep-Space Dossier',
         next: 'Mercury',
         number: '[06]',
         image: MERCURY,
         background: 'venus-background',
         facts: [
-          ['Distance:', '108.2 million km from the Sun.'],
-          ['Year:', '225 Earth days.'],
-          ['Temperature:', 'Around 465 °C — the hottest planet in the Solar System.'],
-          ['Atmosphere:', 'Extremely dense, mostly carbon dioxide, with clouds of sulfuric acid.']
+          ['Mission:', 'PROJECT CHERUB — Venusian Atmospheric Probe Mesh.'],
+          ['Platform:', 'Autonomous Super-Rotation Aerostat Drift Array.'],
+          ['Cloud Layer:', '50–65 km Temperate Sulfuric Acid Cloud Zone.'],
+          ['Avionics:', 'Radiation-Hardened High-Temp Silicon Carbide (SiC).']
+        ]
+      },
+      mercury: {
+        name: 'Mercury',
+        missionTag: 'PROJECT HERMES // RELATIVISTIC PROBE',
+        dossierKey: 'seraph',
+        dossierBtnText: 'Inspect Relativistic Gravimetry Dossier',
+        facts: [
+          ['Mission:', 'PROJECT HERMES — Solar Proximity Gravimetry.'],
+          ['Objective:', 'General Relativity Perihelion Precession Testing.'],
+          ['Thermal:', 'High-Flux Ceramic Heatshield (450 °C Solar Peak).'],
+          ['Power:', 'Thermoelectric Gradient Scavenging System.']
+        ]
+      },
+      jupiter: {
+        name: 'Jupiter',
+        missionTag: 'PROJECT ZEUS // JOVIAN RADIATION MESH',
+        dossierKey: 'cherub',
+        dossierBtnText: 'Inspect Jovian Sensor Mesh Dossier',
+        facts: [
+          ['Mission:', 'PROJECT ZEUS — Jovian Magnetosphere Probe Array.'],
+          ['Objective:', 'Radiation-Hardened In-Situ Jovian Moons Exploration.'],
+          ['Shielding:', 'Tantalum-Titanium Multilayer Radiation Enclosure.'],
+          ['Comms:', 'Deep-Space Ka-Band Phased Array Beamforming.']
+        ]
+      },
+      saturn: {
+        name: 'Saturn',
+        missionTag: 'PROJECT CRONUS // CRYOGENIC PLUME SAMPLER',
+        dossierKey: 'cherub',
+        dossierBtnText: 'Inspect Cryogenic Plume Dossier',
+        facts: [
+          ['Mission:', 'PROJECT CRONUS — Outer Solar System Explorer.'],
+          ['Target:', 'Enceladus Plume Sampler & Titan Subsurface Radar.'],
+          ['Propulsion:', 'Nuclear Electric Xenon Ion Thruster Array.'],
+          ['Sensors:', 'Cryogenic Mass Spectrometry & Bistatic SAR.']
+        ]
+      },
+      uranus: {
+        name: 'Uranus',
+        missionTag: 'PROJECT OURANOS // ICE GIANT PENETRATOR',
+        dossierKey: 'cherub',
+        dossierBtnText: 'Inspect Ice Giant Probe Dossier',
+        facts: [
+          ['Mission:', 'PROJECT OURANOS — Ice Giant Atmospheric Penetrator.'],
+          ['Atmosphere:', 'Supercritical Methane & Hydrogen Diamond Rain.'],
+          ['Aero-Shell:', 'Carbon-Phenolic High-Enthalpy Ablative Heatshield.'],
+          ['Relay:', 'Decentralized Optical Deep-Space Mesh.']
+        ]
+      },
+      neptune: {
+        name: 'Neptune',
+        missionTag: 'PROJECT POSEIDON // KUIPER GATEWAY',
+        dossierKey: 'seraph',
+        dossierBtnText: 'Inspect Kuiper Relay Dossier',
+        facts: [
+          ['Mission:', 'PROJECT POSEIDON — Kuiper Belt Relativistic Gateway.'],
+          ['Velocity:', 'Hyperbolic Solar Escape Vector (17.2 km/s).'],
+          ['Autonomy:', 'Deep Space Autonomous Optical Astrometry Nav.'],
+          ['Link:', 'Interstellar Laser Mesh Relay Node.']
         ]
       }
     };
@@ -1002,6 +1221,7 @@
     let transitionActive = false;
     let hasFrozenScene = false;
     let isFirstRender = true;
+    let activeDossier = 'seraph';
 
     // Pointer tilt
     let rotX = 0, rotY = 0;
@@ -1057,11 +1277,11 @@
     }
 
     function drawShade(ctx) {
-      const grad = ctx.createLinearGradient(0, window.innerHeight * 0.52, 0, window.innerHeight);
+      const grad = ctx.createLinearGradient(0, window.innerHeight * 0.48, 0, window.innerHeight);
       grad.addColorStop(0, 'rgba(0,0,0,0)');
-      grad.addColorStop(1, 'rgba(0,0,0,0.88)');
+      grad.addColorStop(1, 'rgba(0,0,0,0.92)');
       ctx.fillStyle = grad;
-      ctx.fillRect(0, window.innerHeight * 0.52, window.innerWidth, window.innerHeight * 0.48);
+      ctx.fillRect(0, window.innerHeight * 0.48, window.innerWidth, window.innerHeight * 0.52);
     }
 
     // 5. POINTER TILT
@@ -1271,6 +1491,8 @@
       setTimeout(revealPlanetContent, 100);
       await maskRevealPromise;
 
+      showSeraphToast(`ORBIT REACHED: ${next.toUpperCase()} • DOSSIER UPDATED`);
+
       setTimeout(() => {
         transitionVideo.removeAttribute('src');
         transitionVideo.load();
@@ -1281,7 +1503,8 @@
 
     portalBtn.addEventListener('click', travel);
 
-    async function jumpToPlanet(targetPlanet) {
+    // 11. DIRECT PLANETARY JUMP DRIVER
+    async function jumpToPlanet(targetPlanet, withTransition = true) {
       if (busy) return;
       targetPlanet = targetPlanet.toLowerCase();
       if (!states[targetPlanet]) {
@@ -1289,9 +1512,20 @@
         return;
       }
       if (targetPlanet === current) {
-        showSeraphToast(`${targetPlanet.toUpperCase()} • ORBIT CURRENTLY ACTIVE`);
+        openCurrentDossier();
         return;
       }
+
+      const isVideoPlanet = ['mars', 'earth', 'venus'].includes(targetPlanet);
+
+      if (!isVideoPlanet || !withTransition) {
+        current = targetPlanet;
+        render();
+        revealPlanetContent();
+        showSeraphToast(`ORBIT LOCKED: ${targetPlanet.toUpperCase()} • DOSSIER READY`);
+        return;
+      }
+
       busy = true;
       targetX = 0; targetY = 0;
 
@@ -1345,7 +1579,7 @@
       setTimeout(revealPlanetContent, 100);
       await maskRevealPromise;
 
-      showSeraphToast(`ORBIT REACHED: ${targetPlanet.toUpperCase()}`);
+      showSeraphToast(`ORBIT REACHED: ${targetPlanet.toUpperCase()} • DOSSIER READY`);
 
       setTimeout(() => {
         transitionVideo.removeAttribute('src');
@@ -1371,44 +1605,63 @@
       showSeraphToast.timer = setTimeout(() => t.classList.remove('show'), 2200);
     }
 
-    // 11. DATA RENDER FUNCTION
+    // 12. DATA RENDER FUNCTION
     function render() {
-      const state = states[current];
+      const state = states[current] || states.mars;
       experience.setAttribute('data-planet', current);
-      document.getElementById('planet-title').textContent = state.name.toUpperCase();
-      document.getElementById('next-name').textContent = state.next;
-      document.getElementById('next-number').textContent = state.number;
-      portalBtn.setAttribute('aria-label', `Travel to ${state.next}`);
+
+      const titleEl = document.getElementById('planet-title');
+      if (titleEl) titleEl.textContent = state.name.toUpperCase();
+
+      const tagEl = document.getElementById('mission-tag');
+      if (tagEl) tagEl.innerHTML = state.missionTag || 'MISSION SYSTEMS &bull; ORBITAL C2';
+
+      const dossierBtnText = document.getElementById('dossier-btn-text');
+      if (dossierBtnText) dossierBtnText.textContent = state.dossierBtnText || 'Inspect Mission Architecture Dossier';
+
+      const nextNameEl = document.getElementById('next-name');
+      if (nextNameEl && state.next) nextNameEl.textContent = state.next;
+
+      const nextNumEl = document.getElementById('next-number');
+      if (nextNumEl && state.number) nextNumEl.textContent = state.number;
+
+      if (portalBtn && state.next) {
+        portalBtn.setAttribute('aria-label', `Travel to ${state.next}`);
+      }
 
       // #facts
       const dl = document.getElementById('facts');
-      dl.innerHTML = state.facts.map(([k, v]) => `
-        <div class="fact">
-          <dt>${k}</dt>
-          <dd>${v}</dd>
-        </div>
-      `).join('');
+      if (dl && state.facts) {
+        dl.innerHTML = state.facts.map(([k, v]) => `
+          <div class="fact">
+            <dt>${k}</dt>
+            <dd>${v}</dd>
+          </div>
+        `).join('');
+      }
 
       // .planet-list
       const listEl = document.querySelector('.planet-list');
-      listEl.innerHTML = planets.map(p => `
-        <span class="planet-item${p.toLowerCase() === state.name.toLowerCase() ? ' active' : ''}"
-              role="button"
-              tabindex="0"
-              aria-label="Orbit ${p}"
-              onclick="jumpToPlanet('${p.toLowerCase()}')"
-              onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();jumpToPlanet('${p.toLowerCase()}');}">${p}</span>
-      `).join('');
+      if (listEl) {
+        listEl.innerHTML = planets.map(p => `
+          <span class="planet-item${p.toLowerCase() === state.name.toLowerCase() ? ' active' : ''}"
+                role="button"
+                tabindex="0"
+                aria-label="Orbit ${p}"
+                onclick="jumpToPlanet('${p.toLowerCase()}')"
+                onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();jumpToPlanet('${p.toLowerCase()}');}">${p}</span>
+        `).join('');
 
-      if (!isFirstRender) {
-        listEl.classList.remove('is-switching');
-        void listEl.offsetWidth;
-        listEl.classList.add('is-switching');
+        if (!isFirstRender) {
+          listEl.classList.remove('is-switching');
+          void listEl.offsetWidth;
+          listEl.classList.add('is-switching');
+        }
       }
 
       // Background video toggle
       document.querySelectorAll('.backgrounds .background').forEach(bg => {
-        const isMatch = bg.id === state.background;
+        const isMatch = state.background && bg.id === state.background;
         bg.classList.toggle('is-visible', isMatch);
         if (isMatch) {
           bg.currentTime = 0;
@@ -1422,7 +1675,7 @@
       if (state.image) {
         portalImg.style.visibility = 'hidden';
         portalVideo.style.visibility = 'hidden';
-      } else {
+      } else if (state.portal) {
         if (portalVideo.getAttribute('src') !== state.portal) {
           portalVideo.src = state.portal;
           portalVideo.load();
@@ -1433,7 +1686,7 @@
       isFirstRender = false;
     }
 
-    // 12. PRELOADER DRIVER
+    // 13. PRELOADER DRIVER
     function runPreloader() {
       const preloaderVideo = document.getElementById('preloader-video');
       const preloaderCount = document.getElementById('preloader-count');
@@ -1490,7 +1743,7 @@
     async function startExperience() {
       const state = states[current];
       const media = state.image ? portalImg : portalVideo;
-      if (media.tagName === 'VIDEO') {
+      if (media && media.tagName === 'VIDEO') {
         try { await media.play(); } catch(e){}
       }
       await revealMask();
@@ -1498,7 +1751,7 @@
       setTimeout(revealPlanetContent, 850);
     }
 
-    // 13. CUSTOM CURSOR DRIVER
+    // 14. CUSTOM CURSOR DRIVER
     let cursorX = -100, cursorY = -100;
     let orbitX = -100, orbitY = -100;
     const customCursor = document.querySelector('.custom-cursor');
@@ -1533,25 +1786,98 @@
       requestAnimationFrame(cursorLoop);
     }
 
-    // 14. SERAPH BRIEFING MODAL CONTROLS
-    function openSeraphBriefing() {
+    // 15. BRIEFING MODAL CONTROLS & DYNAMIC DOSSIERS
+    function switchDossier(key) {
+      if (!missionDossiers[key]) key = 'seraph';
+      activeDossier = key;
+
+      // Update tabs
+      ['seraph', 'cherub', 'elyra'].forEach(k => {
+        const btn = document.getElementById(`tab-btn-${k}`);
+        if (btn) {
+          const isActive = k === key;
+          btn.classList.toggle('active', isActive);
+          btn.setAttribute('aria-selected', String(isActive));
+        }
+      });
+
+      const d = missionDossiers[key];
+      const container = document.getElementById('dossier-content');
+      if (!container) return;
+
+      container.innerHTML = `
+        <p class="seraph-kicker">${d.kicker}</p>
+        <h2 class="seraph-title" id="seraph-pitch-title">${d.title}</h2>
+        <p class="seraph-lede">${d.lede}</p>
+
+        <!-- LIVE TELEMETRY MATRIX HUD -->
+        <div class="seraph-telemetry-hud">
+          ${d.hud.map(h => `
+            <div class="hud-stat">
+              <div class="hud-label">${h.label}</div>
+              <div class="hud-value" style="color:${h.color};">${h.val}</div>
+              <div class="hud-sub">${h.sub}</div>
+            </div>
+          `).join('')}
+        </div>
+
+        <!-- 3 CORE PILLARS -->
+        <div class="seraph-grid">
+          ${d.pillars.map(p => `
+            <article class="seraph-box">
+              <h3>${p.icon} ${p.title}</h3>
+              <p>${p.desc}</p>
+            </article>
+          `).join('')}
+        </div>
+      `;
+    }
+
+    function openSeraphBriefing(key) {
+      if (!key) {
+        key = states[current] && states[current].dossierKey ? states[current].dossierKey : 'seraph';
+      }
+      switchDossier(key);
       const modal = document.getElementById('seraph-modal');
       modal.classList.add('is-open');
     }
+
+    function openCurrentDossier() {
+      const key = states[current] && states[current].dossierKey ? states[current].dossierKey : 'seraph';
+      openSeraphBriefing(key);
+    }
+
     function closeSeraphBriefing() {
       const modal = document.getElementById('seraph-modal');
       modal.classList.remove('is-open');
-      if (location.hash && (location.hash === '#about' || location.hash === '#explore' || location.hash === '#pitch')) {
+      if (location.hash && (location.hash === '#about' || location.hash === '#explore' || location.hash === '#pitch' || location.hash === '#cherub' || location.hash === '#seraph')) {
         history.replaceState(null, '', location.pathname + location.search);
       }
     }
+
     window.addEventListener('keydown', (e) => {
       if (e.key === 'Escape') closeSeraphBriefing();
     });
 
     function checkHash() {
       const h = location.hash.toLowerCase();
-      if (h === '#about' || h === '#explore' || h === '#pitch' || h === '#briefing' || location.search.includes('modal=1')) {
+      const q = location.search.toLowerCase();
+
+      if (q.includes('planet=')) {
+        const pMatch = location.search.match(/planet=([a-z]+)/i);
+        if (pMatch && pMatch[1]) jumpToPlanet(pMatch[1].toLowerCase(), false);
+      }
+
+      if (h === '#cherub' || q.includes('mission=cherub')) {
+        jumpToPlanet('venus', false);
+        openSeraphBriefing('cherub');
+      } else if (h === '#seraph' || q.includes('mission=seraph')) {
+        jumpToPlanet('earth', false);
+        openSeraphBriefing('seraph');
+      } else if (h === '#elyra' || q.includes('mission=elyra')) {
+        jumpToPlanet('mars', false);
+        openSeraphBriefing('elyra');
+      } else if (h === '#about' || h === '#explore' || h === '#pitch' || h === '#briefing' || q.includes('modal=1')) {
         openSeraphBriefing();
       } else if (h === '#planets') {
         cyclePlanet();
@@ -1562,13 +1888,14 @@
     window.addEventListener('hashchange', checkHash);
     setTimeout(checkHash, 150);
 
-    // 15. BOOT ORDER
+    // 16. BOOT ORDER
     document.querySelectorAll('.backgrounds .background').forEach(v => {
       v.pause();
       v.currentTime = 0;
     });
     resizeCanvas();
     render();
+    switchDossier('seraph');
     requestAnimationFrame(draw);
     requestAnimationFrame(cursorLoop);
     runPreloader();

@@ -90,7 +90,31 @@ LOGO      = `${BASE}/eb7e0f53-50cd-4af5-abc4-8b9a52cdc01b.svg`;
 
 ---
 
-## ⚡ Flagship 2: Project ELYRA (`main.html`)
+## 🎈 Flagship 2: Project CHERUB (`project-seraph.html#cherub`)
+
+### 1. Vision & Planetary Deep-Space Mission
+**PROJECT CHERUB** (*Coordinated Heterogeneous Environmental Reconnaissance Under-cloud Balloon & Probe Mesh*) is an autonomous planetary exploration architecture designed for in-situ atmospheric science, extreme-environment sensor networking, and long-duration aerial sounding within the dense, corrosive atmosphere of Venus.
+
+### 2. Core Technical Pillars
+- **Aerostat Super-Rotation Station-Keeping**:
+  - Autonomous buoyancy altitude control utilizing dual-chamber helium and phase-change fluid bladders within the benign 50–65 km cloud layer (1.0 atm, 25 °C).
+  - Circumnavigates the planet along the 360 km/h zonal super-rotation wind streamlines every 96 Earth hours while profiling vertical shear gradients.
+- **Silicon Carbide (SiC) Extreme-Environment Avionics**:
+  - Radiation-hardened, wide-bandgap SiC semiconductor logic and Gallium Nitride (GaN) power conversion stages engineered to survive deep-descent atmospheric excursions into 465 °C, 92 bar supercritical $CO_2$.
+  - Multilayer fluoropolymer and polybenzimidazole (PBI) barrier coatings resistant to 96% concentrated sulfuric acid ($H_2SO_4$) aerosol clouds.
+- **Delay-Tolerant Optical & RF Sensor Mesh**:
+  - Multi-node aerostat and micro-probe cluster communicating via inter-platform optical laser links (OISL).
+  - Store-and-forward Delay-Tolerant Networking (DTN) streaming atmospheric chemistry, polarimetry, and acoustic infrasound seismology up to polar orbiters for deep-space relay to Earth's DSN.
+
+### 3. Planetary Telemetry Profile (Venus)
+- *Float Altitude Layer*: `54.2 km` (Temperate Cloud Zone / 1.0 atm / 25 °C)
+- *Zonal Super-Rotation*: `360 km/h` (Zonal Wind Lock / 96h Circumnavigation)
+- *Corrosion Shielding*: `99.98%` (Fluoropolymer / PBI Sulfuric Acid Barrier)
+- *Laser Link Margin (OISL)*: `+18.4 dB` (Orbiter Optical Relay Lock)
+
+---
+
+## ⚡ Flagship 3: Project ELYRA (`main.html`)
 
 ### 1. Vision & Architecture
 **ELYRA** is a private, air-gapped on-device Edge AI Companion designed for tactical Android devices, field terminals, and embedded edge nodes operating under constrained power and zero cloud connectivity.
