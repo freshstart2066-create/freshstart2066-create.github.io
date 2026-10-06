@@ -62,7 +62,19 @@
       position: relative;
     }
 
-    /* Ambient Background Canvas */
+    /* Ambient 3D WebGL Background Canvas */
+    #three-bg-canvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      z-index: 0;
+      pointer-events: none;
+      opacity: 0.85;
+    }
+
+    /* Ambient 2D Particle Canvas */
     #ambient-canvas {
       position: fixed;
       top: 0;
@@ -71,7 +83,7 @@
       height: 100vh;
       z-index: 0;
       pointer-events: none;
-      opacity: 0.65;
+      opacity: 0.35;
     }
 
     /* Interactive Spotlight Overlay */
@@ -80,7 +92,7 @@
       inset: 0;
       z-index: 1;
       pointer-events: none;
-      background: radial-gradient(800px circle at var(--mouse-x, 50vw) var(--mouse-y, 50vh), rgba(56, 189, 248, 0.06), transparent 80%);
+      background: radial-gradient(800px circle at var(--mouse-x, 50vw) var(--mouse-y, 50vh), rgba(56, 189, 248, 0.08), transparent 80%);
     }
 
     /* Header */
@@ -138,40 +150,49 @@
     .cmd-trigger {
       display: inline-flex;
       align-items: center;
-      gap: 0.4rem;
-      background: rgba(255, 255, 255, 0.05);
-      border: 1px solid var(--border);
-      color: var(--text-muted);
-      padding: 0.4rem 0.8rem;
-      border-radius: 6px;
-      font-size: 0.75rem;
+      gap: 0.5rem;
+      background: linear-gradient(135deg, rgba(30, 41, 59, 0.6) 0%, rgba(15, 23, 42, 0.8) 100%);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      color: var(--cyan);
+      padding: 0.5rem 0.95rem;
+      border-radius: 10px;
+      font-size: 0.78rem;
       font-family: var(--font-mono);
+      font-weight: 700;
       cursor: pointer;
-      transition: all 0.2s;
+      backdrop-filter: blur(16px) saturate(180%);
+      -webkit-backdrop-filter: blur(16px) saturate(180%);
+      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.4), inset 0 1px 1px 0 rgba(255, 255, 255, 0.25);
+      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
     }
     .cmd-trigger:hover {
-      border-color: var(--cyan);
-      color: var(--cyan);
-      box-shadow: 0 0 12px var(--cyan-glow);
+      border-color: rgba(56, 189, 248, 0.6);
+      color: #ffffff;
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(56, 189, 248, 0.35), 0 0 15px rgba(56, 189, 248, 0.2);
     }
     .btn-github {
       display: inline-flex;
       align-items: center;
       gap: 0.5rem;
-      background: linear-gradient(135deg, #1e293b, #0f172a);
-      border: 1px solid var(--border-bright);
-      color: var(--text);
-      padding: 0.45rem 1rem;
-      border-radius: 6px;
-      font-size: 0.82rem;
-      font-weight: 600;
+      background: linear-gradient(135deg, rgba(51, 65, 85, 0.75) 0%, rgba(15, 23, 42, 0.9) 100%);
+      border: 1px solid rgba(255, 255, 255, 0.22);
+      color: #ffffff;
+      padding: 0.5rem 1.15rem;
+      border-radius: 10px;
+      font-size: 0.84rem;
+      font-weight: 700;
       text-decoration: none;
-      transition: all 0.2s;
+      backdrop-filter: blur(16px) saturate(180%);
+      -webkit-backdrop-filter: blur(16px) saturate(180%);
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4), inset 0 1px 1px 0 rgba(255, 255, 255, 0.35);
+      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
     }
     .btn-github:hover {
-      border-color: var(--cyan);
+      border-color: rgba(56, 189, 248, 0.7);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(56, 189, 248, 0.4), 0 0 20px rgba(56, 189, 248, 0.25);
       color: var(--cyan);
-      transform: translateY(-1px);
     }
 
     /* Main Container */
@@ -447,35 +468,43 @@
       line-height: 1.4;
     }
 
-    /* Filter Controls */
+    /* Filter Controls - Liquid Glass Pills */
     .filter-bar {
       display: flex;
-      gap: 0.5rem;
+      gap: 0.65rem;
       flex-wrap: wrap;
       margin: 3.5rem 0 2rem;
-      padding-bottom: 1rem;
-      border-bottom: 1px solid var(--border);
+      padding-bottom: 1.25rem;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
     }
     .filter-btn {
-      background: transparent;
-      border: 1px solid var(--border);
+      background: linear-gradient(135deg, rgba(30, 41, 59, 0.5) 0%, rgba(15, 23, 42, 0.7) 100%);
+      border: 1px solid rgba(255, 255, 255, 0.12);
       color: var(--text-muted);
-      padding: 0.45rem 1.1rem;
-      border-radius: 20px;
+      padding: 0.5rem 1.2rem;
+      border-radius: 9999px;
       font-size: 0.82rem;
-      font-weight: 600;
+      font-weight: 700;
       cursor: pointer;
-      transition: all 0.2s;
+      backdrop-filter: blur(14px) saturate(160%);
+      -webkit-backdrop-filter: blur(14px) saturate(160%);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.35), inset 0 1px 1px 0 rgba(255, 255, 255, 0.15);
+      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
     }
     .filter-btn:hover {
-      border-color: var(--cyan);
-      color: var(--text);
+      border-color: rgba(56, 189, 248, 0.5);
+      color: #ffffff;
+      transform: translateY(-2px);
+      background: linear-gradient(135deg, rgba(51, 65, 85, 0.7) 0%, rgba(30, 41, 59, 0.85) 100%);
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.45), 0 0 15px rgba(56, 189, 248, 0.2);
     }
     .filter-btn.active {
-      background: var(--cyan);
-      color: #041220;
-      border-color: var(--cyan);
-      box-shadow: 0 0 16px var(--cyan-glow);
+      background: linear-gradient(135deg, #38bdf8 0%, #818cf8 100%);
+      color: #ffffff;
+      border-color: rgba(255, 255, 255, 0.5);
+      box-shadow: 0 6px 22px rgba(56, 189, 248, 0.5), inset 0 1px 2px rgba(255, 255, 255, 0.8);
+      text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+      transform: translateY(-1px);
     }
 
     /* Projects Grid with 3D Perspective */
@@ -623,34 +652,97 @@
       padding-top: 1.2rem;
       border-top: 1px solid rgba(255, 255, 255, 0.06);
     }
+    /* Prominent Liquid Glass Buttons */
     .btn {
       display: inline-flex;
       align-items: center;
-      gap: 0.4rem;
-      font-size: 0.82rem;
-      font-weight: 600;
-      padding: 0.5rem 1rem;
-      border-radius: 6px;
+      gap: 0.5rem;
+      font-size: 0.84rem;
+      font-weight: 700;
+      padding: 0.65rem 1.25rem;
+      border-radius: 12px;
       text-decoration: none;
       cursor: pointer;
-      border: none;
-      transition: all 0.2s;
+      position: relative;
+      overflow: hidden;
+      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+      letter-spacing: 0.02em;
+      border: 1px solid transparent;
+      user-select: none;
+      -webkit-user-select: none;
     }
     .btn-primary {
-      background: var(--cyan);
-      color: #030814;
+      background: linear-gradient(135deg, rgba(56, 189, 248, 0.92) 0%, rgba(14, 165, 233, 0.8) 50%, rgba(99, 102, 241, 0.9) 100%);
+      color: #ffffff;
+      border: 1px solid rgba(255, 255, 255, 0.45);
+      backdrop-filter: blur(16px) saturate(180%);
+      -webkit-backdrop-filter: blur(16px) saturate(180%);
+      box-shadow: 
+        0 8px 24px -4px rgba(56, 189, 248, 0.45),
+        0 2px 6px 0 rgba(0, 0, 0, 0.4),
+        inset 0 1px 1px 0 rgba(255, 255, 255, 0.7),
+        inset 0 -2px 4px 0 rgba(0, 0, 0, 0.2);
+      text-shadow: 0 1px 2px rgba(0, 0, 0, 0.35);
+    }
+    .btn-primary::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+      transition: left 0.6s ease;
     }
     .btn-primary:hover {
-      background: #7dd3fc;
-      box-shadow: 0 0 15px var(--cyan-glow);
+      transform: translateY(-2px) scale(1.02);
+      box-shadow: 
+        0 14px 32px -4px rgba(56, 189, 248, 0.65),
+        0 0 25px rgba(56, 189, 248, 0.45),
+        inset 0 1px 2px 0 rgba(255, 255, 255, 0.9);
+      border-color: rgba(255, 255, 255, 0.8);
+      color: #ffffff;
     }
+    .btn-primary:hover::before {
+      left: 100%;
+    }
+    .btn-primary:active {
+      transform: translateY(1px) scale(0.98);
+      box-shadow: 0 4px 12px rgba(56, 189, 248, 0.35), inset 0 2px 4px rgba(0, 0, 0, 0.3);
+    }
+
     .btn-secondary {
-      background: var(--bg-elevated);
+      background: linear-gradient(135deg, rgba(30, 41, 59, 0.75) 0%, rgba(15, 23, 42, 0.88) 100%);
       color: var(--text);
-      border: 1px solid var(--border);
+      border: 1px solid rgba(255, 255, 255, 0.18);
+      backdrop-filter: blur(16px) saturate(180%);
+      -webkit-backdrop-filter: blur(16px) saturate(180%);
+      box-shadow: 
+        0 4px 16px rgba(0, 0, 0, 0.5),
+        inset 0 1px 1px 0 rgba(255, 255, 255, 0.25);
+    }
+    .btn-secondary::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(56, 189, 248, 0.25), transparent);
+      transition: left 0.6s ease;
     }
     .btn-secondary:hover {
-      border-color: var(--text-muted);
+      transform: translateY(-2px) scale(1.02);
+      border-color: rgba(56, 189, 248, 0.5);
+      background: linear-gradient(135deg, rgba(51, 65, 85, 0.85) 0%, rgba(30, 41, 59, 0.95) 100%);
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.6), 0 0 18px rgba(56, 189, 248, 0.2);
+      color: #ffffff;
+    }
+    .btn-secondary:hover::before {
+      left: 100%;
+    }
+    .btn-secondary:active {
+      transform: translateY(1px) scale(0.98);
     }
 
     /* Interactive Command Modal */
@@ -928,7 +1020,8 @@
 </head>
 <body>
 
-  <!-- Ambient Animated Canvas -->
+  <!-- Ambient 3D WebGL Space Warp Canvas & Ambient Particle Canvas -->
+  <canvas id="three-bg-canvas"></canvas>
   <canvas id="ambient-canvas"></canvas>
   <div class="spotlight"></div>
 
@@ -1583,6 +1676,91 @@ Type one of the following commands:
   </footer>
 
   <script>
+    // 0. Ambient 3D WebGL Space Warp Field Engine (Three.js)
+    (function init3DBackground() {
+      const bgCanvas = document.getElementById('three-bg-canvas');
+      if (!bgCanvas || typeof THREE === 'undefined') return;
+
+      const bgScene = new THREE.Scene();
+      const bgCamera = new THREE.PerspectiveCamera(60, window.innerWidth / window.innerHeight, 1, 1000);
+      bgCamera.position.z = 1;
+
+      const bgRenderer = new THREE.WebGLRenderer({ canvas: bgCanvas, alpha: true, antialias: true });
+      bgRenderer.setSize(window.innerWidth, window.innerHeight);
+      bgRenderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+
+      // 1,200 3D Warp Stars
+      const starGeo = new THREE.BufferGeometry();
+      const starCount = 1200;
+      const positions = new Float32Array(starCount * 3);
+      const velocities = new Float32Array(starCount);
+
+      for (let i = 0; i < starCount * 3; i += 3) {
+        positions[i] = (Math.random() - 0.5) * 600;
+        positions[i + 1] = (Math.random() - 0.5) * 600;
+        positions[i + 2] = (Math.random() - 0.5) * 600;
+        velocities[i / 3] = 0.4 + Math.random() * 0.8;
+      }
+
+      starGeo.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+      const starMat = new THREE.PointsMaterial({
+        color: 0x38bdf8,
+        size: 1.4,
+        transparent: true,
+        opacity: 0.75,
+        blending: THREE.AdditiveBlending
+      });
+
+      const starField = new THREE.Points(starGeo, starMat);
+      bgScene.add(starField);
+
+      let scrollVelocity = 0;
+      let lastScrollY = window.scrollY;
+      window.addEventListener('scroll', () => {
+        const delta = Math.abs(window.scrollY - lastScrollY);
+        scrollVelocity = Math.min(delta * 0.15, 8.0);
+        lastScrollY = window.scrollY;
+      });
+
+      let mouseBg = { x: 0, y: 0 };
+      window.addEventListener('pointermove', (e) => {
+        mouseBg.x = (e.clientX / window.innerWidth - 0.5) * 0.5;
+        mouseBg.y = (e.clientY / window.innerHeight - 0.5) * 0.5;
+      });
+
+      function animate3DBG() {
+        requestAnimationFrame(animate3DBG);
+        scrollVelocity *= 0.92; // smooth decay
+
+        const pos = starGeo.attributes.position.array;
+        const currentSpeed = 0.5 + scrollVelocity;
+
+        for (let i = 0; i < starCount * 3; i += 3) {
+          pos[i + 2] += (velocities[i / 3] * currentSpeed);
+          if (pos[i + 2] > 200) {
+            pos[i + 2] = -400;
+            pos[i] = (Math.random() - 0.5) * 600;
+            pos[i + 1] = (Math.random() - 0.5) * 600;
+          }
+        }
+        starGeo.attributes.position.needsUpdate = true;
+
+        // Subtle camera tilt on mouse move
+        bgCamera.position.x += (mouseBg.x - bgCamera.position.x) * 0.05;
+        bgCamera.position.y += (-mouseBg.y - bgCamera.position.y) * 0.05;
+        bgCamera.lookAt(bgScene.position);
+
+        bgRenderer.render(bgScene, bgCamera);
+      }
+      animate3DBG();
+
+      window.addEventListener('resize', () => {
+        bgCamera.aspect = window.innerWidth / window.innerHeight;
+        bgCamera.updateProjectionMatrix();
+        bgRenderer.setSize(window.innerWidth, window.innerHeight);
+      });
+    })();
+
     // 1. Ambient Constellation / Particle Canvas Engine
     const canvas = document.getElementById('ambient-canvas');
     const ctx = canvas.getContext('2d');
