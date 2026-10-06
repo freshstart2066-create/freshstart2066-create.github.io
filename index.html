@@ -1205,18 +1205,54 @@
       <!-- Interactive Hero Showcase (ELYRA Mobile APK & 3D Holographic Studio) -->
       <div class="hero-interactive-card">
         
-        <!-- Showcase Mode Tabs -->
+        <!-- Showcase Mode Tabs (3D Spatial Studio First) -->
         <div class="showcase-nav-tabs">
-          <button class="showcase-tab-btn active" id="tab-elyra-btn" onclick="switchShowcaseTab('elyra')">
-            📱 ELYRA Mobile APK
-          </button>
-          <button class="showcase-tab-btn" id="tab-3d-btn" onclick="switchShowcaseTab('3d')">
+          <button class="showcase-tab-btn active" id="tab-3d-btn" onclick="switchShowcaseTab('3d')">
             🪐 3D Spatial Studio
+          </button>
+          <button class="showcase-tab-btn" id="tab-elyra-btn" onclick="switchShowcaseTab('elyra')">
+            📱 ELYRA Mobile APK
           </button>
         </div>
 
-        <!-- TAB 1: ELYRA Mobile Android APK Emulator -->
-        <div id="showcase-view-elyra">
+        <!-- TAB 1: 3D Holographic Spatial Matrix Viewport (Default First) -->
+        <div id="showcase-view-3d" style="display:block;">
+          <div class="phone-header">
+            <div class="phone-title">
+              <span>🪐 3D Spatial Matrix</span>
+              <span class="apk-badge" style="background:rgba(56,189,248,0.15); color:var(--cyan); border-color:rgba(56,189,248,0.3);">WebGL 60FPS</span>
+            </div>
+            <span style="font-size:0.75rem; color:var(--cyan); font-family:var(--font-mono);" id="hologram-fps-counter">● 60.0 FPS</span>
+          </div>
+
+          <!-- 3D WebGL Canvas Container -->
+          <div class="hologram-container" id="hologram-canvas-container">
+            <div class="hologram-hud-top">
+              <span id="hologram-target-label">TARGET: SGP4 ORBITAL SWARM</span>
+              <span id="hologram-quaternion">QUAT: [0.707, 0.000, 0.707, 0.000]</span>
+            </div>
+            <canvas id="three-hologram-canvas"></canvas>
+            <div class="hologram-hud-bottom">
+              <span class="hologram-hud-tag" id="hologram-poly-count">TRIANGLES: 1,420</span>
+              <span class="hologram-hud-tag">DRAG TO ROTATE 3D</span>
+            </div>
+          </div>
+
+          <!-- 3D Model Switcher -->
+          <div class="model-toggles">
+            <button class="model-btn active" id="btn-3d-orbit" onclick="switch3DScene('orbit')">🪐 Orbit Swarm</button>
+            <button class="model-btn" id="btn-3d-neural" onclick="switch3DScene('neural')">🧠 Neural Core</button>
+            <button class="model-btn" id="btn-3d-crypto" onclick="switch3DScene('crypto')">🔐 Merkle Prism</button>
+          </div>
+
+          <div style="margin-top:0.75rem; display:flex; gap:0.5rem;">
+            <button class="btn btn-primary" style="flex:1; justify-content:center;" onclick="pulse3DEnergyWave()">⚡ Pulse 3D Warp Field</button>
+            <button class="btn btn-secondary" onclick="reset3DCamera()">Reset View</button>
+          </div>
+        </div>
+
+        <!-- TAB 2: ELYRA Mobile Android APK Emulator -->
+        <div id="showcase-view-elyra" style="display:none;">
           <div class="phone-header">
             <div class="phone-title">
               <span>📱 ELYRA Android</span>
@@ -1255,42 +1291,6 @@
           <div style="margin-top:1rem; display:flex; gap:0.5rem;">
             <button class="btn btn-primary" style="flex:1; justify-content:center;" onclick="triggerElyraTriage()">⚡ Run Telemetry Triage</button>
             <a href="https://github.com/freshstart2066-create/elyra" target="_blank" class="btn btn-secondary">Source Code</a>
-          </div>
-        </div>
-
-        <!-- TAB 2: 3D Holographic Spatial Matrix Viewport -->
-        <div id="showcase-view-3d" style="display:none;">
-          <div class="phone-header">
-            <div class="phone-title">
-              <span>🪐 3D Spatial Matrix</span>
-              <span class="apk-badge" style="background:rgba(56,189,248,0.15); color:var(--cyan); border-color:rgba(56,189,248,0.3);">WebGL 60FPS</span>
-            </div>
-            <span style="font-size:0.75rem; color:var(--cyan); font-family:var(--font-mono);" id="hologram-fps-counter">● 60.0 FPS</span>
-          </div>
-
-          <!-- 3D WebGL Canvas Container -->
-          <div class="hologram-container" id="hologram-canvas-container">
-            <div class="hologram-hud-top">
-              <span id="hologram-target-label">TARGET: SGP4 ORBITAL SWARM</span>
-              <span id="hologram-quaternion">QUAT: [0.707, 0.000, 0.707, 0.000]</span>
-            </div>
-            <canvas id="three-hologram-canvas"></canvas>
-            <div class="hologram-hud-bottom">
-              <span class="hologram-hud-tag" id="hologram-poly-count">TRIANGLES: 1,420</span>
-              <span class="hologram-hud-tag">DRAG TO ROTATE 3D</span>
-            </div>
-          </div>
-
-          <!-- 3D Model Switcher -->
-          <div class="model-toggles">
-            <button class="model-btn active" id="btn-3d-orbit" onclick="switch3DScene('orbit')">🪐 Orbit Swarm</button>
-            <button class="model-btn" id="btn-3d-neural" onclick="switch3DScene('neural')">🧠 Neural Core</button>
-            <button class="model-btn" id="btn-3d-crypto" onclick="switch3DScene('crypto')">🔐 Merkle Prism</button>
-          </div>
-
-          <div style="margin-top:0.75rem; display:flex; gap:0.5rem;">
-            <button class="btn btn-primary" style="flex:1; justify-content:center;" onclick="pulse3DEnergyWave()">⚡ Pulse 3D Warp Field</button>
-            <button class="btn btn-secondary" onclick="reset3DCamera()">Reset View</button>
           </div>
         </div>
 
@@ -2377,6 +2377,13 @@ Type one of the following commands:
         renderer3D.render(scene3D, camera3D);
       }
       render3D(performance.now());
+    }
+
+    // Initialize 3D Spatial Studio immediately since it's the primary default view
+    if (document.readyState === 'loading') {
+      window.addEventListener('DOMContentLoaded', init3DStudio);
+    } else {
+      init3DStudio();
     }
 
     function on3DResize() {
