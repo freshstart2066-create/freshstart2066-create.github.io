@@ -16,6 +16,14 @@
   <!-- Favicon -->
   <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🛰️</text></svg>">
 
+  <!-- 3D Motion Engine (Three.js) -->
+  <script src="js/three.min.js"></script>
+  <script>
+    if (typeof THREE === 'undefined') {
+      document.write('<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"><\/script>');
+    }
+  </script>
+
   <style>
     :root {
       --bg: #050811;
@@ -258,6 +266,93 @@
       letter-spacing: 0.05em;
     }
 
+    /* Showcase Tabs in Hero */
+    .showcase-nav-tabs {
+      display: flex;
+      gap: 0.4rem;
+      background: rgba(5, 8, 17, 0.8);
+      padding: 0.3rem;
+      border-radius: 10px;
+      border: 1px solid var(--border);
+      margin-bottom: 1.25rem;
+    }
+    .showcase-tab-btn {
+      flex: 1;
+      background: transparent;
+      border: none;
+      color: var(--text-muted);
+      padding: 0.45rem 0.6rem;
+      font-size: 0.78rem;
+      font-family: var(--font-mono);
+      font-weight: 600;
+      border-radius: 7px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.4rem;
+      transition: all 0.2s ease;
+    }
+    .showcase-tab-btn.active {
+      background: var(--bg-elevated);
+      color: var(--cyan);
+      border: 1px solid rgba(56, 189, 248, 0.35);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+    }
+
+    /* 3D Holographic Spatial Matrix Viewport */
+    .hologram-container {
+      position: relative;
+      width: 100%;
+      height: 220px;
+      background: radial-gradient(circle at center, rgba(14, 28, 54, 0.85) 0%, rgba(5, 8, 17, 0.98) 85%);
+      border: 1px solid rgba(56, 189, 248, 0.25);
+      border-radius: 12px;
+      overflow: hidden;
+      margin-bottom: 1rem;
+      cursor: grab;
+      box-shadow: inset 0 0 25px rgba(56, 189, 248, 0.1);
+    }
+    .hologram-container:active {
+      cursor: grabbing;
+    }
+    #three-hologram-canvas {
+      width: 100%;
+      height: 100%;
+      display: block;
+    }
+    .hologram-hud-top {
+      position: absolute;
+      top: 8px;
+      left: 12px;
+      right: 12px;
+      display: flex;
+      justify-content: space-between;
+      pointer-events: none;
+      font-family: var(--font-mono);
+      font-size: 0.68rem;
+      color: var(--cyan);
+      text-shadow: 0 0 8px rgba(56, 189, 248, 0.7);
+    }
+    .hologram-hud-bottom {
+      position: absolute;
+      bottom: 8px;
+      left: 12px;
+      right: 12px;
+      display: flex;
+      justify-content: space-between;
+      pointer-events: none;
+      font-family: var(--font-mono);
+      font-size: 0.65rem;
+      color: var(--text-dim);
+    }
+    .hologram-hud-tag {
+      background: rgba(5, 8, 17, 0.75);
+      padding: 0.15rem 0.45rem;
+      border-radius: 4px;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
     /* ELYRA Mobile Phone Interactive Showcase */
     .hero-interactive-card {
       background: var(--bg-surface);
@@ -267,6 +362,7 @@
       box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6), 0 0 30px rgba(56, 189, 248, 0.1);
       position: relative;
       overflow: hidden;
+      perspective: 1000px;
     }
     .phone-header {
       display: flex;
@@ -382,11 +478,12 @@
       box-shadow: 0 0 16px var(--cyan-glow);
     }
 
-    /* Projects Grid */
+    /* Projects Grid with 3D Perspective */
     .projects-grid {
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(380px, 1fr));
       gap: 1.75rem;
+      perspective: 1200px;
     }
     .project-card {
       background: var(--bg-surface);
@@ -396,9 +493,11 @@
       display: flex;
       flex-direction: column;
       justify-content: space-between;
-      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+      transition: transform 0.1s ease-out, box-shadow 0.25s ease, border-color 0.25s ease;
       position: relative;
       overflow: hidden;
+      transform-style: preserve-3d;
+      will-change: transform;
     }
     .project-card::before {
       content: "";
@@ -406,7 +505,7 @@
       inset: 0;
       border-radius: 16px;
       padding: 1px;
-      background: radial-gradient(400px circle at var(--card-x, 0px) var(--card-y, 0px), rgba(56, 189, 248, 0.4), transparent 70%);
+      background: radial-gradient(400px circle at var(--card-x, 0px) var(--card-y, 0px), rgba(56, 189, 248, 0.45), transparent 70%);
       -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
       -webkit-mask-composite: xor;
       mask-composite: exclude;
@@ -418,9 +517,8 @@
       opacity: 1;
     }
     .project-card:hover {
-      transform: translateY(-6px);
-      border-color: rgba(56, 189, 248, 0.4);
-      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5), 0 0 25px rgba(56, 189, 248, 0.15);
+      border-color: rgba(56, 189, 248, 0.5);
+      box-shadow: 0 25px 50px -10px rgba(0, 0, 0, 0.7), 0 0 30px rgba(56, 189, 248, 0.2);
     }
     .project-card.featured {
       grid-column: span 2;
@@ -431,6 +529,18 @@
       .project-card.featured {
         grid-column: span 1;
       }
+    }
+
+    .project-card .card-top,
+    .project-card .card-desc,
+    .project-card .key-features,
+    .project-card .tech-tags,
+    .project-card .card-actions {
+      transform: translateZ(20px);
+      transform-style: preserve-3d;
+    }
+    .project-card .badge {
+      transform: translateZ(30px);
     }
 
     .card-top {
@@ -875,47 +985,98 @@
         </div>
       </div>
 
-      <!-- ELYRA Android Mobile Interactive Emulator -->
+      <!-- Interactive Hero Showcase (ELYRA Mobile APK & 3D Holographic Studio) -->
       <div class="hero-interactive-card">
-        <div class="phone-header">
-          <div class="phone-title">
-            <span>📱 ELYRA Mobile</span>
-            <span class="apk-badge">Android APK</span>
+        
+        <!-- Showcase Mode Tabs -->
+        <div class="showcase-nav-tabs">
+          <button class="showcase-tab-btn active" id="tab-elyra-btn" onclick="switchShowcaseTab('elyra')">
+            📱 ELYRA Mobile APK
+          </button>
+          <button class="showcase-tab-btn" id="tab-3d-btn" onclick="switchShowcaseTab('3d')">
+            🪐 3D Spatial Studio
+          </button>
+        </div>
+
+        <!-- TAB 1: ELYRA Mobile Android APK Emulator -->
+        <div id="showcase-view-elyra">
+          <div class="phone-header">
+            <div class="phone-title">
+              <span>📱 ELYRA Android</span>
+              <span class="apk-badge">ARM64 APK</span>
+            </div>
+            <span style="font-size:0.75rem; color:var(--emerald); font-family:var(--font-mono);">● ON-DEVICE</span>
           </div>
-          <span style="font-size:0.75rem; color:var(--emerald); font-family:var(--font-mono);">● ON-DEVICE</span>
-        </div>
 
-        <p style="font-size:0.8rem; color:var(--text-muted); margin-bottom:0.75rem;">
-          Autonomous Edge AI &amp; Telemetry Triage Engine with on-device quantized model routing (Qwen, Llama on Ollama / GGUF).
-        </p>
+          <p style="font-size:0.8rem; color:var(--text-muted); margin-bottom:0.75rem;">
+            Autonomous Edge AI &amp; Telemetry Triage Engine with on-device quantized model routing (Qwen, Llama on Ollama / GGUF).
+          </p>
 
-        <!-- Live Waveform -->
-        <div class="live-visualizer" id="audio-visualizer">
-          <!-- 16 dynamic waveform bars -->
-          <div class="wave-bar"></div><div class="wave-bar"></div><div class="wave-bar"></div><div class="wave-bar"></div>
-          <div class="wave-bar"></div><div class="wave-bar"></div><div class="wave-bar"></div><div class="wave-bar"></div>
-          <div class="wave-bar"></div><div class="wave-bar"></div><div class="wave-bar"></div><div class="wave-bar"></div>
-          <div class="wave-bar"></div><div class="wave-bar"></div><div class="wave-bar"></div><div class="wave-bar"></div>
-        </div>
+          <!-- Live Waveform -->
+          <div class="live-visualizer" id="audio-visualizer">
+            <!-- 16 dynamic waveform bars -->
+            <div class="wave-bar"></div><div class="wave-bar"></div><div class="wave-bar"></div><div class="wave-bar"></div>
+            <div class="wave-bar"></div><div class="wave-bar"></div><div class="wave-bar"></div><div class="wave-bar"></div>
+            <div class="wave-bar"></div><div class="wave-bar"></div><div class="wave-bar"></div><div class="wave-bar"></div>
+            <div class="wave-bar"></div><div class="wave-bar"></div><div class="wave-bar"></div><div class="wave-bar"></div>
+          </div>
 
-        <!-- Model Selectors -->
-        <div class="model-toggles">
-          <button class="model-btn active" onclick="switchMobileModel('qwen')">Qwen 2.5 (3B)</button>
-          <button class="model-btn" onclick="switchMobileModel('llama')">Llama 3.2 (GGUF)</button>
-          <button class="model-btn" onclick="switchMobileModel('cloud')">Cloud API</button>
-        </div>
+          <!-- Model Selectors -->
+          <div class="model-toggles">
+            <button class="model-btn active" onclick="switchMobileModel('qwen')">Qwen 2.5 (3B)</button>
+            <button class="model-btn" onclick="switchMobileModel('llama')">Llama 3.2 (GGUF)</button>
+            <button class="model-btn" onclick="switchMobileModel('cloud')">Cloud API</button>
+          </div>
 
-        <!-- Terminal Output -->
-        <div class="terminal-output" id="elyra-terminal">[ELYRA_RUNTIME: ACTIVE]
+          <!-- Terminal Output -->
+          <div class="terminal-output" id="elyra-terminal">[ELYRA_RUNTIME: ACTIVE]
 • Target: Android ARM64 APK
 • Token Buffer: 2,048 (Sliding-Window)
 • Telemetry Triage: Nominal (0 Anomaly)
 • Voice DSP Synthesizer: Ready</div>
 
-        <div style="margin-top:1rem; display:flex; gap:0.5rem;">
-          <button class="btn btn-primary" style="flex:1; justify-content:center;" onclick="triggerElyraTriage()">⚡ Run Telemetry Triage</button>
-          <a href="https://github.com/freshstart2066-create/elyra" target="_blank" class="btn btn-secondary">Source Code</a>
+          <div style="margin-top:1rem; display:flex; gap:0.5rem;">
+            <button class="btn btn-primary" style="flex:1; justify-content:center;" onclick="triggerElyraTriage()">⚡ Run Telemetry Triage</button>
+            <a href="https://github.com/freshstart2066-create/elyra" target="_blank" class="btn btn-secondary">Source Code</a>
+          </div>
         </div>
+
+        <!-- TAB 2: 3D Holographic Spatial Matrix Viewport -->
+        <div id="showcase-view-3d" style="display:none;">
+          <div class="phone-header">
+            <div class="phone-title">
+              <span>🪐 3D Spatial Matrix</span>
+              <span class="apk-badge" style="background:rgba(56,189,248,0.15); color:var(--cyan); border-color:rgba(56,189,248,0.3);">WebGL 60FPS</span>
+            </div>
+            <span style="font-size:0.75rem; color:var(--cyan); font-family:var(--font-mono);" id="hologram-fps-counter">● 60.0 FPS</span>
+          </div>
+
+          <!-- 3D WebGL Canvas Container -->
+          <div class="hologram-container" id="hologram-canvas-container">
+            <div class="hologram-hud-top">
+              <span id="hologram-target-label">TARGET: SGP4 ORBITAL SWARM</span>
+              <span id="hologram-quaternion">QUAT: [0.707, 0.000, 0.707, 0.000]</span>
+            </div>
+            <canvas id="three-hologram-canvas"></canvas>
+            <div class="hologram-hud-bottom">
+              <span class="hologram-hud-tag" id="hologram-poly-count">TRIANGLES: 1,420</span>
+              <span class="hologram-hud-tag">DRAG TO ROTATE 3D</span>
+            </div>
+          </div>
+
+          <!-- 3D Model Switcher -->
+          <div class="model-toggles">
+            <button class="model-btn active" id="btn-3d-orbit" onclick="switch3DScene('orbit')">🪐 Orbit Swarm</button>
+            <button class="model-btn" id="btn-3d-neural" onclick="switch3DScene('neural')">🧠 Neural Core</button>
+            <button class="model-btn" id="btn-3d-crypto" onclick="switch3DScene('crypto')">🔐 Merkle Prism</button>
+          </div>
+
+          <div style="margin-top:0.75rem; display:flex; gap:0.5rem;">
+            <button class="btn btn-primary" style="flex:1; justify-content:center;" onclick="pulse3DEnergyWave()">⚡ Pulse 3D Warp Field</button>
+            <button class="btn btn-secondary" onclick="reset3DCamera()">Reset View</button>
+          </div>
+        </div>
+
       </div>
     </section>
 
@@ -1642,6 +1803,328 @@ Type one of the following commands:
         }
       }, 700);
     }
+
+    // 7. Showcase Tab Switcher (ELYRA vs 3D Spatial Studio)
+    function switchShowcaseTab(tab) {
+      const elyraView = document.getElementById('showcase-view-elyra');
+      const view3D = document.getElementById('showcase-view-3d');
+      const tabElyraBtn = document.getElementById('tab-elyra-btn');
+      const tab3DBtn = document.getElementById('tab-3d-btn');
+
+      if (tab === 'elyra') {
+        elyraView.style.display = 'block';
+        view3D.style.display = 'none';
+        tabElyraBtn.classList.add('active');
+        tab3DBtn.classList.remove('active');
+      } else {
+        elyraView.style.display = 'none';
+        view3D.style.display = 'block';
+        tabElyraBtn.classList.remove('active');
+        tab3DBtn.classList.add('active');
+        if (typeof init3DStudio === 'function') {
+          init3DStudio();
+        }
+        if (typeof on3DResize === 'function') {
+          setTimeout(on3DResize, 50);
+        }
+      }
+    }
+
+    // 8. Three.js 3D Holographic Spatial Engine
+    let scene3D, camera3D, renderer3D;
+    let orbitGroup, neuralGroup, cryptoGroup;
+    let current3DMode = 'orbit';
+    let is3DDragging = false;
+    let prev3DMouse = { x: 0, y: 0 };
+    let targetRotation = { x: 0.3, y: 0.4 };
+    let currentRotation = { x: 0.3, y: 0.4 };
+    let satelliteMesh, orbitRing;
+    let lastTime = performance.now(), frameCount = 0;
+    let is3DInitialized = false;
+
+    function init3DStudio() {
+      if (is3DInitialized) return;
+      const canvas = document.getElementById('three-hologram-canvas');
+      const container = document.getElementById('hologram-canvas-container');
+      if (!canvas || !container || typeof THREE === 'undefined') return;
+
+      is3DInitialized = true;
+
+      // Scene, Camera, Renderer
+      scene3D = new THREE.Scene();
+      camera3D = new THREE.PerspectiveCamera(45, container.clientWidth / container.clientHeight, 0.1, 1000);
+      camera3D.position.z = 4.8;
+
+      renderer3D = new THREE.WebGLRenderer({ canvas: canvas, alpha: true, antialias: true });
+      renderer3D.setSize(container.clientWidth, container.clientHeight);
+      renderer3D.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+
+      // Ambient & Directional Lights
+      const ambientLight = new THREE.AmbientLight(0x38bdf8, 0.8);
+      scene3D.add(ambientLight);
+
+      const pointLight = new THREE.PointLight(0x818cf8, 2, 50);
+      pointLight.position.set(5, 5, 5);
+      scene3D.add(pointLight);
+
+      // --- 1. ORBIT GROUP (SGP4 Astrodynamics) ---
+      orbitGroup = new THREE.Group();
+      
+      // Wireframe Earth Sphere
+      const earthGeo = new THREE.SphereGeometry(1.2, 24, 24);
+      const earthMat = new THREE.MeshBasicMaterial({ color: 0x38bdf8, wireframe: true, transparent: true, opacity: 0.35 });
+      const earthMesh = new THREE.Mesh(earthGeo, earthMat);
+      orbitGroup.add(earthMesh);
+
+      // Inner Core Glow
+      const coreGeo = new THREE.SphereGeometry(1.0, 16, 16);
+      const coreMat = new THREE.MeshBasicMaterial({ color: 0x0284c7, transparent: true, opacity: 0.25 });
+      orbitGroup.add(new THREE.Mesh(coreGeo, coreMat));
+
+      // Orbit Ring
+      const ringGeo = new THREE.TorusGeometry(1.9, 0.015, 16, 100);
+      const ringMat = new THREE.MeshBasicMaterial({ color: 0x38bdf8, transparent: true, opacity: 0.7 });
+      orbitRing = new THREE.Mesh(ringGeo, ringMat);
+      orbitRing.rotation.x = Math.PI / 3;
+      orbitGroup.add(orbitRing);
+
+      // Satellite Mesh
+      const satGeo = new THREE.BoxGeometry(0.12, 0.12, 0.12);
+      const satMat = new THREE.MeshBasicMaterial({ color: 0x22c55e });
+      satelliteMesh = new THREE.Mesh(satGeo, satMat);
+
+      // Solar Panels
+      const panelGeo = new THREE.BoxGeometry(0.35, 0.02, 0.08);
+      const panelMat = new THREE.MeshBasicMaterial({ color: 0x38bdf8 });
+      satelliteMesh.add(new THREE.Mesh(panelGeo, panelMat));
+      orbitGroup.add(satelliteMesh);
+
+      // Swarm Particle Nodes
+      const swarmGeo = new THREE.BufferGeometry();
+      const swarmCount = 40;
+      const swarmPos = new Float32Array(swarmCount * 3);
+      for (let i = 0; i < swarmCount * 3; i += 3) {
+        const theta = Math.random() * Math.PI * 2;
+        const phi = Math.acos(Math.random() * 2 - 1);
+        const rad = 1.6 + Math.random() * 0.5;
+        swarmPos[i] = rad * Math.sin(phi) * Math.cos(theta);
+        swarmPos[i + 1] = rad * Math.sin(phi) * Math.sin(theta);
+        swarmPos[i + 2] = rad * Math.cos(phi);
+      }
+      swarmGeo.setAttribute('position', new THREE.BufferAttribute(swarmPos, 3));
+      const swarmMat = new THREE.PointsMaterial({ color: 0x818cf8, size: 0.05, transparent: true, opacity: 0.8 });
+      orbitGroup.add(new THREE.Points(swarmGeo, swarmMat));
+
+      scene3D.add(orbitGroup);
+
+      // --- 2. NEURAL GROUP (ELYRA Quantum Synapse) ---
+      neuralGroup = new THREE.Group();
+      neuralGroup.visible = false;
+
+      const icoGeo = new THREE.IcosahedronGeometry(1.3, 1);
+      const icoMat = new THREE.MeshBasicMaterial({ color: 0xa855f7, wireframe: true, transparent: true, opacity: 0.5 });
+      const icoMesh = new THREE.Mesh(icoGeo, icoMat);
+      neuralGroup.add(icoMesh);
+
+      const innerIcoGeo = new THREE.IcosahedronGeometry(0.8, 0);
+      const innerIcoMat = new THREE.MeshBasicMaterial({ color: 0x38bdf8, wireframe: true, transparent: true, opacity: 0.8 });
+      neuralGroup.add(new THREE.Mesh(innerIcoGeo, innerIcoMat));
+
+      // Synapse Floating Nodes
+      const synGeo = new THREE.BufferGeometry();
+      const synCount = 80;
+      const synPos = new Float32Array(synCount * 3);
+      for (let i = 0; i < synCount * 3; i += 3) {
+        synPos[i] = (Math.random() - 0.5) * 3;
+        synPos[i + 1] = (Math.random() - 0.5) * 3;
+        synPos[i + 2] = (Math.random() - 0.5) * 3;
+      }
+      synGeo.setAttribute('position', new THREE.BufferAttribute(synPos, 3));
+      const synMat = new THREE.PointsMaterial({ color: 0x34d399, size: 0.045, transparent: true, opacity: 0.9 });
+      neuralGroup.add(new THREE.Points(synGeo, synMat));
+
+      scene3D.add(neuralGroup);
+
+      // --- 3. CRYPTO GROUP (OPAP Merkle Prism) ---
+      cryptoGroup = new THREE.Group();
+      cryptoGroup.visible = false;
+
+      const dodecaGeo = new THREE.DodecahedronGeometry(1.2, 0);
+      const dodecaMat = new THREE.MeshBasicMaterial({ color: 0x10b981, wireframe: true, transparent: true, opacity: 0.6 });
+      const dodecaMesh = new THREE.Mesh(dodecaGeo, dodecaMat);
+      cryptoGroup.add(dodecaMesh);
+
+      const ringOuterGeo = new THREE.TorusGeometry(1.7, 0.02, 16, 60);
+      const ringOuterMat = new THREE.MeshBasicMaterial({ color: 0x818cf8, transparent: true, opacity: 0.65 });
+      const ring1 = new THREE.Mesh(ringOuterGeo, ringOuterMat);
+      ring1.rotation.y = Math.PI / 4;
+      cryptoGroup.add(ring1);
+
+      const ring2 = new THREE.Mesh(ringOuterGeo, ringOuterMat);
+      ring2.rotation.x = Math.PI / 3;
+      cryptoGroup.add(ring2);
+
+      scene3D.add(cryptoGroup);
+
+      // Mouse Drag Controls
+      container.addEventListener('mousedown', (e) => {
+        is3DDragging = true;
+        prev3DMouse = { x: e.clientX, y: e.clientY };
+      });
+      window.addEventListener('mouseup', () => { is3DDragging = false; });
+      window.addEventListener('mousemove', (e) => {
+        if (!is3DDragging) return;
+        const dx = e.clientX - prev3DMouse.x;
+        const dy = e.clientY - prev3DMouse.y;
+        targetRotation.y += dx * 0.008;
+        targetRotation.x += dy * 0.008;
+        prev3DMouse = { x: e.clientX, y: e.clientY };
+      });
+
+      // Touch Drag
+      container.addEventListener('touchstart', (e) => {
+        if (e.touches.length === 1) {
+          is3DDragging = true;
+          prev3DMouse = { x: e.touches[0].clientX, y: e.touches[0].clientY };
+        }
+      });
+      window.addEventListener('touchend', () => { is3DDragging = false; });
+      window.addEventListener('touchmove', (e) => {
+        if (!is3DDragging || e.touches.length !== 1) return;
+        const dx = e.touches[0].clientX - prev3DMouse.x;
+        const dy = e.touches[0].clientY - prev3DMouse.y;
+        targetRotation.y += dx * 0.01;
+        targetRotation.x += dy * 0.01;
+        prev3DMouse = { x: e.touches[0].clientX, y: e.touches[0].clientY };
+      });
+
+      // Render Loop
+      function render3D(time) {
+        requestAnimationFrame(render3D);
+
+        // FPS Calculation
+        frameCount++;
+        if (time - lastTime >= 1000) {
+          const fps = ((frameCount * 1000) / (time - lastTime)).toFixed(1);
+          const fpsEl = document.getElementById('hologram-fps-counter');
+          if (fpsEl) fpsEl.textContent = `● ${fps} FPS`;
+          frameCount = 0;
+          lastTime = time;
+        }
+
+        // Auto-rotation & damping
+        if (!is3DDragging) {
+          targetRotation.y += 0.006;
+        }
+        currentRotation.x += (targetRotation.x - currentRotation.x) * 0.08;
+        currentRotation.y += (targetRotation.y - currentRotation.y) * 0.08;
+
+        const activeGroup = current3DMode === 'orbit' ? orbitGroup : (current3DMode === 'neural' ? neuralGroup : cryptoGroup);
+        if (activeGroup) {
+          activeGroup.rotation.x = currentRotation.x;
+          activeGroup.rotation.y = currentRotation.y;
+
+          // Update Quaternion Telemetry HUD
+          const qEl = document.getElementById('hologram-quaternion');
+          if (qEl && activeGroup.quaternion) {
+            qEl.textContent = `QUAT: [${activeGroup.quaternion.w.toFixed(2)}, ${activeGroup.quaternion.x.toFixed(2)}, ${activeGroup.quaternion.y.toFixed(2)}, ${activeGroup.quaternion.z.toFixed(2)}]`;
+          }
+        }
+
+        // Orbit satellite motion
+        if (satelliteMesh && current3DMode === 'orbit') {
+          const t = time * 0.0018;
+          const r = 1.9;
+          satelliteMesh.position.x = r * Math.cos(t);
+          satelliteMesh.position.y = r * Math.sin(t) * Math.cos(Math.PI / 3);
+          satelliteMesh.position.z = r * Math.sin(t) * Math.sin(Math.PI / 3);
+          satelliteMesh.rotation.y = t * 2;
+        }
+
+        renderer3D.render(scene3D, camera3D);
+      }
+      render3D(performance.now());
+    }
+
+    function on3DResize() {
+      const container = document.getElementById('hologram-canvas-container');
+      if (renderer3D && camera3D && container) {
+        camera3D.aspect = container.clientWidth / container.clientHeight;
+        camera3D.updateProjectionMatrix();
+        renderer3D.setSize(container.clientWidth, container.clientHeight);
+      }
+    }
+    window.addEventListener('resize', on3DResize);
+
+    function switch3DScene(mode) {
+      current3DMode = mode;
+      document.querySelectorAll('#showcase-view-3d .model-btn').forEach(btn => btn.classList.remove('active'));
+      const activeBtn = document.getElementById(`btn-3d-${mode}`);
+      if (activeBtn) activeBtn.classList.add('active');
+
+      if (orbitGroup) orbitGroup.visible = (mode === 'orbit');
+      if (neuralGroup) neuralGroup.visible = (mode === 'neural');
+      if (cryptoGroup) cryptoGroup.visible = (mode === 'crypto');
+
+      const targetLabel = document.getElementById('hologram-target-label');
+      const polyCount = document.getElementById('hologram-poly-count');
+
+      if (mode === 'orbit') {
+        if (targetLabel) targetLabel.textContent = "TARGET: SGP4 ORBITAL SWARM";
+        if (polyCount) polyCount.textContent = "TRIANGLES: 1,420";
+      } else if (mode === 'neural') {
+        if (targetLabel) targetLabel.textContent = "TARGET: QUANTUM NEURAL SYNAPSE";
+        if (polyCount) polyCount.textContent = "SYNAPSE NODES: 80";
+      } else {
+        if (targetLabel) targetLabel.textContent = "TARGET: OPAP MERKLE PRISM";
+        if (polyCount) polyCount.textContent = "HEX FACETS: 12";
+      }
+    }
+
+    function pulse3DEnergyWave() {
+      const activeGroup = current3DMode === 'orbit' ? orbitGroup : (current3DMode === 'neural' ? neuralGroup : cryptoGroup);
+      if (!activeGroup) return;
+
+      let scale = 1.0;
+      let growing = true;
+      const pulseInterval = setInterval(() => {
+        if (growing) {
+          scale += 0.05;
+          if (scale >= 1.25) growing = false;
+        } else {
+          scale -= 0.04;
+          if (scale <= 1.0) {
+            scale = 1.0;
+            clearInterval(pulseInterval);
+          }
+        }
+        activeGroup.scale.set(scale, scale, scale);
+      }, 25);
+    }
+
+    function reset3DCamera() {
+      targetRotation = { x: 0.3, y: 0.4 };
+      if (camera3D) camera3D.position.z = 4.8;
+    }
+
+    // 9. Interactive 3D Card Parallax Physics
+    document.querySelectorAll('.project-card').forEach(card => {
+      card.addEventListener('mousemove', (e) => {
+        const rect = card.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
+        const centerX = rect.width / 2;
+        const centerY = rect.height / 2;
+        const rotateX = -((y - centerY) / centerY) * 7.5;
+        const rotateY = ((x - centerX) / centerX) * 7.5;
+
+        card.style.transform = `perspective(1000px) rotateX(${rotateX.toFixed(2)}deg) rotateY(${rotateY.toFixed(2)}deg) scale3d(1.02, 1.02, 1.02)`;
+      });
+
+      card.addEventListener('mouseleave', () => {
+        card.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)';
+      });
+    });
   </script>
 </body>
 </html>
