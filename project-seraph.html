@@ -322,63 +322,158 @@
       text-transform: uppercase;
       text-shadow: 0 10px 40px rgba(0, 0, 0, 0.4);
     }
-    .planet-dossier {
+    /* GLOWING READ MORE CALL-TO-ACTION (UNCLUTTERED CELESTIAL VIEWPORT) */
+    .planet-cta-wrap {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      margin-bottom: 8px;
+      pointer-events: auto;
+    }
+    .glow-read-more-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 16px;
+      padding: 14px 28px 14px 22px;
+      border-radius: 999px;
+      border: 1.5px solid rgba(121, 220, 232, 0.65);
+      background: linear-gradient(135deg, rgba(121, 220, 232, 0.18) 0%, rgba(10, 20, 34, 0.85) 100%);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      color: #fff;
+      cursor: pointer;
+      text-decoration: none;
+      outline: none;
+      opacity: 0;
+      transform: translateY(16px);
+      pointer-events: none;
+      box-shadow: 0 0 24px rgba(121, 220, 232, 0.35), 0 8px 32px rgba(0, 0, 0, 0.6), inset 0 0 14px rgba(121, 220, 232, 0.2);
+      animation: buttonBreathGlow 3.6s ease-in-out infinite;
+      transition: transform 0.25s ease, background 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease, opacity 0.5s ease;
+    }
+    .experience.content-revealing .glow-read-more-btn,
+    body.intro-ready .glow-read-more-btn {
+      opacity: 1;
+      transform: translateY(0);
+      pointer-events: auto;
+    }
+    .glow-read-more-btn:hover,
+    .glow-read-more-btn:focus-visible {
+      background: linear-gradient(135deg, rgba(121, 220, 232, 0.35) 0%, rgba(18, 36, 62, 0.95) 100%);
+      border-color: #ffffff;
+      box-shadow: 0 0 45px rgba(121, 220, 232, 0.85), 0 12px 38px rgba(0, 0, 0, 0.8), inset 0 0 25px rgba(121, 220, 232, 0.45);
+      transform: translateY(-3px) scale(1.02);
+    }
+    .glow-read-more-btn:active {
+      transform: translateY(0) scale(0.98);
+    }
+
+    /* Radar Beacon */
+    .glow-beacon {
+      position: relative;
+      width: 14px;
+      height: 14px;
+      display: grid;
+      place-items: center;
+      flex-shrink: 0;
+    }
+    .beacon-core {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: #79dce8;
+      box-shadow: 0 0 10px #79dce8;
+    }
+    .beacon-ring {
+      position: absolute;
+      width: 14px;
+      height: 14px;
+      border-radius: 50%;
+      border: 1.5px solid #79dce8;
+      animation: beaconRing 2s cubic-bezier(0.2, 0.8, 0.2, 1) infinite;
+    }
+
+    /* Button Text Hierarchy */
+    .glow-btn-content {
       display: flex;
       flex-direction: column;
       align-items: flex-start;
-      gap: 12px;
-      margin-bottom: 4px;
+      gap: 3px;
+      text-align: left;
     }
-    .planet-content dl {
-      width: min(530px, 42vw);
-      margin: 0;
-      font-size: 15px;
-    }
-    .fact {
-      display: grid;
-      grid-template-columns: 148px 1fr;
-      gap: 16px;
-      padding: 7px 0;
-      border-bottom: 1px solid rgba(255, 255, 255, 0.32);
-      opacity: 0;
-    }
-    .fact:last-child {
-      border-bottom: 0;
-    }
-    .fact dt {
+    .glow-btn-kicker {
+      font-size: 10px;
       font-weight: 700;
-      color: #fff;
-      font-size: 13.5px;
-      letter-spacing: 0.02em;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: #79dce8;
+      line-height: 1;
     }
-    .fact dd {
-      margin: 0;
-      color: #cfd9e4;
-      line-height: 1.4;
+    .glow-btn-label {
       font-size: 14px;
-    }
-    .mission-dossier-btn {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      padding: 10px 22px;
-      border-radius: 999px;
-      font-size: 13px;
       font-weight: 700;
       letter-spacing: 0.04em;
-      cursor: pointer;
-      border: 1px solid rgba(121, 220, 232, 0.45);
-      background: rgba(121, 220, 232, 0.12);
-      color: #79dce8;
-      backdrop-filter: blur(10px);
-      -webkit-backdrop-filter: blur(10px);
-      transition: background 0.2s, color 0.2s, transform 0.2s;
-      opacity: 0;
+      color: #ffffff;
+      line-height: 1.2;
+      white-space: nowrap;
     }
-    .mission-dossier-btn:hover {
-      background: #79dce8;
-      color: #030810;
-      transform: translateY(-2px);
+
+    /* Animated Pointing Chevron */
+    .glow-arrow {
+      font-size: 20px;
+      line-height: 1;
+      color: #79dce8;
+      display: inline-block;
+      margin-left: 2px;
+      animation: arrowPoint 1.8s ease-in-out infinite;
+      flex-shrink: 0;
+      transition: transform 0.2s ease;
+    }
+    .glow-read-more-btn:hover .glow-arrow {
+      transform: translateX(10px);
+      color: #fff;
+      text-shadow: 0 0 16px #79dce8;
+    }
+
+    @keyframes buttonBreathGlow {
+      0%, 100% {
+        box-shadow: 0 0 20px rgba(121, 220, 232, 0.35), 0 8px 30px rgba(0, 0, 0, 0.6), inset 0 0 12px rgba(121, 220, 232, 0.18);
+        border-color: rgba(121, 220, 232, 0.55);
+      }
+      50% {
+        box-shadow: 0 0 40px rgba(121, 220, 232, 0.72), 0 10px 40px rgba(0, 0, 0, 0.8), inset 0 0 24px rgba(121, 220, 232, 0.38);
+        border-color: rgba(121, 220, 232, 0.95);
+        transform: translateY(-2px);
+      }
+    }
+
+    @keyframes beaconRing {
+      0% {
+        transform: scale(0.6);
+        opacity: 1;
+      }
+      100% {
+        transform: scale(2.6);
+        opacity: 0;
+      }
+    }
+
+    @keyframes arrowPoint {
+      0%, 100% {
+        transform: translateX(0);
+        opacity: 0.85;
+        text-shadow: 0 0 8px rgba(121, 220, 232, 0.5);
+      }
+      50% {
+        transform: translateX(8px);
+        opacity: 1;
+        text-shadow: 0 0 18px #79dce8, 0 0 30px #79dce8;
+      }
+    }
+
+    /* Screen-reader & legacy DOM facts preservation (Hidden from main viewport) */
+    #facts {
+      display: none !important;
     }
 
     /* 6. PRELOADER */
@@ -562,10 +657,12 @@
       opacity: 1;
       transform: translateX(0);
     }
-    .experience.content-revealing .mission-dossier-btn,
-    body.intro-ready .mission-dossier-btn {
+    .experience.content-revealing .glow-read-more-btn,
+    body.intro-ready .glow-read-more-btn {
       opacity: 1;
-      transition: opacity 0.65s ease 0.3s;
+      transform: translateY(0);
+      pointer-events: auto;
+      transition: opacity 0.65s ease 0.2s, transform 0.65s cubic-bezier(0.16, 1, 0.3, 1) 0.2s;
     }
     .experience.content-revealing .fact,
     body.intro-ready .fact {
@@ -837,29 +934,84 @@
       transform: translate(-50%, 0);
     }
 
+    /* IN-SITU ENVIRONMENTAL TELEMETRY PANEL (IN MODAL) */
+    .seraph-env-panel {
+      margin-bottom: 32px;
+      padding: 24px 28px;
+      border-radius: 20px;
+      background: rgba(121, 220, 232, 0.05);
+      border: 1px solid rgba(121, 220, 232, 0.25);
+    }
+    .env-header {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      margin-bottom: 20px;
+    }
+    .env-icon {
+      font-size: 26px;
+    }
+    .env-title {
+      margin: 0 0 4px;
+      font-size: 16px;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      color: #79dce8;
+    }
+    .env-desc {
+      margin: 0;
+      font-size: 13px;
+      color: #9cb0c4;
+    }
+    .env-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 14px;
+    }
+    .env-stat-box {
+      padding: 12px 16px;
+      border-radius: 12px;
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+    .env-stat-key {
+      font-size: 12px;
+      font-weight: 700;
+      color: #79dce8;
+      letter-spacing: 0.04em;
+    }
+    .env-stat-val {
+      font-size: 14px;
+      color: #e2edf8;
+      line-height: 1.4;
+    }
+
     /* 11. RESPONSIVE */
     @media(max-width:900px){
       .nav { display: none; }
       .portal-wrap { width: min(300px, 48vw); }
-      .planet-content { flex-direction: column; align-items: flex-start; gap: 20px; }
+      .planet-content { flex-direction: column; align-items: flex-start; gap: 18px; }
       .planet-content h1 { font-size: clamp(90px, 20vw, 170px); }
-      .planet-content dl { width: 100%; max-width: 500px; }
-      .fact { grid-template-columns: 120px 1fr; }
+      .planet-cta-wrap { align-items: flex-start; }
       .planet-list { font-size: 14px; }
       .planet-item.active { font-size: 16px; }
       .seraph-grid { grid-template-columns: 1fr; }
       .seraph-telemetry-hud { grid-template-columns: repeat(2, 1fr); }
       .mission-tabs { border-radius: 18px; width: 100%; }
       .mission-tab { width: 100%; }
+      .env-grid { grid-template-columns: 1fr; }
     }
     @media(max-width:640px){
       .experience { min-height: 600px; }
       .planet-list { display: none; }
       .portal-wrap { top: 40%; width: min(250px, 64vw); }
-      .planet-content { left: 18px; right: 18px; bottom: 18px; display: block; }
-      .planet-content h1 { font-size: clamp(80px, 24vw, 140px); margin-bottom: 12px; }
-      .planet-content dl { width: 100%; font-size: 13px; }
-      .fact { grid-template-columns: 100px 1fr; padding: 4px 0; }
+      .planet-content { left: 18px; right: 18px; bottom: 18px; display: flex; flex-direction: column; align-items: flex-start; gap: 14px; }
+      .planet-content h1 { font-size: clamp(75px, 22vw, 130px); margin-bottom: 2px; }
+      .glow-read-more-btn { padding: 12px 20px 12px 16px; gap: 12px; width: 100%; max-width: 360px; justify-content: space-between; }
+      .glow-btn-label { font-size: 13px; }
       .portal-heading { font-size: 14px; }
       .portal-heading strong { font-size: 16px; }
       .menu { height: 38px; }
@@ -933,18 +1085,30 @@
       </button>
     </section>
 
-    <!-- CONTENT (DYNAMIC MISSION DOSSIER FOR EACH PLANET) -->
+    <!-- CONTENT (CLEAN CINEMATIC VIEWPORT & GLOWING CALL-TO-ACTION) -->
     <section class="planet-content chrome" aria-live="polite">
       <div class="planet-headline">
         <div class="mission-tag" id="mission-tag">MISSION SYSTEMS &bull; ORBITAL C2</div>
         <h1 id="planet-title">MARS</h1>
       </div>
-      <div class="planet-dossier">
-        <dl id="facts"></dl>
-        <button class="mission-dossier-btn" id="dossier-btn" type="button" onclick="openCurrentDossier()">
-          <span id="dossier-btn-text">Inspect Mission Architecture Dossier</span> &rarr;
+      
+      <!-- GLOWING READ MORE CALL TO ACTION (NO CLUTTER COVERING CELESTIAL BACKDROP) -->
+      <div class="planet-cta-wrap">
+        <button class="glow-read-more-btn" id="dossier-btn" type="button" onclick="openCurrentDossier()" aria-label="Explore Mission Architecture Dossier">
+          <span class="glow-beacon" aria-hidden="true">
+            <span class="beacon-core"></span>
+            <span class="beacon-ring"></span>
+          </span>
+          <span class="glow-btn-content">
+            <span class="glow-btn-kicker" id="dossier-btn-kicker">MISSION DOSSIER</span>
+            <span class="glow-btn-label" id="dossier-btn-text">READ MORE &bull; EXPLORE ARCHITECTURE</span>
+          </span>
+          <span class="glow-arrow" aria-hidden="true">&rarr;</span>
         </button>
       </div>
+
+      <!-- DOM PRESERVATION FOR SCRIPT DATA CONTRACT (HIDDEN FROM VIEWPORT) -->
+      <dl id="facts" style="display:none;" aria-hidden="true"></dl>
     </section>
 
     <div class="transition-layer" aria-hidden="true"><video id="transition-video" muted playsinline preload="auto"></video></div>
@@ -1106,7 +1270,8 @@
         name: 'Mars',
         missionTag: 'PROJECT ELYRA // TACTICAL EDGE AI',
         dossierKey: 'elyra',
-        dossierBtnText: 'Inspect ELYRA Edge AI Dossier',
+        dossierBtnKicker: 'PROJECT ELYRA // EDGE AI',
+        dossierBtnText: 'READ MORE • ELYRA BRIEFING',
         next: 'Earth',
         number: '[03]',
         portal: TO_EARTH,
@@ -1122,7 +1287,8 @@
         name: 'Earth',
         missionTag: 'PROJECT SERAPH // ORBITAL C2',
         dossierKey: 'seraph',
-        dossierBtnText: 'Inspect SERAPH Mission Dossier',
+        dossierBtnKicker: 'PROJECT SERAPH // ORBITAL C2',
+        dossierBtnText: 'READ MORE • SERAPH BRIEFING',
         next: 'Venus',
         number: '[02]',
         portal: TO_VENUS,
@@ -1138,7 +1304,8 @@
         name: 'Venus',
         missionTag: 'PROJECT CHERUB // ATMOSPHERIC MESH',
         dossierKey: 'cherub',
-        dossierBtnText: 'Inspect CHERUB Deep-Space Dossier',
+        dossierBtnKicker: 'PROJECT CHERUB // ATMOSPHERIC MESH',
+        dossierBtnText: 'READ MORE • CHERUB BRIEFING',
         next: 'Mercury',
         number: '[06]',
         image: MERCURY,
@@ -1154,7 +1321,8 @@
         name: 'Mercury',
         missionTag: 'PROJECT HERMES // RELATIVISTIC PROBE',
         dossierKey: 'seraph',
-        dossierBtnText: 'Inspect Relativistic Gravimetry Dossier',
+        dossierBtnKicker: 'PROJECT HERMES // SOLAR PROBE',
+        dossierBtnText: 'READ MORE • HERMES BRIEFING',
         facts: [
           ['Mission:', 'PROJECT HERMES — Solar Proximity Gravimetry.'],
           ['Objective:', 'General Relativity Perihelion Precession Testing.'],
@@ -1166,7 +1334,8 @@
         name: 'Jupiter',
         missionTag: 'PROJECT ZEUS // JOVIAN RADIATION MESH',
         dossierKey: 'cherub',
-        dossierBtnText: 'Inspect Jovian Sensor Mesh Dossier',
+        dossierBtnKicker: 'PROJECT ZEUS // JOVIAN MESH',
+        dossierBtnText: 'READ MORE • ZEUS BRIEFING',
         facts: [
           ['Mission:', 'PROJECT ZEUS — Jovian Magnetosphere Probe Array.'],
           ['Objective:', 'Radiation-Hardened In-Situ Jovian Moons Exploration.'],
@@ -1178,7 +1347,8 @@
         name: 'Saturn',
         missionTag: 'PROJECT CRONUS // CRYOGENIC PLUME SAMPLER',
         dossierKey: 'cherub',
-        dossierBtnText: 'Inspect Cryogenic Plume Dossier',
+        dossierBtnKicker: 'PROJECT CRONUS // PLUME SAMPLER',
+        dossierBtnText: 'READ MORE • CRONUS BRIEFING',
         facts: [
           ['Mission:', 'PROJECT CRONUS — Outer Solar System Explorer.'],
           ['Target:', 'Enceladus Plume Sampler & Titan Subsurface Radar.'],
@@ -1190,7 +1360,8 @@
         name: 'Uranus',
         missionTag: 'PROJECT OURANOS // ICE GIANT PENETRATOR',
         dossierKey: 'cherub',
-        dossierBtnText: 'Inspect Ice Giant Probe Dossier',
+        dossierBtnKicker: 'PROJECT OURANOS // ICE PENETRATOR',
+        dossierBtnText: 'READ MORE • OURANOS BRIEFING',
         facts: [
           ['Mission:', 'PROJECT OURANOS — Ice Giant Atmospheric Penetrator.'],
           ['Atmosphere:', 'Supercritical Methane & Hydrogen Diamond Rain.'],
@@ -1202,7 +1373,8 @@
         name: 'Neptune',
         missionTag: 'PROJECT POSEIDON // KUIPER GATEWAY',
         dossierKey: 'seraph',
-        dossierBtnText: 'Inspect Kuiper Relay Dossier',
+        dossierBtnKicker: 'PROJECT POSEIDON // KUIPER RELAY',
+        dossierBtnText: 'READ MORE • POSEIDON BRIEFING',
         facts: [
           ['Mission:', 'PROJECT POSEIDON — Kuiper Belt Relativistic Gateway.'],
           ['Velocity:', 'Hyperbolic Solar Escape Vector (17.2 km/s).'],
@@ -1616,8 +1788,11 @@
       const tagEl = document.getElementById('mission-tag');
       if (tagEl) tagEl.innerHTML = state.missionTag || 'MISSION SYSTEMS &bull; ORBITAL C2';
 
+      const dossierBtnKicker = document.getElementById('dossier-btn-kicker');
+      if (dossierBtnKicker) dossierBtnKicker.textContent = state.dossierBtnKicker || 'MISSION DOSSIER';
+
       const dossierBtnText = document.getElementById('dossier-btn-text');
-      if (dossierBtnText) dossierBtnText.textContent = state.dossierBtnText || 'Inspect Mission Architecture Dossier';
+      if (dossierBtnText) dossierBtnText.textContent = state.dossierBtnText || 'READ MORE • EXPLORE ARCHITECTURE';
 
       const nextNameEl = document.getElementById('next-name');
       if (nextNameEl && state.next) nextNameEl.textContent = state.next;
@@ -1805,6 +1980,9 @@
       const container = document.getElementById('dossier-content');
       if (!container) return;
 
+      const currentPlanetState = states[current] || states.mars;
+      const currentPlanetFacts = currentPlanetState.facts || [];
+
       container.innerHTML = `
         <p class="seraph-kicker">${d.kicker}</p>
         <h2 class="seraph-title" id="seraph-pitch-title">${d.title}</h2>
@@ -1829,6 +2007,25 @@
               <p>${p.desc}</p>
             </article>
           `).join('')}
+        </div>
+
+        <!-- IN-SITU FLIGHT REGIME & TELEMETRY PANEL -->
+        <div class="seraph-env-panel">
+          <div class="env-header">
+            <span class="env-icon">🌐</span>
+            <div>
+              <h3 class="env-title">${currentPlanetState.name.toUpperCase()} &bull; IN-SITU FLIGHT REGIME &amp; SENSOR TELEMETRY</h3>
+              <p class="env-desc">Environmental boundary conditions, radiation exposures, and deep-space telemetry recorded by active sensor nodes.</p>
+            </div>
+          </div>
+          <div class="env-grid">
+            ${currentPlanetFacts.map(([k, v]) => `
+              <div class="env-stat-box">
+                <span class="env-stat-key">${k}</span>
+                <span class="env-stat-val">${v}</span>
+              </div>
+            `).join('')}
+          </div>
         </div>
       `;
     }
