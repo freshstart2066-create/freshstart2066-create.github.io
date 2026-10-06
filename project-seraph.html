@@ -47,6 +47,7 @@
       margin: 0;
       width: 100%;
       height: 100%;
+      height: 100dvh;
       overflow: hidden;
       background: #090807;
     }
@@ -56,7 +57,8 @@
       position: relative;
       width: 100%;
       height: 100%;
-      min-height: 540px;
+      height: 100dvh;
+      min-height: 100%;
       overflow: hidden;
       background: #0a0908;
     }
@@ -92,9 +94,9 @@
 
     /* 2. HEADER */
     .header {
-      left: clamp(18px, 1.95vw, 28px);
-      right: clamp(18px, 1.95vw, 28px);
-      top: clamp(18px, 3.1vh, 28px);
+      left: max(clamp(16px, 2.5vw, 28px), env(safe-area-inset-left, 16px));
+      right: max(clamp(16px, 2.5vw, 28px), env(safe-area-inset-right, 16px));
+      top: max(clamp(16px, 2.8vh, 28px), env(safe-area-inset-top, 16px));
       display: flex;
       justify-content: space-between;
       align-items: center;
@@ -518,8 +520,8 @@
                   transform 2s cubic-bezier(0.16, 1, 0.3, 1);
     }
     .floating-logo.is-docked {
-      left: clamp(18px, 1.95vw, 28px);
-      top: clamp(18px, 3.1vh, 28px);
+      left: max(clamp(16px, 2.5vw, 28px), env(safe-area-inset-left, 16px));
+      top: max(clamp(16px, 2.8vh, 28px), env(safe-area-inset-top, 16px));
       width: 32px;
       transform: translate(0, 0);
       pointer-events: auto;
@@ -989,36 +991,217 @@
       line-height: 1.4;
     }
 
-    /* 11. RESPONSIVE */
-    @media(max-width:900px){
-      .nav { display: none; }
-      .portal-wrap { width: min(300px, 48vw); }
-      .planet-content { flex-direction: column; align-items: flex-start; gap: 18px; }
-      .planet-content h1 { font-size: clamp(90px, 20vw, 170px); }
-      .planet-cta-wrap { align-items: flex-start; }
-      .planet-list { font-size: 14px; }
-      .planet-item.active { font-size: 16px; }
-      .seraph-grid { grid-template-columns: 1fr; }
+    /* 11. RESPONSIVE TIERS */
+
+    /* A) LARGE DESKTOPS & ULTRAWIDE */
+    @media(min-width: 1921px) {
+      .portal-wrap { width: min(440px, 26vw); }
+      .planet-content h1 { font-size: 260px; }
+      .seraph-sheet { max-width: 1200px; }
+    }
+
+    /* B) LAPTOPS & TABLETS IN LANDSCAPE / MODERATE SCREENS */
+    @media(max-width: 1024px) {
+      .portal-wrap { width: min(290px, 36vw); top: 46%; }
+      .planet-content {
+        left: clamp(20px, 3.5vw, 36px);
+        right: clamp(20px, 3.5vw, 36px);
+        bottom: clamp(20px, 2.8vh, 32px);
+      }
+      .planet-content h1 { font-size: clamp(80px, 15vw, 160px); }
+      .planet-list { font-size: 14.5px; }
+      .planet-item.active { font-size: 16.5px; }
       .seraph-telemetry-hud { grid-template-columns: repeat(2, 1fr); }
+      .env-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+
+    /* C) TABLET PORTRAIT / MID-SIZE SCREENS */
+    @media(max-width: 900px) {
+      .nav { display: none; }
+      .seraph-grid { grid-template-columns: 1fr; }
       .mission-tabs { border-radius: 18px; width: 100%; }
       .mission-tab { width: 100%; }
-      .env-grid { grid-template-columns: 1fr; }
     }
-    @media(max-width:640px){
-      .experience { min-height: 600px; }
+
+    /* D) MOBILE PORTRAIT */
+    @media(max-width: 640px) {
+      .experience { min-height: 0; }
       .planet-list { display: none; }
-      .portal-wrap { top: 40%; width: min(250px, 64vw); }
-      .planet-content { left: 18px; right: 18px; bottom: 18px; display: flex; flex-direction: column; align-items: flex-start; gap: 14px; }
-      .planet-content h1 { font-size: clamp(75px, 22vw, 130px); margin-bottom: 2px; }
-      .glow-read-more-btn { padding: 12px 20px 12px 16px; gap: 12px; width: 100%; max-width: 360px; justify-content: space-between; }
-      .glow-btn-label { font-size: 13px; }
-      .portal-heading { font-size: 14px; }
-      .portal-heading strong { font-size: 16px; }
-      .menu { height: 38px; }
-      .portal { border-radius: 70px; }
-      .seraph-telemetry-hud { grid-template-columns: 1fr; }
       .project-badge { display: none; }
+      .header-actions { margin-left: auto; }
+      .menu { height: 38px; padding: 0 16px; font-size: 13px; }
+      .portal-wrap {
+        left: 50%;
+        top: 36%;
+        transform: translate(-50%, -50%);
+        width: min(220px, 58vw);
+      }
+      .portal { border-radius: 70px; }
+      .portal-heading { font-size: 13.5px; }
+      .portal-heading strong { font-size: 15px; }
+      .planet-content {
+        left: max(16px, env(safe-area-inset-left, 16px));
+        right: max(16px, env(safe-area-inset-right, 16px));
+        bottom: max(16px, env(safe-area-inset-bottom, 16px));
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+      }
+      .planet-headline { gap: 6px; }
+      .mission-tag {
+        font-size: 11px;
+        padding: 4px 12px;
+        letter-spacing: 0.16em;
+      }
+      .planet-content h1 {
+        font-size: clamp(44px, 14vw, 84px);
+        line-height: 0.82;
+        margin-bottom: 2px;
+        white-space: nowrap;
+      }
+      .planet-cta-wrap {
+        align-items: flex-start;
+        width: 100%;
+      }
+      .glow-read-more-btn {
+        width: 100%;
+        max-width: 360px;
+        box-sizing: border-box;
+        padding: 11px 18px;
+        gap: 12px;
+        justify-content: space-between;
+      }
+      .glow-btn-kicker { font-size: 9.5px; }
+      .glow-btn-label { font-size: 13px; }
+      .glow-arrow { font-size: 18px; }
+
+      /* Mobile Modal Drawer Polish */
+      .seraph-modal {
+        padding: max(10px, env(safe-area-inset-top, 10px)) max(10px, env(safe-area-inset-right, 10px)) max(12px, env(safe-area-inset-bottom, 12px)) max(10px, env(safe-area-inset-left, 10px));
+      }
+      .seraph-sheet {
+        padding: 22px 16px 20px;
+        border-radius: 20px;
+      }
+      .seraph-close {
+        right: 12px;
+        top: 12px;
+        width: 36px;
+        height: 36px;
+        font-size: 20px;
+      }
+      .seraph-title-row h2 {
+        font-size: clamp(22px, 6vw, 28px);
+      }
+      .seraph-header-lead {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 6px;
+      }
+      .seraph-actions {
+        flex-direction: column;
+        width: 100%;
+        gap: 10px;
+      }
+      .seraph-btn {
+        width: 100%;
+        justify-content: center;
+      }
+      .mission-tabs {
+        flex-direction: column;
+        gap: 6px;
+      }
+      .mission-tab {
+        width: 100%;
+        justify-content: center;
+      }
+      .seraph-telemetry-hud {
+        grid-template-columns: 1fr;
+        gap: 8px;
+      }
+      .env-grid {
+        grid-template-columns: 1fr;
+        gap: 10px;
+      }
     }
+
+    /* E) MOBILE LANDSCAPE & LOW VIEWPORT HEIGHT */
+    @media(max-height: 560px) {
+      .portal-wrap {
+        left: 70%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+        width: min(165px, 24vw);
+      }
+      .portal-heading {
+        margin-bottom: 5px;
+        font-size: 12px;
+      }
+      .portal-heading strong {
+        font-size: 13.5px;
+      }
+      .planet-list {
+        display: none;
+      }
+      .project-badge {
+        display: none;
+      }
+      .header-actions {
+        margin-left: auto;
+      }
+      .menu {
+        height: 36px;
+        padding: 0 16px;
+        font-size: 12.5px;
+      }
+      .planet-content {
+        left: max(16px, env(safe-area-inset-left, 16px));
+        bottom: max(12px, env(safe-area-inset-bottom, 12px));
+        max-width: 52vw;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 6px;
+      }
+      .planet-headline {
+        gap: 4px;
+      }
+      .mission-tag {
+        font-size: 10px;
+        padding: 3px 10px;
+      }
+      .planet-content h1 {
+        font-size: clamp(38px, 12vh, 68px);
+        line-height: 0.8;
+        margin-bottom: 0;
+      }
+      .planet-cta-wrap {
+        align-items: flex-start;
+        width: auto;
+      }
+      .glow-read-more-btn {
+        padding: 8px 16px;
+        gap: 10px;
+        width: auto;
+      }
+      .glow-btn-kicker { font-size: 9px; }
+      .glow-btn-label { font-size: 12px; }
+      .glow-arrow { font-size: 16px; }
+    }
+
+    /* F) ULTRA-COMPACT LANDSCAPE */
+    @media(max-height: 420px) {
+      .portal-wrap {
+        width: min(135px, 20vw);
+      }
+      .planet-content h1 {
+        font-size: clamp(32px, 10vh, 52px);
+      }
+      .header {
+        top: 10px;
+      }
+    }
+
     @media(prefers-reduced-motion:reduce){
       * { transition-duration: 0.01ms !important; }
       .portal { transform: none !important; }
@@ -1433,6 +1616,10 @@
       }
     }
     window.addEventListener('resize', resizeCanvas, { passive: true });
+    window.addEventListener('orientationchange', resizeCanvas, { passive: true });
+    if (window.screen && window.screen.orientation) {
+      window.screen.orientation.addEventListener('change', resizeCanvas);
+    }
 
     function drawCover(ctx, media) {
       if (!media) return;

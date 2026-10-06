@@ -216,8 +216,12 @@ When working on this codebase, you **MUST** adhere to the following rules:
    - Every `<button>` or `<a>` must either perform an interactive action (open a panel, trigger an animation, play audio) or route to a valid URL.
    - Never leave unattached buttons or empty `href="#"` dead ends.
 5. **Mirror Synchronization**:
-   - Every change made in `freshstart2066-create.github.io/` must also be mirrored in `portfolio-v3/`. If modifying `project-seraph.html`, update [`build_seraph_page.py`](file:///C:/Users/Archangel/.gemini/antigravity/scratch/build_seraph_page.py) and execute it.
-6. **No Placeholder Words**:
+   - Every change made in `freshstart2066-create.github.io/` must also be mirrored in `portfolio-v3/`. If modifying `project-seraph.html`, update [`build_seraph_page.py`](file:///C:/Users/Archangel/.gemini/antigravity/scratch/build_seraph_page.py) and execute it. If modifying `main.html`, update [`build_elyra_page.py`](file:///C:/Users/Archangel/.gemini/antigravity/scratch/build_elyra_page.py) and execute it.
+6. **Multi-Device Fluid Auto-Resizing**:
+   - The entire portfolio is built to auto-resize fluidly across every device form factor: mobile portrait (320px–430px), mobile landscape (cockpit console layout for heights $\le 560\text{px}$), tablets (768px–1024px), standard desktops (1440px), and ultrawides ($1920\text{px}+$ and $2560\text{px}+$).
+   - Never use arbitrary fixed `min-height` rules combined with `overflow: hidden` that cause clipping on small screens. Use `100svh`/`100dvh` and safe area insets (`env(safe-area-inset-*)`).
+   - Canvas projections and layouts must bind to both `resize`, `orientationchange`, and `screen.orientation` events.
+7. **No Placeholder Words**:
    - Keep all technical descriptions authentic to aerospace C2 and edge AI systems. Never inject generic placeholder lorem ipsum.
 
 ---
