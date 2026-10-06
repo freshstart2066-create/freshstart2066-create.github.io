@@ -1041,7 +1041,7 @@
       <div class="preloader-shade"></div>
     </div>
     
-    <img class="floating-logo" id="floating-logo" src="https://d2ol7oe51mr4n9.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/eb7e0f53-50cd-4af5-abc4-8b9a52cdc01b.svg" alt="SERAPH & CHERUB" onclick="openCurrentDossier()" title="Click for Mission Architecture Dossier">
+    <img class="floating-logo" id="floating-logo" src="https://d2ol7oe51mr4n9.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/eb7e0f53-50cd-4af5-abc4-8b9a52cdc01b.svg" alt="SERAPH & CHERUB">
     
     <div class="preloader-count" id="preloader-count" aria-live="polite">
       <span id="preloader-value">0</span><span class="percent">%</span>
@@ -1052,15 +1052,15 @@
 
     <!-- HEADER -->
     <header class="header chrome">
-      <a href="#about" class="project-badge" onclick="openSeraphBriefing('seraph'); return false;" aria-label="SERAPH Mission Architecture">
+      <a href="#seraph" class="project-badge" onclick="jumpToPlanet('earth'); return false;" aria-label="SERAPH Mission Architecture">
         <span class="project-badge-dot"></span>
         <span>SERAPH &bull; ORBITAL C2</span>
       </a>
 
       <div class="header-actions">
         <nav class="nav" aria-label="Primary navigation">
-          <a class="active" href="#seraph" onclick="openSeraphBriefing('seraph'); return false;">SERAPH C2</a>
-          <a href="#cherub" onclick="openSeraphBriefing('cherub'); return false;">CHERUB Mesh</a>
+          <a class="active" href="#seraph" onclick="jumpToPlanet('earth'); return false;">SERAPH C2</a>
+          <a href="#cherub" onclick="jumpToPlanet('venus'); return false;">CHERUB Mesh</a>
           <a href="#planets" onclick="cyclePlanet(); return false;">Planets</a>
           <a href="main.html" aria-label="ELYRA Edge AI">ELYRA AI &rarr;</a>
         </nav>
@@ -1684,7 +1684,6 @@
         return;
       }
       if (targetPlanet === current) {
-        openCurrentDossier();
         return;
       }
 
@@ -1694,7 +1693,9 @@
         current = targetPlanet;
         render();
         revealPlanetContent();
-        showSeraphToast(`ORBIT LOCKED: ${targetPlanet.toUpperCase()} • DOSSIER READY`);
+        if (withTransition) {
+          showSeraphToast(`ORBIT LOCKED: ${targetPlanet.toUpperCase()} • DOSSIER READY`);
+        }
         return;
       }
 
@@ -2067,19 +2068,16 @@
 
       if (h === '#cherub' || q.includes('mission=cherub')) {
         jumpToPlanet('venus', false);
-        openSeraphBriefing('cherub');
       } else if (h === '#seraph' || q.includes('mission=seraph')) {
         jumpToPlanet('earth', false);
-        openSeraphBriefing('seraph');
       } else if (h === '#elyra' || q.includes('mission=elyra')) {
         jumpToPlanet('mars', false);
-        openSeraphBriefing('elyra');
-      } else if (h === '#about' || h === '#explore' || h === '#pitch' || h === '#briefing' || q.includes('modal=1')) {
-        openSeraphBriefing();
       } else if (h === '#planets') {
         cyclePlanet();
       } else if (h === '#mars' || h === '#earth' || h === '#venus') {
-        jumpToPlanet(h.replace('#', ''));
+        jumpToPlanet(h.replace('#', ''), false);
+      } else if (q.includes('modal=1')) {
+        openSeraphBriefing();
       }
     }
     window.addEventListener('hashchange', checkHash);
