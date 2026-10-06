@@ -837,16 +837,18 @@
       margin-bottom: 0.45rem;
     }
 
-    /* Workflow Pipeline Section */
+    /* System Architecture Workflow Canvas & Blueprint System */
     .workflow-section {
-      background: rgba(15, 23, 42, 0.65);
-      border: 1px solid rgba(56, 189, 248, 0.2);
+      background: rgba(8, 8, 12, 0.92);
+      border: 1px solid rgba(255, 255, 255, 0.1);
       border-radius: 20px;
-      padding: 3rem 2.5rem;
+      padding: 3rem 2rem;
       margin-bottom: 3.5rem;
       position: relative;
       overflow: hidden;
-      box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.7);
+      box-shadow: 0 25px 60px rgba(0, 0, 0, 0.9), 0 0 35px rgba(56, 189, 248, 0.08);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
     }
     .workflow-header {
       display: flex;
@@ -854,7 +856,7 @@
       align-items: flex-start;
       flex-wrap: wrap;
       gap: 1.5rem;
-      margin-bottom: 2rem;
+      margin-bottom: 1.5rem;
     }
     .workflow-title-box h2 {
       font-size: 1.8rem;
@@ -875,124 +877,181 @@
       gap: 0.5rem;
       align-items: center;
     }
-    .pipeline-pulse-btn {
-      background: rgba(56, 189, 248, 0.1);
-      border: 1px solid rgba(56, 189, 248, 0.4);
-      color: var(--cyan);
-      padding: 0.5rem 1rem;
-      border-radius: 9999px;
+
+    /* Blueprint Navigation Tabs */
+    .blueprint-tabs {
+      display: flex;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+      margin-bottom: 1.75rem;
+      background: rgba(4, 4, 8, 0.85);
+      padding: 0.35rem;
+      border-radius: 12px;
+      border: 1px solid rgba(255, 255, 255, 0.06);
+    }
+    .blueprint-tab-btn {
+      background: transparent;
+      border: 1px solid transparent;
+      color: var(--text-muted);
+      padding: 0.45rem 0.9rem;
+      border-radius: 8px;
+      font-size: 0.78rem;
       font-family: var(--font-mono);
-      font-size: 0.8rem;
+      font-weight: 700;
       cursor: pointer;
       display: flex;
       align-items: center;
-      gap: 0.5rem;
-      transition: all 0.2s ease;
+      gap: 0.45rem;
+      transition: all 0.25s ease;
     }
-    .pipeline-pulse-btn:hover {
-      background: rgba(56, 189, 248, 0.2);
-      box-shadow: 0 0 15px rgba(56, 189, 248, 0.3);
+    .blueprint-tab-btn:hover {
+      color: #ffffff;
+      background: rgba(255, 255, 255, 0.04);
     }
-    
-    /* Interactive Flow Nodes Container */
-    .flow-pipeline-container {
-      position: relative;
-      margin: 2.5rem 0 1.5rem;
-    }
-    
-    /* Flow SVG Overlay */
-    .flow-svg-overlay {
-      width: 100%;
-      height: 120px;
-      position: relative;
-    }
-    .flow-line-base {
-      stroke: rgba(255, 255, 255, 0.1);
-      stroke-width: 3;
-      fill: none;
-    }
-    .flow-line-pulse {
-      stroke: var(--cyan);
-      stroke-width: 3;
-      fill: none;
-      stroke-dasharray: 8 16;
-      animation: flowDash 1.2s linear infinite;
-      filter: drop-shadow(0 0 8px rgba(56, 189, 248, 0.8));
-    }
-    .flow-line-pulse-purple {
-      stroke: var(--purple);
-      stroke-width: 3;
-      fill: none;
-      stroke-dasharray: 8 16;
-      animation: flowDash 1.2s linear infinite;
-      filter: drop-shadow(0 0 8px rgba(129, 140, 248, 0.8));
-    }
-    @keyframes flowDash {
-      to {
-        stroke-dashoffset: -48;
-      }
+    .blueprint-tab-btn.active {
+      background: var(--bg-elevated);
+      color: var(--cyan);
+      border-color: rgba(56, 189, 248, 0.4);
+      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.6);
     }
 
-    .flow-stages-grid {
+    /* Master Architecture Flow Canvas */
+    .blueprint-canvas-container {
+      position: relative;
+      background: radial-gradient(circle at center, rgba(14, 16, 24, 0.95) 0%, rgba(3, 3, 6, 0.98) 90%);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 16px;
+      padding: 1.75rem 1.25rem;
+      margin-bottom: 1.5rem;
+    }
+
+    /* Subgraph Clusters */
+    .clusters-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-      gap: 1rem;
-      margin-top: -1.5rem;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 1.25rem;
       position: relative;
       z-index: 2;
     }
-    .flow-stage-card {
-      background: rgba(30, 41, 59, 0.85);
+    .cluster-box {
+      background: rgba(12, 12, 18, 0.88);
       border: 1px solid rgba(255, 255, 255, 0.1);
-      border-radius: 12px;
-      padding: 1.2rem;
-      cursor: pointer;
+      border-radius: 14px;
+      padding: 1.25rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+      position: relative;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.6);
       transition: all 0.3s ease;
+    }
+    .cluster-box:hover {
+      border-color: rgba(56, 189, 248, 0.4);
+      transform: translateY(-2px);
+      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.8), 0 0 20px rgba(56, 189, 248, 0.15);
+    }
+    .cluster-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+      padding-bottom: 0.6rem;
+    }
+    .cluster-title {
+      font-size: 0.86rem;
+      font-weight: 800;
+      color: #ffffff;
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+    .cluster-tag {
+      font-size: 0.65rem;
+      font-family: var(--font-mono);
+      padding: 0.15rem 0.45rem;
+      border-radius: 4px;
+      font-weight: 700;
+    }
+
+    /* Rectangular System Node Boxes */
+    .nodes-step-list {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+    .node-box {
+      background: rgba(18, 18, 26, 0.95);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 8px;
+      padding: 0.6rem 0.75rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0.5rem;
+      cursor: pointer;
+      font-family: var(--font-mono);
+      font-size: 0.76rem;
+      color: #e2e8f0;
+      transition: all 0.25s ease;
       position: relative;
     }
-    .flow-stage-card:hover, .flow-stage-card.active {
+    .node-box:hover, .node-box.active {
+      background: rgba(28, 30, 42, 0.98);
       border-color: var(--cyan);
-      background: rgba(30, 41, 59, 0.98);
-      transform: translateY(-4px);
-      box-shadow: 0 10px 25px -5px rgba(56, 189, 248, 0.25);
+      transform: translateX(4px);
+      box-shadow: 0 4px 15px rgba(56, 189, 248, 0.25);
+      color: #ffffff;
     }
-    .flow-stage-card.active::after {
-      content: '';
-      position: absolute;
-      bottom: -6px;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 40%;
-      height: 3px;
-      background: var(--cyan);
-      border-radius: 9999px;
-      box-shadow: 0 0 10px var(--cyan);
+    .node-idx {
+      font-size: 0.66rem;
+      color: var(--cyan);
+      font-weight: 700;
     }
-    .stage-idx {
+    .node-wire-arrow {
+      text-align: center;
+      color: var(--cyan);
+      font-size: 0.75rem;
+      line-height: 0.5;
+      opacity: 0.7;
+    }
+
+    /* Connecting String Wire Banners Between Clusters */
+    .cluster-wire-banner {
+      background: linear-gradient(90deg, rgba(56, 189, 248, 0.08), rgba(168, 85, 247, 0.08));
+      border: 1px dashed rgba(56, 189, 248, 0.35);
+      border-radius: 8px;
+      padding: 0.45rem 0.85rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
       font-family: var(--font-mono);
       font-size: 0.72rem;
       color: var(--cyan);
-      letter-spacing: 0.05em;
-      margin-bottom: 0.4rem;
-      display: block;
+      letter-spacing: 0.04em;
+      margin: 1rem 0;
+      position: relative;
+      overflow: hidden;
     }
-    .stage-title {
-      font-size: 0.95rem;
-      font-weight: 700;
-      color: var(--text-main);
-      margin-bottom: 0.35rem;
+    .cluster-wire-banner::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(56, 189, 248, 0.3), transparent);
+      animation: wireStream 2.5s infinite linear;
     }
-    .stage-metric {
-      font-size: 0.78rem;
-      color: var(--text-dim);
-      font-family: var(--font-mono);
+    @keyframes wireStream {
+      to { left: 100%; }
     }
 
     /* Live Pipeline Console */
     .pipeline-console {
       margin-top: 1.5rem;
-      background: rgba(10, 15, 29, 0.95);
-      border: 1px solid rgba(56, 189, 248, 0.25);
+      background: rgba(4, 4, 8, 0.95);
+      border: 1px solid rgba(255, 255, 255, 0.1);
       border-radius: 10px;
       padding: 1.25rem;
       font-family: var(--font-mono);
@@ -1301,76 +1360,185 @@
     <section class="workflow-section" id="architecture-pipeline">
       <div class="workflow-header">
         <div class="workflow-title-box">
-          <h2>⚡ System Execution &amp; Telemetry Pipeline</h2>
+          <h2>⚡ Distributed Systems &amp; Edge AI Architecture Blueprint</h2>
           <p>
-            Real-time visual map of the on-device Edge AI ingestion, memory budgeting, local quantization routing, tool actuation, and statistical anomaly detection loops.
+            Interactive multi-cluster execution flow: from on-device sensor ingestion and quantized LLM routing to cryptographic attestation, swarm consensus, and aerospace telemetry dispatch.
           </p>
         </div>
         <div class="pipeline-controls">
-          <button class="pipeline-pulse-btn" onclick="simulatePipelineCycle()">
-            <span class="pulse-dot"></span> Run Pipeline Cycle
+          <button class="pipeline-pulse-btn" onclick="simulateFullPipelineTrace()">
+            <span class="pulse-dot"></span> Run Full Pipeline Trace
           </button>
         </div>
       </div>
 
-      <!-- Flow SVG Animated Lines -->
-      <div class="flow-pipeline-container">
-        <svg class="flow-svg-overlay" viewBox="0 0 1000 80" preserveAspectRatio="none">
-          <defs>
-            <linearGradient id="cyanPurpleGrad" x1="0%" y1="0%" x2="100%" y2="0%">
-              <stop offset="0%" stop-color="#38bdf8" />
-              <stop offset="50%" stop-color="#818cf8" />
-              <stop offset="100%" stop-color="#34d399" />
-            </linearGradient>
-          </defs>
-          <!-- Base background tracks -->
-          <path d="M 100 40 L 300 40 L 500 40 L 700 40 L 900 40" class="flow-line-base" />
-          <!-- Animated glowing pulse lines -->
-          <path d="M 100 40 L 300 40 L 500 40 L 700 40 L 900 40" class="flow-line-pulse" id="flow-pulse-track" />
-          <!-- Flowing connector arches -->
-          <path d="M 300 40 Q 400 10 500 40" class="flow-line-pulse-purple" />
-          <path d="M 500 40 Q 600 70 700 40" class="flow-line-pulse" />
-        </svg>
+      <!-- Blueprint Navigation Tabs -->
+      <div class="blueprint-tabs">
+        <button class="blueprint-tab-btn active" id="tab-bp-all" onclick="switchBlueprintView('all')">
+          🌐 Full Architecture Pipeline
+        </button>
+        <button class="blueprint-tab-btn" id="tab-bp-edge" onclick="switchBlueprintView('edge')">
+          📱 Cluster 1: Edge AI (ELYRA)
+        </button>
+        <button class="blueprint-tab-btn" id="tab-bp-crypto" onclick="switchBlueprintView('crypto')">
+          🔐 Cluster 2: Cryptographic Layer (OPAP)
+        </button>
+        <button class="blueprint-tab-btn" id="tab-bp-swarms" onclick="switchBlueprintView('swarms')">
+          🤖 Cluster 3: Multi-Agent Swarms
+        </button>
+        <button class="blueprint-tab-btn" id="tab-bp-aero" onclick="switchBlueprintView('aero')">
+          🛰️ Cluster 4: Astrodynamics C2
+        </button>
+      </div>
 
-        <!-- Stage Cards Grid -->
-        <div class="flow-stages-grid">
-          <div class="flow-stage-card active" id="stage-0" onclick="selectPipelineStage(0)">
-            <span class="stage-idx">STAGE 01</span>
-            <div class="stage-title">🎙️ Sensor Ingestion</div>
-            <div class="stage-metric">Web Audio DSP &amp; Sensors</div>
+      <!-- Master Architecture Flow Canvas -->
+      <div class="blueprint-canvas-container">
+        <!-- Subgraph Clusters Grid -->
+        <div class="clusters-grid">
+
+          <!-- Cluster 1: Edge AI (ELYRA) -->
+          <div class="cluster-box" id="cluster-box-edge" style="border-top: 3px solid #38bdf8;">
+            <div class="cluster-header">
+              <div class="cluster-title">
+                <span>📱 CLUSTER 1: EDGE AI</span>
+              </div>
+              <span class="cluster-tag" style="background:rgba(56,189,248,0.15); color:#38bdf8;">ARM64 APK</span>
+            </div>
+            <div class="nodes-step-list">
+              <div class="node-box active" id="node-1-1" onclick="selectBlueprintNode('node-1-1', '01. SENSOR INGESTION', 'Sampling Web Audio DSP and Android accelerometer at 44.1 kHz with sub-50ms ring buffer lock.')">
+                <span class="node-idx">NODE 1.1</span>
+                <span>🎙️ Sensor Ingestion (44.1kHz)</span>
+              </div>
+              <div class="node-wire-arrow">▼</div>
+              <div class="node-box" id="node-1-2" onclick="selectBlueprintNode('node-1-2', '02. SLIDING CONTEXT', 'Sliding context window allocating 412/2048 tokens with active FIFO eviction to eliminate OOM.')">
+                <span class="node-idx">NODE 1.2</span>
+                <span>🪟 Sliding Window (2048 Tok)</span>
+              </div>
+              <div class="node-wire-arrow">▼</div>
+              <div class="node-box" id="node-1-3" onclick="selectBlueprintNode('node-1-3', '03. QUANTIZED ROUTER', 'Local Ollama runtime executing Qwen 2.5 3B (Q4_K_M) at 28.4 tok/s with zero cloud egress.')">
+                <span class="node-idx">NODE 1.3</span>
+                <span>🧠 Quantized Router (Qwen 2.5)</span>
+              </div>
+              <div class="node-wire-arrow">▼</div>
+              <div class="node-box" id="node-1-4" onclick="selectBlueprintNode('node-1-4', '04. TOOL DISPATCH', 'Deterministic function dispatcher invoking psutil hardware sensors and battery thermals.')">
+                <span class="node-idx">NODE 1.4</span>
+                <span>🛠️ Tool Dispatch (psutil)</span>
+              </div>
+            </div>
           </div>
 
-          <div class="flow-stage-card" id="stage-1" onclick="selectPipelineStage(1)">
-            <span class="stage-idx">STAGE 02</span>
-            <div class="stage-title">🪟 Sliding Context</div>
-            <div class="stage-metric">2,048 Tokens (FIFO Evict)</div>
+          <!-- Cluster 2: Cryptography & Standards (OPAP) -->
+          <div class="cluster-box" id="cluster-box-crypto" style="border-top: 3px solid #10b981;">
+            <div class="cluster-header">
+              <div class="cluster-title">
+                <span>🔐 CLUSTER 2: ATTESTATION</span>
+              </div>
+              <span class="cluster-tag" style="background:rgba(16,185,129,0.15); color:#10b981;">RFC 8037</span>
+            </div>
+            <div class="nodes-step-list">
+              <div class="node-box" id="node-2-1" onclick="selectBlueprintNode('node-2-1', '05. GS1 DIGITAL LINK', 'Generating GS1 Sunrise 2027 compliant URI: /01/00012345678905/21/SER-99 with canonical GTIN encoding.')">
+                <span class="node-idx">NODE 2.1</span>
+                <span>🏷️ GS1 Digital Link 2027</span>
+              </div>
+              <div class="node-wire-arrow">▼</div>
+              <div class="node-box" id="node-2-2" onclick="selectBlueprintNode('node-2-2', '06. ED25519 MERKLE PROOF', 'Ed25519 asymmetric signature tree generating sub-millisecond cryptographic inclusion proofs.')">
+                <span class="node-idx">NODE 2.2</span>
+                <span>🛡️ Ed25519 Merkle Proof</span>
+              </div>
+              <div class="node-wire-arrow">▼</div>
+              <div class="node-box" id="node-2-3" onclick="selectBlueprintNode('node-2-3', '07. ANTI-COUNTERFEIT PASS', 'Zero-knowledge verification validating authentic manufacture seal without leaking serial keys.')">
+                <span class="node-idx">NODE 2.3</span>
+                <span>📜 Anti-Counterfeit Proof</span>
+              </div>
+              <div class="node-wire-arrow">▼</div>
+              <div class="node-box" id="node-2-4" onclick="selectBlueprintNode('node-2-4', '08. EU DPP 2.0 COMPLIANCE', 'Minting EU Ecodesign ESPR & Battery Passport payload for offline decentralized inspection.')">
+                <span class="node-idx">NODE 2.4</span>
+                <span>🇪🇺 EU DPP 2.0 Mint</span>
+              </div>
+            </div>
           </div>
 
-          <div class="flow-stage-card" id="stage-2" onclick="selectPipelineStage(2)">
-            <span class="stage-idx">STAGE 03</span>
-            <div class="stage-title">🧠 Quantized Router</div>
-            <div class="stage-metric">Qwen 2.5 / Llama GGUF</div>
+          <!-- Cluster 3: Autonomous Multi-Agent Swarms (CortexFlow) -->
+          <div class="cluster-box" id="cluster-box-swarms" style="border-top: 3px solid #a855f7;">
+            <div class="cluster-header">
+              <div class="cluster-title">
+                <span>🤖 CLUSTER 3: SWARM CONSENSUS</span>
+              </div>
+              <span class="cluster-tag" style="background:rgba(168,85,247,0.15); color:#a855f7;">DAG STATE</span>
+            </div>
+            <div class="nodes-step-list">
+              <div class="node-box" id="node-3-1" onclick="selectBlueprintNode('node-3-1', '09. MISSION TASK INGESTION', 'Multi-tenant task dispatcher ingesting priority telemetry alerts and agent goal constraints.')">
+                <span class="node-idx">NODE 3.1</span>
+                <span>🤖 Mission Task Ingestion</span>
+              </div>
+              <div class="node-wire-arrow">▼</div>
+              <div class="node-box" id="node-3-2" onclick="selectBlueprintNode('node-3-2', '10. DAG GRAPH STATE MACHINE', 'State graph computing dependency resolution and cycle-free topological node scheduling.')">
+                <span class="node-idx">NODE 3.2</span>
+                <span>🕸️ DAG Graph State</span>
+              </div>
+              <div class="node-wire-arrow">▼</div>
+              <div class="node-box" id="node-3-3" onclick="selectBlueprintNode('node-3-3', '11. PARALLEL SWARM CONSENSUS', 'Peer agents executing Raft-inspired state reconciliation across distributed worker nodes.')">
+                <span class="node-idx">NODE 3.3</span>
+                <span>⚖️ Swarm Consensus</span>
+              </div>
+              <div class="node-wire-arrow">▼</div>
+              <div class="node-box" id="node-3-4" onclick="selectBlueprintNode('node-3-4', '12. ATOMIC ACTION EXECUTION', 'Dispatching verified sub-task instructions to target ground and edge runtime actuators.')">
+                <span class="node-idx">NODE 3.4</span>
+                <span>⚡ Action Execution</span>
+              </div>
+            </div>
           </div>
 
-          <div class="flow-stage-card" id="stage-3" onclick="selectPipelineStage(3)">
-            <span class="stage-idx">STAGE 04</span>
-            <div class="stage-title">🛠️ Tool Dispatch</div>
-            <div class="stage-metric">Deterministic Schema Call</div>
+          <!-- Cluster 4: Aerospace Astrodynamics & C2 (Cherub) -->
+          <div class="cluster-box" id="cluster-box-aero" style="border-top: 3px solid #f59e0b;">
+            <div class="cluster-header">
+              <div class="cluster-title">
+                <span>🛰️ CLUSTER 4: ASTRODYNAMICS</span>
+              </div>
+              <span class="cluster-tag" style="background:rgba(245,158,11,0.15); color:#f59e0b;">SGP4 / WGS84</span>
+            </div>
+            <div class="nodes-step-list">
+              <div class="node-box" id="node-4-1" onclick="selectBlueprintNode('node-4-1', '13. NORAD TLE INGESTION', 'Ingesting real-time Two-Line Element (TLE) orbital vectors from Space-Track catalog.')">
+                <span class="node-idx">NODE 4.1</span>
+                <span>🛰️ NORAD TLE Ingestion</span>
+              </div>
+              <div class="node-wire-arrow">▼</div>
+              <div class="node-box" id="node-4-2" onclick="selectBlueprintNode('node-4-2', '14. SGP4 ORBIT PROPAGATOR', 'High-precision orbital mechanics solver computing ECI/ECEF coordinates with WGS-84 oblate Earth model.')">
+                <span class="node-idx">NODE 4.2</span>
+                <span>🧮 SGP4 Orbit Propagator</span>
+              </div>
+              <div class="node-wire-arrow">▼</div>
+              <div class="node-box" id="node-4-3" onclick="selectBlueprintNode('node-4-3', '15. CONJUNCTION RISK (CAM)', 'Collision Avoidance Maneuver risk calculator: Miss Distance 4.82km (Pc &lt; 1e-7 nominal).')">
+                <span class="node-idx">NODE 4.3</span>
+                <span>⚠️ CAM Avoidance Risk</span>
+              </div>
+              <div class="node-wire-arrow">▼</div>
+              <div class="node-box" id="node-4-4" onclick="selectBlueprintNode('node-4-4', '16. GROUND STATION C2', 'CCSDS compliant telemetry frame uplink calculating Azimuth/Elevation/Range (AER) passes.')">
+                <span class="node-idx">NODE 4.4</span>
+                <span>📡 Ground Station AER C2</span>
+              </div>
+            </div>
           </div>
 
-          <div class="flow-stage-card" id="stage-4" onclick="selectPipelineStage(4)">
-            <span class="stage-idx">STAGE 05</span>
-            <div class="stage-title">📊 Anomaly Filter</div>
-            <div class="stage-metric">Rolling Z-Score (z &lt; 2.5)</div>
-          </div>
+        </div>
+
+        <!-- Animated Connecting Wire Banners Between Clusters -->
+        <div class="cluster-wire-banner" style="margin-top: 1.25rem;">
+          <span>⚡ VERIFIED EDGE TELEMETRY</span>
+          <span>───────▶</span>
+          <span>🔐 IMMUTABLE MERKLE AUDIT LOG</span>
+          <span>───────▶</span>
+          <span>🤖 SWARM CONSENSUS</span>
+          <span>───────▶</span>
+          <span>🛰️ CCSDS GROUND C2 FRAME</span>
         </div>
       </div>
 
-      <!-- Live Stage Console Logs -->
+      <!-- Live Pipeline Console Trace -->
       <div class="pipeline-console" id="pipeline-console-log">
         <div class="console-header-row">
-          <span>ACTIVE PIPELINE TRACE // ELYRA_RUNTIME</span>
-          <span id="pipeline-stage-tag" style="color:var(--cyan)">STAGE 01: SENSOR INGESTION</span>
+          <span>ACTIVE PIPELINE TRACE // SYSTEM BLUEPRINT</span>
+          <span id="pipeline-stage-tag" style="color:var(--cyan)">NODE 1.1: SENSOR INGESTION</span>
         </div>
         <div id="pipeline-log-content">
           &gt; INGESTION_BUS: Sampling Web Audio DSP &amp; Android accelerometer at 44.1 kHz. Frame buffer nominal. Sub-50ms latency locked.
@@ -2083,58 +2251,103 @@ Type one of the following commands:
       body.scrollTop = body.scrollHeight;
     }
 
-    // 6. Interactive Workflow Pipeline Engine
-    const pipelineStages = [
-      {
-        tag: "STAGE 01: SENSOR INGESTION",
-        log: "> INGESTION_BUS: Sampling Web Audio DSP & Android accelerometer at 44.1 kHz. Frame buffer nominal. Sub-50ms latency locked."
-      },
-      {
-        tag: "STAGE 02: SLIDING CONTEXT",
-        log: "> MEMORY_MANAGER: Active window 412/2048 tokens. FIFO eviction threshold at 85%. Zero OOM risk detected on ARM64 host."
-      },
-      {
-        tag: "STAGE 03: QUANTIZED ROUTER",
-        log: "> INFERENCE_ROUTER: Local Ollama daemon active. Qwen 2.5 3B (Q4_K_M) dispatching at 28.4 tok/s. Zero cloud egress."
-      },
-      {
-        tag: "STAGE 04: TOOL DISPATCH",
-        log: "> TOOL_REGISTRY: Schema parsed: `get_device_telemetry()`. Polling psutil CPU load, battery thermals, and network latency."
-      },
-      {
-        tag: "STAGE 05: ANOMALY FILTER",
-        log: "> TELEMETRY_ENGINE: Rolling Z-Score matrix computed (z = 0.42 < 2.50 threshold). State: NOMINAL. Feedback delivered to APK UI."
-      }
+    // 6. Interactive Multi-Cluster Architecture Blueprint Controller
+    const blueprintNodeList = [
+      { id: 'node-1-1', title: 'NODE 1.1: SENSOR INGESTION', log: '> INGESTION_BUS: Sampling Web Audio DSP & Android accelerometer at 44.1 kHz. Sub-50ms ring buffer nominal. Zero jitter.' },
+      { id: 'node-1-2', title: 'NODE 1.2: SLIDING CONTEXT', log: '> MEMORY_MANAGER: Allocated 412/2048 tokens. FIFO eviction threshold at 85%. Zero memory fragmentation on ARM64 host.' },
+      { id: 'node-1-3', title: 'NODE 1.3: QUANTIZED ROUTER', log: '> INFERENCE_ROUTER: Local Ollama daemon active. Qwen 2.5 3B (Q4_K_M) dispatching at 28.4 tok/s. Zero cloud egress.' },
+      { id: 'node-1-4', title: 'NODE 1.4: TOOL DISPATCH', log: '> TOOL_REGISTRY: Schema parsed: `get_device_telemetry()`. Polling psutil CPU load, thermals, and battery charge level.' },
+      { id: 'node-2-1', title: 'NODE 2.1: GS1 DIGITAL LINK', log: '> GS1_ENCODER: Canonical URI generated: `https://id.gs1.org/01/00012345678905/21/SER-99` (GS1 Sunrise 2027 standard).' },
+      { id: 'node-2-2', title: 'NODE 2.2: MERKLE SIGNATURE', log: '> CRYPTO_CORE: Ed25519 asymmetric root tree sealed. SHA-256 inclusion proof validated in 0.48ms.' },
+      { id: 'node-2-3', title: 'NODE 2.3: ANTI-COUNTERFEIT', log: '> ATTESTATION_ENGINE: Offline V-Pass verification PASSED. Cryptographic authenticity stamp validated.' },
+      { id: 'node-2-4', title: 'NODE 2.4: EU DPP 2.0 MINT', log: '> COMPLIANCE_MINT: EU Ecodesign ESPR battery passport payload created. JSON-LD schema validated.' },
+      { id: 'node-3-1', title: 'NODE 3.1: TASK INGESTION', log: '> SWARM_DISPATCH: Priority goal ingested: [SURVEILLANCE_SWARM_ALPHA]. Cost constraints & SLA attached.' },
+      { id: 'node-3-2', title: 'NODE 3.2: DAG GRAPH STATE', log: '> GRAPH_ENGINE: Dynamic topological sort resolved. 6 sub-agents scheduled across 3 parallel execution branches.' },
+      { id: 'node-3-3', title: 'NODE 3.3: SWARM CONSENSUS', log: '> RAFT_CONSENSUS: Quorum reached (3/3 peer nodes). Distributed lock acquired for ground sensor actuator.' },
+      { id: 'node-3-4', title: 'NODE 3.4: ACTION EXECUTION', log: '> ACTUATOR_BUS: Verified sub-task dispatched to target runtime. Execution completed in 12ms.' },
+      { id: 'node-4-1', title: 'NODE 4.1: NORAD TLE INGEST', log: '> TLE_ORBIT_CATALOG: Ingested NORAD 25544 (ISS). Epoch: 2026-10-06T07:00:00Z. BSTAR drag term: 0.000128.' },
+      { id: 'node-4-2', title: 'NODE 4.2: SGP4 PROPAGATOR', log: '> ASTRODYNAMICS_CORE: Propagated orbit 1440 mins forward. Current Altitude: 418.2 km, Velocity: 7.66 km/s.' },
+      { id: 'node-4-3', title: 'NODE 4.3: CAM AVOIDANCE', log: '> CONJUNCTION_ENGINE: Miss distance 4.82 km computed. Probability of Collision Pc < 1e-7 (GREEN: Nominal).' },
+      { id: 'node-4-4', title: 'NODE 4.4: GROUND STATION C2', log: '> C2_GROUND_UPLINK: CCSDS frame sealed. Azimuth: 142.4°, Elevation: 58.2°, Slant Range: 642.1 km. Tracking locked.' }
     ];
 
-    function selectPipelineStage(idx) {
-      document.querySelectorAll('.flow-stage-card').forEach((card, i) => {
-        card.classList.toggle('active', i === idx);
-      });
-      const tag = document.getElementById('pipeline-stage-tag');
-      const log = document.getElementById('pipeline-log-content');
-      if (tag && log && pipelineStages[idx]) {
-        tag.textContent = pipelineStages[idx].tag;
-        log.innerHTML = pipelineStages[idx].log;
-      }
+    function selectBlueprintNode(nodeId, title, logText) {
+      document.querySelectorAll('.node-box').forEach(node => node.classList.remove('active'));
+      const activeEl = document.getElementById(nodeId);
+      if (activeEl) activeEl.classList.add('active');
+
+      const tagEl = document.getElementById('pipeline-stage-tag');
+      const logEl = document.getElementById('pipeline-log-content');
+      if (tagEl) tagEl.textContent = title;
+      if (logEl) logEl.innerHTML = `&gt; ${logText}`;
+
+      playCyberChime(740, 'sine', 0.1);
     }
 
-    let isSimulatingPipeline = false;
-    function simulatePipelineCycle() {
-      if (isSimulatingPipeline) return;
-      isSimulatingPipeline = true;
-      let currentStage = 0;
-      
+    function switchBlueprintView(mode) {
+      document.querySelectorAll('.blueprint-tab-btn').forEach(btn => btn.classList.remove('active'));
+      const activeTab = document.getElementById(`tab-bp-${mode}`);
+      if (activeTab) activeTab.classList.add('active');
+
+      const edgeBox = document.getElementById('cluster-box-edge');
+      const cryptoBox = document.getElementById('cluster-box-crypto');
+      const swarmsBox = document.getElementById('cluster-box-swarms');
+      const aeroBox = document.getElementById('cluster-box-aero');
+
+      if (mode === 'all') {
+        if (edgeBox) edgeBox.style.display = 'flex';
+        if (cryptoBox) cryptoBox.style.display = 'flex';
+        if (swarmsBox) swarmsBox.style.display = 'flex';
+        if (aeroBox) aeroBox.style.display = 'flex';
+      } else if (mode === 'edge') {
+        if (edgeBox) edgeBox.style.display = 'flex';
+        if (cryptoBox) cryptoBox.style.display = 'none';
+        if (swarmsBox) swarmsBox.style.display = 'none';
+        if (aeroBox) aeroBox.style.display = 'none';
+      } else if (mode === 'crypto') {
+        if (edgeBox) edgeBox.style.display = 'none';
+        if (cryptoBox) cryptoBox.style.display = 'flex';
+        if (swarmsBox) swarmsBox.style.display = 'none';
+        if (aeroBox) aeroBox.style.display = 'none';
+      } else if (mode === 'swarms') {
+        if (edgeBox) edgeBox.style.display = 'none';
+        if (cryptoBox) cryptoBox.style.display = 'none';
+        if (swarmsBox) swarmsBox.style.display = 'flex';
+        if (aeroBox) aeroBox.style.display = 'none';
+      } else if (mode === 'aero') {
+        if (edgeBox) edgeBox.style.display = 'none';
+        if (cryptoBox) cryptoBox.style.display = 'none';
+        if (swarmsBox) swarmsBox.style.display = 'none';
+        if (aeroBox) aeroBox.style.display = 'flex';
+      }
+      playCyberChime(600, 'sine', 0.1);
+    }
+
+    let isSimulatingBlueprint = false;
+    function simulateFullPipelineTrace() {
+      if (isSimulatingBlueprint) return;
+      isSimulatingBlueprint = true;
+      switchBlueprintView('all');
+
+      let currentIdx = 0;
       const interval = setInterval(() => {
-        selectPipelineStage(currentStage);
-        currentStage++;
-        if (currentStage >= pipelineStages.length) {
+        const item = blueprintNodeList[currentIdx];
+        if (item) {
+          selectBlueprintNode(item.id, item.title, item.log);
+        }
+        currentIdx++;
+        if (currentIdx >= blueprintNodeList.length) {
           clearInterval(interval);
           setTimeout(() => {
-            isSimulatingPipeline = false;
-          }, 800);
+            isSimulatingBlueprint = false;
+          }, 600);
         }
-      }, 700);
+      }, 550);
+    }
+
+    // Legacy alias
+    function simulatePipelineCycle() {
+      simulateFullPipelineTrace();
     }
 
     // 7. Showcase Tab Switcher (ELYRA vs 3D Spatial Studio)
@@ -2670,13 +2883,13 @@ Type one of the following commands:
         }
       },
       {
-        badge: "STEP 4/6: EXECUTION PIPELINE",
-        title: "Live Execution & Telemetry Pipeline",
-        text: "Watch live data flow from audio sensors through token budgeting and quantized local inference to statistical z-score anomaly filters!",
+        badge: "STEP 4/6: ARCHITECTURE BLUEPRINT",
+        title: "Distributed Systems Blueprint",
+        text: "Inspect our multi-cluster execution flow! Trace data across Edge AI, RFC 8037 Cryptography, Multi-Agent Swarms, and SGP4 Astrodynamics C2.",
         action: () => {
           const el = document.getElementById('architecture-pipeline');
           if (el) el.scrollIntoView({ behavior: 'smooth', block: 'center' });
-          simulatePipelineCycle();
+          simulateFullPipelineTrace();
           playCyberChime(880, 'sine', 0.15);
         }
       },
