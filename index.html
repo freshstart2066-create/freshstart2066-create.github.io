@@ -26,19 +26,19 @@
 
   <style>
     :root {
-      --bg: #050811;
-      --bg-surface: #0a0f1d;
-      --bg-elevated: #11182c;
-      --bg-glass: rgba(10, 15, 29, 0.7);
-      --border: #1e293b;
-      --border-bright: #334155;
+      --bg: #000000;
+      --bg-surface: rgba(10, 10, 15, 0.88);
+      --bg-elevated: rgba(18, 18, 26, 0.95);
+      --bg-glass: rgba(5, 5, 8, 0.88);
+      --border: rgba(255, 255, 255, 0.08);
+      --border-bright: rgba(255, 255, 255, 0.2);
       
       --cyan: #38bdf8;
-      --cyan-glow: rgba(56, 189, 248, 0.35);
+      --cyan-glow: rgba(56, 189, 248, 0.4);
       --emerald: #10b981;
-      --emerald-glow: rgba(16, 185, 129, 0.3);
+      --emerald-glow: rgba(16, 185, 129, 0.35);
       --purple: #a855f7;
-      --purple-glow: rgba(168, 85, 247, 0.3);
+      --purple-glow: rgba(168, 85, 247, 0.35);
       --amber: #f59e0b;
       --rose: #f43f5e;
       
@@ -53,7 +53,13 @@
     * { box-sizing: border-box; margin: 0; padding: 0; }
 
     body {
-      background-color: var(--bg);
+      background-color: #000000;
+      background-image: 
+        radial-gradient(circle at 50% -20%, rgba(56, 189, 248, 0.12) 0%, transparent 60%),
+        radial-gradient(circle at 80% 60%, rgba(168, 85, 247, 0.07) 0%, transparent 50%),
+        linear-gradient(to right, rgba(255, 255, 255, 0.02) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+      background-size: 100% 100%, 100% 100%, 48px 48px, 48px 48px;
       color: var(--text);
       font-family: var(--font-sans);
       line-height: 1.6;
@@ -71,7 +77,7 @@
       height: 100vh;
       z-index: 0;
       pointer-events: none;
-      opacity: 0.85;
+      opacity: 0.95;
     }
 
     /* Ambient 2D Particle Canvas */
@@ -83,7 +89,7 @@
       height: 100vh;
       z-index: 0;
       pointer-events: none;
-      opacity: 0.35;
+      opacity: 0.3;
     }
 
     /* Interactive Spotlight Overlay */
@@ -92,7 +98,7 @@
       inset: 0;
       z-index: 1;
       pointer-events: none;
-      background: radial-gradient(800px circle at var(--mouse-x, 50vw) var(--mouse-y, 50vh), rgba(56, 189, 248, 0.08), transparent 80%);
+      background: radial-gradient(800px circle at var(--mouse-x, 50vw) var(--mouse-y, 50vh), rgba(56, 189, 248, 0.12), transparent 75%);
     }
 
     /* Header */
@@ -317,8 +323,8 @@
     .showcase-tab-btn.active {
       background: var(--bg-elevated);
       color: var(--cyan);
-      border: 1px solid rgba(56, 189, 248, 0.35);
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+      border: 1px solid rgba(56, 189, 248, 0.4);
+      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.6);
     }
 
     /* 3D Holographic Spatial Matrix Viewport */
@@ -326,13 +332,13 @@
       position: relative;
       width: 100%;
       height: 220px;
-      background: radial-gradient(circle at center, rgba(14, 28, 54, 0.85) 0%, rgba(5, 8, 17, 0.98) 85%);
-      border: 1px solid rgba(56, 189, 248, 0.25);
+      background: radial-gradient(circle at center, rgba(14, 16, 24, 0.95) 0%, #000000 85%);
+      border: 1px solid rgba(255, 255, 255, 0.12);
       border-radius: 12px;
       overflow: hidden;
       margin-bottom: 1rem;
       cursor: grab;
-      box-shadow: inset 0 0 25px rgba(56, 189, 248, 0.1);
+      box-shadow: inset 0 0 35px rgba(0, 0, 0, 0.9);
     }
     .hologram-container:active {
       cursor: grabbing;
@@ -368,22 +374,24 @@
       color: var(--text-dim);
     }
     .hologram-hud-tag {
-      background: rgba(5, 8, 17, 0.75);
+      background: rgba(0, 0, 0, 0.85);
       padding: 0.15rem 0.45rem;
       border-radius: 4px;
-      border: 1px solid rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.1);
     }
 
     /* ELYRA Mobile Phone Interactive Showcase */
     .hero-interactive-card {
-      background: var(--bg-surface);
-      border: 1px solid rgba(56, 189, 248, 0.25);
+      background: rgba(8, 8, 12, 0.9);
+      border: 1px solid rgba(255, 255, 255, 0.12);
       border-radius: 20px;
       padding: 1.5rem;
-      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6), 0 0 30px rgba(56, 189, 248, 0.1);
+      box-shadow: 0 25px 60px rgba(0, 0, 0, 0.9), 0 0 35px rgba(56, 189, 248, 0.08);
       position: relative;
       overflow: hidden;
       perspective: 1000px;
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
     }
     .phone-header {
       display: flex;
@@ -515,8 +523,8 @@
       perspective: 1200px;
     }
     .project-card {
-      background: var(--bg-surface);
-      border: 1px solid var(--border);
+      background: rgba(8, 8, 12, 0.88);
+      border: 1px solid rgba(255, 255, 255, 0.08);
       border-radius: 16px;
       padding: 1.75rem;
       display: flex;
@@ -527,6 +535,8 @@
       overflow: hidden;
       transform-style: preserve-3d;
       will-change: transform;
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
     }
     .project-card::before {
       content: "";
@@ -534,7 +544,7 @@
       inset: 0;
       border-radius: 16px;
       padding: 1px;
-      background: radial-gradient(400px circle at var(--card-x, 0px) var(--card-y, 0px), rgba(56, 189, 248, 0.45), transparent 70%);
+      background: radial-gradient(400px circle at var(--card-x, 0px) var(--card-y, 0px), rgba(56, 189, 248, 0.5), transparent 70%);
       -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
       -webkit-mask-composite: xor;
       mask-composite: exclude;
@@ -546,13 +556,13 @@
       opacity: 1;
     }
     .project-card:hover {
-      border-color: rgba(56, 189, 248, 0.5);
-      box-shadow: 0 25px 50px -10px rgba(0, 0, 0, 0.7), 0 0 30px rgba(56, 189, 248, 0.2);
+      border-color: rgba(56, 189, 248, 0.55);
+      box-shadow: 0 25px 60px -10px rgba(0, 0, 0, 0.95), 0 0 35px rgba(56, 189, 248, 0.2);
     }
     .project-card.featured {
       grid-column: span 2;
-      background: linear-gradient(180deg, rgba(14, 20, 36, 0.95) 0%, rgba(10, 15, 29, 0.95) 100%);
-      border-color: rgba(56, 189, 248, 0.35);
+      background: linear-gradient(180deg, rgba(14, 14, 20, 0.95) 0%, rgba(6, 6, 10, 0.98) 100%);
+      border-color: rgba(255, 255, 255, 0.14);
     }
     @media (max-width: 900px) {
       .project-card.featured {
@@ -1000,6 +1010,120 @@
       border-bottom: 1px solid rgba(255, 255, 255, 0.08);
       padding-bottom: 0.5rem;
       margin-bottom: 0.25rem;
+    }
+
+    /* 3D Animated AI Tour Bot Widget */
+    .tour-bot-dock {
+      position: fixed;
+      bottom: 24px;
+      right: 28px;
+      z-index: 1000;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      gap: 0.75rem;
+      pointer-events: none;
+    }
+    .bot-speech-bubble {
+      background: rgba(10, 10, 16, 0.94);
+      border: 1px solid rgba(56, 189, 248, 0.4);
+      border-radius: 16px;
+      padding: 1.25rem 1.4rem;
+      max-width: 340px;
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.85), 0 0 25px rgba(56, 189, 248, 0.2);
+      backdrop-filter: blur(20px) saturate(180%);
+      -webkit-backdrop-filter: blur(20px) saturate(180%);
+      pointer-events: auto;
+      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+      position: relative;
+    }
+    .bot-bubble-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 0.5rem;
+      padding-right: 1.2rem;
+    }
+    .bot-badge {
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      color: var(--cyan);
+      font-weight: 700;
+    }
+    .bot-step-badge {
+      font-family: var(--font-mono);
+      font-size: 0.65rem;
+      color: var(--text-dim);
+      background: rgba(255, 255, 255, 0.06);
+      padding: 0.15rem 0.45rem;
+      border-radius: 4px;
+    }
+    .bot-message-text {
+      font-size: 0.86rem;
+      color: var(--text);
+      line-height: 1.5;
+      margin-bottom: 1rem;
+      min-height: 44px;
+    }
+    .bot-action-row {
+      display: flex;
+      gap: 0.5rem;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+    .bot-close-btn {
+      position: absolute;
+      top: 10px;
+      right: 12px;
+      background: transparent;
+      border: none;
+      color: var(--text-dim);
+      cursor: pointer;
+      font-size: 0.95rem;
+      line-height: 1;
+      padding: 0.2rem;
+      transition: color 0.2s;
+    }
+    .bot-close-btn:hover {
+      color: #ffffff;
+    }
+    .bot-canvas-wrapper {
+      width: 110px;
+      height: 110px;
+      position: relative;
+      cursor: grab;
+      pointer-events: auto;
+      filter: drop-shadow(0 10px 20px rgba(0, 0, 0, 0.8)) drop-shadow(0 0 15px rgba(56, 189, 248, 0.4));
+      transition: transform 0.2s ease;
+    }
+    .bot-canvas-wrapper:hover {
+      transform: scale(1.08);
+    }
+    .bot-canvas-wrapper:active {
+      cursor: grabbing;
+    }
+    #elyra-bot-3d-canvas {
+      width: 100%;
+      height: 100%;
+      display: block;
+    }
+    .bot-status-ring {
+      position: absolute;
+      bottom: 2px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 50px;
+      height: 12px;
+      background: radial-gradient(ellipse at center, rgba(56, 189, 248, 0.8) 0%, transparent 70%);
+      border-radius: 50%;
+      animation: botRingPulse 1.8s infinite ease-in-out;
+    }
+    @keyframes botRingPulse {
+      0%, 100% { opacity: 0.4; transform: translateX(-50%) scale(0.9); }
+      50% { opacity: 1; transform: translateX(-50%) scale(1.2); }
     }
 
     /* Footer */
@@ -1669,6 +1793,37 @@ Type one of the following commands:
     </div>
   </div>
 
+  <!-- 3D Animated AI Tour Bot Companion Dock -->
+  <div class="tour-bot-dock" id="tour-bot-dock">
+    <!-- Interactive Speech Bubble -->
+    <div class="bot-speech-bubble" id="bot-speech-bubble">
+      <button class="bot-close-btn" onclick="toggleTourBubble()" title="Minimize Guide">✕</button>
+      <div class="bot-bubble-header">
+        <div class="bot-badge">
+          <span class="pulse-dot"></span> ELYRA-BOT // 3D TOUR GUIDE
+        </div>
+        <span class="bot-step-badge" id="bot-step-badge">STEP 1/5</span>
+      </div>
+      <div class="bot-message-text" id="bot-message-text">
+        "Greetings! I am ELYRA-3D, your on-device Systems Guide. Click below to take an interactive flight tour through our live engineering architectures!"
+      </div>
+      <div class="bot-action-row" id="bot-action-row">
+        <button class="btn btn-primary" style="padding:0.45rem 0.9rem; font-size:0.78rem;" onclick="startInteractiveTour()">
+          🚀 Launch Guided Tour
+        </button>
+        <button class="btn btn-secondary" style="padding:0.45rem 0.8rem; font-size:0.78rem;" onclick="toggleTourBubble()">
+          Dismiss
+        </button>
+      </div>
+    </div>
+
+    <!-- 3D WebGL Bot Canvas -->
+    <div class="bot-canvas-wrapper" id="bot-canvas-wrapper" onclick="handleBotClick()">
+      <canvas id="elyra-bot-3d-canvas"></canvas>
+      <div class="bot-status-ring"></div>
+    </div>
+  </div>
+
   <!-- Footer -->
   <footer>
     <p>Constructed with high-assurance standards. Hosted freely via <a href="https://pages.github.com" target="_blank">GitHub Pages</a>.</p>
@@ -2303,6 +2458,346 @@ Type one of the following commands:
         card.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)';
       });
     });
+
+    // 10. Web Audio Sound Synthesizer
+    let audioCtx = null;
+    function playCyberChime(freq = 660, type = 'sine', duration = 0.12) {
+      try {
+        if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+        if (audioCtx.state === 'suspended') audioCtx.resume();
+        const osc = audioCtx.createOscillator();
+        const gain = audioCtx.createGain();
+        osc.type = type;
+        osc.frequency.setValueAtTime(freq, audioCtx.currentTime);
+        gain.gain.setValueAtTime(0.08, audioCtx.currentTime);
+        gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + duration);
+        osc.connect(gain);
+        gain.connect(audioCtx.destination);
+        osc.start();
+        osc.stop(audioCtx.currentTime + duration);
+      } catch (e) {}
+    }
+
+    // 11. 3D Animated AI Bot Character Engine (Three.js)
+    let botScene, botCamera, botRenderer;
+    let botGroup, botHead, botVisor, botRing, botLeftHand, botRightHand, botAntennaLed;
+    let mouseGlobal = { x: 0, y: 0 };
+    let isBotWaving = false;
+
+    window.addEventListener('pointermove', (e) => {
+      mouseGlobal.x = (e.clientX / window.innerWidth) * 2 - 1;
+      mouseGlobal.y = -(e.clientY / window.innerHeight) * 2 + 1;
+    });
+
+    (function init3DBot() {
+      const canvas = document.getElementById('elyra-bot-3d-canvas');
+      const wrapper = document.getElementById('bot-canvas-wrapper');
+      if (!canvas || !wrapper || typeof THREE === 'undefined') return;
+
+      botScene = new THREE.Scene();
+      botCamera = new THREE.PerspectiveCamera(45, 1, 0.1, 100);
+      botCamera.position.set(0, 0, 3.2);
+
+      botRenderer = new THREE.WebGLRenderer({ canvas: canvas, alpha: true, antialias: true });
+      botRenderer.setSize(110, 110);
+      botRenderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+
+      // Lighting
+      const ambLight = new THREE.AmbientLight(0xffffff, 0.9);
+      botScene.add(ambLight);
+
+      const pLight = new THREE.PointLight(0x38bdf8, 3, 20);
+      pLight.position.set(2, 3, 4);
+      botScene.add(pLight);
+
+      const pLightViolet = new THREE.PointLight(0xc084fc, 2, 20);
+      pLightViolet.position.set(-2, -2, 3);
+      botScene.add(pLightViolet);
+
+      botGroup = new THREE.Group();
+
+      // Bot Head Capsule
+      const headGeo = new THREE.SphereGeometry(0.65, 32, 32);
+      headGeo.scale(1, 0.9, 0.95);
+      const headMat = new THREE.MeshStandardMaterial({
+        color: 0x0f172a,
+        metalness: 0.9,
+        roughness: 0.2,
+        wireframe: false
+      });
+      botHead = new THREE.Mesh(headGeo, headMat);
+      botGroup.add(botHead);
+
+      // Cyber Glow Visor
+      const visorGeo = new THREE.SphereGeometry(0.55, 32, 16, 0, Math.PI);
+      visorGeo.scale(1, 0.45, 0.8);
+      const visorMat = new THREE.MeshBasicMaterial({
+        color: 0x38bdf8,
+        transparent: true,
+        opacity: 0.9
+      });
+      botVisor = new THREE.Mesh(visorGeo, visorMat);
+      botVisor.position.set(0, 0.05, 0.25);
+      botVisor.rotation.x = Math.PI / 2;
+      botHead.add(botVisor);
+
+      // Visor Eye Dots
+      const eyeMat = new THREE.MeshBasicMaterial({ color: 0xffffff });
+      const eyeGeo = new THREE.SphereGeometry(0.06, 16, 16);
+      const leftEye = new THREE.Mesh(eyeGeo, eyeMat);
+      leftEye.position.set(-0.2, 0.05, 0.58);
+      botHead.add(leftEye);
+
+      const rightEye = new THREE.Mesh(eyeGeo, eyeMat);
+      rightEye.position.set(0.2, 0.05, 0.58);
+      botHead.add(rightEye);
+
+      // Antenna & Flashing LED
+      const antStalkGeo = new THREE.CylinderGeometry(0.02, 0.02, 0.35, 8);
+      const antStalkMat = new THREE.MeshStandardMaterial({ color: 0x64748b, metalness: 0.8 });
+      const antStalk = new THREE.Mesh(antStalkGeo, antStalkMat);
+      antStalk.position.set(0, 0.72, 0);
+      botHead.add(antStalk);
+
+      const ledGeo = new THREE.SphereGeometry(0.08, 16, 16);
+      const ledMat = new THREE.MeshBasicMaterial({ color: 0x38bdf8 });
+      botAntennaLed = new THREE.Mesh(ledGeo, ledMat);
+      botAntennaLed.position.set(0, 0.9, 0);
+      botHead.add(botAntennaLed);
+
+      // Anti-Gravity Thruster Ring
+      const ringGeo = new THREE.TorusGeometry(0.48, 0.04, 16, 32);
+      const ringMat = new THREE.MeshBasicMaterial({ color: 0x38bdf8, wireframe: true });
+      botRing = new THREE.Mesh(ringGeo, ringMat);
+      botRing.position.set(0, -0.65, 0);
+      botRing.rotation.x = Math.PI / 2;
+      botGroup.add(botRing);
+
+      // Left Mechanical Hand
+      const handGeo = new THREE.CapsuleGeometry ? new THREE.CapsuleGeometry(0.08, 0.25, 4, 8) : new THREE.CylinderGeometry(0.08, 0.08, 0.25, 8);
+      const handMat = new THREE.MeshStandardMaterial({ color: 0x334155, metalness: 0.7 });
+      
+      botLeftHand = new THREE.Mesh(handGeo, handMat);
+      botLeftHand.position.set(-0.85, -0.15, 0);
+      botLeftHand.rotation.z = Math.PI / 6;
+      botGroup.add(botLeftHand);
+
+      // Right Mechanical Hand (Waving Hand)
+      botRightHand = new THREE.Mesh(handGeo, handMat);
+      botRightHand.position.set(0.85, -0.15, 0);
+      botRightHand.rotation.z = -Math.PI / 6;
+      botGroup.add(botRightHand);
+
+      botScene.add(botGroup);
+
+      // Animation Loop
+      function animateBot(time) {
+        requestAnimationFrame(animateBot);
+
+        const t = time * 0.003;
+
+        // Hover bobbing motion
+        botGroup.position.y = Math.sin(t) * 0.08;
+
+        // Follow mouse pointer with head
+        const targetRotY = mouseGlobal.x * 0.55;
+        const targetRotX = -mouseGlobal.y * 0.35;
+        botHead.rotation.y += (targetRotY - botHead.rotation.y) * 0.1;
+        botHead.rotation.x += (targetRotX - botHead.rotation.x) * 0.1;
+
+        // Spin anti-gravity thruster ring
+        if (botRing) {
+          botRing.rotation.z = t * 1.5;
+        }
+
+        // Flashing LED pulse
+        if (botAntennaLed) {
+          botAntennaLed.scale.setScalar(0.9 + Math.sin(t * 3) * 0.25);
+        }
+
+        // Waving Hand Animation
+        if (isBotWaving && botRightHand) {
+          botRightHand.position.y = 0.3 + Math.sin(t * 8) * 0.1;
+          botRightHand.rotation.z = -Math.PI / 3 + Math.sin(t * 12) * 0.4;
+        } else if (botRightHand) {
+          botRightHand.position.y = -0.15 + Math.sin(t) * 0.04;
+          botRightHand.rotation.z = -Math.PI / 6 + Math.sin(t) * 0.05;
+        }
+
+        botRenderer.render(botScene, botCamera);
+      }
+      animateBot(performance.now());
+    })();
+
+    // 12. Interactive Guided Portfolio Tour Engine
+    let currentTourStep = 0;
+    const tourSteps = [
+      {
+        badge: "STEP 1/6: ARCHITECT MISSION",
+        title: "Welcome to Systems Architecture",
+        text: "I am ELYRA, your 3D autonomous guide! We engineer mission-critical Aerospace C2, Applied Cryptography (OPAP), and On-Device Mobile AI.",
+        action: () => {
+          window.scrollTo({ top: 0, behavior: 'smooth' });
+          playCyberChime(520, 'sine', 0.15);
+        }
+      },
+      {
+        badge: "STEP 2/6: 3D SPATIAL STUDIO",
+        title: "3D Holographic Spatial Studio",
+        text: "Inspect our WebGL 3D Spatial Matrix! Switch between SGP4 satellite orbital tracks, neural quantum synapses, and Merkle cryptography crystals.",
+        action: () => {
+          switchShowcaseTab('3d');
+          switch3DScene('orbit');
+          pulse3DEnergyWave();
+          playCyberChime(660, 'sine', 0.15);
+        }
+      },
+      {
+        badge: "STEP 3/6: ON-DEVICE ELYRA APK",
+        title: "ELYRA Android Edge AI",
+        text: "Explore the standalone Android APK runtime! Features sub-second local LLM routing (Qwen 2.5), sliding-window memory buffers, and live sensor triage.",
+        action: () => {
+          switchShowcaseTab('elyra');
+          triggerElyraTriage();
+          playCyberChime(780, 'sine', 0.15);
+        }
+      },
+      {
+        badge: "STEP 4/6: EXECUTION PIPELINE",
+        title: "Live Execution & Telemetry Pipeline",
+        text: "Watch live data flow from audio sensors through token budgeting and quantized local inference to statistical z-score anomaly filters!",
+        action: () => {
+          const el = document.getElementById('architecture-pipeline');
+          if (el) el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+          simulatePipelineCycle();
+          playCyberChime(880, 'sine', 0.15);
+        }
+      },
+      {
+        badge: "STEP 5/6: PRODUCTION REPOSITORIES",
+        title: "High-Assurance Systems Portfolio",
+        text: "Browse 14 production-grade open-source repositories with true 3D parallax tilt, GS1 Sunrise 2027 compliance, and Astrodynamics C2.",
+        action: () => {
+          const el = document.getElementById('projects');
+          if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          playCyberChime(960, 'sine', 0.15);
+        }
+      },
+      {
+        badge: "STEP 6/6: COMMAND PALETTE",
+        title: "Interactive System Terminal [⌘K]",
+        text: "You can trigger commands anytime! Try typing 'elyra', 'cherub', or 'opap' to run instant live system simulations.",
+        action: () => {
+          toggleCommandPalette();
+          runCommand('elyra');
+          playCyberChime(1100, 'triangle', 0.2);
+        }
+      }
+    ];
+
+    function renderTourStep(idx) {
+      currentTourStep = idx;
+      const step = tourSteps[idx];
+      const bubble = document.getElementById('bot-speech-bubble');
+      const badge = document.getElementById('bot-step-badge');
+      const text = document.getElementById('bot-message-text');
+      const actionRow = document.getElementById('bot-action-row');
+
+      if (!bubble || !step) return;
+
+      bubble.style.display = 'block';
+      badge.textContent = step.badge;
+      
+      // Typewriter animation
+      text.textContent = "";
+      let charIdx = 0;
+      const fullText = `"${step.text}"`;
+      clearInterval(window.botTypeInterval);
+      window.botTypeInterval = setInterval(() => {
+        text.textContent += fullText[charIdx];
+        charIdx++;
+        if (charIdx >= fullText.length) {
+          clearInterval(window.botTypeInterval);
+        }
+      }, 16);
+
+      // Buttons
+      if (idx === 0) {
+        actionRow.innerHTML = `
+          <button class="btn btn-primary" style="padding:0.45rem 0.9rem; font-size:0.78rem;" onclick="nextTourStep()">
+            🚀 Start Flight Tour
+          </button>
+          <button class="btn btn-secondary" style="padding:0.45rem 0.8rem; font-size:0.78rem;" onclick="toggleTourBubble()">
+            Dismiss
+          </button>
+        `;
+      } else if (idx === tourSteps.length - 1) {
+        actionRow.innerHTML = `
+          <button class="btn btn-secondary" style="padding:0.45rem 0.75rem; font-size:0.75rem;" onclick="prevTourStep()">❮ Prev</button>
+          <button class="btn btn-primary" style="padding:0.45rem 0.9rem; font-size:0.78rem;" onclick="exitTour()">
+            ✨ Finish Tour
+          </button>
+        `;
+      } else {
+        actionRow.innerHTML = `
+          <button class="btn btn-secondary" style="padding:0.45rem 0.75rem; font-size:0.75rem;" onclick="prevTourStep()">❮ Prev</button>
+          <button class="btn btn-primary" style="padding:0.45rem 0.9rem; font-size:0.78rem;" onclick="nextTourStep()">
+            Next Step ❯
+          </button>
+          <button class="btn btn-secondary" style="padding:0.45rem 0.75rem; font-size:0.75rem;" onclick="exitTour()">✕</button>
+        `;
+      }
+
+      // Execute Step Action
+      if (step.action) step.action();
+
+      // Trigger bot waving
+      isBotWaving = true;
+      setTimeout(() => { isBotWaving = false; }, 1800);
+    }
+
+    function startInteractiveTour() {
+      playCyberChime(700, 'sine', 0.15);
+      renderTourStep(0);
+    }
+
+    function nextTourStep() {
+      if (currentTourStep < tourSteps.length - 1) {
+        renderTourStep(currentTourStep + 1);
+      } else {
+        exitTour();
+      }
+    }
+
+    function prevTourStep() {
+      if (currentTourStep > 0) {
+        renderTourStep(currentTourStep - 1);
+      }
+    }
+
+    function exitTour() {
+      playCyberChime(440, 'sine', 0.12);
+      const bubble = document.getElementById('bot-speech-bubble');
+      if (bubble) bubble.style.display = 'none';
+    }
+
+    function toggleTourBubble() {
+      const bubble = document.getElementById('bot-speech-bubble');
+      if (!bubble) return;
+      const isHidden = bubble.style.display === 'none';
+      bubble.style.display = isHidden ? 'block' : 'none';
+      if (isHidden) {
+        playCyberChime(600, 'sine', 0.12);
+        renderTourStep(currentTourStep);
+      }
+    }
+
+    function handleBotClick() {
+      isBotWaving = true;
+      playCyberChime(800, 'sine', 0.15);
+      setTimeout(() => { isBotWaving = false; }, 2000);
+      toggleTourBubble();
+    }
   </script>
 </body>
 </html>
