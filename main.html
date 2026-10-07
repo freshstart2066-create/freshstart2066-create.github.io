@@ -1349,6 +1349,15 @@ Type: triage, models, memory, telemetry, apk, specs, clear, help</div>
       say('Nominal Baseline Restored');
     }
 
+    function injectAnomaly(type) {
+      if (type === 'thermal' || type === 'temp') injectThermalSurge();
+      else injectRamSaturation();
+    }
+    window.injectAnomaly = injectAnomaly;
+    window.resetTelemetryBaseline = resetNominalBaseline;
+    window.startSlmStream = runTokenStreamTest;
+    window.pauseSlmStream = function() { isStreamTesting = false; };
+
     let isStreamTesting = false;
     function runTokenStreamTest() {
       if (isStreamTesting) return;

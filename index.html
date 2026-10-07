@@ -448,21 +448,21 @@
       const PROJECTS = {
         seraph: {
           planetKey: 'earth',
-          eyebrow: '👋 WELCOME! HI, I AM EMMANUEL &bull; PROJECT SERAPH // ORBITAL C2',
+          eyebrow: '👋 WELCOME! HI, I AM EMMANUEL &bull; HERE ARE SOME OF MY PROJECTS &bull; PROJECT SERAPH // ORBITAL C2',
           name: 'SERAPH',
           still: 'https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260827_202133_508c64b8-a31e-4290-bdfc-1187df70e0a6.png',
           lede: 'Autonomous aerospace command &amp; control (C2), real-time SGP4 orbital propagation, <br>conjunction matrix tracking, and multi-satellite constellation telemetry streaming.'
         },
         cherub: {
           planetKey: 'venus',
-          eyebrow: '👋 WELCOME! HI, I AM EMMANUEL &bull; PROJECT CHERUB // VENUSIAN MESH',
+          eyebrow: '👋 WELCOME! HI, I AM EMMANUEL &bull; HERE ARE SOME OF MY PROJECTS &bull; PROJECT CHERUB // VENUSIAN MESH',
           name: 'CHERUB',
           still: 'https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260827_202133_cf55d1d8-7b59-4a64-80da-d72052ae974e.png',
           lede: 'Coordinated Heterogeneous Environmental Reconnaissance Under-cloud Balloon &amp; Probe Mesh.<br>Autonomous aerostat super-rotation station-keeping, SiC avionics, and extreme-environment planetary observation.'
         },
         elyra: {
           planetKey: 'mars',
-          eyebrow: '👋 WELCOME! HI, I AM EMMANUEL &bull; PROJECT ELYRA // TACTICAL EDGE AI',
+          eyebrow: '👋 WELCOME! HI, I AM EMMANUEL &bull; HERE ARE SOME OF MY PROJECTS &bull; PROJECT ELYRA // TACTICAL EDGE AI',
           name: 'ELYRA',
           still: 'https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260827_202133_0ba6de7c-285d-43dc-b7ab-8c54c73707cb.png',
           lede: 'On-device tactical neural intelligence, distributed robotic formation control, <br>and decentralized aerospace edge computing operating with zero cloud latency.'
@@ -567,6 +567,9 @@
 
         currentProject = next;
       }
+
+      window.show = show;
+      window.switchProject = show;
 
       function warm(key) {
         if (!sky || !PROJECTS[key]) return;
