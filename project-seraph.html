@@ -372,6 +372,55 @@
       transform: translateY(14px);
       transition: opacity 0.65s ease 0.12s, transform 0.65s cubic-bezier(0.16, 1, 0.3, 1) 0.12s;
     }
+    .mission-tag.is-soon {
+      color: #ffd166;
+      background: rgba(255, 209, 102, 0.12);
+      border-color: rgba(255, 209, 102, 0.45);
+    }
+    .planet-project-desc.is-soon {
+      border-left-color: #ffd166;
+    }
+    .title-status-badge {
+      display: inline-flex;
+      align-items: center;
+      vertical-align: middle;
+      font-family: 'SF Pro Text', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      font-size: clamp(11px, 1.05vw, 13px);
+      font-weight: 800;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: #ffd166;
+      background: rgba(255, 209, 102, 0.14);
+      border: 1px solid rgba(255, 209, 102, 0.48);
+      padding: 3px 12px;
+      border-radius: 6px;
+      margin-right: 12px;
+      margin-bottom: 4px;
+      box-shadow: 0 0 16px rgba(255, 209, 102, 0.25);
+      line-height: 1.2;
+    }
+    .planet-soon-badge {
+      display: inline-block;
+      font-family: 'SF Pro Text', -apple-system, BlinkMacSystemFont, sans-serif;
+      font-size: 8.5px;
+      font-weight: 800;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: #ffd166;
+      background: rgba(255, 209, 102, 0.16);
+      border: 1px solid rgba(255, 209, 102, 0.38);
+      padding: 1px 5px;
+      border-radius: 4px;
+      margin-left: 6px;
+      line-height: 1.2;
+      vertical-align: middle;
+      transition: background 0.2s ease, border-color 0.2s ease;
+    }
+    .planet-item:hover .planet-soon-badge,
+    .planet-item.active .planet-soon-badge {
+      background: rgba(255, 209, 102, 0.3);
+      border-color: #ffd166;
+    }
     /* GLOWING READ MORE CALL-TO-ACTION (UNCLUTTERED CELESTIAL VIEWPORT) */
     .planet-cta-wrap {
       display: flex;
@@ -1342,6 +1391,12 @@
         margin-bottom: 2px;
         white-space: normal;
       }
+      .title-status-badge {
+        font-size: 10px;
+        padding: 2px 8px;
+        margin-right: 8px;
+        margin-bottom: 3px;
+      }
       .planet-project-desc {
         max-width: 100%;
         font-size: 13px;
@@ -1549,9 +1604,9 @@
 
     <!-- HEADER -->
     <header class="header chrome">
-      <a href="#seraph" class="project-badge" onclick="jumpToPlanet('earth'); return false;" aria-label="SERAPH Mission Architecture">
+      <a href="#seraph" class="project-badge" onclick="jumpToPlanet('earth'); return false;" aria-label="Emmanuel's Systems Architecture">
         <span class="project-badge-dot"></span>
-        <span>SERAPH &bull; ORBITAL C2</span>
+        <span>👋 HI, I'M EMMANUEL &bull; EXPLORE MY PROJECTS</span>
       </a>
 
       <div class="header-actions">
@@ -1825,13 +1880,15 @@
       },
       mercury: {
         name: 'Mercury',
+        isComingSoon: true,
         projectTitle: 'PROJECT HERMES',
-        projectSummary: 'Project HERMES is a solar perihelion relativistic dynamics mission designed for 0.387 AU inner-system trajectories. Investigating solar gravitational field multipole moments and General Relativity perihelion precession, HERMES tests high-temperature ceramic shielding and sovereign deep-space Doppler tracking during extreme solar energetic particle (SEP) events.',
-        missionTag: 'INNER SOLAR SYSTEM // PERIHELION ORBIT',
+        projectSummary: '[COMING SOON // CONCEPT ARCHITECTURE] Project HERMES is a solar perihelion relativistic dynamics mission designed for 0.387 AU inner-system trajectories. Investigating solar gravitational field multipole moments and General Relativity perihelion precession, HERMES tests high-temperature ceramic shielding and sovereign deep-space Doppler tracking during extreme solar energetic particle (SEP) events.',
+        missionTag: 'COMING SOON // INNER SOLAR SYSTEM // PERIHELION ORBIT',
         dossierKey: 'seraph',
-        dossierBtnKicker: 'INNER ORBIT // GRAVIMETRY',
-        dossierBtnText: 'READ MORE • MERCURY BRIEFING',
+        dossierBtnKicker: 'COMING SOON // CONCEPT ARCHITECTURE',
+        dossierBtnText: 'PREVIEW ARCHITECTURE • COMING SOON',
         facts: [
+          ['Status:', 'COMING SOON — Deep-Space Phase 2 Architecture.'],
           ['Orbit:', '0.387 AU Solar Perihelion Relativistic Orbit.'],
           ['Objective:', 'General Relativity Perihelion Precession Testing.'],
           ['Thermal:', 'High-Flux Ceramic Heatshield (450 °C Solar Peak).'],
@@ -1840,13 +1897,15 @@
       },
       jupiter: {
         name: 'Jupiter',
+        isComingSoon: true,
         projectTitle: 'PROJECT ZEUS',
-        projectSummary: 'Project ZEUS is a deep-space radiation-hardened probe mesh engineered for the Jovian magnetosphere. Featuring multi-layer tantalum-titanium radiation shielding and Ka-band phased array beamforming, ZEUS conducts autonomous in-situ subsurface radar soundings and ice-ocean habitability analysis across Europa, Ganymede, and Callisto.',
-        missionTag: 'PROJECT ZEUS // JOVIAN RADIATION MESH',
+        projectSummary: '[COMING SOON // CONCEPT ARCHITECTURE] Project ZEUS is a deep-space radiation-hardened probe mesh engineered for the Jovian magnetosphere. Featuring multi-layer tantalum-titanium radiation shielding and Ka-band phased array beamforming, ZEUS conducts autonomous in-situ subsurface radar soundings and ice-ocean habitability analysis across Europa, Ganymede, and Callisto.',
+        missionTag: 'COMING SOON // JOVIAN RADIATION MESH',
         dossierKey: 'cherub',
-        dossierBtnKicker: 'PROJECT ZEUS // JOVIAN MESH',
-        dossierBtnText: 'READ MORE • ZEUS BRIEFING',
+        dossierBtnKicker: 'COMING SOON // CONCEPT ARCHITECTURE',
+        dossierBtnText: 'PREVIEW ARCHITECTURE • COMING SOON',
         facts: [
+          ['Status:', 'COMING SOON — Outer Planetary Exploration Concept.'],
           ['Mission:', 'PROJECT ZEUS — Jovian Magnetosphere Probe Array.'],
           ['Objective:', 'Radiation-Hardened In-Situ Jovian Moons Exploration.'],
           ['Shielding:', 'Tantalum-Titanium Multilayer Radiation Enclosure.'],
@@ -1855,13 +1914,15 @@
       },
       saturn: {
         name: 'Saturn',
+        isComingSoon: true,
         projectTitle: 'PROJECT CRONUS',
-        projectSummary: 'Project CRONUS is an outer-system cryogenic exploration mission powered by high-efficiency nuclear electric xenon ion propulsion. Equipped with cryogenic mass spectrometers and bistatic synthetic aperture radar (SAR), CRONUS performs autonomous plume interception over Enceladus and deep hydrocarbon bathymetry across Titan\'s methane seas.',
-        missionTag: 'PROJECT CRONUS // CRYOGENIC PLUME SAMPLER',
+        projectSummary: '[COMING SOON // CONCEPT ARCHITECTURE] Project CRONUS is an outer-system cryogenic exploration mission powered by high-efficiency nuclear electric xenon ion propulsion. Equipped with cryogenic mass spectrometers and bistatic synthetic aperture radar (SAR), CRONUS performs autonomous plume interception over Enceladus and deep hydrocarbon bathymetry across Titan\'s methane seas.',
+        missionTag: 'COMING SOON // CRYOGENIC PLUME SAMPLER',
         dossierKey: 'cherub',
-        dossierBtnKicker: 'PROJECT CRONUS // PLUME SAMPLER',
-        dossierBtnText: 'READ MORE • CRONUS BRIEFING',
+        dossierBtnKicker: 'COMING SOON // CONCEPT ARCHITECTURE',
+        dossierBtnText: 'PREVIEW ARCHITECTURE • COMING SOON',
         facts: [
+          ['Status:', 'COMING SOON — Outer Solar System Explorer Concept.'],
           ['Mission:', 'PROJECT CRONUS — Outer Solar System Explorer.'],
           ['Target:', 'Enceladus Plume Sampler & Titan Subsurface Radar.'],
           ['Propulsion:', 'Nuclear Electric Xenon Ion Thruster Array.'],
@@ -1870,13 +1931,15 @@
       },
       uranus: {
         name: 'Uranus',
+        isComingSoon: true,
         projectTitle: 'PROJECT OURANOS',
-        projectSummary: 'Project OURANOS is a high-enthalpy ice giant atmospheric entry probe architecture. Utilizing carbon-phenolic ablative heatshields designed for extreme hypersonic aerocapture, OURANOS penetrates Uranus\'s supercritical hydrogen-helium atmosphere to analyze noble gas abundances and deep convective diamond precipitation dynamics.',
-        missionTag: 'PROJECT OURANOS // ICE GIANT PENETRATOR',
+        projectSummary: '[COMING SOON // CONCEPT ARCHITECTURE] Project OURANOS is a high-enthalpy ice giant atmospheric entry probe architecture. Utilizing carbon-phenolic ablative heatshields designed for extreme hypersonic aerocapture, OURANOS penetrates Uranus\'s supercritical hydrogen-helium atmosphere to analyze noble gas abundances and deep convective diamond precipitation dynamics.',
+        missionTag: 'COMING SOON // ICE GIANT PENETRATOR',
         dossierKey: 'cherub',
-        dossierBtnKicker: 'PROJECT OURANOS // ICE PENETRATOR',
-        dossierBtnText: 'READ MORE • OURANOS BRIEFING',
+        dossierBtnKicker: 'COMING SOON // CONCEPT ARCHITECTURE',
+        dossierBtnText: 'PREVIEW ARCHITECTURE • COMING SOON',
         facts: [
+          ['Status:', 'COMING SOON — Ice Giant Exploration Concept.'],
           ['Mission:', 'PROJECT OURANOS — Ice Giant Atmospheric Penetrator.'],
           ['Atmosphere:', 'Supercritical Methane & Hydrogen Diamond Rain.'],
           ['Aero-Shell:', 'Carbon-Phenolic High-Enthalpy Ablative Heatshield.'],
@@ -1885,13 +1948,15 @@
       },
       neptune: {
         name: 'Neptune',
+        isComingSoon: true,
         projectTitle: 'PROJECT POSEIDON',
-        projectSummary: 'Project POSEIDON is a deep-space interstellar precursor probe and Kuiper Belt relativistic gateway node. Travelling along a hyperbolic 17.2 km/s solar escape trajectory, POSEIDON executes autonomous optical astrometry navigation and tests high-bandwidth laser mesh communications back to the inner solar system.',
-        missionTag: 'PROJECT POSEIDON // KUIPER GATEWAY',
+        projectSummary: '[COMING SOON // CONCEPT ARCHITECTURE] Project POSEIDON is a deep-space interstellar precursor probe and Kuiper Belt relativistic gateway node. Travelling along a hyperbolic 17.2 km/s solar escape trajectory, POSEIDON executes autonomous optical astrometry navigation and tests high-bandwidth laser mesh communications back to the inner solar system.',
+        missionTag: 'COMING SOON // KUIPER GATEWAY',
         dossierKey: 'seraph',
-        dossierBtnKicker: 'PROJECT POSEIDON // KUIPER RELAY',
-        dossierBtnText: 'READ MORE • POSEIDON BRIEFING',
+        dossierBtnKicker: 'COMING SOON // CONCEPT ARCHITECTURE',
+        dossierBtnText: 'PREVIEW ARCHITECTURE • COMING SOON',
         facts: [
+          ['Status:', 'COMING SOON — Interstellar Precursor Node.'],
           ['Mission:', 'PROJECT POSEIDON — Kuiper Belt Relativistic Gateway.'],
           ['Velocity:', 'Hyperbolic Solar Escape Vector (17.2 km/s).'],
           ['Autonomy:', 'Deep Space Autonomous Optical Astrometry Nav.'],
@@ -2247,7 +2312,9 @@
         render();
         revealPlanetContent();
         if (withTransition) {
-          showSeraphToast(`ORBIT LOCKED: ${targetPlanet.toUpperCase()} • DOSSIER READY`);
+          showSeraphToast(states[targetPlanet].isComingSoon
+            ? `COMING SOON: ${targetPlanet.toUpperCase()} • CONCEPT ARCHITECTURE`
+            : `ORBIT LOCKED: ${targetPlanet.toUpperCase()} • DOSSIER READY`);
         }
         return;
       }
@@ -2337,13 +2404,25 @@
       experience.setAttribute('data-planet', current);
 
       const titleEl = document.getElementById('planet-title');
-      if (titleEl) titleEl.textContent = state.projectTitle || state.name.toUpperCase();
+      if (titleEl) {
+        if (state.isComingSoon) {
+          titleEl.innerHTML = `<span class="title-status-badge">COMING SOON</span> ${state.projectTitle || state.name.toUpperCase()}`;
+        } else {
+          titleEl.textContent = state.projectTitle || state.name.toUpperCase();
+        }
+      }
 
       const descEl = document.getElementById('planet-desc');
-      if (descEl) descEl.textContent = state.projectSummary || '';
+      if (descEl) {
+        descEl.textContent = state.projectSummary || '';
+        descEl.classList.toggle('is-soon', Boolean(state.isComingSoon));
+      }
 
       const tagEl = document.getElementById('mission-tag');
-      if (tagEl) tagEl.innerHTML = state.missionTag || 'MISSION SYSTEMS &bull; ORBITAL C2';
+      if (tagEl) {
+        tagEl.innerHTML = state.missionTag || 'MISSION SYSTEMS &bull; ORBITAL C2';
+        tagEl.classList.toggle('is-soon', Boolean(state.isComingSoon));
+      }
 
       const dossierBtnKicker = document.getElementById('dossier-btn-kicker');
       if (dossierBtnKicker) dossierBtnKicker.textContent = state.dossierBtnKicker || 'MISSION DOSSIER';
@@ -2375,14 +2454,22 @@
       // .planet-list
       const listEl = document.querySelector('.planet-list');
       if (listEl) {
-        listEl.innerHTML = planets.map(p => `
-          <span class="planet-item${p.toLowerCase() === state.name.toLowerCase() ? ' active' : ''}"
-                role="button"
-                tabindex="0"
-                aria-label="Orbit ${p}"
-                onclick="jumpToPlanet('${p.toLowerCase()}')"
-                onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();jumpToPlanet('${p.toLowerCase()}');}">${p}</span>
-        `).join('');
+        listEl.innerHTML = planets.map(p => {
+          const pKey = p.toLowerCase();
+          const pState = states[pKey];
+          const isSoon = pState && pState.isComingSoon;
+          const isActive = pKey === state.name.toLowerCase();
+          return `
+            <span class="planet-item${isActive ? ' active' : ''}${isSoon ? ' is-soon' : ''}"
+                  role="button"
+                  tabindex="0"
+                  aria-label="Orbit ${p}${isSoon ? ' (Coming Soon)' : ''}"
+                  onclick="jumpToPlanet('${pKey}')"
+                  onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();jumpToPlanet('${pKey}');}">
+              <span>${p}</span>${isSoon ? '<span class="planet-soon-badge">SOON</span>' : ''}
+            </span>
+          `;
+        }).join('');
 
         if (!isFirstRender) {
           listEl.classList.remove('is-switching');
