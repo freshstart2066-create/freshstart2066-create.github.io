@@ -318,11 +318,12 @@
       display: flex;
       flex-direction: column;
       align-items: flex-start;
-      gap: 10px;
+      gap: 8px;
+      max-width: min(680px, 58vw);
     }
     .mission-tag {
       font-family: 'SF Pro', Arial, sans-serif;
-      font-size: 12.5px;
+      font-size: 12px;
       font-weight: 700;
       letter-spacing: 0.22em;
       text-transform: uppercase;
@@ -339,16 +340,37 @@
       transition: opacity 0.45s ease, transform 0.45s ease;
     }
     .planet-content h1 {
-      font-family: Aalto, 'Arial Narrow', sans-serif;
-      font-size: clamp(100px, 18.5vw, 270px);
-      font-weight: 400;
-      line-height: 0.72;
-      margin: 0 0 -0.04em;
-      letter-spacing: 0;
-      transform: translateX(-32px);
+      font-family: 'Aalto', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      font-size: clamp(26px, 3.2vw, 42px);
+      font-weight: 700;
+      line-height: 1.15;
+      margin: 2px 0 0;
+      letter-spacing: 0.04em;
+      transform: translateX(-24px);
       opacity: 0;
       text-transform: uppercase;
-      text-shadow: 0 10px 40px rgba(0, 0, 0, 0.4);
+      color: #ffffff;
+      text-shadow: 0 4px 20px rgba(0, 0, 0, 0.7), 0 0 24px rgba(121, 220, 232, 0.35);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+    .planet-project-desc {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+      font-size: clamp(13px, 1.05vw, 15px);
+      line-height: 1.62;
+      color: rgba(222, 238, 248, 0.94);
+      margin: 4px 0 0;
+      padding: 14px 18px;
+      background: rgba(6, 14, 26, 0.68);
+      border: 1px solid rgba(121, 220, 232, 0.28);
+      border-left: 3.5px solid #79dce8;
+      border-radius: 12px;
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+      text-shadow: 0 1px 2px rgba(0, 0, 0, 0.7);
+      opacity: 0;
+      transform: translateY(14px);
+      transition: opacity 0.65s ease 0.12s, transform 0.65s cubic-bezier(0.16, 1, 0.3, 1) 0.12s;
     }
     /* GLOWING READ MORE CALL-TO-ACTION (UNCLUTTERED CELESTIAL VIEWPORT) */
     .planet-cta-wrap {
@@ -684,6 +706,11 @@
     body.intro-ready .mission-tag {
       opacity: 1;
       transform: translateX(0);
+    }
+    .experience.content-revealing .planet-project-desc,
+    body.intro-ready .planet-project-desc {
+      opacity: 1;
+      transform: translateY(0);
     }
     .experience.content-revealing .glow-read-more-btn,
     body.intro-ready .glow-read-more-btn {
@@ -1246,7 +1273,8 @@
     /* A) LARGE DESKTOPS & ULTRAWIDE */
     @media(min-width: 1921px) {
       .portal-wrap { width: min(440px, 26vw); }
-      .planet-content h1 { font-size: 260px; }
+      .planet-headline { max-width: 760px; }
+      .planet-content h1 { font-size: 48px; }
       .seraph-sheet { max-width: 1200px; }
     }
 
@@ -1258,7 +1286,8 @@
         right: clamp(20px, 3.5vw, 36px);
         bottom: clamp(20px, 2.8vh, 32px);
       }
-      .planet-content h1 { font-size: clamp(80px, 15vw, 160px); }
+      .planet-headline { max-width: min(600px, 54vw); }
+      .planet-content h1 { font-size: clamp(24px, 3.6vw, 36px); }
       .planet-list { font-size: 14.5px; }
       .planet-item.active { font-size: 16.5px; }
       .seraph-telemetry-hud { grid-template-columns: repeat(2, 1fr); }
@@ -1298,17 +1327,26 @@
         align-items: flex-start;
         gap: 10px;
       }
-      .planet-headline { gap: 6px; }
+      .planet-headline {
+        gap: 6px;
+        max-width: 100%;
+      }
       .mission-tag {
         font-size: 11px;
         padding: 4px 12px;
         letter-spacing: 0.16em;
       }
       .planet-content h1 {
-        font-size: clamp(44px, 14vw, 84px);
-        line-height: 0.82;
+        font-size: clamp(22px, 5.8vw, 30px);
+        line-height: 1.2;
         margin-bottom: 2px;
-        white-space: nowrap;
+        white-space: normal;
+      }
+      .planet-project-desc {
+        max-width: 100%;
+        font-size: 13px;
+        line-height: 1.52;
+        padding: 10px 14px;
       }
       .planet-cta-wrap {
         align-items: flex-start;
@@ -1414,6 +1452,7 @@
         gap: 6px;
       }
       .planet-headline {
+        max-width: 52vw;
         gap: 4px;
       }
       .mission-tag {
@@ -1421,9 +1460,16 @@
         padding: 3px 10px;
       }
       .planet-content h1 {
-        font-size: clamp(38px, 12vh, 68px);
-        line-height: 0.8;
+        font-size: clamp(18px, 5.5vh, 26px);
+        line-height: 1.15;
         margin-bottom: 0;
+      }
+      .planet-project-desc {
+        font-size: 11.5px;
+        line-height: 1.4;
+        padding: 8px 12px;
+        max-height: 130px;
+        overflow-y: auto;
       }
       .planet-cta-wrap {
         align-items: flex-start;
@@ -1445,7 +1491,13 @@
         width: min(135px, 20vw);
       }
       .planet-content h1 {
-        font-size: clamp(32px, 10vh, 52px);
+        font-size: clamp(16px, 5vh, 22px);
+      }
+      .planet-project-desc {
+        font-size: 10.5px;
+        line-height: 1.35;
+        padding: 6px 10px;
+        max-height: 90px;
       }
       .header {
         top: 10px;
@@ -1534,8 +1586,9 @@
     <!-- CONTENT (CLEAN CINEMATIC VIEWPORT & GLOWING CALL-TO-ACTION) -->
     <section class="planet-content chrome" aria-live="polite">
       <div class="planet-headline">
-        <div class="mission-tag" id="mission-tag">MISSION SYSTEMS &bull; ORBITAL C2</div>
-        <h1 id="planet-title">MARS</h1>
+        <div class="mission-tag" id="mission-tag">PROJECT ELYRA // TACTICAL EDGE AI</div>
+        <h1 id="planet-title">PROJECT ELYRA</h1>
+        <p class="planet-project-desc" id="planet-desc">Project ELYRA is an air-gapped, on-device neural reasoning companion compiled as a standalone Android APK for interplanetary transit and Martian surface operations. Running under a strict 2.0 GB memory envelope with bounded 2,048-token sliding-window memory, ELYRA executes quantized small language models (Qwen 2.5 &amp; Llama 3.2) at sub-50ms latency with rolling z-score hardware sensor anomaly triage.</p>
       </div>
       
       <!-- GLOWING READ MORE CALL TO ACTION (NO CLUTTER COVERING CELESTIAL BACKDROP) -->
@@ -1715,6 +1768,8 @@
     const states = {
       mars: {
         name: 'Mars',
+        projectTitle: 'PROJECT ELYRA',
+        projectSummary: 'Project ELYRA is an air-gapped, on-device neural reasoning companion compiled as a standalone Android APK for interplanetary transit and Martian surface operations. Running under a strict 2.0 GB memory envelope with bounded 2,048-token sliding-window memory, ELYRA executes quantized small language models (Qwen 2.5 & Llama 3.2) at sub-50ms latency with rolling z-score hardware sensor anomaly triage.',
         missionTag: 'PROJECT ELYRA // TACTICAL EDGE AI',
         dossierKey: 'elyra',
         dossierBtnKicker: 'PROJECT ELYRA // EDGE AI',
@@ -1732,6 +1787,8 @@
       },
       earth: {
         name: 'Earth',
+        projectTitle: 'PROJECT SERAPH',
+        projectSummary: 'Project SERAPH is an autonomous aerospace command & control (C2) architecture engineered for high-density orbital regimes. Powered by SIMD-vectorized SGP4/SDP4 analytical propagation across 100,000+ resident space objects, SERAPH screens high-precision ephemeris catalogs in real time, executing autonomous impulsive Δv collision evasion maneuvers and sovereign megaconstellation RF slot deconfliction with sub-millisecond latency.',
         missionTag: 'PROJECT SERAPH // ORBITAL C2',
         dossierKey: 'seraph',
         dossierBtnKicker: 'PROJECT SERAPH // ORBITAL C2',
@@ -1749,6 +1806,8 @@
       },
       venus: {
         name: 'Venus',
+        projectTitle: 'PROJECT CHERUB',
+        projectSummary: 'Project CHERUB (Coordinated Heterogeneous Environmental Reconnaissance Under-cloud Balloon) is an autonomous deep-space aerostat probe mesh designed for Venus’s extreme atmosphere. Operating within the temperate 50–65 km cloud deck at 1.0 atm and 25°C, the aerostat array rides Venus’s 360 km/h zonal super-rotation winds to circumnavigate the planet every 96 hours, conducting polarimetric gas spectroscopy while deploying high-temperature Silicon Carbide (SiC) deep descent probes into the 465°C, 92 bar supercritical surface.',
         missionTag: 'PROJECT CHERUB // ATMOSPHERIC MESH',
         dossierKey: 'cherub',
         dossierBtnKicker: 'PROJECT CHERUB // ATMOSPHERIC MESH',
@@ -1766,6 +1825,8 @@
       },
       mercury: {
         name: 'Mercury',
+        projectTitle: 'PROJECT HERMES',
+        projectSummary: 'Project HERMES is a solar perihelion relativistic dynamics mission designed for 0.387 AU inner-system trajectories. Investigating solar gravitational field multipole moments and General Relativity perihelion precession, HERMES tests high-temperature ceramic shielding and sovereign deep-space Doppler tracking during extreme solar energetic particle (SEP) events.',
         missionTag: 'INNER SOLAR SYSTEM // PERIHELION ORBIT',
         dossierKey: 'seraph',
         dossierBtnKicker: 'INNER ORBIT // GRAVIMETRY',
@@ -1779,6 +1840,8 @@
       },
       jupiter: {
         name: 'Jupiter',
+        projectTitle: 'PROJECT ZEUS',
+        projectSummary: 'Project ZEUS is a deep-space radiation-hardened probe mesh engineered for the Jovian magnetosphere. Featuring multi-layer tantalum-titanium radiation shielding and Ka-band phased array beamforming, ZEUS conducts autonomous in-situ subsurface radar soundings and ice-ocean habitability analysis across Europa, Ganymede, and Callisto.',
         missionTag: 'PROJECT ZEUS // JOVIAN RADIATION MESH',
         dossierKey: 'cherub',
         dossierBtnKicker: 'PROJECT ZEUS // JOVIAN MESH',
@@ -1792,6 +1855,8 @@
       },
       saturn: {
         name: 'Saturn',
+        projectTitle: 'PROJECT CRONUS',
+        projectSummary: 'Project CRONUS is an outer-system cryogenic exploration mission powered by high-efficiency nuclear electric xenon ion propulsion. Equipped with cryogenic mass spectrometers and bistatic synthetic aperture radar (SAR), CRONUS performs autonomous plume interception over Enceladus and deep hydrocarbon bathymetry across Titan\'s methane seas.',
         missionTag: 'PROJECT CRONUS // CRYOGENIC PLUME SAMPLER',
         dossierKey: 'cherub',
         dossierBtnKicker: 'PROJECT CRONUS // PLUME SAMPLER',
@@ -1805,6 +1870,8 @@
       },
       uranus: {
         name: 'Uranus',
+        projectTitle: 'PROJECT OURANOS',
+        projectSummary: 'Project OURANOS is a high-enthalpy ice giant atmospheric entry probe architecture. Utilizing carbon-phenolic ablative heatshields designed for extreme hypersonic aerocapture, OURANOS penetrates Uranus\'s supercritical hydrogen-helium atmosphere to analyze noble gas abundances and deep convective diamond precipitation dynamics.',
         missionTag: 'PROJECT OURANOS // ICE GIANT PENETRATOR',
         dossierKey: 'cherub',
         dossierBtnKicker: 'PROJECT OURANOS // ICE PENETRATOR',
@@ -1818,6 +1885,8 @@
       },
       neptune: {
         name: 'Neptune',
+        projectTitle: 'PROJECT POSEIDON',
+        projectSummary: 'Project POSEIDON is a deep-space interstellar precursor probe and Kuiper Belt relativistic gateway node. Travelling along a hyperbolic 17.2 km/s solar escape trajectory, POSEIDON executes autonomous optical astrometry navigation and tests high-bandwidth laser mesh communications back to the inner solar system.',
         missionTag: 'PROJECT POSEIDON // KUIPER GATEWAY',
         dossierKey: 'seraph',
         dossierBtnKicker: 'PROJECT POSEIDON // KUIPER RELAY',
@@ -2268,7 +2337,10 @@
       experience.setAttribute('data-planet', current);
 
       const titleEl = document.getElementById('planet-title');
-      if (titleEl) titleEl.textContent = state.name.toUpperCase();
+      if (titleEl) titleEl.textContent = state.projectTitle || state.name.toUpperCase();
+
+      const descEl = document.getElementById('planet-desc');
+      if (descEl) descEl.textContent = state.projectSummary || '';
 
       const tagEl = document.getElementById('mission-tag');
       if (tagEl) tagEl.innerHTML = state.missionTag || 'MISSION SYSTEMS &bull; ORBITAL C2';
