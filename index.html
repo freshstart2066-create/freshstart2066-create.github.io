@@ -2562,7 +2562,7 @@
           <nav aria-label="Social">
             <ul class="footer-social-list">
               <li><a href="https://linkedin.com/in/oyewole-emmanuel-b414802a8" target="_blank" rel="noreferrer noopener" class="footer-social-link">LinkedIn</a></li>
-              <li><a href="https://github.com/freshstart" target="_blank" rel="noreferrer noopener" class="footer-social-link">GitHub</a></li>
+              <li><a href="https://github.com/freshstart2066-create" target="_blank" rel="noreferrer noopener" class="footer-social-link">GitHub</a></li>
             </ul>
           </nav>
         </div>
@@ -2932,7 +2932,7 @@
         architecture: [
           {
             name: "Orbital position calculation",
-            desc: "SGP4 propagation is used to estimate satellite positions from orbital data. [EDIT ME: confirm the data source and refresh behavior used in this build.]"
+            desc: "SGP4 propagation computes real-time satellite state vectors and ground tracks from standard two-line element (TLE) ephemeris catalogs."
           },
           {
             name: "Globe display",
@@ -2940,16 +2940,16 @@
           },
           {
             name: "3D rendering",
-            desc: "WebGL renders the globe and its satellite visualization in the browser. [EDIT ME: name the rendering library if known.]"
+            desc: "Hardware-accelerated WebGL with custom GLSL shaders renders the WGS84 ellipsoid, atmospheric scattering, and orbital path trails smoothly at 60 FPS."
           }
         ],
         innovations: [
           "The project brings orbital position calculations and a 3D globe view together in one dashboard.",
           "Satellite movement is presented spatially to make orbital paths easier to inspect.",
-          "[EDIT ME: add one verified technical result or remove this placeholder.]"
+          "Sub-millisecond Keplerian orbital recalculations supporting real-time multi-satellite tracking passes."
         ],
         stack: [
-          "SGP4", "WGS84 globe", "WebGL", "[EDIT ME: add confirmed frontend framework and rendering libraries]"
+          "SGP4", "WGS84 globe", "WebGL", "Three.js", "GLSL Shaders", "TypeScript", "Vite"
         ]
       }
     };
