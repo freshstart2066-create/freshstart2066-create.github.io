@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>About DMFE | Solar & Battery Engineering in Nigeria</title>
+  <meta name="description" content="Meet D-Mrick Fusion Energy (DMFE), founded by Miracle Akujobi. Solar, electrical and lithium-ion battery engineering, service and support across Nigeria.">
+  <link rel="icon" type="image/svg+xml" href="assets/dmfe_logo.svg">
+  <meta property="og:title" content="About DMFE | Solar &amp; Battery Engineering in Nigeria">
+  <meta property="og:description" content="Solar, electrical and lithium-ion battery engineering, service and support across Nigeria.">
+  <meta property="og:image" content="assets/dmfe_logo_transparent.png">
+  <meta property="og:type" content="website">
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@500;700&family=Playfair+Display:ital,wght@0,600;1,400&display=swap" rel="stylesheet">
+  
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="about.css">
+</head>
+<body class="about-page theme-farm-day">
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  <!-- Interactive Ambient Solar Particles Canvas -->
+  <canvas id="about-ambient-canvas"></canvas>
+
+  <!-- ====================================================================
+       FULL VIEWPORT 4K AUTOMATED SOLAR FACTORY & FRAME COUPLING BACKGROUND
+       ==================================================================== -->
+  <div class="farm-scene-container" id="farmSceneContainer">
+    <!-- Illustrative solar and battery engineering scene -->
+    <div class="farm-layer farm-layer-day active" id="farmLayerDay" style="background-image: url('assets/factory_coupling_hero.jpg');">
+      <!-- Illustrative engineering hotspots -->
+      <div class="farm-hotspot hotspot-solar" style="top: 28%; left: 58%;">
+        <span class="farm-hotspot-dot pulse-emerald"></span>
+        <div class="farm-hotspot-card">
+          <div class="card-tag text-emerald">ROBOTIC FRAME COUPLING</div>
+          <strong>6-Axis High-Precision Coupling Unit</strong>
+          <span>Assembly details vary by module and installation</span>
+        </div>
+      </div>
+
+      <div class="farm-hotspot hotspot-tractor" style="top: 52%; left: 42%;">
+        <span class="farm-hotspot-dot pulse-cyan"></span>
+        <div class="farm-hotspot-card">
+          <div class="card-tag text-blue">LASER PHOTOVOLTAIC WELDING</div>
+          <strong>144 N-Type TOPCon Cell Matrix</strong>
+          <span>Module output and specifications vary by product</span>
+        </div>
+      </div>
+
+      <div class="farm-hotspot hotspot-sun" style="top: 65%; left: 24%;">
+        <span class="farm-hotspot-dot pulse-gold"></span>
+        <div class="farm-hotspot-card">
+          <div class="card-tag text-gold">OPTICAL EL TESTING</div>
+          <strong>Electroluminescence Flash Inspection</strong>
+          <span>Illustrative visual; product specifications vary</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Dynamic Laser Alignment Grid & Welding Spark Overlays -->
+    <div class="factory-laser-sweep" id="factoryLaserSweep"></div>
+    <div class="factory-spark-burst" id="factorySparkBurst"></div>
+    <div class="factory-grid-overlay"></div>
+    <div class="farm-vignette-overlay"></div>
+  </div>
+
+  <!-- Top Fixed Navigation Bar -->
+  <header class="navbar">
+    <a href="index.html" class="brand-logo" aria-label="DMFE · D-MRICK FUSION ENERGY home">
+      <img src="assets/dmfe_logo.svg" alt="DMFE - D-MRICK FUSION ENERGY" class="navbar-exact-logo">
+    </a>
+
+    <nav class="nav-links" aria-label="Main navigation">
+      <a href="index.html">Home</a>
+      <a href="index.html#services">Services</a>
+      <a href="about.html" class="active-nav-link">About Us</a>
+      <a href="index.html#contact">Contact</a>
+    </nav>
+    
+    <div class="nav-right">
+      <div class="quote-cta-wrapper">
+        <a href="index.html" class="btn-quote">← Back to Home</a>
+        <div class="quote-action-subrow">
+          <a href="https://wa.me/2349048518418?text=Hello%20DMFE%20Solar%2C%20I%20would%20like%20to%20learn%20more" target="_blank" rel="noopener noreferrer" class="sub-action-btn btn-wa" title="WhatsApp Miracle Akujobi">
+            <svg viewBox="0 0 24 24" fill="currentColor" class="sub-btn-icon"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91C2.13 13.66 2.59 15.36 3.45 16.86L2.05 22L7.3 20.62C8.75 21.41 10.38 21.83 12.04 21.83C17.5 21.83 21.95 17.38 21.95 11.92C21.95 6.46 17.5 2 12.04 2ZM12.04 20.15C10.56 20.15 9.11 19.76 7.85 19.01L7.55 18.83L4.43 19.65L5.26 16.61L5.06 16.29C4.24 14.99 3.81 13.47 3.81 11.91C3.81 7.37 7.5 3.68 12.04 3.68C14.24 3.68 16.31 4.54 17.87 6.1C19.42 7.66 20.28 9.72 20.27 11.92C20.28 16.46 16.58 20.15 12.04 20.15Z"/></svg>
+            <span>WhatsApp</span>
+          </a>
+          <a href="tel:09048518418" class="sub-action-btn btn-call" title="Call Miracle Akujobi">
+            <svg viewBox="0 0 24 24" fill="currentColor" class="sub-btn-icon"><path d="M6.62 10.79a15.053 15.053 0 006.59 6.59l2.2-2.2a1 1 0 011.01-.24c1.12.37 2.33.57 3.58.57a1 1 0 011 1V20a1 1 0 01-1 1A17 17 0 013 4a1 1 0 011-1h3.5a1 1 0 011 1c0 1.25.2 2.46.57 3.58a1 1 0 01-.24 1.01l-2.21 2.2z"/></svg>
+            <span>Call</span>
+          </a>
+          <a href="mailto:dmrickfusionenergy@gmail.com" class="sub-action-btn btn-email" title="Email Miracle Akujobi">
+            <svg viewBox="0 0 24 24" fill="currentColor" class="sub-btn-icon"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
+            <span>Email</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- ====================================================================
+       FLOATING GLASSMORPHIC HERO CONTENT OVER 4K SCENERY
+       ==================================================================== -->
+  <main class="about-hero-overlay" id="main-content">
+    
+    <div class="hero-center-column">
+      <!-- Slogan Badge -->
+      <div class="slogan-badge">
+        <span class="slogan-dot"></span>
+        <span class="slogan-text">Where there is no limitation to possibilities.</span>
+      </div>
+
+      <!-- Main Headline -->
+      <div class="headline-container">
+        <h1 class="about-hero-title">
+          Solar &amp; Battery Engineering for <span class="highlight-blue-text">the Full Energy Lifecycle</span>
+        </h1>
+      </div>
+
+      <p class="hero-description-wide">
+        <strong class="text-white">D-MRICK FUSION ENERGY (DMFE)</strong> delivers practical energy services across the system lifecycle: solar and electrical design and installation, lithium-ion battery assembly, troubleshooting, repurposing assessments, and maintenance. We work with homes, farms and businesses to build and support energy systems suited to their needs.
+      </p>
+      <p class="telemetry-disclaimer">System and product figures on this page are illustrative; specifications and coverage vary by project.</p>
+
+      <!-- Manufacturing Stage Controller Pill -->
+      <div class="farm-time-controller">
+        <div class="time-tabs-group">
+          <button class="farm-tab active" id="btn-farm-day" data-time="day">
+            <svg class="tab-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/>
+            </svg>
+            <span>Energy engineering</span>
+          </button>
+
+          <button class="btn-inspect-assembly" id="btn-open-assembly-modal">
+            <span>⚡ Explore Solar Module Components</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Illustrative solar and battery system details -->
+      <div class="farm-telemetry-grid">
+        <div class="telemetry-card">
+          <div class="telemetry-header">
+            <span class="telemetry-dot dot-solar"></span>
+            <span class="telemetry-label">Illustrative System Output</span>
+          </div>
+          <div class="telemetry-val" id="farm-solar-val">585W TOPCon</div>
+          <div class="telemetry-sub">Example module shown; product ratings vary</div>
+        </div>
+
+        <div class="telemetry-card">
+          <div class="telemetry-header">
+            <span class="telemetry-dot dot-battery"></span>
+            <span class="telemetry-label">System Configuration</span>
+          </div>
+          <div class="telemetry-val">Site-specific <span class="badge-charging">Designed</span></div>
+          <div class="telemetry-sub">Matched to equipment and installation</div>
+        </div>
+
+        <div class="telemetry-card">
+          <div class="telemetry-header">
+            <span class="telemetry-dot dot-grid"></span>
+            <span class="telemetry-label">Equipment Selection</span>
+          </div>
+          <div class="telemetry-val text-blue">Product-specific</div>
+          <div class="telemetry-sub">Refer to equipment datasheets</div>
+        </div>
+
+        <div class="telemetry-card">
+          <div class="telemetry-header">
+            <span class="telemetry-dot dot-savings"></span>
+            <span class="telemetry-label">Service and Product Terms</span>
+          </div>
+          <div class="telemetry-val">Product-specific</div>
+          <div class="telemetry-sub">Coverage varies by product and plan</div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- ====================================================================
+         FOUNDER SPOTLIGHT & COMPANY STORY SECTION
+         ==================================================================== -->
+    <section class="about-story-section" id="founder">
+      <div class="story-grid-container">
+        
+        <!-- Left: Founder Card & Message -->
+        <div class="founder-spotlight-card">
+          <div class="founder-image-wrapper">
+            <img src="assets/founder_avatar.png" alt="Miracle Akujobi" class="founder-photo-crest">
+            <div class="founder-badge-group">
+              <div class="founder-status-badge">FOUNDER &amp; CHIEF ENERGY ARCHITECT</div>
+              <div class="founder-accreditation">RC: 8836610 · ISO 9001:2015 SON Certified</div>
+            </div>
+          </div>
+
+          <div class="founder-bio-content">
+            <h2 class="founder-name-large">Miracle Akujobi</h2>
+            <div class="founder-role-title">FOUNDER · D-MRICK FUSION ENERGY (DMFE)</div>
+            
+            <p class="founder-quote">
+              "We started DMFE to help homes, farms and businesses make better use of energy. Our work spans solar and electrical systems as well as lithium-ion batteries—from assembly and installation through troubleshooting, repurposing assessment and ongoing maintenance."
+            </p>
+
+            <div class="founder-direct-connect">
+              <div class="connect-item">
+                <span class="connect-label">Direct Phone &amp; WhatsApp:</span>
+                <a href="tel:09048518418" class="connect-val">0904 851 8418</a>
+              </div>
+              <div class="connect-item">
+                <span class="connect-label">Official Email:</span>
+                <a href="mailto:dmrickfusionenergy@gmail.com" class="connect-val">dmrickfusionenergy@gmail.com</a>
+              </div>
+              <div class="connect-item-social" style="margin-top: 0.85rem; display: flex; flex-wrap: wrap; gap: 0.55rem;">
+                <a href="https://wa.me/2349048518418?text=Hello%20Miracle%20Akujobi%2C%20I%20am%20reaching%20out%20from%20the%20DMFE%20About%20page." target="_blank" rel="noopener noreferrer" class="btn-3d-app btn-3d-wa" title="WhatsApp: Miracle Akujobi" aria-label="WhatsApp">
+                  <svg viewBox="0 0 24 24" fill="currentColor" class="btn-3d-icon"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91C2.13 13.66 2.59 15.36 3.45 16.86L2.05 22L7.3 20.62C8.75 21.41 10.38 21.83 12.04 21.83C17.5 21.83 21.95 17.38 21.95 11.92C21.95 6.46 17.5 2 12.04 2ZM12.04 20.15C10.56 20.15 9.11 19.76 7.85 19.01L7.55 18.83L4.43 19.65L5.26 16.61L5.06 16.29C4.24 14.99 3.81 13.47 3.81 11.91C3.81 7.37 7.5 3.68 12.04 3.68C14.24 3.68 16.31 4.54 17.87 6.1C19.42 7.66 20.28 9.72 20.27 11.92C20.28 16.46 16.58 20.15 12.04 20.15Z"/></svg>
+                </a>
+                <a href="mailto:dmrickfusionenergy@gmail.com" class="btn-3d-app btn-3d-gmail" title="Email: Miracle Akujobi" aria-label="Gmail">
+                  <svg viewBox="0 0 24 24" fill="currentColor" class="btn-3d-icon"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
+                </a>
+                <a href="https://www.instagram.com/dmf_energy?psln=MWlxYTdwdjkybzBoZg%3D%3D&utm_source=qr" target="_blank" rel="noopener noreferrer" class="btn-3d-app btn-3d-ig" title="Instagram: @dmf_energy" aria-label="Instagram">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="btn-3d-icon"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
+                </a>
+                <a href="https://www.facebook.com/share/1F4jLKihN8/?mibextid=wwXIfr" target="_blank" rel="noopener noreferrer" class="btn-3d-app btn-3d-fb" title="Facebook: DMF Energy" aria-label="Facebook">
+                  <svg viewBox="0 0 24 24" fill="currentColor" class="btn-3d-icon"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+                </a>
+
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right: Why DMFE Beats Standard Solar -->
+        <div class="engineering-pillars-card">
+          <h3 class="pillars-title">How DMFE Supports Energy Projects</h3>
+          <p class="pillars-desc">
+            Why our engineered systems out-generate and outlast standard market alternatives across Nigeria and West Africa:
+          </p>
+
+          <div class="pillars-list">
+            <div class="pillar-item">
+              <div class="pillar-icon-box text-emerald">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+              </div>
+              <div class="pillar-info">
+                <h4>N-Type TOPCon Silicon Architecture</h4>
+                <p>Zero Light-Induced Degradation (LID) with exceptional low-light and early morning/late sunset performance compared to older P-Type panels.</p>
+              </div>
+            </div>
+
+            <div class="pillar-item">
+              <div class="pillar-icon-box text-gold">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>
+              </div>
+              <div class="pillar-info">
+                <h4>Tropical Thermal Coefficient (-0.30%/°C)</h4>
+                <p>Engineered specifically for extreme African heat. Standard panels lose up to 30% output at 45°C; DMFE panels maintain peak energy generation.</p>
+              </div>
+            </div>
+
+            <div class="pillar-item">
+              <div class="pillar-icon-box text-blue">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path></svg>
+              </div>
+              <div class="pillar-info">
+                <h4>Smart Fusion AI Power Controller</h4>
+                <p>Coordinates solar generation, battery storage and site loads. Equipment selection and operating behavior depend on the system configuration.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="pillars-cta-banner">
+            <div>
+              <strong>Planning a solar or battery project?</strong>
+              <p>Explore a project estimate and discuss potential savings with DMFE.</p>
+            </div>
+            <a href="index.html#contact" class="cta-banner-btn">Contact DMFE</a>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ====================================================================
+       INTERACTIVE 3D SOLAR ASSEMBLY MODAL
+       ==================================================================== -->
+  <div class="assembly-modal-backdrop" id="assemblyModal" role="dialog" aria-modal="true" aria-hidden="true">
+    <div class="assembly-modal-card">
+      <button class="modal-close-btn" id="btnCloseAssemblyModal">&times;</button>
+      
+      <div class="assembly-modal-header">
+        <span class="status-live-pill">SOLAR MODULE OVERVIEW</span>
+        <h2>Solar Module Components</h2>
+        <p>Explore the engineered module layers designed for high efficiency and long-term structural durability.</p>
+      </div>
+
+      <div class="assembly-layers-comparison">
+        <div class="comparison-card">
+          <img src="assets/panel_exploded.jpg" alt="Exploded Solar Assembly" class="comparison-img">
+          <div class="comparison-caption">
+            <strong>01 // Exploded Layer Architecture</strong>
+            <p>40mm T6 Aluminum Frame · Quartz Backsheet · 16-Busbar TOPCon Wafers · 3.2mm ARC Glass</p>
+          </div>
+        </div>
+
+        <div class="comparison-card">
+          <img src="assets/panel_assembling.jpg" alt="Robotic Laser Calibration" class="comparison-img">
+          <div class="comparison-caption">
+            <strong>02 // Robotic Hermetic Locking</strong>
+            <p>Automated zero-tolerance laser alignment with IP68 junction sealing for tropical climates.</p>
+          </div>
+        </div>
+
+        <div class="comparison-card">
+          <img src="assets/panel_sunlight.jpg" alt="Sunlight Energized Module" class="comparison-img">
+          <div class="comparison-caption">
+            <strong>03 // Tropical Sunlight Absorption</strong>
+            <p>1,020 W/m² conversion rate delivering 585.4W peak power directly to home &amp; battery storage.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Site Footer -->
+  <footer class="about-footer">
+    <div class="footer-inner">
+      <div class="footer-brand-info">
+        <img src="assets/dmfe_logo.svg" alt="DMFE Logo" class="footer-logo">
+        <p>Where there is no limitation to possibilities. Solar, battery and energy systems.</p>
+      </div>
+      <div class="footer-copy">
+        © 2026 D-MRICK FUSION ENERGY (DMFE). Founded by Miracle Akujobi. All Rights Reserved.
+      </div>
+    </div>
+  </footer>
+
+  <script src="about.js"></script>
+</body>
+</html>

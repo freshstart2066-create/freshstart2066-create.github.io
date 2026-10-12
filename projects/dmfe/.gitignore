@@ -1,0 +1,13 @@
+# Dependencies
+node_modules/
+react-landing/node_modules/
+react-landing/dist/
+
+# System Files
+.DS_Store
+Thumbs.db
+*.log
+
+# Editor directories
+.vscode/
+.idea/

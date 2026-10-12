@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 340 76" fill="none" class="dmfe-official-logo">
+  <defs>
+    <filter id="glowOrange" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="0" stdDeviation="4" flood-color="#ff7828" flood-opacity="0.9"/>
+    </filter>
+    <filter id="glowEmerald" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="0" stdDeviation="3.5" flood-color="#10b981" flood-opacity="0.85"/>
+    </filter>
+    <filter id="glowWhite" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="0" stdDeviation="2.5" flood-color="#ffffff" flood-opacity="0.4"/>
+    </filter>
+  </defs>
+
+  <!-- Large Extra-Bold Stylized Monogram DMFE -->
+  <g stroke-linecap="round" stroke-linejoin="round">
+    <!-- D (Extra Bold) -->
+    <path d="M 14,14 L 14,60 M 14,14 L 30,14 C 48,14 56,24 56,37 C 56,50 48,60 30,60 L 14,60" 
+          stroke="#ffffff" stroke-width="5.8" filter="url(#glowWhite)"/>
+    
+    <!-- M (Extra Bold) -->
+    <path d="M 72,60 L 86,14 L 98,42 L 110,14 L 124,60" 
+          stroke="#ffffff" stroke-width="5.8" filter="url(#glowWhite)"/>
+    
+    <!-- F (Extra Bold) -->
+    <path d="M 142,14 L 142,60 M 142,14 L 180,14 M 142,36 L 174,36" 
+          stroke="#ffffff" stroke-width="5.8" filter="url(#glowWhite)"/>
+    
+    <!-- E (Extra Bold Signature Orange) -->
+    <path d="M 198,14 L 198,60 M 198,14 L 238,14 M 198,37 L 234,37 M 198,60 L 238,60" 
+          stroke="#ff7828" stroke-width="7.2" filter="url(#glowOrange)"/>
+  </g>
+
+  <!-- Clean Knockout Mask / Background for subline -->
+  <rect x="40" y="38" width="285" height="19" fill="#060b12" rx="3" opacity="0.96"/>
+
+  <!-- Subtitle Text horizontally crossing lower third with ENERGY in Emerald Green -->
+  <text x="45" y="52" font-family="'Plus Jakarta Sans', 'Space Grotesk', sans-serif" font-weight="900" font-size="11.8" letter-spacing="3.2" fill="#ffffff">
+    D-MRICK FUSION <tspan fill="#10b981" filter="url(#glowEmerald)">ENERGY</tspan>
+  </text>
+</svg>

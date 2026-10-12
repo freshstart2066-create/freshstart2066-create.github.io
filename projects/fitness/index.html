@@ -1,0 +1,2841 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Andreas Health & Activity Dashboard - Neumorphism 4K</title>
+  <!-- Google Fonts: Inter & Plus Jakarta Sans -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <style>
+    :root {
+      --bg-base: #06080b; /* Ultra Matte Obsidian Black Canvas */
+      --bg-surface: #e4ebf5; /* Calibrated Neumorphic Base Canvas */
+      --card-bg: #eaf0f8;
+      --card-border: rgba(255, 255, 255, 0.85);
+      --text-main: #0a0f18;
+      --text-muted: #53647a;
+      --text-sub: #7e90a8;
+
+      /* ULTRA-DEEP DRAMATIC NEUMORPHIC SHADOWS */
+      --neu-light: #ffffff;
+      --neu-dark: #b2c2d6;
+      --neu-card: 22px 24px 48px #a8bcd5, -22px -24px 48px #ffffff;
+      --neu-card-sm: 10px 12px 26px rgba(160, 182, 208, 0.75), -10px -12px 26px #ffffff;
+      --neu-btn: 10px 12px 24px #a9bdd6, -10px -12px 24px #ffffff;
+      --neu-pressed: inset 8px 8px 16px #afc2d9, inset -8px -8px 16px #ffffff;
+      --neu-pressed-sm: inset 6px 6px 12px #b2c5dc, inset -6px -6px 12px #ffffff;
+      --neu-inset-subtle: inset 5px 5px 11px #b2c5dc, inset -5px -5px 11px #ffffff;
+      
+      --accent-blue: #328af1;
+      --accent-blue-dark: #1e6acc;
+      --accent-lime: #b0ea3d;
+      --accent-lime-text: #233b04;
+      --accent-green-bar: #8cb83a;
+      --primary-dark: #12151b;
+      --badge-yellow: #dbf068;
+    }
+
+    /* 🌓 Obsidian Neumorphic Dark Mode */
+    body.theme-dark {
+      --bg-surface: #131720;
+      --card-bg: #181d28;
+      --card-border: rgba(255, 255, 255, 0.08);
+      --text-main: #f1f5f9;
+      --text-muted: #94a3b8;
+      --text-sub: #64748b;
+
+      --neu-light: rgba(255, 255, 255, 0.06);
+      --neu-dark: #090c12;
+      --neu-card: 20px 22px 45px #07090d, -18px -18px 40px rgba(45, 55, 75, 0.35);
+      --neu-card-sm: 8px 10px 22px #07090d, -8px -10px 20px rgba(45, 55, 75, 0.3);
+      --neu-btn: 8px 10px 20px #080a0f, -8px -10px 20px rgba(50, 62, 85, 0.35);
+      --neu-pressed: inset 8px 8px 16px #080a0f, inset -8px -8px 16px rgba(45, 55, 75, 0.4);
+      --neu-pressed-sm: inset 5px 5px 10px #080a0f, inset -5px -5px 10px rgba(45, 55, 75, 0.35);
+      --neu-inset-subtle: inset 4px 4px 9px #080a0f, inset -4px -4px 9px rgba(45, 55, 75, 0.3);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    body {
+      background-color: var(--bg-base);
+      background-image: radial-gradient(circle at 50% 0%, #171b24 0%, #06080a 100%);
+      font-family: 'Plus Jakarta Sans', 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      color: var(--text-main);
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 24px;
+      overflow-x: hidden;
+    }
+
+    /* Main Dashboard Shell - Very Deep Matte Contrast */
+    .dashboard-container {
+      width: 100%;
+      max-width: 1440px;
+      min-height: 920px;
+      background: var(--bg-surface);
+      border-radius: 46px;
+      box-shadow: 0 45px 110px rgba(0, 0, 0, 0.92), 0 0 1px 1px rgba(255, 255, 255, 0.08);
+      display: flex;
+      position: relative;
+      overflow: hidden;
+      border: 1.5px solid rgba(255, 255, 255, 0.4);
+    }
+
+    /* Left Sidebar - Very Deep Extruded White */
+    .sidebar {
+      width: 96px;
+      padding: 34px 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: space-between;
+      border-right: 1.5px solid rgba(200, 215, 232, 0.45);
+      background: linear-gradient(180deg, #f7faff 0%, #edf2f8 100%);
+      z-index: 10;
+    }
+
+    .brand-logo {
+      width: 54px;
+      height: 54px;
+      border-radius: 20px;
+      background: #f4f7fb;
+      box-shadow: var(--neu-btn);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      border: 1px solid rgba(255, 255, 255, 0.9);
+      transition: all 0.25s ease;
+    }
+
+    .brand-logo:hover {
+      box-shadow: var(--neu-pressed-sm);
+    }
+
+    .logo-dots {
+      display: grid;
+      grid-template-columns: repeat(3, 7px);
+      grid-gap: 4px;
+      place-items: center;
+    }
+
+    .logo-dots span {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: #84cc16;
+    }
+    .logo-dots span:nth-child(even) {
+      background: #65a30d;
+    }
+
+    .nav-menu {
+      display: flex;
+      flex-direction: column;
+      gap: 22px;
+      align-items: center;
+    }
+
+    .nav-btn {
+      width: 52px;
+      height: 52px;
+      border-radius: 20px;
+      background: #f4f7fb;
+      box-shadow: var(--neu-btn);
+      border: 1px solid rgba(255, 255, 255, 0.95);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #55657d;
+      cursor: pointer;
+      transition: all 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+
+    .nav-btn:hover {
+      color: #0f172a;
+      transform: translateY(-3px) scale(1.02);
+      box-shadow: 12px 14px 26px rgba(150, 175, 205, 0.7), -12px -14px 26px #ffffff;
+    }
+
+    .nav-btn.active {
+      background: linear-gradient(135deg, #8cb83a, #74a024);
+      color: #ffffff;
+      box-shadow: 6px 8px 20px rgba(115, 165, 35, 0.55), inset 2px 2px 4px rgba(255, 255, 255, 0.6), inset -2px -2px 4px rgba(60, 90, 15, 0.3);
+      border: none;
+    }
+
+    .nav-btn:active {
+      box-shadow: var(--neu-pressed);
+      transform: translateY(1px) scale(0.98);
+    }
+
+    .nav-btn.pressed {
+      box-shadow: var(--neu-pressed-sm);
+    }
+
+    .nav-divider {
+      width: 32px;
+      height: 2px;
+      background: #d8e2ee;
+      border-radius: 2px;
+      margin: 4px 0;
+    }
+
+    .user-avatar-btn {
+      width: 52px;
+      height: 52px;
+      border-radius: 50%;
+      padding: 3px;
+      background: var(--bg-surface);
+      box-shadow: var(--neu-card-sm);
+      cursor: pointer;
+      transition: all 0.2s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .user-avatar-btn:hover {
+      box-shadow: var(--neu-pressed-sm);
+    }
+
+    .user-avatar-btn img {
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+      object-fit: cover;
+    }
+
+    /* Main Content Area */
+    .main-content {
+      flex: 1;
+      padding: 36px 44px;
+      display: flex;
+      flex-direction: column;
+      gap: 28px;
+      overflow-y: auto;
+    }
+
+    /* Header Section */
+    .top-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+    }
+
+    .header-greeting h1 {
+      font-size: 32px;
+      font-weight: 800;
+      color: #0f172a;
+      letter-spacing: -0.03em;
+      line-height: 1.15;
+    }
+
+    .header-greeting p {
+      font-size: 14.5px;
+      font-weight: 500;
+      color: #7b889d;
+      margin-top: 5px;
+    }
+
+    .header-actions {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+
+    /* Search Bar Very Deep Inset Neumorphic */
+    .search-wrapper {
+      position: relative;
+      width: 320px;
+    }
+
+    .search-input {
+      width: 100%;
+      height: 50px;
+      border-radius: 30px;
+      border: 1px solid rgba(255, 255, 255, 0.9);
+      background: #eef3f9;
+      box-shadow: inset 5px 5px 10px #cad7e7, inset -5px -5px 10px #ffffff;
+      padding: 0 20px 0 48px;
+      font-size: 14px;
+      font-family: inherit;
+      color: #1e293b;
+      outline: none;
+      transition: all 0.25s ease;
+    }
+
+    .search-input::placeholder {
+      color: #8b99ae;
+      font-weight: 500;
+    }
+
+    .search-input:focus {
+      box-shadow: inset 6px 6px 12px #c2d1e2, inset -6px -6px 12px #ffffff;
+      border-color: rgba(50, 138, 241, 0.4);
+    }
+
+    .search-icon {
+      position: absolute;
+      left: 18px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: #7b8ea5;
+      pointer-events: none;
+      display: flex;
+      align-items: center;
+    }
+
+    /* Upgrade Button - Deep Neumorphic Lift */
+    .btn-upgrade {
+      height: 50px;
+      padding: 0 28px;
+      border-radius: 30px;
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      background: #0f131a;
+      color: #ffffff;
+      font-size: 14.5px;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      gap: 9px;
+      cursor: pointer;
+      box-shadow: 8px 10px 22px rgba(10, 15, 25, 0.45), -6px -6px 16px rgba(255, 255, 255, 0.8);
+      transition: all 0.25s ease;
+    }
+
+    .btn-upgrade:hover {
+      transform: translateY(-2px);
+      box-shadow: 12px 14px 28px rgba(10, 15, 25, 0.55), -8px -8px 20px rgba(255, 255, 255, 0.9);
+    }
+
+    .btn-upgrade svg {
+      color: #facc15;
+    }
+
+    /* Main Content Grid */
+    .dashboard-grid {
+      display: grid;
+      grid-template-columns: 1.55fr 1fr;
+      gap: 28px;
+    }
+
+    /* ULTRA DEEP Sculpted Base Cards */
+    .neu-card {
+      background: var(--card-bg);
+      border-radius: 36px;
+      box-shadow: var(--neu-card);
+      border: 1.5px solid rgba(255, 255, 255, 0.85);
+      transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+
+    /* 👑 SKEUOMORPHIC Hero Workout Banner Card */
+    .hero-banner-card {
+      position: relative;
+      height: 380px;
+      border-radius: 36px;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: 38px 42px;
+      color: #ffffff;
+      
+      /* Rich Skeuomorphic Brushed Cobalt & Metallic Lacquer */
+      background: 
+        linear-gradient(180deg, rgba(255, 255, 255, 0.28) 0%, rgba(255, 255, 255, 0.05) 45%, rgba(0, 0, 0, 0.2) 46%, rgba(0, 0, 0, 0.45) 100%),
+        radial-gradient(ellipse at 25% 15%, #4299e1 0%, #1a60cc 55%, #0f3d8a 100%);
+      
+      /* Machined Chrome Bezel Rim & Heavy Hardware Drop Shadows */
+      border-top: 2px solid #93c5fd;
+      border-bottom: 2.5px solid #08214d;
+      border-left: 1.5px solid #2563eb;
+      border-right: 1.5px solid #1e40af;
+      
+      box-shadow: 
+        0 1px 1px rgba(255, 255, 255, 0.8) inset,  /* Top specular catchlight */
+        0 -3px 6px rgba(0, 0, 0, 0.6) inset,        /* Bottom inner bezel darkness */
+        0 24px 50px rgba(10, 35, 80, 0.55),        /* Heavy hardware ambient drop shadow */
+        0 8px 16px rgba(0, 0, 0, 0.35),
+        0 0 0 1px rgba(15, 30, 60, 0.6);           /* Outer mechanical gasket border */
+      
+      transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+
+    /* Skeuomorphic Convex Glass Dome Gloss on Hero Card */
+    .hero-banner-card::before {
+      content: '';
+      position: absolute;
+      top: 1px;
+      left: 12px;
+      right: 12px;
+      height: 44%;
+      border-radius: 26px 26px 80px 80px;
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.38) 0%, rgba(255, 255, 255, 0.1) 70%, rgba(255, 255, 255, 0.01) 100%);
+      pointer-events: none;
+      z-index: 2;
+    }
+
+    /* High-res Realistic Athlete Background */
+    .hero-bg-img {
+      position: absolute;
+      right: 0;
+      bottom: 0;
+      top: 0;
+      width: 58%;
+      height: 100%;
+      object-fit: cover;
+      object-position: 30% center;
+      z-index: 1;
+      mask-image: linear-gradient(to right, transparent 0%, rgba(0,0,0,0.6) 25%, black 60%);
+      -webkit-mask-image: linear-gradient(to right, transparent 0%, rgba(0,0,0,0.7) 20%, black 50%);
+      filter: saturate(1.1) contrast(1.08);
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 3;
+      max-width: 380px;
+    }
+
+    .hero-title {
+      font-size: 38px;
+      font-weight: 800;
+      line-height: 1.12;
+      letter-spacing: -0.035em;
+      text-shadow: 0 -1px 1px rgba(0, 0, 0, 0.6), 0 2px 8px rgba(0, 15, 45, 0.7), 0 0 20px rgba(59, 130, 246, 0.4);
+    }
+
+    /* Explore Play Button on Athlete - Skeuomorphic Chromed Lens */
+    .explore-badge {
+      position: absolute;
+      left: 360px;
+      top: 140px;
+      z-index: 4;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 6px;
+      cursor: pointer;
+      transition: transform 0.25s ease;
+    }
+
+    .explore-badge:hover {
+      transform: scale(1.08) translateY(-2px);
+    }
+
+    .play-circle {
+      width: 56px;
+      height: 56px;
+      border-radius: 50%;
+      background: radial-gradient(circle at 35% 30%, #ffffff 0%, #bfdbfe 35%, #60a5fa 75%, #1d4ed8 100%);
+      border: 2px solid #ffffff;
+      box-shadow: 
+        0 1px 2px #ffffff inset,
+        0 -2px 4px rgba(0, 0, 0, 0.5) inset,
+        0 8px 20px rgba(0, 0, 0, 0.45);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .play-circle svg {
+      fill: #ffffff;
+      color: #ffffff;
+      margin-left: 2px;
+      filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.4));
+    }
+
+    .explore-text {
+      font-size: 13px;
+      font-weight: 700;
+      color: #ffffff;
+      text-shadow: 0 -1px 1px rgba(0, 0, 0, 0.8), 0 2px 6px rgba(0, 0, 0, 0.5);
+      letter-spacing: -0.01em;
+    }
+
+    .hero-footer {
+      position: relative;
+      z-index: 3;
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+    }
+
+    .members-group {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .members-group .label {
+      font-size: 13px;
+      font-weight: 500;
+      color: rgba(255, 255, 255, 0.85);
+      text-shadow: 0 1px 3px rgba(0,0,0,0.2);
+    }
+
+    .members-row {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .avatar-stack {
+      display: flex;
+      align-items: center;
+    }
+
+    .avatar-stack img {
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      border: 2px solid #ffffff;
+      margin-left: -10px;
+      object-fit: cover;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.25);
+    }
+
+    .avatar-stack img:first-child {
+      margin-left: 0;
+    }
+
+    .members-count {
+      font-size: 19px;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      line-height: 1.1;
+    }
+
+    .members-count span {
+      display: block;
+      font-size: 12px;
+      font-weight: 500;
+      opacity: 0.85;
+    }
+
+    /* Start Free Trial Dark Liquid Glass Breathing Animation */
+    @keyframes darkLiquidSheen {
+      0% {
+        transform: translateX(-160%) skewX(-25deg);
+      }
+      50%, 100% {
+        transform: translateX(250%) skewX(-25deg);
+      }
+    }
+
+    @keyframes darkLiquidBreathe {
+      0%, 100% {
+        transform: scale(1);
+        box-shadow: 
+          0 12px 30px rgba(0, 0, 0, 0.45),
+          0 0 15px rgba(50, 138, 241, 0.15),
+          0 0 35px rgba(255, 255, 255, 0.05),
+          inset 0 1.5px 2px rgba(255, 255, 255, 0.4),
+          inset 0 -2px 6px rgba(0, 0, 0, 0.7);
+        border-color: rgba(255, 255, 255, 0.2);
+      }
+      50% {
+        transform: scale(1.038);
+        box-shadow: 
+          0 18px 45px rgba(0, 0, 0, 0.65),
+          0 0 30px rgba(56, 160, 255, 0.4),
+          0 0 55px rgba(255, 255, 255, 0.12),
+          inset 0 2px 4px rgba(255, 255, 255, 0.75),
+          inset 0 -3px 8px rgba(0, 0, 0, 0.85);
+        border-color: rgba(255, 255, 255, 0.45);
+      }
+    }
+
+    /* 👑 SKEUOMORPHIC "Start Free Trial" Physical Hardware Button */
+    @keyframes skeuoSheen {
+      0% {
+        background-position: -200% 0;
+      }
+      100% {
+        background-position: 200% 0;
+      }
+    }
+
+    .btn-trial {
+      position: relative;
+      height: 48px;
+      padding: 0 8px 0 22px;
+      border-radius: 28px;
+      font-size: 13.5px;
+      font-weight: 800;
+      letter-spacing: 0.02em;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      cursor: pointer;
+      user-select: none;
+      
+      /* Rich Skeuomorphic Layered Gradients: High-Gloss Lacquered Onyx */
+      background: 
+        linear-gradient(180deg, rgba(255, 255, 255, 0.35) 0%, rgba(255, 255, 255, 0.05) 50%, rgba(0, 0, 0, 0.4) 51%, rgba(0, 0, 0, 0.75) 100%),
+        linear-gradient(135deg, #1f242d 0%, #11141a 50%, #080a0e 100%);
+      
+      /* Skeuomorphic Metallic Rim Bevel & Cast Deep Shadows */
+      border-top: 1.5px solid #8e9bb0;
+      border-bottom: 2px solid #000000;
+      border-left: 1px solid #4a5464;
+      border-right: 1px solid #4a5464;
+      
+      box-shadow: 
+        0 1px 0 rgba(255, 255, 255, 0.4) inset, /* Top specular catchlight */
+        0 -2px 3px rgba(0, 0, 0, 0.8) inset,     /* Bottom inner rim darkness */
+        0 12px 24px rgba(0, 0, 0, 0.65),         /* Ambient hardware drop shadow */
+        0 4px 8px rgba(0, 0, 0, 0.5),
+        0 0 0 1px rgba(0, 0, 0, 0.85);           /* Outer mechanical gasket border */
+      
+      color: #ffffff;
+      text-shadow: 0 -1px 1px rgba(0, 0, 0, 0.9), 0 1px 2px rgba(255, 255, 255, 0.4);
+      transition: all 0.15s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    /* Skeuomorphic Glass Specular Lens (Top Half Gloss Dome) */
+    .btn-trial::before {
+      content: '';
+      position: absolute;
+      top: 1px;
+      left: 6px;
+      right: 6px;
+      height: 48%;
+      border-radius: 20px 20px 40px 40px;
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.6) 0%, rgba(255, 255, 255, 0.18) 75%, rgba(255, 255, 255, 0.02) 100%);
+      pointer-events: none;
+      box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.8);
+    }
+
+    /* Skeuomorphic Tactile Hover State */
+    .btn-trial:hover {
+      transform: translateY(-2px);
+      box-shadow: 
+        0 1px 0 rgba(255, 255, 255, 0.6) inset,
+        0 -2px 3px rgba(0, 0, 0, 0.8) inset,
+        0 16px 30px rgba(0, 0, 0, 0.75),
+        0 6px 12px rgba(0, 0, 0, 0.55),
+        0 0 0 1px rgba(0, 0, 0, 0.9);
+      filter: brightness(1.06);
+    }
+
+    /* Skeuomorphic Tactile Mechanical Push Down on Click */
+    .btn-trial:active {
+      transform: translateY(2px) scale(0.99);
+      background: 
+        linear-gradient(180deg, rgba(0, 0, 0, 0.5) 0%, rgba(0, 0, 0, 0.2) 60%, rgba(255, 255, 255, 0.15) 100%),
+        linear-gradient(135deg, #0d0f13 0%, #171b22 100%);
+      box-shadow: 
+        0 3px 6px rgba(0, 0, 0, 0.9) inset,
+        0 1px 2px rgba(0, 0, 0, 0.8) inset,
+        0 2px 6px rgba(0, 0, 0, 0.5),
+        0 0 0 1px rgba(0, 0, 0, 0.9);
+    }
+
+    /* Skeuomorphic Chrome Push-Button Knob with Engraved Arrow */
+    .trial-arrow {
+      width: 34px;
+      height: 34px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      
+      /* High-Gloss Brushed Chrome Metallic Cylinder */
+      background: 
+        radial-gradient(circle at 35% 30%, #ffffff 0%, #d8e2ee 40%, #8ca1ba 85%, #596c82 100%);
+      
+      border: 1.5px solid #ffffff;
+      box-shadow: 
+        0 1px 1px #ffffff inset,
+        0 -1px 2px rgba(0, 0, 0, 0.4) inset,
+        0 3px 6px rgba(0, 0, 0, 0.6),
+        0 1px 3px rgba(0, 0, 0, 0.4);
+      
+      color: #111827;
+      transition: all 0.15s ease;
+      position: relative;
+      z-index: 2;
+    }
+
+    .trial-arrow svg {
+      width: 16px;
+      height: 16px;
+      filter: drop-shadow(0 1px 0 rgba(255, 255, 255, 0.8));
+    }
+
+    .btn-trial:hover .trial-arrow {
+      transform: translateX(2px) scale(1.04);
+      box-shadow: 
+        0 1px 2px #ffffff inset,
+        0 5px 10px rgba(0, 0, 0, 0.7);
+    }
+
+    .btn-trial:active .trial-arrow {
+      transform: scale(0.94);
+      box-shadow: 
+        0 2px 4px rgba(0, 0, 0, 0.6) inset,
+        0 1px 2px rgba(0, 0, 0, 0.3);
+    }
+
+    /* 👑 SKEUOMORPHIC Hydration Status Card */
+    .hydration-card {
+      position: relative;
+      border-radius: 36px;
+      padding: 34px 36px;
+      color: #ffffff;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      overflow: hidden;
+      
+      /* Rich Skeuomorphic Physical Fluid Chamber & Specular Cobalt Dome */
+      background: 
+        linear-gradient(180deg, rgba(255, 255, 255, 0.32) 0%, rgba(255, 255, 255, 0.06) 45%, rgba(0, 0, 0, 0.22) 46%, rgba(0, 0, 0, 0.5) 100%),
+        radial-gradient(ellipse at 50% 20%, #4da7ff 0%, #1e70e4 55%, #0b3fa8 100%);
+      
+      /* Machined Chrome Bezel Rim & Heavy Hardware Drop Shadows */
+      border-top: 2px solid #a5d0ff;
+      border-bottom: 2.5px solid #062668;
+      border-left: 1.5px solid #2b7cf5;
+      border-right: 1.5px solid #1a5ac9;
+      
+      box-shadow: 
+        0 1px 1px rgba(255, 255, 255, 0.85) inset, /* Top specular catchlight */
+        0 -3px 6px rgba(0, 0, 0, 0.6) inset,        /* Bottom inner bezel shadow */
+        0 24px 50px rgba(10, 35, 80, 0.55),        /* Heavy hardware ambient drop shadow */
+        0 8px 16px rgba(0, 0, 0, 0.35),
+        0 0 0 1px rgba(15, 30, 60, 0.6);           /* Outer mechanical gasket border */
+      
+      transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+
+    /* Skeuomorphic Convex Glass Dome Gloss on Hydration Card */
+    .hydration-card::before {
+      content: '';
+      position: absolute;
+      top: 1px;
+      left: 12px;
+      right: 12px;
+      height: 44%;
+      border-radius: 26px 26px 80px 80px;
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.4) 0%, rgba(255, 255, 255, 0.12) 70%, rgba(255, 255, 255, 0.01) 100%);
+      pointer-events: none;
+      z-index: 2;
+    }
+
+    .hydration-top {
+      position: relative;
+      z-index: 3;
+      display: flex;
+      justify-content: space-between;
+      gap: 20px;
+    }
+
+    .hydration-info {
+      max-width: 190px;
+    }
+
+    .hydration-info h3 {
+      font-size: 21px;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      text-shadow: 0 -1px 1px rgba(0, 0, 0, 0.7), 0 2px 4px rgba(0, 20, 60, 0.6);
+    }
+
+    .hydration-info p {
+      font-size: 12.5px;
+      color: rgba(255, 255, 255, 0.9);
+      margin-top: 8px;
+      line-height: 1.45;
+      text-shadow: 0 1px 2px rgba(0, 0, 0, 0.4);
+    }
+
+    /* Shining Liquid Glass Button & Controls */
+    @keyframes liquidSheen {
+      0% {
+        transform: translateX(-150%) skewX(-25deg);
+      }
+      50%, 100% {
+        transform: translateX(250%) skewX(-25deg);
+      }
+    }
+
+    @keyframes waterPulse {
+      0%, 100% {
+        box-shadow: 
+          0 10px 25px rgba(219, 240, 104, 0.45),
+          0 0 15px rgba(255, 255, 255, 0.6),
+          inset 0 2px 4px rgba(255, 255, 255, 0.9),
+          inset 0 -3px 6px rgba(120, 150, 20, 0.4);
+      }
+      50% {
+        box-shadow: 
+          0 14px 32px rgba(219, 240, 104, 0.65),
+          0 0 25px rgba(255, 255, 255, 0.85),
+          inset 0 3px 6px rgba(255, 255, 255, 1),
+          inset 0 -4px 8px rgba(120, 150, 20, 0.5);
+      }
+    }
+
+    .badge-well-done {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      position: relative;
+      overflow: hidden;
+      cursor: pointer;
+      background: linear-gradient(135deg, rgba(235, 255, 120, 0.95) 0%, rgba(200, 235, 70, 0.85) 50%, rgba(225, 250, 95, 0.95) 100%);
+      color: #1a2e05;
+      font-size: 13.5px;
+      font-weight: 800;
+      padding: 10px 20px;
+      border-radius: 24px;
+      margin-top: 18px;
+      backdrop-filter: blur(16px) saturate(180%);
+      -webkit-backdrop-filter: blur(16px) saturate(180%);
+      border: 1.5px solid rgba(255, 255, 255, 0.85);
+      animation: waterPulse 3.5s ease-in-out infinite;
+      transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+
+    .badge-well-done::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: 0;
+      width: 50%;
+      height: 200%;
+      background: linear-gradient(
+        90deg,
+        rgba(255, 255, 255, 0) 0%,
+        rgba(255, 255, 255, 0.4) 30%,
+        rgba(255, 255, 255, 0.95) 50%,
+        rgba(255, 255, 255, 0.4) 70%,
+        rgba(255, 255, 255, 0.95) 50%,
+        rgba(255, 255, 255, 0) 100%
+      );
+      animation: liquidSheen 3.2s ease-in-out infinite;
+      pointer-events: none;
+    }
+
+    .badge-well-done::after {
+      content: '';
+      position: absolute;
+      top: 2px;
+      left: 10%;
+      right: 10%;
+      height: 35%;
+      border-radius: 20px 20px 8px 8px;
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.75) 0%, rgba(255, 255, 255, 0.05) 100%);
+      pointer-events: none;
+    }
+
+    .badge-well-done:hover {
+      transform: translateY(-2px) scale(1.04);
+      filter: brightness(1.08);
+    }
+
+    /* Skeuomorphic Embossed Glass Tumblers */
+    .water-grid-container {
+      display: grid;
+      grid-template-columns: repeat(6, 1fr);
+      gap: 7px;
+      padding: 8px;
+      background: rgba(0, 15, 45, 0.25);
+      border-radius: 18px;
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      box-shadow: inset 0 2px 6px rgba(0, 0, 0, 0.4);
+    }
+
+    .water-cup {
+      width: 22px;
+      height: 30px;
+      border-radius: 4px 4px 8px 8px;
+      background: rgba(255, 255, 255, 0.18);
+      border: 1px solid rgba(255, 255, 255, 0.35);
+      box-shadow: 
+        inset 1px 1px 2px rgba(255, 255, 255, 0.6), 
+        inset -1px -1px 3px rgba(0, 0, 0, 0.4),
+        0 2px 4px rgba(0, 0, 0, 0.2);
+      position: relative;
+      cursor: pointer;
+      transition: all 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+
+    .water-cup:hover {
+      transform: scale(1.12);
+      border-color: #ffffff;
+    }
+
+    .water-cup.filled {
+      /* Skeuomorphic Pure Crystal Water Tumbler */
+      background: 
+        linear-gradient(180deg, rgba(255, 255, 255, 0.95) 0%, rgba(220, 240, 255, 0.85) 50%, #ffffff 100%);
+      border: 1.5px solid #ffffff;
+      box-shadow: 
+        0 4px 10px rgba(0, 0, 0, 0.35), 
+        0 0 10px rgba(255, 255, 255, 0.7),
+        inset 0 2px 3px #ffffff,
+        inset 0 -2px 3px rgba(30, 110, 230, 0.3);
+    }
+
+    .hydration-bottom {
+      position: relative;
+      z-index: 3;
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      margin-top: 14px;
+    }
+
+    /* Skeuomorphic Aluminum Bezel Segmented Controls (D / W / M) */
+    .segmented-control {
+      display: flex;
+      background: linear-gradient(180deg, #182844 0%, #0d1728 100%);
+      padding: 5px;
+      border-radius: 36px;
+      gap: 6px;
+      border-top: 1px solid #4a638a;
+      border-bottom: 1.5px solid #000000;
+      box-shadow: 
+        inset 0 2px 4px rgba(0, 0, 0, 0.7), 
+        0 8px 18px rgba(0, 0, 0, 0.4),
+        0 0 0 1px rgba(255, 255, 255, 0.15);
+    }
+
+    .segment-btn {
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      border: 1px solid transparent;
+      background: transparent;
+      color: rgba(255, 255, 255, 0.75);
+      font-size: 14.5px;
+      font-weight: 800;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      transition: all 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+
+    .segment-btn:hover {
+      color: #ffffff;
+    }
+
+    /* Skeuomorphic Machined Aluminum Dial (Active Button) */
+    .segment-btn.active {
+      background: 
+        radial-gradient(circle at 35% 30%, #ffffff 0%, #e2e8f0 45%, #94a3b8 85%, #64748b 100%);
+      color: #1e3a8a;
+      border: 1.5px solid #ffffff;
+      box-shadow: 
+        0 1px 1px #ffffff inset,
+        0 -1px 2px rgba(0, 0, 0, 0.4) inset,
+        0 4px 10px rgba(0, 0, 0, 0.5),
+        0 1px 3px rgba(0, 0, 0, 0.3);
+      text-shadow: 0 1px 0 rgba(255, 255, 255, 0.8);
+    }
+
+    .hydration-amount {
+      text-align: right;
+    }
+
+    .amount-value {
+      font-size: 44px;
+      font-weight: 800;
+      letter-spacing: -0.04em;
+      line-height: 1;
+    }
+
+    .amount-unit {
+      font-size: 22px;
+      font-weight: 500;
+      opacity: 0.9;
+    }
+
+    /* Bottom Row Cards */
+    .bottom-row {
+      display: grid;
+      grid-template-columns: 1fr 1.35fr 1fr;
+      gap: 26px;
+    }
+
+    /* Sleep Card */
+    .sleep-card {
+      padding: 30px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      background: var(--card-bg);
+    }
+
+    .sleep-card-header {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .sleep-card-avatars {
+      display: flex;
+      align-items: center;
+    }
+
+    .sleep-card-avatars img {
+      width: 34px;
+      height: 34px;
+      border-radius: 50%;
+      border: 2px solid #ffffff;
+      margin-left: -8px;
+      object-fit: cover;
+      box-shadow: 2px 2px 6px rgba(18, 28, 45, 0.12);
+    }
+
+    .sleep-card-avatars img:first-child {
+      margin-left: 0;
+    }
+
+    .sleep-title {
+      font-size: 21px;
+      font-weight: 800;
+      color: #0f172a;
+      line-height: 1.25;
+      letter-spacing: -0.025em;
+    }
+
+    /* Inset Neumorphic Subcard for Sleep - ULTRA DEEP INSET */
+    .sleep-inset-box {
+      background: #e2eaf5;
+      border-radius: 26px;
+      padding: 20px 22px;
+      box-shadow: inset 8px 8px 16px #afc2d9, inset -8px -8px 16px #ffffff;
+      border: 1.5px solid rgba(255, 255, 255, 0.9);
+      margin: 14px 0;
+    }
+
+    .deep-sleep-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: #eaf0f8;
+      border-radius: 14px;
+      padding: 6px 14px;
+      font-size: 12px;
+      font-weight: 700;
+      color: #1e293b;
+      box-shadow: 5px 5px 12px #a8bcd5, -5px -5px 12px #ffffff;
+      border: 1px solid rgba(255, 255, 255, 0.95);
+      margin-bottom: 12px;
+    }
+
+    .sleep-desc {
+      font-size: 12.5px;
+      color: #55657d;
+      line-height: 1.55;
+      font-weight: 450;
+    }
+
+    .sleep-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .pagination-counter {
+      font-size: 26px;
+      font-weight: 800;
+      color: #0f172a;
+    }
+
+    .pagination-counter span {
+      font-size: 15px;
+      font-weight: 600;
+      color: #8b99ae;
+    }
+
+    .nav-arrows {
+      display: flex;
+      gap: 12px;
+    }
+
+    .nav-arrow-btn {
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      border: 1.5px solid rgba(255, 255, 255, 0.95);
+      background: #eaf0f8;
+      box-shadow: var(--neu-btn);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #475569;
+      cursor: pointer;
+      transition: all 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+
+    .nav-arrow-btn:hover {
+      box-shadow: 14px 16px 28px #9cb2cc, -14px -16px 28px #ffffff;
+      color: #0f172a;
+      transform: translateY(-2px);
+    }
+
+    .nav-arrow-btn:active {
+      box-shadow: var(--neu-pressed-sm);
+      transform: translateY(1px);
+    }
+
+    /* Calories Card */
+    .calories-card {
+      padding: 30px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      background: var(--card-bg);
+    }
+
+    .calories-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+    }
+
+    .calories-title-wrap {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .calories-icon-badge {
+      width: 50px;
+      height: 50px;
+      border-radius: 20px;
+      background: #eaf0f8;
+      box-shadow: var(--neu-btn);
+      border: 1.5px solid rgba(255, 255, 255, 0.95);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #0f172a;
+    }
+
+    .calories-title-wrap h3 {
+      font-size: 22px;
+      font-weight: 800;
+      color: #0f172a;
+      letter-spacing: -0.02em;
+    }
+
+    .target-dose {
+      text-align: right;
+    }
+
+    .target-dose .val {
+      font-size: 22px;
+      font-weight: 800;
+      color: #0f172a;
+    }
+
+    .target-dose .val span {
+      font-size: 13px;
+      font-weight: 600;
+      color: #64748b;
+    }
+
+    .target-dose .sub {
+      font-size: 12px;
+      font-weight: 500;
+      color: #8b99ae;
+      margin-top: 2px;
+    }
+
+    .calories-subtext {
+      font-size: 13px;
+      color: #7b889d;
+      font-weight: 500;
+      margin-top: 4px;
+    }
+
+    .calories-stat {
+      margin-top: 12px;
+    }
+
+    .calories-number {
+      font-size: 46px;
+      font-weight: 800;
+      color: #0f172a;
+      letter-spacing: -0.04em;
+      line-height: 1;
+    }
+
+    .calories-number span {
+      font-size: 20px;
+      font-weight: 600;
+      color: #64748b;
+    }
+
+    /* Bar Chart Component - ULTRA DEEP Inset Channel */
+    .bars-chart-container {
+      margin-top: 14px;
+    }
+
+    .bars-range-labels {
+      display: flex;
+      justify-content: space-between;
+      font-size: 12px;
+      font-weight: 700;
+      color: #64748b;
+      margin-bottom: 8px;
+    }
+
+    .bars-flex {
+      display: flex;
+      align-items: flex-end;
+      gap: 5.5px;
+      height: 58px;
+      padding: 6px 8px;
+      border-radius: 18px;
+      background: #dee7f3;
+      box-shadow: inset 7px 7px 14px #b0c3d9, inset -7px -7px 14px #ffffff;
+    }
+
+    .bar-column {
+      flex: 1;
+      height: 80%;
+      border-radius: 6px;
+      background: linear-gradient(180deg, #99c73e 0%, #7da728 100%);
+      box-shadow: 2px 3px 6px rgba(110, 155, 30, 0.45);
+      transition: height 0.3s ease;
+    }
+
+    .bar-column:hover {
+      filter: brightness(1.15);
+    }
+
+    /* Macro Breakdown */
+    .macro-row {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+      padding-top: 14px;
+      border-top: 1.5px solid rgba(195, 210, 228, 0.7);
+    }
+
+    .macro-item .val {
+      font-size: 21px;
+      font-weight: 800;
+      color: #0f172a;
+      letter-spacing: -0.02em;
+    }
+
+    .macro-item .val span {
+      font-size: 12.5px;
+      font-weight: 600;
+      color: #7b889d;
+    }
+
+    .macro-item .label {
+      font-size: 12px;
+      font-weight: 500;
+      color: #64748b;
+      margin-top: 2px;
+    }
+
+    /* Weight Card */
+    .weight-card {
+      padding: 30px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      background: var(--card-bg);
+    }
+
+    .weight-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+    }
+
+    .weight-title-wrap {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .weight-icon-badge {
+      width: 50px;
+      height: 50px;
+      border-radius: 20px;
+      background: #eaf0f8;
+      box-shadow: var(--neu-btn);
+      border: 1.5px solid rgba(255, 255, 255, 0.95);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #0f172a;
+    }
+
+    .weight-title-wrap h3 {
+      font-size: 22px;
+      font-weight: 800;
+      color: #0f172a;
+      letter-spacing: -0.02em;
+    }
+
+    .height-stat {
+      text-align: right;
+    }
+
+    .height-stat .val {
+      font-size: 22px;
+      font-weight: 800;
+      color: #0f172a;
+    }
+
+    .height-stat .val span {
+      font-size: 13px;
+      font-weight: 600;
+      color: #64748b;
+    }
+
+    .height-stat .sub {
+      font-size: 12px;
+      font-weight: 500;
+      color: #8b99ae;
+      margin-top: 2px;
+    }
+
+    .weight-healthy-tag {
+      font-size: 13px;
+      font-weight: 500;
+      color: #7b889d;
+      margin-top: 4px;
+    }
+
+    /* Wave Curve SVG */
+    .wave-chart-wrap {
+      position: relative;
+      height: 80px;
+      margin: 10px 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .wave-chart-wrap svg {
+      width: 100%;
+      height: 100%;
+      overflow: visible;
+    }
+
+    .weight-bottom {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+    }
+
+    .weight-main-val {
+      font-size: 54px;
+      font-weight: 800;
+      color: #0f172a;
+      letter-spacing: -0.04em;
+      line-height: 1;
+    }
+
+    .weight-main-val span {
+      font-size: 22px;
+      font-weight: 600;
+      color: #475569;
+    }
+
+    .weight-goal-status {
+      text-align: right;
+    }
+
+    .weight-goal-status .desc {
+      font-size: 12px;
+      font-weight: 500;
+      color: #7b889d;
+      line-height: 1.35;
+      max-width: 110px;
+    }
+
+    .weight-goal-status .cheer {
+      font-size: 13.5px;
+      font-weight: 800;
+      color: #0f172a;
+      margin-top: 4px;
+    }
+
+    /* Tactile Hover Effects */
+    .interactive-card {
+      transition: transform 0.25s ease, box-shadow 0.25s ease;
+    }
+    .interactive-card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 16px 38px rgba(18, 28, 45, 0.1), 0 2px 6px rgba(18, 28, 45, 0.06);
+    }
+
+    @media (max-width: 1200px) {
+      .dashboard-grid {
+        grid-template-columns: 1fr;
+      }
+      .bottom-row {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    /* Multi-Page Views System */
+    .page-view {
+      display: none;
+      flex-direction: column;
+      gap: 26px;
+      animation: viewFadeIn 0.35s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    }
+
+    .page-view.active {
+      display: flex;
+    }
+
+    @keyframes viewFadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(12px) scale(0.995);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+      }
+    }
+
+    /* Common View Components */
+    .view-hero-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 6px 4px 10px 4px;
+    }
+
+    .view-hero-header .title-area h2 {
+      font-size: 26px;
+      font-weight: 800;
+      color: #0f172a;
+      letter-spacing: -0.025em;
+    }
+
+    .view-hero-header .title-area p {
+      font-size: 13.5px;
+      color: #64748b;
+      margin-top: 4px;
+      font-weight: 500;
+    }
+
+    .view-pill-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      padding: 8px 18px;
+      border-radius: 24px;
+      font-size: 13px;
+      font-weight: 700;
+      background: #f4f7fb;
+      box-shadow: var(--neu-btn);
+      border: 1px solid rgba(255, 255, 255, 0.9);
+      color: #0f172a;
+    }
+
+    /* Analytics Styles */
+    .analytics-grid-top {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 22px;
+    }
+
+    .metric-card-deep {
+      padding: 24px;
+      background: #fdfefe;
+      border-radius: 28px;
+      box-shadow: var(--neu-card);
+      border: 1.5px solid rgba(255, 255, 255, 0.95);
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    .metric-icon-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .metric-symbol-box {
+      width: 44px;
+      height: 44px;
+      border-radius: 16px;
+      background: #f4f7fb;
+      box-shadow: var(--neu-btn);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .metric-trend {
+      font-size: 12.5px;
+      font-weight: 700;
+      display: inline-flex;
+      align-items: center;
+      gap: 3px;
+      padding: 4px 10px;
+      border-radius: 20px;
+    }
+    .metric-trend.up { background: #dcfce7; color: #15803d; }
+    .metric-trend.down { background: #fee2e2; color: #b91c1c; }
+
+    .analytics-charts-split {
+      display: grid;
+      grid-template-columns: 1.6fr 1fr;
+      gap: 26px;
+    }
+
+    /* Messages Layout */
+    .messages-container {
+      display: grid;
+      grid-template-columns: 320px 1fr;
+      gap: 24px;
+      height: 600px;
+    }
+
+    .chat-threads-card {
+      background: #fdfefe;
+      border-radius: 32px;
+      box-shadow: var(--neu-card);
+      border: 1.5px solid rgba(255, 255, 255, 0.95);
+      padding: 22px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      overflow-y: auto;
+    }
+
+    .chat-active-card {
+      background: #fdfefe;
+      border-radius: 32px;
+      box-shadow: var(--neu-card);
+      border: 1.5px solid rgba(255, 255, 255, 0.95);
+      padding: 26px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .thread-item {
+      padding: 14px;
+      border-radius: 20px;
+      background: #f4f7fb;
+      box-shadow: var(--neu-btn);
+      border: 1px solid rgba(255, 255, 255, 0.9);
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      cursor: pointer;
+      transition: all 0.25s ease;
+    }
+    .thread-item:hover, .thread-item.active {
+      box-shadow: var(--neu-pressed-sm);
+      transform: translateY(1px);
+    }
+    .thread-item img {
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      object-fit: cover;
+    }
+
+    .message-bubble {
+      max-width: 65%;
+      padding: 14px 20px;
+      border-radius: 22px;
+      font-size: 13.5px;
+      line-height: 1.5;
+    }
+    .message-bubble.incoming {
+      background: #edf3f9;
+      box-shadow: var(--neu-card-sm);
+      color: #1e293b;
+      align-self: flex-start;
+      border-bottom-left-radius: 6px;
+    }
+    .message-bubble.outgoing {
+      background: linear-gradient(135deg, #2b7ce5 0%, #1765cb 100%);
+      color: #ffffff;
+      box-shadow: 0 8px 20px rgba(27, 108, 213, 0.35);
+      align-self: flex-end;
+      border-bottom-right-radius: 6px;
+    }
+
+    .chat-input-bar {
+      display: flex;
+      gap: 12px;
+      align-items: center;
+      background: #eef3f9;
+      border-radius: 30px;
+      padding: 6px 10px 6px 20px;
+      box-shadow: inset 4px 4px 8px #c6d5e6, inset -4px -4px 8px #ffffff;
+    }
+    .chat-input-bar input {
+      flex: 1;
+      border: none;
+      background: transparent;
+      outline: none;
+      font-family: inherit;
+      font-size: 14px;
+      color: #0f172a;
+    }
+
+    /* Calendar Grid */
+    .calendar-card {
+      background: #fdfefe;
+      border-radius: 34px;
+      box-shadow: var(--neu-card);
+      border: 1.5px solid rgba(255, 255, 255, 0.95);
+      padding: 28px;
+    }
+
+    .calendar-days-grid {
+      display: grid;
+      grid-template-columns: repeat(7, 1fr);
+      gap: 12px;
+      margin-top: 18px;
+    }
+
+    .cal-cell {
+      height: 72px;
+      border-radius: 20px;
+      background: #f4f7fb;
+      box-shadow: var(--neu-card-sm);
+      border: 1px solid rgba(255, 255, 255, 0.9);
+      padding: 10px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+    .cal-cell:hover {
+      box-shadow: var(--neu-pressed-sm);
+      transform: translateY(1px);
+    }
+    .cal-cell.workout-day {
+      background: linear-gradient(180deg, #f7fafe 0%, #edf5ff 100%);
+      border: 1.5px solid #93c5fd;
+    }
+    .cal-cell.active-today {
+      background: linear-gradient(135deg, #8cb83a, #74a024);
+      color: #ffffff;
+      box-shadow: 6px 8px 18px rgba(115, 165, 35, 0.45);
+      border: none;
+    }
+    .cal-cell.active-today .cal-num { color: #ffffff !important; }
+
+    /* Notifications & Settings */
+    .settings-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 26px;
+    }
+
+    .setting-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 16px 0;
+      border-bottom: 1px solid #e2e8f0;
+    }
+
+    /* Neumorphic Toggle Switch */
+    .neu-toggle {
+      width: 52px;
+      height: 28px;
+      border-radius: 20px;
+      background: #edf2f8;
+      box-shadow: inset 3px 3px 6px #cad7e7, inset -3px -3px 6px #ffffff;
+      position: relative;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+    .neu-toggle.checked {
+      background: #8cb83a;
+    }
+    .neu-toggle::after {
+      content: '';
+      position: absolute;
+      top: 3px;
+      left: 3px;
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      background: #ffffff;
+      box-shadow: 2px 2px 5px rgba(0,0,0,0.25);
+      transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+    .neu-toggle.checked::after {
+      transform: translateX(24px);
+    }
+  </style>
+</head>
+<body>
+
+  <div class="dashboard-container">
+    <!-- Left Neumorphic Sidebar -->
+    <aside class="sidebar">
+      <div class="brand-logo" title="Pulse Fitness">
+        <div class="logo-dots">
+          <span></span><span></span><span></span>
+          <span></span><span></span><span></span>
+          <span></span><span></span><span></span>
+        </div>
+      </div>
+
+      <nav class="nav-menu">
+        <button class="nav-btn active" data-page="dashboard" title="Dashboard">
+          <i data-lucide="home" style="width: 22px; height: 22px;"></i>
+        </button>
+        <button class="nav-btn" data-page="analytics" title="Analytics & Performance">
+          <i data-lucide="activity" style="width: 22px; height: 22px;"></i>
+        </button>
+        <button class="nav-btn" data-page="messages" title="Coach & Community Messages">
+          <i data-lucide="message-square" style="width: 22px; height: 22px;"></i>
+        </button>
+        <button class="nav-btn" data-page="calendar" title="Training Schedule">
+          <i data-lucide="calendar" style="width: 22px; height: 22px;"></i>
+        </button>
+        
+        <div class="nav-divider"></div>
+
+        <button class="nav-btn" data-page="notifications" title="Notifications & Alerts">
+          <i data-lucide="bell" style="width: 22px; height: 22px;"></i>
+        </button>
+        <button class="nav-btn" data-page="settings" title="Account & Preferences">
+          <i data-lucide="settings" style="width: 22px; height: 22px;"></i>
+        </button>
+      </nav>
+
+      <div style="display: flex; flex-direction: column; gap: 16px; align-items: center;">
+        <button class="nav-btn" style="width: 44px; height: 44px; border-radius: 15px;" title="Sign Out" onclick="alert('Session locked securely.')">
+          <i data-lucide="log-out" style="width: 19px; height: 19px;"></i>
+        </button>
+        <button class="nav-btn" data-page="help" style="width: 44px; height: 44px; border-radius: 15px;" title="Help & System Guide">
+          <i data-lucide="info" style="width: 19px; height: 19px;"></i>
+        </button>
+        
+        <!-- User Avatar -->
+        <div class="user-avatar-btn" title="Profile: Archangel">
+          <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=150&q=80" alt="Archangel Profile">
+        </div>
+      </div>
+    </aside>
+
+    <!-- Main Content Panel -->
+    <main class="main-content">
+      <!-- Top Header Navigation -->
+      <header class="top-header">
+        <div class="header-greeting">
+          <h1>Hi, Archangel!</h1>
+          <p>Let's look at your daily activity overview.</p>
+        </div>
+
+        <div class="header-actions">
+          <!-- Neumorphic Theme Switcher -->
+          <button id="themeToggleBtn" class="nav-btn" style="width: 48px; height: 48px;" title="Switch Obsidian / Titanium Mode">
+            <i data-lucide="moon" style="width: 20px; height: 20px;"></i>
+          </button>
+
+          <div class="search-wrapper">
+            <span class="search-icon">
+              <i data-lucide="search" style="width: 19px; height: 19px;"></i>
+            </span>
+            <input type="text" class="search-input" placeholder="Search for healthy metrics">
+          </div>
+
+          <button class="btn-upgrade">
+            <i data-lucide="crown" style="width: 18px; height: 18px; fill: #facc15;"></i>
+            <span>Upgrade</span>
+          </button>
+        </div>
+      </header>
+
+      <!-- 4K Workout Stream Video Player Modal -->
+      <div id="workoutModal" style="display: none; position: fixed; inset: 0; z-index: 1000; background: rgba(5, 7, 10, 0.85); backdrop-filter: blur(16px); justify-content: center; align-items: center; padding: 24px;">
+        <div class="neu-card" style="max-width: 900px; width: 100%; border-radius: 36px; padding: 32px; position: relative; background: #0f131a; color: #fff; box-shadow: 0 35px 80px rgba(0,0,0,0.8);">
+          <button id="closeModalBtn" class="nav-arrow-btn" style="position: absolute; right: 24px; top: 24px; background: rgba(255,255,255,0.1); color: #fff; border: 1px solid rgba(255,255,255,0.2);">
+            <i data-lucide="x" style="width: 18px;"></i>
+          </button>
+
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+            <div>
+              <span style="font-size: 12px; font-weight: 800; color: #38bdf8; letter-spacing: 0.05em; text-transform: uppercase;">● Live 4K Exercise Stream</span>
+              <h2 style="font-size: 26px; font-weight: 800; margin-top: 4px; color: #ffffff;">Calisthenics & Explosive Pushups</h2>
+            </div>
+            <div style="display: flex; gap: 12px; align-items: center;">
+              <span class="view-pill-badge" style="background: rgba(239, 68, 68, 0.2); color: #ef4444; border: 1px solid rgba(239,68,68,0.4);"><i data-lucide="heart" style="width: 14px;"></i> 142 BPM</span>
+              <span class="view-pill-badge" style="background: rgba(34, 197, 94, 0.2); color: #22c55e; border: 1px solid rgba(34,197,94,0.4);">Zone 4</span>
+            </div>
+          </div>
+
+          <!-- Video Canvas Box -->
+          <div style="position: relative; height: 420px; border-radius: 24px; overflow: hidden; background: #000; box-shadow: inset 0 0 40px rgba(0,0,0,0.8);">
+            <img src="https://images.unsplash.com/photo-1581009146145-b5ef050c2e1e?auto=format&fit=crop&w=1400&q=90" style="width: 100%; height: 100%; object-fit: cover;">
+            
+            <div style="position: absolute; inset: 0; background: linear-gradient(180deg, rgba(0,0,0,0.2) 0%, rgba(0,0,0,0.7) 100%); display: flex; flex-direction: column; justify-content: space-between; padding: 24px;">
+              <div style="display: flex; justify-content: space-between;">
+                <span style="background: rgba(0,0,0,0.6); padding: 6px 14px; border-radius: 20px; font-size: 13px; font-weight: 700; backdrop-filter: blur(10px);">Set 3 of 4 • 15 Reps</span>
+                <span id="modalTimer" style="background: #2563eb; padding: 6px 16px; border-radius: 20px; font-size: 14px; font-weight: 800; font-family: monospace;">00:45</span>
+              </div>
+
+              <!-- HUD Overlay -->
+              <div style="display: flex; justify-content: space-between; align-items: flex-end;">
+                <div>
+                  <div style="font-size: 13px; color: #94a3b8;">Current Tempo</div>
+                  <div style="font-size: 24px; font-weight: 800;">3-1-1 Concentric</div>
+                </div>
+                <div style="display: flex; gap: 14px;">
+                  <button id="modalPlayBtn" class="nav-arrow-btn" style="width: 50px; height: 50px; background: #fff; color: #000; box-shadow: 0 4px 15px rgba(255,255,255,0.4);"><i data-lucide="pause" style="width: 22px;"></i></button>
+                  <button class="nav-arrow-btn" style="width: 50px; height: 50px; background: rgba(255,255,255,0.2); color: #fff;"><i data-lucide="rotate-ccw" style="width: 20px;"></i></button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- VIEW: DASHBOARD (Active by default) -->
+      <div class="page-view active" id="view-dashboard">
+        <!-- Top Row: Hero Workout Card & Hydration Card -->
+        <section class="dashboard-grid">
+        <!-- Hero Card with Realistic 4K Athlete Image -->
+        <div class="hero-banner-card interactive-card">
+          <!-- 4K Realistic High-Definition Athlete Photo -->
+          <img 
+            class="hero-bg-img" 
+            src="https://images.unsplash.com/photo-1581009146145-b5ef050c2e1e?auto=format&fit=crop&w=1400&q=90" 
+            alt="Male athlete pushup workout in 4k high definition"
+          >
+
+          <div class="hero-content">
+            <h2 class="hero-title">Your Home Workout Starts Here!</h2>
+          </div>
+
+          <!-- Video Explore Badge / Play Button -->
+          <div class="explore-badge">
+            <div class="play-circle">
+              <i data-lucide="play" style="width: 22px; height: 22px;"></i>
+            </div>
+            <span class="explore-text">Explore Now</span>
+          </div>
+
+          <div class="hero-footer">
+            <div class="members-group">
+              <span class="label">Join program with:</span>
+              <div class="members-row">
+                <div class="avatar-stack">
+                  <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=100&q=80" alt="Member 1">
+                  <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=100&q=80" alt="Member 2">
+                  <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=100&q=80" alt="Member 3">
+                </div>
+                <div class="members-count">
+                  5.8K+
+                  <span>Members</span>
+                </div>
+              </div>
+            </div>
+
+            <button class="btn-trial">
+              <span>Start Free Trial</span>
+              <div class="trial-arrow">
+                <i data-lucide="arrow-right" style="width: 19px; height: 19px;"></i>
+              </div>
+            </button>
+          </div>
+        </div>
+
+        <!-- Hydration Status Card -->
+        <div class="hydration-card interactive-card">
+          <div class="hydration-top">
+            <div class="hydration-info">
+              <h3>Hydration Status</h3>
+              <p>Drive your goal water daily. Build healthy habits and achieve your focus.</p>
+              <div class="badge-well-done">
+                <span>Well Done</span>
+                <i data-lucide="thumbs-up" style="width: 15px; height: 15px; fill: #1a2e05;"></i>
+              </div>
+            </div>
+
+            <!-- Neumorphic Water Glasses Grid -->
+            <div class="water-grid-container">
+              <!-- Row 1 -->
+              <div class="water-cup"></div>
+              <div class="water-cup"></div>
+              <div class="water-cup"></div>
+              <div class="water-cup"></div>
+              <div class="water-cup filled"></div>
+              <div class="water-cup filled"></div>
+              <!-- Row 2 -->
+              <div class="water-cup"></div>
+              <div class="water-cup"></div>
+              <div class="water-cup"></div>
+              <div class="water-cup filled"></div>
+              <div class="water-cup filled"></div>
+              <div class="water-cup filled"></div>
+              <!-- Row 3 -->
+              <div class="water-cup filled"></div>
+              <div class="water-cup filled"></div>
+              <div class="water-cup filled"></div>
+              <div class="water-cup filled"></div>
+              <div class="water-cup filled"></div>
+              <div class="water-cup filled"></div>
+              <!-- Row 4 -->
+              <div class="water-cup filled"></div>
+              <div class="water-cup filled"></div>
+              <div class="water-cup filled"></div>
+              <div class="water-cup filled"></div>
+              <div class="water-cup filled"></div>
+              <div class="water-cup filled"></div>
+            </div>
+          </div>
+
+          <div class="hydration-bottom">
+            <div class="segmented-control">
+              <button class="segment-btn active">D</button>
+              <button class="segment-btn">W</button>
+              <button class="segment-btn">M</button>
+            </div>
+
+            <div class="hydration-amount">
+              <div class="amount-value">2.15<span class="amount-unit">L</span></div>
+              <div style="font-size: 15px; font-weight: 600; opacity: 0.9; margin-top: 2px;">/Day</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Bottom Row: Deep Sleep, Calories, and Weight Metrics -->
+      <section class="bottom-row">
+        <!-- Sleep Card -->
+        <div class="neu-card sleep-card interactive-card">
+          <div class="sleep-card-header">
+            <div class="sleep-card-avatars">
+              <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=90&q=80" alt="Sleep expert 1">
+              <img src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&w=90&q=80" alt="Sleep expert 2">
+              <img src="https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=90&q=80" alt="Sleep expert 3">
+            </div>
+
+            <h3 class="sleep-title">Experience the Goodness of Deep Sleep</h3>
+          </div>
+
+          <div class="sleep-inset-box">
+            <div class="deep-sleep-tag">
+              <i data-lucide="moon" style="width: 14px; height: 14px; fill: #1e293b;"></i>
+              <span>Deep sleep</span>
+            </div>
+            <p class="sleep-desc">
+              Discover tips and techniques for better, deeper sleep. Wake up refreshed and experience the true benefits of restful nights.
+            </p>
+          </div>
+
+          <div class="sleep-footer">
+            <div class="pagination-counter">
+              2<span>/5</span>
+            </div>
+            <div class="nav-arrows">
+              <button class="nav-arrow-btn" title="Previous tip">
+                <i data-lucide="chevron-left" style="width: 18px; height: 18px;"></i>
+              </button>
+              <button class="nav-arrow-btn" title="Next tip">
+                <i data-lucide="chevron-right" style="width: 18px; height: 18px;"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Calories Card -->
+        <div class="neu-card calories-card interactive-card">
+          <div>
+            <div class="calories-top">
+              <div class="calories-title-wrap">
+                <div class="calories-icon-badge">
+                  <i data-lucide="flame" style="width: 22px; height: 22px; fill: #0f172a;"></i>
+                </div>
+                <h3>Calories</h3>
+              </div>
+
+              <div class="target-dose">
+                <div class="val">2.350 <span>Kcal</span></div>
+                <div class="sub">Daily dose</div>
+              </div>
+            </div>
+
+            <div class="calories-subtext">Lack of physical activity</div>
+
+            <div class="calories-stat">
+              <div class="calories-number">
+                2.040<span>/Kcal</span>
+              </div>
+            </div>
+
+            <!-- Neumorphic Bar Histogram -->
+            <div class="bars-chart-container">
+              <div class="bars-range-labels">
+                <span>0</span>
+                <span>2.350</span>
+              </div>
+              <div class="bars-flex" id="caloriesHistogram">
+                <!-- Javascript will inject smoothly heights -->
+              </div>
+            </div>
+          </div>
+
+          <!-- Macro Nutrients Breakdown -->
+          <div class="macro-row">
+            <div class="macro-item">
+              <div class="val">269 <span>Gram</span></div>
+              <div class="label">Carbohydrates</div>
+            </div>
+            <div class="macro-item">
+              <div class="val">164 <span>Gram</span></div>
+              <div class="label">Proteins</div>
+            </div>
+            <div class="macro-item">
+              <div class="val">110 <span>Gram</span></div>
+              <div class="label">Fats</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Weight Card -->
+        <div class="neu-card weight-card interactive-card">
+          <div>
+            <div class="weight-top">
+              <div class="weight-title-wrap">
+                <div class="weight-icon-badge">
+                  <i data-lucide="arrow-left-right" style="width: 22px; height: 22px;"></i>
+                </div>
+                <h3>Weight</h3>
+              </div>
+
+              <div class="height-stat">
+                <div class="val">188 <span>Cm</span></div>
+                <div class="sub">Tall body</div>
+              </div>
+            </div>
+
+            <div class="weight-healthy-tag">Healthy weight is 68 Kg - 84 Kg</div>
+
+            <!-- Neumorphic Dynamic Smooth Wave Chart -->
+            <div class="wave-chart-wrap">
+              <svg viewBox="0 0 300 90" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <defs>
+                  <filter id="waveGlow" x="-20%" y="-20%" width="140%" height="140%">
+                    <feDropShadow dx="0" dy="6" stdDeviation="5" flood-color="#38bdf8" flood-opacity="0.35"/>
+                  </filter>
+                  <linearGradient id="waveGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+                    <stop offset="0%" stop-color="#93c5fd" />
+                    <stop offset="50%" stop-color="#38bdf8" />
+                    <stop offset="100%" stop-color="#67e8f9" />
+                  </linearGradient>
+                  <linearGradient id="waveGradGhost" x1="0%" y1="0%" x2="100%" y2="0%">
+                    <stop offset="0%" stop-color="#bfdbfe" stop-opacity="0.4" />
+                    <stop offset="100%" stop-color="#93c5fd" stop-opacity="0.2" />
+                  </linearGradient>
+                </defs>
+
+                <!-- Ghost Background Curve -->
+                <path d="M 10,75 C 60,30 110,95 170,45 C 220,10 260,65 290,40" 
+                      stroke="url(#waveGradGhost)" 
+                      stroke-width="10" 
+                      stroke-linecap="round"/>
+
+                <!-- Main Smooth Neumorphic Sine Curve -->
+                <path d="M 10,65 C 50,20 90,10 140,55 C 190,95 240,70 290,20" 
+                      stroke="url(#waveGrad)" 
+                      stroke-width="9" 
+                      stroke-linecap="round"
+                      filter="url(#waveGlow)"/>
+
+                <!-- Interactive Indicator Node -->
+                <circle cx="85" cy="22" r="7" fill="#ffffff" stroke="#38bdf8" stroke-width="4" style="filter: drop-shadow(0 4px 6px rgba(56, 189, 248, 0.4));" />
+              </svg>
+            </div>
+          </div>
+
+          <div class="weight-bottom">
+            <div class="weight-main-val">
+              82<span>kg</span>
+            </div>
+
+            <div class="weight-goal-status">
+              <div class="desc">Of the weekly plan completed</div>
+              <div class="cheer">Keep it up!</div>
+            </div>
+          </div>
+        </div>
+      </section>
+      </div> <!-- End #view-dashboard -->
+
+      <!-- VIEW: ANALYTICS & BIOMETRICS -->
+      <div class="page-view" id="view-analytics">
+        <div class="view-hero-header">
+          <div class="title-area">
+            <h2>Performance & Biometrics</h2>
+            <p>Comprehensive cardiovascular, metabolic, and endurance telemetry.</p>
+          </div>
+          <div class="view-pill-badge">
+            <i data-lucide="trending-up" style="color: #16a34a; width: 17px; height: 17px;"></i>
+            <span>+14.8% vs Last Month</span>
+          </div>
+        </div>
+
+        <!-- 4 Metric Cards -->
+        <div class="analytics-grid-top">
+          <div class="metric-card-deep interactive-card">
+            <div class="metric-icon-row">
+              <div class="metric-symbol-box" style="color: #ef4444;"><i data-lucide="heart"></i></div>
+              <span class="metric-trend up"><i data-lucide="arrow-up-right" style="width: 14px;"></i> 58 bpm</span>
+            </div>
+            <div>
+              <div style="font-size: 28px; font-weight: 800; color: #0f172a;">62 <span style="font-size: 15px; font-weight: 500; color: #64748b;">bpm avg</span></div>
+              <div style="font-size: 13px; font-weight: 600; color: #64748b; margin-top: 2px;">Resting Heart Rate</div>
+            </div>
+          </div>
+
+          <div class="metric-card-deep interactive-card">
+            <div class="metric-icon-row">
+              <div class="metric-symbol-box" style="color: #3b82f6;"><i data-lucide="wind"></i></div>
+              <span class="metric-trend up"><i data-lucide="arrow-up-right" style="width: 14px;"></i> Elite</span>
+            </div>
+            <div>
+              <div style="font-size: 28px; font-weight: 800; color: #0f172a;">54.2 <span style="font-size: 15px; font-weight: 500; color: #64748b;">ml/kg</span></div>
+              <div style="font-size: 13px; font-weight: 600; color: #64748b; margin-top: 2px;">VO2 Max Score</div>
+            </div>
+          </div>
+
+          <div class="metric-card-deep interactive-card">
+            <div class="metric-icon-row">
+              <div class="metric-symbol-box" style="color: #8b5cf6;"><i data-lucide="zap"></i></div>
+              <span class="metric-trend up"><i data-lucide="arrow-up-right" style="width: 14px;"></i> +18W</span>
+            </div>
+            <div>
+              <div style="font-size: 28px; font-weight: 800; color: #0f172a;">340 <span style="font-size: 15px; font-weight: 500; color: #64748b;">Watts</span></div>
+              <div style="font-size: 13px; font-weight: 600; color: #64748b; margin-top: 2px;">Peak Power Output</div>
+            </div>
+          </div>
+
+          <div class="metric-card-deep interactive-card">
+            <div class="metric-icon-row">
+              <div class="metric-symbol-box" style="color: #10b981;"><i data-lucide="battery-charging"></i></div>
+              <span class="metric-trend up"><i data-lucide="arrow-up-right" style="width: 14px;"></i> Optimal</span>
+            </div>
+            <div>
+              <div style="font-size: 28px; font-weight: 800; color: #0f172a;">94% <span style="font-size: 15px; font-weight: 500; color: #64748b;">ready</span></div>
+              <div style="font-size: 13px; font-weight: 600; color: #64748b; margin-top: 2px;">Recovery Index</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Analytical Deep Charts Split -->
+        <div class="analytics-charts-split">
+          <div class="neu-card" style="padding: 30px;">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+              <div>
+                <h3 style="font-size: 20px; font-weight: 800; color: #0f172a;">Weekly Training Volume</h3>
+                <p style="font-size: 13px; color: #64748b; margin-top: 2px;">Active minutes across cardio, hypertrophy & recovery</p>
+              </div>
+              <div class="segmented-control" style="background: #edf2f8; border: 1px solid #d5e0ee;">
+                <button class="segment-btn active" style="color: #1e6acc; width: 50px; border-radius: 20px; font-size: 12.5px;">Week</button>
+                <button class="segment-btn" style="color: #64748b; width: 50px; border-radius: 20px; font-size: 12.5px;">Month</button>
+              </div>
+            </div>
+
+            <!-- SVG Multi-Line Chart -->
+            <div style="height: 240px; width: 100%; position: relative;">
+              <svg viewBox="0 0 600 240" fill="none" style="width: 100%; height: 100%;">
+                <line x1="40" y1="20" x2="580" y2="20" stroke="#f1f5f9" stroke-width="1.5" />
+                <line x1="40" y1="80" x2="580" y2="80" stroke="#f1f5f9" stroke-width="1.5" />
+                <line x1="40" y1="140" x2="580" y2="140" stroke="#f1f5f9" stroke-width="1.5" />
+                <line x1="40" y1="200" x2="580" y2="200" stroke="#e2e8f0" stroke-width="1.5" />
+
+                <polygon points="60,190 140,110 220,130 300,70 380,100 460,50 540,80 540,200 60,200" fill="rgba(59, 130, 246, 0.08)" />
+
+                <path d="M 60,190 Q 100,110 140,110 T 220,130 T 300,70 T 380,100 T 460,50 T 540,80" stroke="#2563eb" stroke-width="4.5" stroke-linecap="round" />
+                <path d="M 60,160 Q 100,140 140,150 T 220,110 T 300,120 T 380,80 T 460,100 T 540,65" stroke="#10b981" stroke-width="3" stroke-dasharray="6 6" stroke-linecap="round" />
+
+                <circle cx="460" cy="50" r="7" fill="#ffffff" stroke="#2563eb" stroke-width="4" style="filter: drop-shadow(0 4px 6px rgba(37,99,235,0.4));" />
+                <circle cx="540" cy="80" r="6" fill="#ffffff" stroke="#10b981" stroke-width="3" />
+              </svg>
+            </div>
+            <div style="display: flex; justify-content: space-between; padding: 0 20px; font-size: 13px; font-weight: 600; color: #64748b;">
+              <span>Mon</span><span>Tue</span><span>Wed</span><span>Thu</span><span>Fri</span><span>Sat</span><span>Sun</span>
+            </div>
+          </div>
+
+          <!-- Muscle Load Breakdown -->
+          <div class="neu-card" style="padding: 30px; display: flex; flex-direction: column; justify-content: space-between;">
+            <div>
+              <h3 style="font-size: 20px; font-weight: 800; color: #0f172a;">Muscle Load Split</h3>
+              <p style="font-size: 13px; color: #64748b; margin-top: 2px;">Targeted muscle group fatigue analysis</p>
+
+              <div style="display: flex; flex-direction: column; gap: 16px; margin-top: 24px;">
+                <div>
+                  <div style="display: flex; justify-content: space-between; font-size: 13.5px; font-weight: 700; margin-bottom: 6px;">
+                    <span>Chest & Core</span><span>88%</span>
+                  </div>
+                  <div style="height: 10px; border-radius: 10px; background: #eef3f8; box-shadow: inset 2px 2px 4px #ccd9e8, inset -2px -2px 4px #fff;">
+                    <div style="width: 88%; height: 100%; border-radius: 10px; background: linear-gradient(90deg, #38bdf8, #2563eb);"></div>
+                  </div>
+                </div>
+
+                <div>
+                  <div style="display: flex; justify-content: space-between; font-size: 13.5px; font-weight: 700; margin-bottom: 6px;">
+                    <span>Legs & Glutes</span><span>74%</span>
+                  </div>
+                  <div style="height: 10px; border-radius: 10px; background: #eef3f8; box-shadow: inset 2px 2px 4px #ccd9e8, inset -2px -2px 4px #fff;">
+                    <div style="width: 74%; height: 100%; border-radius: 10px; background: linear-gradient(90deg, #84cc16, #65a30d);"></div>
+                  </div>
+                </div>
+
+                <div>
+                  <div style="display: flex; justify-content: space-between; font-size: 13.5px; font-weight: 700; margin-bottom: 6px;">
+                    <span>Back & Shoulders</span><span>62%</span>
+                  </div>
+                  <div style="height: 10px; border-radius: 10px; background: #eef3f8; box-shadow: inset 2px 2px 4px #ccd9e8, inset -2px -2px 4px #fff;">
+                    <div style="width: 62%; height: 100%; border-radius: 10px; background: linear-gradient(90deg, #f59e0b, #d97706);"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div style="padding: 16px; border-radius: 20px; background: #f4f8fd; box-shadow: var(--neu-card-sm); border: 1px solid #ffffff; margin-top: 20px;">
+              <div style="font-size: 13px; font-weight: 700; color: #1e293b;">Coach Recommendation</div>
+              <div style="font-size: 12.5px; color: #64748b; margin-top: 4px;">Deload scheduled for Wednesday. Focus on active posterior chain mobility.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- VIEW: MESSAGES & COACH -->
+      <div class="page-view" id="view-messages">
+        <div class="view-hero-header">
+          <div class="title-area">
+            <h2>Coach & Community Inbox</h2>
+            <p>Direct communication with certified performance specialists & training partners.</p>
+          </div>
+          <div class="view-pill-badge" style="background: #22c55e; color: #ffffff; box-shadow: 0 4px 12px rgba(34,197,94,0.35);">
+            <span style="width: 8px; height: 8px; border-radius: 50%; background: #ffffff;"></span>
+            <span>3 Coaches Online</span>
+          </div>
+        </div>
+
+        <div class="messages-container">
+          <!-- Left Chat Threads -->
+          <div class="chat-threads-card">
+            <div style="font-size: 15px; font-weight: 800; color: #0f172a; margin-bottom: 6px;">Conversations</div>
+
+            <div class="thread-item active">
+              <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=120&q=80" alt="Coach Sarah">
+              <div style="flex: 1; min-width: 0;">
+                <div style="display: flex; justify-content: space-between; font-size: 14px; font-weight: 700; color: #0f172a;">
+                  <span>Coach Elena</span><span style="font-size: 11px; color: #8b99ae;">10:42 AM</span>
+                </div>
+                <div style="font-size: 12px; color: #64748b; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; margin-top: 3px;">
+                  Your VO2 max output looks phenomenal today!
+                </div>
+              </div>
+            </div>
+
+            <div class="thread-item">
+              <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=120&q=80" alt="Marcus">
+              <div style="flex: 1; min-width: 0;">
+                <div style="display: flex; justify-content: space-between; font-size: 14px; font-weight: 700; color: #0f172a;">
+                  <span>Marcus Vance (PT)</span><span style="font-size: 11px; color: #8b99ae;">Yesterday</span>
+                </div>
+                <div style="font-size: 12px; color: #64748b; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; margin-top: 3px;">
+                  Let's up the hydration benchmark to 2.4L.
+                </div>
+              </div>
+            </div>
+
+            <div class="thread-item">
+              <img src="https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=120&q=80" alt="Nutrition Desk">
+              <div style="flex: 1; min-width: 0;">
+                <div style="display: flex; justify-content: space-between; font-size: 14px; font-weight: 700; color: #0f172a;">
+                  <span>Pulse Nutrition Desk</span><span style="font-size: 11px; color: #8b99ae;">Fri</span>
+                </div>
+                <div style="font-size: 12px; color: #64748b; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; margin-top: 3px;">
+                  New macro split updated for high carb cycle.
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Active Chat Window -->
+          <div class="chat-active-card">
+            <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1.5px solid #edf2f7; padding-bottom: 16px;">
+              <div style="display: flex; align-items: center; gap: 14px;">
+                <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=120&q=80" style="width: 48px; height: 48px; border-radius: 50%; object-fit: cover;">
+                <div>
+                  <div style="font-size: 16px; font-weight: 800; color: #0f172a;">Coach Elena Rostova</div>
+                  <div style="font-size: 12.5px; color: #16a34a; font-weight: 600;">● Active • Master Performance Specialist</div>
+                </div>
+              </div>
+              <div style="display: flex; gap: 10px;">
+                <button class="nav-arrow-btn" title="Voice Call"><i data-lucide="phone" style="width: 17px;"></i></button>
+                <button class="nav-arrow-btn" title="Video Session"><i data-lucide="video" style="width: 17px;"></i></button>
+              </div>
+            </div>
+
+            <div style="display: flex; flex-direction: column; gap: 16px; padding: 24px 0; overflow-y: auto;">
+              <div class="message-bubble incoming">
+                Good morning Andreas! I inspected your pushup cadence and peak heart rate recovery from yesterday's set.
+              </div>
+              <div class="message-bubble outgoing">
+                Thanks Elena! Felt strong on the concentric phase. Resting heart rate hit 58 bpm during the recovery interval.
+              </div>
+              <div class="message-bubble incoming">
+                Your VO2 max output looks phenomenal today! Keep your water target strictly above 2.15L before the afternoon workout.
+              </div>
+            </div>
+
+            <div class="chat-input-bar">
+              <button class="nav-arrow-btn" style="width: 36px; height: 36px; border: none; box-shadow: none;" title="Attachment">
+                <i data-lucide="paperclip" style="width: 17px; color: #64748b;"></i>
+              </button>
+              <input type="text" placeholder="Type message to Coach Elena...">
+              <button class="nav-arrow-btn" style="width: 40px; height: 40px; background: #2563eb; color: #fff; box-shadow: 0 4px 12px rgba(37,99,235,0.4);" title="Send">
+                <i data-lucide="send" style="width: 16px;"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- VIEW: CALENDAR SCHEDULE -->
+      <div class="page-view" id="view-calendar">
+        <div class="view-hero-header">
+          <div class="title-area">
+            <h2>Workout Schedule & Periodization</h2>
+            <p>October 2026 • Macrocycle: Power & Hypertrophy Phase 3</p>
+          </div>
+          <div style="display: flex; gap: 12px;">
+            <button class="view-pill-badge" style="cursor: pointer;"><i data-lucide="plus" style="width: 16px;"></i> Schedule Session</button>
+            <button class="view-pill-badge" style="background: #0f131a; color: #fff;"><i data-lucide="download" style="width: 16px;"></i> Sync iCal</button>
+          </div>
+        </div>
+
+        <div class="calendar-card">
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
+            <div style="font-size: 20px; font-weight: 800; color: #0f172a;">October 2026</div>
+            <div class="nav-arrows">
+              <button class="nav-arrow-btn"><i data-lucide="chevron-left" style="width: 18px;"></i></button>
+              <button class="nav-arrow-btn"><i data-lucide="chevron-right" style="width: 18px;"></i></button>
+            </div>
+          </div>
+
+          <div style="display: grid; grid-template-columns: repeat(7, 1fr); text-align: center; font-size: 13px; font-weight: 700; color: #64748b; margin-bottom: 6px;">
+            <span>SUN</span><span>MON</span><span>TUE</span><span>WED</span><span>THU</span><span>FRI</span><span>SAT</span>
+          </div>
+
+          <div class="calendar-days-grid">
+            <div class="cal-cell"><span class="cal-num" style="font-weight: 700; font-size: 14px; color: #94a3b8;">28</span></div>
+            <div class="cal-cell"><span class="cal-num" style="font-weight: 700; font-size: 14px; color: #94a3b8;">29</span></div>
+            <div class="cal-cell"><span class="cal-num" style="font-weight: 700; font-size: 14px; color: #94a3b8;">30</span></div>
+            <div class="cal-cell workout-day"><span class="cal-num" style="font-weight: 800; font-size: 14px;">1</span><span style="font-size: 10px; font-weight: 700; color: #2563eb;">HIIT Run</span></div>
+            <div class="cal-cell"><span class="cal-num" style="font-weight: 800; font-size: 14px;">2</span></div>
+            <div class="cal-cell workout-day"><span class="cal-num" style="font-weight: 800; font-size: 14px;">3</span><span style="font-size: 10px; font-weight: 700; color: #16a34a;">Chest/Core</span></div>
+            <div class="cal-cell"><span class="cal-num" style="font-weight: 800; font-size: 14px;">4</span></div>
+
+            <div class="cal-cell workout-day"><span class="cal-num" style="font-weight: 800; font-size: 14px;">5</span><span style="font-size: 10px; font-weight: 700; color: #2563eb;">Tempo 8K</span></div>
+            <div class="cal-cell"><span class="cal-num" style="font-weight: 800; font-size: 14px;">6</span></div>
+            <div class="cal-cell workout-day"><span class="cal-num" style="font-weight: 800; font-size: 14px;">7</span><span style="font-size: 10px; font-weight: 700; color: #d97706;">Leg Day</span></div>
+            <div class="cal-cell"><span class="cal-num" style="font-weight: 800; font-size: 14px;">8</span></div>
+            <div class="cal-cell workout-day"><span class="cal-num" style="font-weight: 800; font-size: 14px;">9</span><span style="font-size: 10px; font-weight: 700; color: #16a34a;">Back/Biceps</span></div>
+            <div class="cal-cell"><span class="cal-num" style="font-weight: 800; font-size: 14px;">10</span></div>
+            <div class="cal-cell workout-day"><span class="cal-num" style="font-weight: 800; font-size: 14px;">11</span><span style="font-size: 10px; font-weight: 700; color: #2563eb;">Recovery Yoga</span></div>
+
+            <div class="cal-cell active-today"><span class="cal-num" style="font-weight: 800; font-size: 14px;">12 (Today)</span><span style="font-size: 11px; font-weight: 800;">Home Pushups</span></div>
+            <div class="cal-cell workout-day"><span class="cal-num" style="font-weight: 800; font-size: 14px;">13</span><span style="font-size: 10px; font-weight: 700; color: #d97706;">Lower Power</span></div>
+            <div class="cal-cell"><span class="cal-num" style="font-weight: 800; font-size: 14px;">14</span></div>
+            <div class="cal-cell workout-day"><span class="cal-num" style="font-weight: 800; font-size: 14px;">15</span><span style="font-size: 10px; font-weight: 700; color: #2563eb;">Sprints 10x</span></div>
+            <div class="cal-cell"><span class="cal-num" style="font-weight: 800; font-size: 14px;">16</span></div>
+            <div class="cal-cell workout-day"><span class="cal-num" style="font-weight: 800; font-size: 14px;">17</span><span style="font-size: 10px; font-weight: 700; color: #16a34a;">Full Body</span></div>
+            <div class="cal-cell"><span class="cal-num" style="font-weight: 800; font-size: 14px;">18</span></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- VIEW: NOTIFICATIONS & ALERTS -->
+      <div class="page-view" id="view-notifications">
+        <div class="view-hero-header">
+          <div class="title-area">
+            <h2>Notifications & Smart Triggers</h2>
+            <p>Real-time telemetry, biometric thresholds, and coach advisories.</p>
+          </div>
+          <button class="view-pill-badge" onclick="alert('All marked as read.')">Mark All as Read</button>
+        </div>
+
+        <div style="display: flex; flex-direction: column; gap: 16px;">
+          <div class="neu-card interactive-card" style="padding: 22px 28px; display: flex; align-items: center; gap: 20px;">
+            <div class="metric-symbol-box" style="background: #dbeafe; color: #1d4ed8;"><i data-lucide="droplet"></i></div>
+            <div style="flex: 1;">
+              <div style="font-size: 15px; font-weight: 800; color: #0f172a;">Hydration Milestone Achieved</div>
+              <div style="font-size: 13px; color: #64748b; margin-top: 3px;">You drank 2.15L today. Well done on reaching 100% of your daily water intake goal!</div>
+            </div>
+            <span style="font-size: 12px; font-weight: 600; color: #94a3b8;">15m ago</span>
+          </div>
+
+          <div class="neu-card interactive-card" style="padding: 22px 28px; display: flex; align-items: center; gap: 20px;">
+            <div class="metric-symbol-box" style="background: #fef3c7; color: #b45309;"><i data-lucide="flame"></i></div>
+            <div style="flex: 1;">
+              <div style="font-size: 15px; font-weight: 800; color: #0f172a;">Calorie Burn Velocity Warning</div>
+              <div style="font-size: 13px; color: #64748b; margin-top: 3px;">Daily output reached 2.040 Kcal with 310 Kcal remaining until your target daily dose.</div>
+            </div>
+            <span style="font-size: 12px; font-weight: 600; color: #94a3b8;">1h ago</span>
+          </div>
+
+          <div class="neu-card interactive-card" style="padding: 22px 28px; display: flex; align-items: center; gap: 20px;">
+            <div class="metric-symbol-box" style="background: #ede9fe; color: #6d28d9;"><i data-lucide="moon"></i></div>
+            <div style="flex: 1;">
+              <div style="font-size: 15px; font-weight: 800; color: #0f172a;">Optimal Sleep Window Prepared</div>
+              <div style="font-size: 13px; color: #64748b; margin-top: 3px;">Recommended sleep time tonight is 10:45 PM based on your heart rate variability.</div>
+            </div>
+            <span style="font-size: 12px; font-weight: 600; color: #94a3b8;">3h ago</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- VIEW: SETTINGS & PREFERENCES -->
+      <div class="page-view" id="view-settings">
+        <div class="view-hero-header">
+          <div class="title-area">
+            <h2>Account & Performance Preferences</h2>
+            <p>Customize sensor calibration, haptic feedback, and biometric thresholds.</p>
+          </div>
+          <button class="view-pill-badge" style="background: #0f131a; color: #fff;">Save Changes</button>
+        </div>
+
+        <div class="settings-grid">
+          <!-- Card 1: Preferences -->
+          <div class="neu-card" style="padding: 30px;">
+            <h3 style="font-size: 18px; font-weight: 800; color: #0f172a; margin-bottom: 8px;">Telemetry & Sensors</h3>
+            
+            <div class="setting-row">
+              <div>
+                <div style="font-size: 14px; font-weight: 700; color: #0f172a;">Real-Time Heart Rate Sync</div>
+                <div style="font-size: 12.5px; color: #64748b;">BLE Bluetooth telemetry link</div>
+              </div>
+              <div class="neu-toggle checked" onclick="this.classList.toggle('checked')"></div>
+            </div>
+
+            <div class="setting-row">
+              <div>
+                <div style="font-size: 14px; font-weight: 700; color: #0f172a;">Hydration Haptic Reminders</div>
+                <div style="font-size: 12.5px; color: #64748b;">Vibrate smartband every 90 mins</div>
+              </div>
+              <div class="neu-toggle checked" onclick="this.classList.toggle('checked')"></div>
+            </div>
+
+            <div class="setting-row">
+              <div>
+                <div style="font-size: 14px; font-weight: 700; color: #0f172a;">Sleep Phase Auto-Detection</div>
+                <div style="font-size: 12.5px; color: #64748b;">Monitor delta wave restorative sleep</div>
+              </div>
+              <div class="neu-toggle checked" onclick="this.classList.toggle('checked')"></div>
+            </div>
+          </div>
+
+          <!-- Card 2: Profile & Subscription -->
+          <div class="neu-card" style="padding: 30px;">
+            <h3 style="font-size: 18px; font-weight: 800; color: #0f172a; margin-bottom: 8px;">Member Account: Archangel</h3>
+            <div style="display: flex; align-items: center; gap: 16px; margin: 16px 0;">
+              <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=150&q=80" style="width: 60px; height: 60px; border-radius: 50%; box-shadow: var(--neu-card-sm);">
+              <div>
+                <div style="font-size: 16px; font-weight: 800; color: #0f172a;">Archangel</div>
+                <div style="font-size: 13px; color: #64748b;">Pro Athlete Tier • ID #884920</div>
+              </div>
+            </div>
+
+            <div class="setting-row">
+              <div>
+                <div style="font-size: 14px; font-weight: 700; color: #0f172a;">Metric Units</div>
+                <div style="font-size: 12.5px; color: #64748b;">Kilograms, Centimeters, Liters</div>
+              </div>
+              <div class="view-pill-badge" style="font-size: 12px; padding: 4px 12px;">Metric (SI)</div>
+            </div>
+
+            <div class="setting-row" style="border-bottom: none;">
+              <div>
+                <div style="font-size: 14px; font-weight: 700; color: #0f172a;">Membership Status</div>
+                <div style="font-size: 12.5px; color: #16a34a; font-weight: 600;">Active 4K Premium Plan</div>
+              </div>
+              <button class="btn-upgrade" style="height: 38px; padding: 0 16px; font-size: 12.5px;">Manage</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- VIEW: HELP & INFO -->
+      <div class="page-view" id="view-help">
+        <div class="view-hero-header">
+          <div class="title-area">
+            <h2>Help & System Architecture</h2>
+            <p>Pulse Neumorphic Health Core • Release 4.0.0</p>
+          </div>
+        </div>
+
+        <div class="neu-card" style="padding: 34px;">
+          <h3 style="font-size: 20px; font-weight: 800; color: #0f172a; margin-bottom: 12px;">About Your Neumorphic Dashboard</h3>
+          <p style="font-size: 14px; line-height: 1.7; color: #55657d; margin-bottom: 16px;">
+            This system integrates deep tactile neumorphic physical modeling with high-definition biometrics tracking. All cards, buttons, and telemetry widgets reflect physiological data in real-time.
+          </p>
+
+          <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; margin-top: 24px;">
+            <div style="padding: 20px; border-radius: 20px; background: #f8fafc; box-shadow: var(--neu-card-sm); border: 1px solid #ffffff;">
+              <div style="font-size: 15px; font-weight: 800; color: #0f172a; margin-bottom: 6px;">Liquid Glass Physics</div>
+              <p style="font-size: 12.5px; color: #64748b; line-height: 1.5;">Refractive specular convex shaders calculate light refraction across buttons dynamically.</p>
+            </div>
+            <div style="padding: 20px; border-radius: 20px; background: #f8fafc; box-shadow: var(--neu-card-sm); border: 1px solid #ffffff;">
+              <div style="font-size: 15px; font-weight: 800; color: #0f172a; margin-bottom: 6px;">Dual-Axis Shading</div>
+              <p style="font-size: 12.5px; color: #64748b; line-height: 1.5;">Ultra-deep elevation utilizes double negative/positive ambient light drop offsets.</p>
+            </div>
+            <div style="padding: 20px; border-radius: 20px; background: #f8fafc; box-shadow: var(--neu-card-sm); border: 1px solid #ffffff;">
+              <div style="font-size: 15px; font-weight: 800; color: #0f172a; margin-bottom: 6px;">Real-Time Periodization</div>
+              <p style="font-size: 12.5px; color: #64748b; line-height: 1.5;">Calendar tracks microcycle intensity across hypertrophy and endurance days automatically.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <script>
+    // Initialize Lucide Icons
+    lucide.createIcons();
+
+    // Populate Calories Histogram Bars
+    const histContainer = document.getElementById('caloriesHistogram');
+    const barCount = 31;
+    const baseHeights = [
+      65, 70, 75, 80, 85, 90, 88, 85, 80, 85, 90, 95, 92, 88, 85, 82, 
+      86, 92, 98, 95, 90, 85, 88, 92, 90, 85, 82, 80, 75, 78, 80
+    ];
+
+    if (histContainer) {
+      for (let i = 0; i < barCount; i++) {
+        const bar = document.createElement('div');
+        bar.className = 'bar-column';
+        const heightVal = baseHeights[i % baseHeights.length];
+        bar.style.height = `${heightVal}%`;
+        bar.title = `Day ${i + 1}: ${Math.round(2040 * (heightVal / 100))} Kcal`;
+        histContainer.appendChild(bar);
+      }
+    }
+
+    // Segmented button state toggles
+    document.querySelectorAll('.segment-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const parent = btn.parentElement;
+        parent.querySelectorAll('.segment-btn').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+      });
+    });
+
+    // Multi-Page SPA Navigation Router
+    const navButtons = document.querySelectorAll('.nav-btn[data-page]');
+    const pageViews = document.querySelectorAll('.page-view');
+
+    navButtons.forEach(btn => {
+      btn.addEventListener('click', () => {
+        const targetPage = btn.getAttribute('data-page');
+        if (!targetPage) return;
+
+        // Update nav active states
+        navButtons.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+
+        // Switch visible page view with smooth animation
+        pageViews.forEach(view => {
+          if (view.id === `view-${targetPage}`) {
+            view.classList.add('active');
+          } else {
+            view.classList.remove('active');
+          }
+        });
+
+        lucide.createIcons();
+      });
+    });
+
+    // 1. Interactive Hydration Glasses (Toggle filled / unfilled & update count)
+    const waterCups = document.querySelectorAll('.water-cup');
+    const amountValEl = document.querySelector('.amount-value');
+    let filledCount = document.querySelectorAll('.water-cup.filled').length;
+
+    waterCups.forEach((cup, idx) => {
+      cup.style.cursor = 'pointer';
+      cup.addEventListener('click', () => {
+        cup.classList.toggle('filled');
+        const totalFilled = document.querySelectorAll('.water-cup.filled').length;
+        const liters = (totalFilled * 0.12).toFixed(2);
+        if (amountValEl) {
+          amountValEl.innerHTML = `${liters}<span class="amount-unit">L</span>`;
+        }
+      });
+    });
+
+    // 2. Interactive Sleep Tips Carousel Pagination
+    const sleepTips = [
+      {
+        tag: "Deep sleep",
+        desc: "Discover tips and techniques for better, deeper sleep. Wake up refreshed and experience the true benefits of restful nights."
+      },
+      {
+        tag: "Circadian rhythm",
+        desc: "Aim to sleep within a 30-minute window every evening. Consistent melatonin timing strengthens immune recovery by 22%."
+      },
+      {
+        tag: "Temperature control",
+        desc: "Set your bedroom between 18°C - 20°C (65°F - 68°F). Cooler core temperatures trigger rapid non-REM slow-wave rest."
+      },
+      {
+        tag: "Blue light buffer",
+        desc: "Limit screen exposure 60 minutes before bed. Shift to amber hue mode to maintain natural adenosine pressure."
+      },
+      {
+        tag: "Magnesium & Recovery",
+        desc: "Magnesium glycinate supports GABA receptors and relaxes muscle tone, reducing spontaneous nighttime waking."
+      }
+    ];
+
+    let currentSleepIndex = 1; // 2 of 5
+    const paginationEl = document.querySelector('.pagination-counter');
+    const sleepTagEl = document.querySelector('.deep-sleep-tag span');
+    const sleepDescEl = document.querySelector('.sleep-desc');
+    const prevBtn = document.querySelector('.nav-arrow-btn[title="Previous tip"]');
+    const nextBtn = document.querySelector('.nav-arrow-btn[title="Next tip"]');
+
+    function updateSleepTip(index) {
+      currentSleepIndex = index;
+      if (paginationEl) paginationEl.innerHTML = `${currentSleepIndex + 1}<span>/5</span>`;
+      if (sleepTagEl) sleepTagEl.textContent = sleepTips[currentSleepIndex].tag;
+      if (sleepDescEl) sleepDescEl.textContent = sleepTips[currentSleepIndex].desc;
+    }
+
+    if (prevBtn) {
+      prevBtn.addEventListener('click', () => {
+        const next = (currentSleepIndex - 1 + sleepTips.length) % sleepTips.length;
+        updateSleepTip(next);
+      });
+    }
+
+    if (nextBtn) {
+      nextBtn.addEventListener('click', () => {
+        const next = (currentSleepIndex + 1) % sleepTips.length;
+        updateSleepTip(next);
+      });
+    }
+
+    // 3. Interactive Video Explore Play Badge Modal (Now Opens Fullscreen 4K HUD)
+    const exploreBadge = document.querySelector('.explore-badge');
+    const workoutModal = document.getElementById('workoutModal');
+    const closeModalBtn = document.getElementById('closeModalBtn');
+    const modalTimer = document.getElementById('modalTimer');
+    const modalPlayBtn = document.getElementById('modalPlayBtn');
+    let timerInterval = null;
+    let secondsLeft = 45;
+
+    if (exploreBadge && workoutModal) {
+      exploreBadge.addEventListener('click', () => {
+        workoutModal.style.display = 'flex';
+        playHapticTone(580, 0.08);
+        if (!timerInterval) {
+          timerInterval = setInterval(() => {
+            if (secondsLeft > 0) {
+              secondsLeft--;
+              const m = String(Math.floor(secondsLeft / 60)).padStart(2, '0');
+              const s = String(secondsLeft % 60).padStart(2, '0');
+              if (modalTimer) modalTimer.textContent = `${m}:${s}`;
+            }
+          }, 1000);
+        }
+      });
+    }
+
+    if (closeModalBtn && workoutModal) {
+      closeModalBtn.addEventListener('click', () => {
+        workoutModal.style.display = 'none';
+        playHapticTone(320, 0.06);
+      });
+    }
+
+    if (modalPlayBtn) {
+      modalPlayBtn.addEventListener('click', () => {
+        playHapticTone(440, 0.08);
+        const icon = modalPlayBtn.querySelector('svg');
+        if (icon) {
+          const isPaused = icon.getAttribute('data-lucide') === 'play';
+          modalPlayBtn.innerHTML = isPaused ? '<i data-lucide="pause" style="width: 22px;"></i>' : '<i data-lucide="play" style="width: 22px;"></i>';
+          lucide.createIcons();
+        }
+      });
+    }
+
+    // 4. Interactive Start Free Trial Button Modal
+    const trialBtn = document.querySelector('.btn-trial');
+    if (trialBtn) {
+      trialBtn.addEventListener('click', () => {
+        playHapticTone(660, 0.12);
+        alert('🎉 Welcome to the 14-Day Pro Performance Free Trial!\n\nYour personalized workout plan and biometric syncing are now unlocked.');
+      });
+    }
+
+    // 5. Interactive Upgrade Buttons
+    document.querySelectorAll('.btn-upgrade').forEach(btn => {
+      btn.addEventListener('click', () => {
+        playHapticTone(720, 0.1);
+        alert('💎 Pulse Premium 4K Membership\n\n• Unrestricted Coach Consultations\n• Real-Time BLE Biometric Streaming\n• Advanced Muscle Periodization Models\n\nReady to activate?');
+      });
+    });
+
+    // 6. Interactive Well Done Liquid Glass Button
+    const wellDoneBtn = document.querySelector('.badge-well-done');
+    if (wellDoneBtn) {
+      wellDoneBtn.addEventListener('click', () => {
+        playHapticTone(520, 0.1);
+        alert('💧 Daily Hydration Target Confirmed!\n\nYou logged 2.15L today. Great discipline keeping cellular hydration peak.');
+      });
+    }
+
+    // 7. Interactive Chat Message Send Bar
+    const chatInput = document.querySelector('.chat-input-bar input');
+    const chatSendBtn = document.querySelector('.chat-input-bar button[title="Send"]');
+    const chatStream = document.querySelector('.chat-active-card > div:nth-child(2)');
+
+    function sendChatMessage() {
+      if (!chatInput || !chatInput.value.trim() || !chatStream) return;
+      const text = chatInput.value.trim();
+      
+      const outgoing = document.createElement('div');
+      outgoing.className = 'message-bubble outgoing';
+      outgoing.textContent = text;
+      chatStream.appendChild(outgoing);
+      chatInput.value = '';
+      chatStream.scrollTop = chatStream.scrollHeight;
+      playHapticTone(640, 0.05);
+
+      setTimeout(() => {
+        const reply = document.createElement('div');
+        reply.className = 'message-bubble incoming';
+        reply.textContent = "Got your update Archangel! I'm tracking your recovery stats right now.";
+        chatStream.appendChild(reply);
+        chatStream.scrollTop = chatStream.scrollHeight;
+        playHapticTone(480, 0.08);
+      }, 1000);
+    }
+
+    if (chatSendBtn) chatSendBtn.addEventListener('click', sendChatMessage);
+    if (chatInput) {
+      chatInput.addEventListener('keypress', (e) => {
+        if (e.key === 'Enter') sendChatMessage();
+      });
+    }
+
+    // 8. Interactive Calendar Cells
+    document.querySelectorAll('.cal-cell').forEach(cell => {
+      cell.addEventListener('click', () => {
+        playHapticTone(400, 0.05);
+        document.querySelectorAll('.cal-cell').forEach(c => c.style.outline = 'none');
+        cell.style.outline = '2px solid #2563eb';
+        const dayNum = cell.querySelector('.cal-num')?.textContent || 'Selected Day';
+        const workoutText = cell.querySelector('span:nth-child(2)')?.textContent;
+        if (workoutText) {
+          alert(`📅 ${dayNum}: ${workoutText}\n\nSession Duration: 45 Minutes\nTarget Heart Rate Zone: Zone 3-4`);
+        } else {
+          alert(`📅 ${dayNum}: Rest & Active Recovery Day\n\nFocus on hydration, gentle stretching, and early sleep.`);
+        }
+      });
+    });
+
+    // 9. Interactive Brand Logo Click (Takes home)
+    const brandLogo = document.querySelector('.brand-logo');
+    if (brandLogo) {
+      brandLogo.addEventListener('click', () => {
+        playHapticTone(440, 0.05);
+        const homeBtn = document.querySelector('.nav-btn[data-page="dashboard"]');
+        if (homeBtn) homeBtn.click();
+      });
+    }
+
+    // 10. 🌓 Obsidian Dark Mode Toggle Controller
+    const themeToggleBtn = document.getElementById('themeToggleBtn');
+    if (themeToggleBtn) {
+      themeToggleBtn.addEventListener('click', () => {
+        document.body.classList.toggle('theme-dark');
+        const isDark = document.body.classList.contains('theme-dark');
+        themeToggleBtn.innerHTML = isDark 
+          ? '<i data-lucide="sun" style="width: 20px; height: 20px; color: #facc15;"></i>' 
+          : '<i data-lucide="moon" style="width: 20px; height: 20px;"></i>';
+        lucide.createIcons();
+        playHapticTone(isDark ? 680 : 380, 0.1);
+      });
+    }
+
+    // 11. 🎧 Synthetic Web Audio Haptic Feedback Generator
+    let audioCtx = null;
+    function playHapticTone(freq, duration) {
+      try {
+        if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+        if (audioCtx.state === 'suspended') audioCtx.resume();
+        const osc = audioCtx.createOscillator();
+        const gain = audioCtx.createGain();
+        osc.type = 'sine';
+        osc.frequency.setValueAtTime(freq, audioCtx.currentTime);
+        gain.gain.setValueAtTime(0.04, audioCtx.currentTime);
+        gain.gain.exponentialRampToValueAtTime(0.0001, audioCtx.currentTime + duration);
+        osc.connect(gain);
+        gain.connect(audioCtx.destination);
+        osc.start();
+        osc.stop(audioCtx.currentTime + duration);
+      } catch (err) {}
+    }
+
+    // 12. 🎛️ Real-Time Dynamic Specular Lighting Tracker
+    document.addEventListener('mousemove', (e) => {
+      const x = (e.clientX / window.innerWidth) - 0.5;
+      const y = (e.clientY / window.innerHeight) - 0.5;
+      
+      const offsetX = Math.round(x * 16);
+      const offsetY = Math.round(y * 16);
+      
+      const lightElements = document.querySelectorAll('.interactive-card');
+      lightElements.forEach(el => {
+        if (!document.body.classList.contains('theme-dark')) {
+          el.style.boxShadow = `${20 + offsetX}px ${22 + offsetY}px 46px #a8bcd5, ${-20 + offsetX}px ${-22 + offsetY}px 46px #ffffff`;
+        }
+      });
+    });
+  </script>
+</body>
+</html>

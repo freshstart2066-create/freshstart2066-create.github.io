@@ -1,0 +1,990 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DMFE | Solar, Battery & Energy Services in Nigeria</title>
+  <meta name="description" content="D-Mrick Fusion Energy (DMFE) designs, installs and supports solar power systems and lithium-ion battery solutions in Nigeria, from assembly and diagnostics to maintenance and repurposing.">
+  <link rel="icon" type="image/svg+xml" href="assets/dmfe_logo.svg">
+  <meta property="og:title" content="DMFE | D-MRICK FUSION ENERGY — Clean Energy Systems">
+  <meta property="og:description" content="Solar and battery engineering across Nigeria, including system design, lithium-ion battery assembly, troubleshooting, repurposing and maintenance.">
+  <meta property="og:image" content="assets/dmfe_logo_transparent.png">
+  <meta property="og:type" content="website">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Outfit:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@500;700&family=Playfair+Display:ital,wght@0,600;1,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body class="theme-morning house-modern">
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  <!-- Interactive Canvas for Solar Flow, Sunbeams, Stars and Orbital Radar Glow -->
+  <canvas id="ambient-canvas"></canvas>
+
+  <!-- Background visual scene layers -->
+  <div class="scene-container" id="scene-container">
+    <!-- Classic House Layers (Exact reference architecture in 4K) -->
+    <div class="scene-layer layer-classic layer-classic-day" id="classic-day"></div>
+    <div class="scene-layer layer-classic layer-classic-sunset" id="classic-sunset"></div>
+    <div class="scene-layer layer-classic layer-classic-night" id="classic-night"></div>
+
+    <!-- Modern Villa Architecture Layers (Two-story luxury in 4K) -->
+    <div class="scene-layer layer-modern layer-modern-day" id="modern-day"></div>
+    <div class="scene-layer layer-modern layer-modern-sunset" id="modern-sunset"></div>
+    <div class="scene-layer layer-modern layer-modern-night" id="modern-night"></div>
+
+    <div class="scene-overlay-lighting" id="scene-lighting"></div>
+    <div class="scene-vignette"></div>
+  </div>
+
+  <!-- Navigation Bar -->
+  <header class="navbar">
+    <a href="index.html" class="brand-logo" aria-label="DMFE · D-MRICK FUSION ENERGY home">
+      <img src="assets/dmfe_logo.svg" alt="DMFE - D-MRICK FUSION ENERGY" class="navbar-exact-logo">
+    </a>
+
+    <nav class="nav-links" aria-label="Main navigation">
+      <a href="index.html">Home</a>
+      <a href="#services">Services</a>
+      <a href="#guarantee">SLA</a>
+      <a href="#faq">FAQ</a>
+      <a href="about.html">About Us</a>
+      <a href="#contact">Contact</a>
+    </nav>
+    
+    <div class="nav-right">
+      <div class="house-switch-pill" title="Switch House Model">
+        <button class="house-btn" id="btn-house-classic">Classic</button>
+        <button class="house-btn active" id="btn-house-modern">Villa</button>
+      </div>
+
+      <div class="quote-cta-wrapper">
+        <button class="btn-quote" id="btn-open-quote">Estimate Energy Costs</button>
+        <div class="quote-action-subrow">
+          <a href="https://wa.me/2349048518418?text=Hello%20DMFE%20Solar%2C%20I%20would%20like%20to%20get%20an%20instant%20quote" target="_blank" rel="noopener noreferrer" class="sub-action-btn btn-wa" title="WhatsApp Miracle Akujobi">
+            <svg viewBox="0 0 24 24" fill="currentColor" class="sub-btn-icon"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91C2.13 13.66 2.59 15.36 3.45 16.86L2.05 22L7.3 20.62C8.75 21.41 10.38 21.83 12.04 21.83C17.5 21.83 21.95 17.38 21.95 11.92C21.95 6.46 17.5 2 12.04 2ZM12.04 20.15C10.56 20.15 9.11 19.76 7.85 19.01L7.55 18.83L4.43 19.65L5.26 16.61L5.06 16.29C4.24 14.99 3.81 13.47 3.81 11.91C3.81 7.37 7.5 3.68 12.04 3.68C14.24 3.68 16.31 4.54 17.87 6.1C19.42 7.66 20.28 9.72 20.27 11.92C20.28 16.46 16.58 20.15 12.04 20.15Z"/></svg>
+            <span>WhatsApp</span>
+          </a>
+          <a href="tel:09048518418" class="sub-action-btn btn-call" title="Call Miracle Akujobi">
+            <svg viewBox="0 0 24 24" fill="currentColor" class="sub-btn-icon"><path d="M6.62 10.79a15.053 15.053 0 006.59 6.59l2.2-2.2a1 1 0 011.01-.24c1.12.37 2.33.57 3.58.57a1 1 0 011 1V20a1 1 0 01-1 1A17 17 0 013 4a1 1 0 011-1h3.5a1 1 0 011 1c0 1.25.2 2.46.57 3.58a1 1 0 01-.24 1.01l-2.21 2.2z"/></svg>
+            <span>Call</span>
+          </a>
+          <a href="mailto:dmrickfusionenergy@gmail.com" class="sub-action-btn btn-email" title="Email Miracle Akujobi">
+            <svg viewBox="0 0 24 24" fill="currentColor" class="sub-btn-icon"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
+            <span>Email</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Hero Content Section -->
+  <main class="hero-wrapper" id="main-content">
+    <div class="hero-content">
+      <!-- Tagline & Slogan Kicker -->
+      <div class="slogan-badge">
+        <span class="slogan-dot"></span>
+        <span class="slogan-text">Where there is no limitation to possibilities.</span>
+      </div>
+
+      <div class="headline-container">
+        <h1 class="hero-title">
+          <span class="highlight-dollar">Reliable energy, engineered</span>
+          <span class="highlight-sub">for homes, farms and businesses</span>
+        </h1>
+      </div>
+
+      <!-- Center Interactive Time Controller -->
+      <div class="controller-card">
+        <div class="time-toggle-group" role="tablist" aria-label="Time of Day Selection">
+          <button class="time-tab active" id="tab-morning" role="tab" aria-selected="true" data-time="morning">
+            <span class="tab-title">
+              <svg class="tab-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <circle cx="12" cy="12" r="5"></circle>
+                <line x1="12" y1="1" x2="12" y2="3"></line>
+                <line x1="12" y1="21" x2="12" y2="23"></line>
+                <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                <line x1="1" y1="12" x2="3" y2="12"></line>
+                <line x1="21" y1="12" x2="23" y2="12"></line>
+                <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+              </svg>
+              Morning
+            </span>
+            <span class="tab-sublabel">₦0 for Electricity</span>
+          </button>
+
+          <button class="time-tab" id="tab-sunset" role="tab" aria-selected="false" data-time="sunset">
+            <span class="tab-title">
+              <svg class="tab-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M17 18a5 5 0 0 0-10 0"></path>
+                <line x1="12" y1="2" x2="12" y2="9"></line>
+                <line x1="4.22" y1="10.22" x2="5.64" y2="11.64"></line>
+                <line x1="1" y1="18" x2="3" y2="18"></line>
+                <line x1="21" y1="18" x2="23" y2="18"></line>
+                <line x1="18.36" y1="11.64" x2="19.78" y2="10.22"></line>
+                <line x1="23" y1="22" x2="1" y2="22"></line>
+                <polyline points="8 6 12 2 16 6"></polyline>
+              </svg>
+              Sunset
+            </span>
+            <span class="tab-sublabel">₦0 for Electricity</span>
+          </button>
+
+          <button class="time-tab" id="tab-night" role="tab" aria-selected="false" data-time="night">
+            <span class="tab-title">
+              <svg class="tab-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+              </svg>
+              Night
+            </span>
+            <span class="tab-sublabel">₦0 for Electricity</span>
+          </button>
+
+          <div class="toggle-slider-pill" id="slider-pill"></div>
+        </div>
+
+        <!-- Continuous 24h scrubber -->
+        <div class="timeline-controls">
+          <div class="range-slider-wrapper">
+            <span class="time-badge" id="live-time-label">09:00 AM</span>
+            <input type="range" id="time-range-slider" min="0" max="100" value="0" step="0.5" aria-label="Time of Day Slider">
+          </div>
+        </div>
+      </div>
+
+      <p class="hero-description">
+        <strong class="text-blue-highlight">Explore a solar and battery system designed around your energy needs.</strong> This dashboard is illustrative; actual output, costs and savings depend on your site, usage, equipment and written service terms.
+      </p>
+
+      <!-- Live Smart Energy HUD / Telemetry -->
+      <div class="energy-telemetry-grid">
+        <div class="telemetry-card solar-stat">
+          <div class="telemetry-header">
+            <span class="telemetry-dot dot-solar"></span>
+            <span class="telemetry-label">Example solar generation</span>
+          </div>
+          <div class="telemetry-val" id="stat-solar">7.8 kW</div>
+          <div class="telemetry-sub" id="stat-solar-status">Directing to Home & Battery</div>
+        </div>
+
+        <div class="telemetry-card battery-stat">
+          <div class="telemetry-header">
+            <span class="telemetry-dot dot-battery"></span>
+            <span class="telemetry-label">Example battery status</span>
+          </div>
+          <div class="telemetry-val" id="stat-battery">94% <span class="badge-charging" id="battery-mode-badge">Charging</span></div>
+          <div class="telemetry-sub" id="stat-battery-status">Stored: 14.8 kWh (₦0 Grid)</div>
+        </div>
+
+        <div class="telemetry-card grid-stat">
+          <div class="telemetry-header">
+            <span class="telemetry-dot dot-grid"></span>
+            <span class="telemetry-label">Illustrative grid estimate</span>
+          </div>
+          <div class="telemetry-val val-green" id="stat-grid">₦0.00 / mo</div>
+          <div class="telemetry-sub">Illustrative value only</div>
+        </div>
+
+        <div class="telemetry-card savings-stat">
+          <div class="telemetry-header">
+            <span class="telemetry-dot dot-savings"></span>
+            <span class="telemetry-label">Potential savings estimate</span>
+          </div>
+          <div class="telemetry-val" id="stat-savings"><span class="cancelled-savings">₦18,420,000</span> <span class="saved-badge">SAVED</span></div>
+          <div class="telemetry-sub">Estimate only; not a savings guarantee</div>
+        </div>
+      </div>
+
+      <p class="telemetry-disclaimer">Illustrative figures only; this is not live system monitoring. Actual output and savings depend on site conditions, usage, tariffs and final system design.</p>
+      <!-- Founder & Corporate Trust Bar -->
+      <div class="founder-card-strip">
+        <div class="founder-info-left">
+          <img src="assets/founder_avatar.png" alt="Miracle Akujobi" class="founder-avatar-img">
+          <div class="founder-details">
+            <div class="founder-name">Miracle Akujobi</div>
+            <div class="founder-title">FOUNDER · D-MRICK FUSION ENERGY (DMFE)</div>
+          </div>
+        </div>
+        <div class="founder-contacts">
+          <a href="https://wa.me/2349048518418?text=Hello%20Miracle%20Akujobi%2C%20I%20am%20reaching%20out%20from%20the%20DMFE%20website." target="_blank" rel="noopener noreferrer" class="btn-3d-app btn-3d-wa" title="WhatsApp: 0904 851 8418" aria-label="WhatsApp">
+            <svg viewBox="0 0 24 24" fill="currentColor" class="btn-3d-icon"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91C2.13 13.66 2.59 15.36 3.45 16.86L2.05 22L7.3 20.62C8.75 21.41 10.38 21.83 12.04 21.83C17.5 21.83 21.95 17.38 21.95 11.92C21.95 6.46 17.5 2 12.04 2ZM12.04 20.15C10.56 20.15 9.11 19.76 7.85 19.01L7.55 18.83L4.43 19.65L5.26 16.61L5.06 16.29C4.24 14.99 3.81 13.47 3.81 11.91C3.81 7.37 7.5 3.68 12.04 3.68C14.24 3.68 16.31 4.54 17.87 6.1C19.42 7.66 20.28 9.72 20.27 11.92C20.28 16.46 16.58 20.15 12.04 20.15Z"/></svg>
+          </a>
+          <a href="mailto:dmrickfusionenergy@gmail.com" class="btn-3d-app btn-3d-gmail" title="Email: dmrickfusionenergy@gmail.com" aria-label="Gmail">
+            <svg viewBox="0 0 24 24" fill="currentColor" class="btn-3d-icon"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
+          </a>
+          <a href="https://www.instagram.com/dmf_energy?psln=MWlxYTdwdjkybzBoZg%3D%3D&utm_source=qr" target="_blank" rel="noopener noreferrer" class="btn-3d-app btn-3d-ig" title="Instagram: @dmf_energy" aria-label="Instagram">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="btn-3d-icon"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
+          </a>
+          <a href="https://www.facebook.com/share/1F4jLKihN8/?mibextid=wwXIfr" target="_blank" rel="noopener noreferrer" class="btn-3d-app btn-3d-fb" title="Facebook: DMF Energy" aria-label="Facebook">
+            <svg viewBox="0 0 24 24" fill="currentColor" class="btn-3d-icon"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+          </a>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- ====================================================================
+       OUR SERVICES — 3D INTERACTIVE WINDOW WHEEL (SYNAPSEX CYLINDER STYLE)
+       ==================================================================== -->
+  <section class="section-services" id="services">
+    <!-- 4K High-Resolution Robotics & Battery Cleanroom Facility Background -->
+    <div class="services-bg-visual" style="background-image: url('assets/cleanroom_battery_services.jpg');"></div>
+    <div class="services-laser-sweep"></div>
+    <div class="services-circuit-stream"></div>
+    <div class="services-grid-overlay"></div>
+    <div class="services-vignette"></div>
+    <div class="services-radial-glow"></div>
+
+    <div class="section-container">
+      <div class="section-header">
+        <div class="section-tag-badge">
+          <span class="badge-dot"></span>
+          <span>SPECIALIZED ENGINEERING CAPABILITIES</span>
+        </div>
+        <h2 class="section-title">Our Engineered Energy Services</h2>
+        <p class="section-subtitle">
+          From solar EPC and electrical integration to lithium-ion battery assembly, diagnostics, repurposing and ongoing care. Explore the full range of DMFE services below.
+        </p>
+      </div>
+
+      <div class="service-quick-links" aria-label="DMFE services">
+        <a class="service-quick-link" href="#services" data-service-index="5">
+          <span class="service-quick-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="5" y="4" width="14" height="17" rx="2"/><path d="M9 2v2m6-2v2M9 9h6m-6 4h6m-6 4h3"/></svg></span>
+          <span class="service-quick-copy"><strong>Lithium-ion battery assembly</strong><span>Pack assembly and system integration</span></span><span class="service-quick-arrow" aria-hidden="true">↗</span>
+        </a>
+        <a class="service-quick-link" href="#services" data-service-index="6">
+          <span class="service-quick-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M13 2 4 14h7l-1 8 10-12h-7l0-8Z"/></svg></span>
+          <span class="service-quick-copy"><strong>Battery troubleshooting</strong><span>Fault-finding and clear next steps</span></span><span class="service-quick-arrow" aria-hidden="true">↗</span>
+        </a>
+        <a class="service-quick-link" href="#services" data-service-index="7">
+          <span class="service-quick-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M20 7v5h-5M4 17v-5h5"/><path d="M5.6 9A7 7 0 0 1 18 6l2 6M4 12l2 6a7 7 0 0 0 12.4-3"/></svg></span>
+          <span class="service-quick-copy"><strong>Battery repurposing</strong><span>Condition checks for second-life use</span></span><span class="service-quick-arrow" aria-hidden="true">↗</span>
+        </a>
+        <a class="service-quick-link" href="#services" data-service-index="8">
+          <span class="service-quick-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 3v3m0 12v3M4.2 5.2l2.1 2.1m11.4 11.4 2.1 2.1M3 12h3m12 0h3M4.2 18.8l2.1-2.1M17.7 7.3l2.1-2.1"/><circle cx="12" cy="12" r="4"/></svg></span>
+          <span class="service-quick-copy"><strong>Battery maintenance</strong><span>Planned checks and ongoing care</span></span><span class="service-quick-arrow" aria-hidden="true">↗</span>
+        </a>
+
+        <a class="service-quick-link" href="#services" data-service-index="2">
+          <span class="service-quick-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 19h18M5 16l4-5 3 2 6-8"/><path d="M15 5h3v3"/></svg></span>
+          <span class="service-quick-copy"><strong>Electrical load audit &amp; design</strong><span>Load profiling and system planning</span></span><span class="service-quick-arrow" aria-hidden="true">↗</span>
+        </a>
+        <a class="service-quick-link" href="#services" data-service-index="4">
+          <span class="service-quick-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><path d="m15.5 8.5-2.2 4.8-4.8 2.2 2.2-4.8 4.8-2.2Z"/></svg></span>
+          <span class="service-quick-copy"><strong>Engineering consultancy</strong><span>Technical advice for energy projects</span></span><span class="service-quick-arrow" aria-hidden="true">↗</span>
+        </a>
+      </div>
+      <!-- 3D Window Wheel Showcase -->
+      <div class="wheel-3d-wrapper" id="servicesWheelWrapper">
+        <div class="wheel-3d-scene" id="servicesWheelScene">
+          <div class="wheel-3d-cylinder" id="servicesWheelCylinder">
+            
+            <!-- Service 1: Power Bank Production -->
+            <div class="wheel-card" data-index="0">
+              <div class="wheel-card-glass">
+                <div class="wheel-card-top">
+                  <span class="wheel-tag text-emerald">01 // ENERGY STORAGE</span>
+                  <span class="wheel-status-dot pulse-emerald"></span>
+                </div>
+                <div class="wheel-metric-val">65W – 300W</div>
+                <h3 class="wheel-card-title">Power Bank Production</h3>
+                <p class="wheel-card-desc">
+                  Custom high-density portable fusion power packs with bi-directional USB-C PD fast-charging and intelligent battery management.
+                </p>
+                <ul class="wheel-specs-list">
+                  <li>⚡ Multi-Protocol PD 100W Quick Charge</li>
+                  <li>🔋 Grade-A LiFePO4 &amp; Lithium-Ion Cells</li>
+                  <li>🛡️ Over-Voltage &amp; Thermal Protection BMS</li>
+                </ul>
+                <div class="wheel-card-footer">
+                  <span class="wheel-footer-label">OEM &amp; Custom Batch Production</span>
+                  <a href="https://wa.me/2349048518418?text=Hello%20Miracle%20Akujobi%2C%20I%20am%20interested%20in%20DMFE%20Power%20Bank%20Production." target="_blank" rel="noopener noreferrer" class="btn-wheel-action">
+                    <span>Inquire</span> →
+                  </a>
+                </div>
+              </div>
+            </div>
+
+            <!-- Service 2: Solar EPC Installation -->
+            <div class="wheel-card" data-index="1">
+              <div class="wheel-card-glass">
+                <div class="wheel-card-top">
+                  <span class="wheel-tag text-cyan">02 // TURNKEY INFRASTRUCTURE</span>
+                  <span class="wheel-status-dot pulse-cyan"></span>
+                </div>
+                <div class="wheel-metric-val">5kW – 500kW+</div>
+                <h3 class="wheel-card-title">Solar EPC Installation</h3>
+                <p class="wheel-card-desc">
+                  Turnkey Engineering, Procurement &amp; Construction for residential estates, commercial facilities, and agrivoltaic microgrids.
+                </p>
+                <ul class="wheel-specs-list">
+                  <li>☀️ Tier-1 N-Type TOPCon Bifacial Panels</li>
+                  <li>⏱️ Schedule confirmed after site assessment</li>
+                  <li>📜 Service terms agreed in writing</li>
+                </ul>
+                <div class="wheel-card-footer">
+                  <span class="wheel-footer-label">Residential · Commercial · Microgrids</span>
+                  <a href="https://wa.me/2349048518418?text=Hello%20Miracle%20Akujobi%2C%20I%20am%20interested%20in%20DMFE%20Solar%20EPC%20Installation." target="_blank" rel="noopener noreferrer" class="btn-wheel-action">
+                    <span>Inquire</span> →
+                  </a>
+                </div>
+              </div>
+            </div>
+
+            <!-- Service 3: Electrical Load Audit and Design -->
+            <div class="wheel-card" data-index="2">
+              <div class="wheel-card-glass">
+                <div class="wheel-card-top">
+                  <span class="wheel-tag text-gold">03 // SIMULATION &amp; AUDIT</span>
+                  <span class="wheel-status-dot pulse-gold"></span>
+                </div>
+                <div class="wheel-metric-val">Load profile · System design</div>
+                <h3 class="wheel-card-title">Electrical Load Audit and Design</h3>
+                <p class="wheel-card-desc">
+                  Electrical load audits and system design informed by usage patterns, peak demand, equipment requirements and site conditions.
+                </p>
+                <ul class="wheel-specs-list">
+                  <li>📊 Load and peak demand profiling</li>
+                  <li>⚡ Solar and battery system sizing</li>
+                  <li>📋 Design recommendations for your site</li>
+                </ul>
+                <div class="wheel-card-footer">
+                  <span class="wheel-footer-label">Homes · Farms · Commercial sites</span>
+                  <a href="https://wa.me/2349048518418?text=Hello%20Miracle%20Akujobi%2C%20I%20am%20interested%20in%20DMFE%20System%20Sizing%20and%20Design." target="_blank" rel="noopener noreferrer" class="btn-wheel-action">
+                    <span>Inquire</span> →
+                  </a>
+                </div>
+              </div>
+            </div>
+
+            <!-- Service 4: Electrical Installation -->
+            <div class="wheel-card" data-index="3">
+              <div class="wheel-card-glass">
+                <div class="wheel-card-top">
+                  <span class="wheel-tag text-emerald">04 // INDUSTRIAL INTEGRATION</span>
+                  <span class="wheel-status-dot pulse-emerald"></span>
+                </div>
+                <div class="wheel-metric-val">&lt;5Ω Earth Ground</div>
+                <h3 class="wheel-card-title">Electrical Installation</h3>
+                <p class="wheel-card-desc">
+                  Industrial-grade switchgear, copper earthing, Type II SPD surge arrestors, and seamless automatic grid synchronization.
+                </p>
+                <ul class="wheel-specs-list">
+                  <li>⚡ Deep Earth Rod Grounding (&lt;5 Ohms)</li>
+                  <li>🛡️ Multi-Stage Lightning &amp; Surge Protection</li>
+                  <li>🔌 IP67 Heavy-Duty DC Combiner Boxes</li>
+                </ul>
+                <div class="wheel-card-footer">
+                  <span class="wheel-footer-label">Certified High-Voltage Compliance</span>
+                  <a href="https://wa.me/2349048518418?text=Hello%20Miracle%20Akujobi%2C%20I%20am%20interested%20in%20DMFE%20Electrical%20Installation." target="_blank" rel="noopener noreferrer" class="btn-wheel-action">
+                    <span>Inquire</span> →
+                  </a>
+                </div>
+              </div>
+            </div>
+
+            <!-- Service 5: Engineering Consultancy -->
+            <div class="wheel-card" data-index="4">
+              <div class="wheel-card-glass">
+                <div class="wheel-card-top">
+                  <span class="wheel-tag text-cyan">05 // ADVISORY &amp; FEASIBILITY</span>
+                  <span class="wheel-status-dot pulse-cyan"></span>
+                </div>
+                <div class="wheel-metric-val">Project-specific guidance</div>
+                <h3 class="wheel-card-title">Engineering Consultancy</h3>
+                <p class="wheel-card-desc">
+                  Independent technical guidance for energy projects, including feasibility reviews, system planning and power quality diagnostics.
+                </p>
+                <ul class="wheel-specs-list">
+                  <li>📊 Feasibility and system reviews</li>
+                  <li>🔍 Power quality and system assessments</li>
+                  <li>📋 Practical project recommendations</li>
+                </ul>
+                <div class="wheel-card-footer">
+                  <span class="wheel-footer-label">Headed by Miracle Akujobi</span>
+                  <a href="https://wa.me/2349048518418?text=Hello%20Miracle%20Akujobi%2C%20I%20am%20interested%20in%20DMFE%20Engineering%20Consultancy." target="_blank" rel="noopener noreferrer" class="btn-wheel-action">
+                    <span>Inquire</span> →
+                  </a>
+                </div>
+              </div>
+            </div>
+
+            <!-- Service 6: Lithium-Ion Battery Assembly -->
+            <div class="wheel-card" data-index="5">
+              <div class="wheel-card-glass">
+                <div class="wheel-card-top">
+                  <span class="wheel-tag text-gold">06 // BATTERY ASSEMBLY</span>
+                  <span class="wheel-status-dot pulse-gold"></span>
+                </div>
+                <div class="wheel-metric-val">Application-led design</div>
+                <h3 class="wheel-card-title">Lithium-Ion Battery Assembly</h3>
+                <p class="wheel-card-desc">
+                  Assembly and integration of lithium-ion battery packs for suitable stationary energy storage applications, with battery management and system compatibility considered.
+                </p>
+                <ul class="wheel-specs-list">
+                  <li>🔋 Pack configuration matched to the intended use</li>
+                  <li>🧠 BMS options selected for system compatibility</li>
+                  <li>🔥 Protection and safe operating limits built into the design</li>
+                </ul>
+                <div class="wheel-card-footer">
+                  <span class="wheel-footer-label">Residential · Commercial · Service</span>
+                  <a href="https://wa.me/2349048518418?text=Hello%20Miracle%20Akujobi%2C%20I%20am%20interested%20in%20DMFE%20Lithium-Ion%20Battery%20Production." target="_blank" rel="noopener noreferrer" class="btn-wheel-action">
+                    <span>Inquire</span> →
+                  </a>
+                </div>
+              </div>
+            </div>
+
+            <!-- Service 7: Battery Troubleshooting -->
+            <div class="wheel-card" data-index="6"><div class="wheel-card-glass"><div class="wheel-card-top"><span class="wheel-tag text-cyan">07 // DIAGNOSTICS</span><span class="wheel-status-dot pulse-cyan"></span></div><div class="wheel-metric-val">Inspect · Diagnose · Advise</div><h3 class="wheel-card-title">Battery Troubleshooting</h3><p class="wheel-card-desc">Practical fault-finding for lithium-ion battery systems, BMS alerts, charging issues and inverter communication problems.</p><ul class="wheel-specs-list"><li>System and fault-code assessment</li><li>Wiring, connections and configuration checks</li><li>Clear repair or replacement recommendations</li></ul><div class="wheel-card-footer"><span class="wheel-footer-label">On-site or remote assessment</span><a href="https://wa.me/2349048518418?text=Hello%20DMFE%2C%20I%20need%20help%20troubleshooting%20a%20battery%20system." target="_blank" rel="noopener noreferrer" class="btn-wheel-action"><span>Request support</span> →</a></div></div></div>
+            <!-- Service 8: Battery Repurposing -->
+            <div class="wheel-card" data-index="7"><div class="wheel-card-glass"><div class="wheel-card-top"><span class="wheel-tag text-gold">08 // SECOND-LIFE ASSESSMENT</span><span class="wheel-status-dot pulse-gold"></span></div><div class="wheel-metric-val">Assess · Test · Reuse</div><h3 class="wheel-card-title">Battery Repurposing</h3><p class="wheel-card-desc">Assessment of suitable batteries for a second-life application, with condition, capacity and safety checks before reuse is considered.</p><ul class="wheel-specs-list"><li>Battery history and condition review</li><li>Capacity and pack-level assessment</li><li>Reuse recommendations based on test results</li></ul><div class="wheel-card-footer"><span class="wheel-footer-label">Suitability-led assessment</span><a href="https://wa.me/2349048518418?text=Hello%20DMFE%2C%20I%20would%20like%20a%20battery%20repurposing%20assessment." target="_blank" rel="noopener noreferrer" class="btn-wheel-action"><span>Request assessment</span> →</a></div></div></div>
+            <!-- Service 9: Battery Maintenance -->
+            <div class="wheel-card" data-index="8"><div class="wheel-card-glass"><div class="wheel-card-top"><span class="wheel-tag text-emerald">09 // LIFECYCLE CARE</span><span class="wheel-status-dot pulse-emerald"></span></div><div class="wheel-metric-val">Preventive · Corrective</div><h3 class="wheel-card-title">Battery Maintenance</h3><p class="wheel-card-desc">Planned checks and responsive service to help keep battery installations operating within their specified limits.</p><ul class="wheel-specs-list"><li>Visual and connection inspections</li><li>Operating data and alarm review</li><li>Maintenance recommendations and records</li></ul><div class="wheel-card-footer"><span class="wheel-footer-label">Service plans by installation</span><a href="https://wa.me/2349048518418?text=Hello%20DMFE%2C%20I%20am%20interested%20in%20battery%20maintenance." target="_blank" rel="noopener noreferrer" class="btn-wheel-action"><span>Discuss a plan</span> →</a></div></div></div>
+
+          </div>
+        </div>
+
+        <!-- 3D Wheel Controls -->
+        <div class="wheel-nav-controls">
+          <button class="wheel-nav-btn wheel-btn-prev" id="btnWheelPrev" aria-label="Previous Service">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="15 18 9 12 15 6"></polyline></svg>
+          </button>
+          
+          <div class="wheel-pagination-dots" id="wheelDots">
+            <button type="button" class="wheel-dot active" data-index="0" aria-label="Show Power Bank Production" aria-current="true"></button>
+            <button type="button" class="wheel-dot" data-index="1" aria-label="Show Solar EPC Installation" aria-current="false"></button>
+            <button type="button" class="wheel-dot" data-index="2" aria-label="Show Electrical Load Audit and Design" aria-current="false"></button>
+            <button type="button" class="wheel-dot" data-index="3" aria-label="Show Electrical Installation" aria-current="false"></button>
+            <button type="button" class="wheel-dot" data-index="4" aria-label="Show Engineering Consultancy" aria-current="false"></button>
+            <button type="button" class="wheel-dot" data-index="5" aria-label="Show Lithium-Ion Battery Assembly" aria-current="false"></button>
+            <button type="button" class="wheel-dot" data-index="6" aria-label="Show Battery Troubleshooting" aria-current="false"></button>
+            <button type="button" class="wheel-dot" data-index="7" aria-label="Show Battery Repurposing" aria-current="false"></button>
+            <button type="button" class="wheel-dot" data-index="8" aria-label="Show Battery Maintenance" aria-current="false"></button>
+          </div>
+
+          <button class="wheel-nav-btn wheel-btn-next" id="btnWheelNext" aria-label="Next Service">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"></polyline></svg>
+          </button>
+        </div>
+
+        <div class="wheel-drag-hint">
+          <span class="drag-icon">⇄</span>
+          <span>Drag horizontally or click cards to rotate the 3D wheel</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ====================================================================
+       SERVICE COVERAGE & CONTINUOUS POWER SLA SECTION
+       ==================================================================== -->
+  <section class="section-guarantee" id="guarantee">
+    <!-- 4K High-Resolution Background & Circuit Flow Layers -->
+    <div class="guarantee-bg-visual" style="background-image: url('assets/panel_sunlight.jpg');"></div>
+    <div class="guarantee-circuit-grid"></div>
+    <div class="guarantee-laser-sweep"></div>
+    <div class="guarantee-vignette"></div>
+
+    <div class="section-container">
+      <div class="section-header">
+        <div class="section-tag-badge">
+          <span class="badge-dot"></span>
+          <span>UNCOMPROMISING POWER SLA</span>
+        </div>
+        <h2 class="section-title">Service Coverage &amp; Continuous Power SLA</h2>
+        <p class="section-subtitle">
+          DMFE offers service coverage for eligible systems. Included components, response targets, exclusions and performance commitments are defined in the written agreement for each project.
+        </p>
+      </div>
+
+      <!-- SLA Performance Metrics Bar -->
+      <div class="sla-metrics-strip">
+        <div class="sla-metric-item">
+          <div class="sla-metric-val text-emerald">Project-defined</div>
+          <div class="sla-metric-label">Service agreement terms</div>
+        </div>
+        <div class="sla-metric-item">
+          <div class="sla-metric-val text-cyan">Site-assessed</div>
+          <div class="sla-metric-label">System sizing</div>
+        </div>
+        <div class="sla-metric-item">
+          <div class="sla-metric-val text-gold">Written scope</div>
+          <div class="sla-metric-label">Coverage and response terms</div>
+        </div>
+        <div class="sla-metric-item">
+          <div class="sla-metric-val text-emerald">Lifecycle support</div>
+          <div class="sla-metric-label">Battery service and maintenance</div>
+        </div>
+      </div>
+
+      <!-- 4 Core Guarantee Pillars -->
+      <div class="guarantee-pillars-grid">
+        <div class="pillar-card">
+          <div class="pillar-icon-box icon-box-emerald">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+              <path d="M9 12l2 2 4-4"/>
+            </svg>
+          </div>
+          <h3>Component Coverage Defined in Writing</h3>
+          <p>
+            Component coverage depends on the equipment and written service agreement. DMFE explains included items, exclusions, warranty terms and the service process before installation.
+          </p>
+          <ul class="pillar-checklist">
+            <li>✓ Coverage recorded in the agreement</li>
+            <li>✓ Service scope explained in advance</li>
+            <li>✓ Manufacturer warranties vary by product</li>
+          </ul>
+        </div>
+
+        <div class="pillar-card">
+          <div class="pillar-icon-box icon-box-cyan">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/>
+            </svg>
+          </div>
+          <h3>Continuity Through System Design</h3>
+          <p>
+            Solar and battery systems can be designed around priority loads and backup needs. Available power and backup duration depend on system sizing, weather, usage and battery state.
+          </p>
+          <ul class="pillar-checklist">
+            <li>✓ Critical loads considered during design</li>
+            <li>✓ Backup expectations discussed up front</li>
+            <li>✓ Monitoring depends on selected equipment</li>
+          </ul>
+        </div>
+
+        <div class="pillar-card">
+          <div class="pillar-icon-box icon-box-gold">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="12" cy="12" r="5"/>
+              <line x1="12" y1="1" x2="12" y2="3"/>
+              <line x1="12" y1="21" x2="12" y2="23"/>
+              <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/>
+              <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/>
+              <line x1="1" y1="12" x2="3" y2="12"/>
+              <line x1="21" y1="12" x2="23" y2="12"/>
+              <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/>
+              <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
+            </svg>
+          </div>
+          <h3>Product Warranties and Service Life Vary</h3>
+          <p>
+            Module performance and warranty terms vary by product and installation conditions. DMFE can help select equipment for the project and provide the relevant product documentation.
+          </p>
+          <ul class="pillar-checklist">
+            <li>✓ Product-specific performance terms</li>
+            <li>✓ Equipment selected for site conditions</li>
+            <li>✓ Maintenance guidance for the system</li>
+          </ul>
+        </div>
+
+        <div class="pillar-card">
+          <div class="pillar-icon-box icon-box-orange">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <line x1="12" y1="1" x2="12" y2="23"/>
+              <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/>
+            </svg>
+          </div>
+          <h3>Energy Cost Estimates with Clear Assumptions</h3>
+          <p>
+            A site assessment can compare current energy costs with a proposed system. Actual savings depend on your usage, tariffs, site conditions, system costs and the final service agreement.
+          </p>
+          <ul class="pillar-checklist">
+            <li>✓ Load audit informs system sizing</li>
+            <li>✓ Estimates state their assumptions</li>
+            <li>✓ Final terms confirmed before purchase</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ====================================================================
+       FREQUENTLY ASKED QUESTIONS (FAQ) SECTION
+       ==================================================================== -->
+  <section class="section-faq" id="faq">
+    <!-- 4K Atmospheric Background & Diffused UV Particle Stream -->
+    <div class="faq-bg-visual" style="background-image: url('assets/farm_sunset_4k.jpg');"></div>
+    <div class="faq-light-wave"></div>
+    <div class="faq-vignette"></div>
+
+    <div class="section-container">
+      <div class="section-header">
+        <div class="section-tag-badge">
+          <span class="badge-dot"></span>
+          <span>CLEAR ANSWERS</span>
+        </div>
+        <h2 class="section-title">Frequently Asked Questions</h2>
+        <p class="section-subtitle">
+          Everything you need to know about DMFE solar installations, battery systems, rainy season performance, and our service agreements.
+        </p>
+      </div>
+
+      <div class="faq-accordion-container">
+        <!-- FAQ 1 -->
+        <div class="faq-item active">
+          <button class="faq-trigger" aria-expanded="true">
+            <span class="faq-question">How does the DMFE service and support agreement work?</span>
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-content">
+            <p>
+              Service coverage applies to eligible systems and is defined by a written agreement. The agreement outlines covered equipment, service commitments, exclusions and customer responsibilities. Ask DMFE to review the terms for your site before proceeding.
+            </p>
+          </div>
+        </div>
+
+        <!-- FAQ 2 -->
+        <div class="faq-item">
+          <button class="faq-trigger" aria-expanded="false">
+            <span class="faq-question">What happens during the rainy season or on heavily overcast days in Nigeria?</span>
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-content">
+            <p>
+              Solar generation changes with weather, shading, installation and equipment. System design can account for seasonal conditions and battery storage, but available power and backup duration depend on the final system size and energy use.
+            </p>
+          </div>
+        </div>
+
+        <!-- FAQ 3 -->
+        <div class="faq-item">
+          <button class="faq-trigger" aria-expanded="false">
+            <span class="faq-question">What battery chemistry does DMFE use, and what is the expected lifespan?</span>
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-content">
+            <p>
+              Battery chemistry, cycle rating and expected service life vary by product, operating conditions and maintenance. DMFE can discuss LiFePO4 options and share the relevant product specifications for your project.
+            </p>
+          </div>
+        </div>
+
+        <!-- FAQ 4 -->
+        <div class="faq-item">
+          <button class="faq-trigger" aria-expanded="false">
+            <span class="faq-question">How does the system protect against grid surges, lightning, and voltage spikes?</span>
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-content">
+            <p>
+              Every installation incorporates multi-stage industrial protection: Type II SPD surge arrestors, copper earth rod grounding (&lt;5Ω resistance), rapid-acting DC/AC breakers, and optical galvanic isolation in the DMFE Smart Controller. Protection measures are selected for the site and equipment. No surge-protection design can guarantee that damage will never occur; the project design and equipment specifications define the intended protection.
+            </p>
+          </div>
+        </div>
+
+        <!-- FAQ 5 -->
+        <div class="faq-item">
+          <button class="faq-trigger" aria-expanded="false">
+            <span class="faq-question">Can I upgrade or expand the capacity of my system later?</span>
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-content">
+            <p>
+              Some systems can be expanded, subject to inverter capacity, battery compatibility, available space and electrical design. DMFE can assess the existing installation before recommending an upgrade.
+            </p>
+          </div>
+        </div>
+
+        <!-- FAQ 6 -->
+        <div class="faq-item">
+          <button class="faq-trigger" aria-expanded="false">
+            <span class="faq-question">How quickly can DMFE complete the installation after consultation?</span>
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-content">
+            <p>
+              After a site assessment and approved proposal, DMFE agrees an installation schedule based on project scope, equipment availability, site readiness and commissioning requirements.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- FAQ CTA Strip -->
+      <div class="faq-cta-box">
+        <div class="faq-cta-text">
+          <h3>Have a specific question about your building or energy load?</h3>
+          <p>Speak directly with Founder Miracle Akujobi and our chief technical engineers today.</p>
+        </div>
+        <a href="https://wa.me/2349048518418?text=Hello%20Miracle%20Akujobi%2C%20I%20have%20a%20question%20regarding%20the%20DMFE%20Solar%20System." target="_blank" rel="noopener noreferrer" class="btn-faq-whatsapp">
+          <svg viewBox="0 0 24 24" fill="currentColor" class="sub-btn-icon"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91C2.13 13.66 2.59 15.36 3.45 16.86L2.05 22L7.3 20.62C8.75 21.41 10.38 21.83 12.04 21.83C17.5 21.83 21.95 17.38 21.95 11.92C21.95 6.46 17.5 2 12.04 2ZM12.04 20.15C10.56 20.15 9.11 19.76 7.85 19.01L7.55 18.83L4.43 19.65L5.26 16.61L5.06 16.29C4.24 14.99 3.81 13.47 3.81 11.91C3.81 7.37 7.5 3.68 12.04 3.68C14.24 3.68 16.31 4.54 17.87 6.1C19.42 7.66 20.28 9.72 20.27 11.92C20.28 16.46 16.58 20.15 12.04 20.15Z"/></svg>
+          <span>Ask on WhatsApp</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ====================================================================
+       FOOTER & NIGERIA DISPATCH RADAR MAP SECTION
+       ==================================================================== -->
+  <footer class="site-footer" id="contact">
+    <div class="footer-inner-container">
+      
+      <!-- ====================================================================
+           CONTACT SECTION ANIMATION — 4K VIDEO HERO, FLOATING NAV & MARQUEE SCROLLER
+           Exact Specification from Reference
+           ==================================================================== -->
+      <section class="contact-epoch-showcase">
+        <div class="epoch-hero-container">
+          <!-- Background Video Layer -->
+          <div class="epoch-video-bg">
+            <video 
+              src="https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260505_101331_74f9b798-3f00-4e86-8a01-377aa16ffeaa.mp4" 
+              autoplay 
+              loop 
+              muted 
+              playsinline 
+              class="epoch-video-elem">
+            </video>
+          </div>
+
+          <!-- Hero Text Content -->
+          <div class="epoch-content-wrapper">
+            <h2 class="epoch-headline">Energy systems, built<br>for the long term</h2>
+            <p class="epoch-subheadline">
+              DMFE supports the full energy system lifecycle across Nigeria: planning, solar installation, lithium-ion battery assembly, troubleshooting, repurposing and maintenance.
+            </p>
+            <div class="epoch-actions-wrapper">
+              <div class="epoch-actions-primary">
+                <a href="#quote-modal" onclick="event.preventDefault(); window.solarHero.openModal();" class="epoch-contact-btn">
+                  <span>Schedule Energy Consultation</span>
+                </a>
+              </div>
+              <div class="epoch-3d-buttons-row">
+                <a href="https://wa.me/2349048518418?text=Hello%20Miracle%20Akujobi%2C%20I%20am%20reaching%20out%20from%20the%20DMFE%20contact%20section." target="_blank" rel="noopener noreferrer" class="btn-3d-app btn-3d-wa" title="WhatsApp: Miracle Akujobi" aria-label="WhatsApp">
+                  <svg viewBox="0 0 24 24" fill="currentColor" class="btn-3d-icon"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91C2.13 13.66 2.59 15.36 3.45 16.86L2.05 22L7.3 20.62C8.75 21.41 10.38 21.83 12.04 21.83C17.5 21.83 21.95 17.38 21.95 11.92C21.95 6.46 17.5 2 12.04 2ZM12.04 20.15C10.56 20.15 9.11 19.76 7.85 19.01L7.55 18.83L4.43 19.65L5.26 16.61L5.06 16.29C4.24 14.99 3.81 13.47 3.81 11.91C3.81 7.37 7.5 3.68 12.04 3.68C14.24 3.68 16.31 4.54 17.87 6.1C19.42 7.66 20.28 9.72 20.27 11.92C20.28 16.46 16.58 20.15 12.04 20.15Z"/></svg>
+                </a>
+                <a href="mailto:dmrickfusionenergy@gmail.com" class="btn-3d-app btn-3d-gmail" title="Email: Miracle Akujobi" aria-label="Gmail">
+                  <svg viewBox="0 0 24 24" fill="currentColor" class="btn-3d-icon"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
+                </a>
+                <a href="https://www.instagram.com/dmf_energy?psln=MWlxYTdwdjkybzBoZg%3D%3D&utm_source=qr" target="_blank" rel="noopener noreferrer" class="btn-3d-app btn-3d-ig" title="Instagram: @dmf_energy" aria-label="Instagram">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="btn-3d-icon"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
+                </a>
+                <a href="https://www.facebook.com/share/1F4jLKihN8/?mibextid=wwXIfr" target="_blank" rel="noopener noreferrer" class="btn-3d-app btn-3d-fb" title="Facebook: DMF Energy" aria-label="Facebook">
+                  <svg viewBox="0 0 24 24" fill="currentColor" class="btn-3d-icon"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+                </a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Floating Bottom Navbar -->
+          <nav class="epoch-floating-navbar" aria-label="Quick navigation">
+            <div class="epoch-nav-logo" title="DMFE Clean Energy">⚡</div>
+            <a href="#services" class="epoch-nav-text-btn">Services</a>
+            <a href="about.html" class="epoch-nav-text-btn">About Us</a>
+            <a href="#quote-modal" onclick="event.preventDefault(); window.solarHero.openModal();" class="epoch-nav-touch-btn">
+              <span>Free Audit</span>
+              <svg class="epoch-nav-touch-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"></polyline></svg>
+            </a>
+          </nav>
+        </div>
+
+        <!-- Seamless Marquee Logo Scroller Component -->
+        <div class="epoch-marquee-container">
+          <div class="epoch-marquee-track">
+            <!-- First Infinite Marquee Loop Set (Facebook, Instagram, WhatsApp, Google) -->
+            <a href="https://www.facebook.com/share/1F4jLKihN8/?mibextid=wwXIfr" target="_blank" rel="noopener noreferrer" class="epoch-logo-card" title="Facebook: DMF Energy" aria-label="Facebook">
+              <div class="epoch-card-gradient" style="background: linear-gradient(135deg, #1877F2, #0D5EC4);"></div>
+              <img src="assets/facebook.svg" alt="Facebook" class="epoch-card-img">
+            </a>
+            <a href="https://www.instagram.com/dmf_energy?psln=MWlxYTdwdjkybzBoZg%3D%3D&utm_source=qr" target="_blank" rel="noopener noreferrer" class="epoch-logo-card" title="Instagram: @dmf_energy" aria-label="Instagram">
+              <div class="epoch-card-gradient" style="background: linear-gradient(135deg, #833AB4, #FD1D1D, #F77737);"></div>
+              <img src="assets/instagram.svg" alt="Instagram" class="epoch-card-img">
+            </a>
+            <a href="https://wa.me/2349048518418?text=Hello%20Miracle%20Akujobi%2C%20I%20am%20reaching%20out%20from%20the%20DMFE%20contact%20section." target="_blank" rel="noopener noreferrer" class="epoch-logo-card" title="WhatsApp: 0904 851 8418" aria-label="WhatsApp">
+              <div class="epoch-card-gradient" style="background: linear-gradient(135deg, #25D366, #128C7E);"></div>
+              <img src="assets/whatsapp.svg" alt="WhatsApp" class="epoch-card-img">
+            </a>
+            <a href="mailto:dmrickfusionenergy@gmail.com" class="epoch-logo-card" title="Google Email: dmrickfusionenergy@gmail.com" aria-label="Google">
+              <div class="epoch-card-gradient" style="background: linear-gradient(135deg, #EA4335, #FBBC05, #34A853, #4285F4);"></div>
+              <img src="assets/google.svg" alt="Google" class="epoch-card-img">
+            </a>
+
+            <a href="https://www.facebook.com/share/1F4jLKihN8/?mibextid=wwXIfr" target="_blank" rel="noopener noreferrer" class="epoch-logo-card" title="Facebook: DMF Energy" aria-label="Facebook">
+              <div class="epoch-card-gradient" style="background: linear-gradient(135deg, #1877F2, #0D5EC4);"></div>
+              <img src="assets/facebook.svg" alt="Facebook" class="epoch-card-img">
+            </a>
+            <a href="https://www.instagram.com/dmf_energy?psln=MWlxYTdwdjkybzBoZg%3D%3D&utm_source=qr" target="_blank" rel="noopener noreferrer" class="epoch-logo-card" title="Instagram: @dmf_energy" aria-label="Instagram">
+              <div class="epoch-card-gradient" style="background: linear-gradient(135deg, #833AB4, #FD1D1D, #F77737);"></div>
+              <img src="assets/instagram.svg" alt="Instagram" class="epoch-card-img">
+            </a>
+            <a href="https://wa.me/2349048518418?text=Hello%20Miracle%20Akujobi%2C%20I%20am%20reaching%20out%20from%20the%20DMFE%20contact%20section." target="_blank" rel="noopener noreferrer" class="epoch-logo-card" title="WhatsApp: 0904 851 8418" aria-label="WhatsApp">
+              <div class="epoch-card-gradient" style="background: linear-gradient(135deg, #25D366, #128C7E);"></div>
+              <img src="assets/whatsapp.svg" alt="WhatsApp" class="epoch-card-img">
+            </a>
+            <a href="mailto:dmrickfusionenergy@gmail.com" class="epoch-logo-card" title="Google Email: dmrickfusionenergy@gmail.com" aria-label="Google">
+              <div class="epoch-card-gradient" style="background: linear-gradient(135deg, #EA4335, #FBBC05, #34A853, #4285F4);"></div>
+              <img src="assets/google.svg" alt="Google" class="epoch-card-img">
+            </a>
+
+            <!-- Second Identical Infinite Marquee Loop Set -->
+            <a href="https://www.facebook.com/share/1F4jLKihN8/?mibextid=wwXIfr" target="_blank" rel="noopener noreferrer" class="epoch-logo-card" title="Facebook: DMF Energy" aria-label="Facebook">
+              <div class="epoch-card-gradient" style="background: linear-gradient(135deg, #1877F2, #0D5EC4);"></div>
+              <img src="assets/facebook.svg" alt="Facebook" class="epoch-card-img">
+            </a>
+            <a href="https://www.instagram.com/dmf_energy?psln=MWlxYTdwdjkybzBoZg%3D%3D&utm_source=qr" target="_blank" rel="noopener noreferrer" class="epoch-logo-card" title="Instagram: @dmf_energy" aria-label="Instagram">
+              <div class="epoch-card-gradient" style="background: linear-gradient(135deg, #833AB4, #FD1D1D, #F77737);"></div>
+              <img src="assets/instagram.svg" alt="Instagram" class="epoch-card-img">
+            </a>
+            <a href="https://wa.me/2349048518418?text=Hello%20Miracle%20Akujobi%2C%20I%20am%20reaching%20out%20from%20the%20DMFE%20contact%20section." target="_blank" rel="noopener noreferrer" class="epoch-logo-card" title="WhatsApp: 0904 851 8418" aria-label="WhatsApp">
+              <div class="epoch-card-gradient" style="background: linear-gradient(135deg, #25D366, #128C7E);"></div>
+              <img src="assets/whatsapp.svg" alt="WhatsApp" class="epoch-card-img">
+            </a>
+            <a href="mailto:dmrickfusionenergy@gmail.com" class="epoch-logo-card" title="Google Email: dmrickfusionenergy@gmail.com" aria-label="Google">
+              <div class="epoch-card-gradient" style="background: linear-gradient(135deg, #EA4335, #FBBC05, #34A853, #4285F4);"></div>
+              <img src="assets/google.svg" alt="Google" class="epoch-card-img">
+            </a>
+
+            <a href="https://www.facebook.com/share/1F4jLKihN8/?mibextid=wwXIfr" target="_blank" rel="noopener noreferrer" class="epoch-logo-card" title="Facebook: DMF Energy" aria-label="Facebook">
+              <div class="epoch-card-gradient" style="background: linear-gradient(135deg, #1877F2, #0D5EC4);"></div>
+              <img src="assets/facebook.svg" alt="Facebook" class="epoch-card-img">
+            </a>
+            <a href="https://www.instagram.com/dmf_energy?psln=MWlxYTdwdjkybzBoZg%3D%3D&utm_source=qr" target="_blank" rel="noopener noreferrer" class="epoch-logo-card" title="Instagram: @dmf_energy" aria-label="Instagram">
+              <div class="epoch-card-gradient" style="background: linear-gradient(135deg, #833AB4, #FD1D1D, #F77737);"></div>
+              <img src="assets/instagram.svg" alt="Instagram" class="epoch-card-img">
+            </a>
+            <a href="https://wa.me/2349048518418?text=Hello%20Miracle%20Akujobi%2C%20I%20am%20reaching%20out%20from%20the%20DMFE%20contact%20section." target="_blank" rel="noopener noreferrer" class="epoch-logo-card" title="WhatsApp: 0904 851 8418" aria-label="WhatsApp">
+              <div class="epoch-card-gradient" style="background: linear-gradient(135deg, #25D366, #128C7E);"></div>
+              <img src="assets/whatsapp.svg" alt="WhatsApp" class="epoch-card-img">
+            </a>
+            <a href="mailto:dmrickfusionenergy@gmail.com" class="epoch-logo-card" title="Google Email: dmrickfusionenergy@gmail.com" aria-label="Google">
+              <div class="epoch-card-gradient" style="background: linear-gradient(135deg, #EA4335, #FBBC05, #34A853, #4285F4);"></div>
+              <img src="assets/google.svg" alt="Google" class="epoch-card-img">
+            </a>
+          </div>
+        </div>
+      </section>
+      
+      <div class="footer-top-grid">
+        <div class="footer-brand-col">
+          <img src="assets/dmfe_logo.svg" alt="DMFE Solar" class="footer-brand-logo">
+          <p class="footer-slogan">Where there is no limitation to possibilities.</p>
+          <p class="footer-bio">
+            D-Mrick Fusion Energy (DMFE) provides solar, electrical and lithium-ion battery services across Nigeria—from system design and installation to diagnostics, repurposing and maintenance.
+          </p>
+        </div>
+
+        <div class="footer-links-col">
+          <h4>Navigation</h4>
+          <a href="index.html">Home</a>
+          <a href="#services">Our Services (3D Wheel)</a>
+          <a href="#guarantee">SLA</a>
+          <a href="#faq">FAQ</a>
+          <a href="about.html">About DMFE</a>
+          <a href="#quote-modal" onclick="event.preventDefault(); window.solarHero.openModal();">Instant Calculator</a>
+        </div>
+
+        <div class="footer-contact-col">
+          <h4>Direct Contact</h4>
+          <div class="footer-contact-entry">
+            <strong>Miracle Akujobi</strong>
+            <span>FOUNDER · DMFE</span>
+          </div>
+          <a href="tel:09048518418" class="footer-link-item">
+            <svg viewBox="0 0 24 24" fill="currentColor" class="footer-icon"><path d="M6.62 10.79a15.053 15.053 0 006.59 6.59l2.2-2.2a1 1 0 011.01-.24c1.12.37 2.33.57 3.58.57a1 1 0 011 1V20a1 1 0 01-1 1A17 17 0 013 4a1 1 0 011-1h3.5a1 1 0 011 1c0 1.25.2 2.46.57 3.58a1 1 0 01-.24 1.01l-2.21 2.2z"/></svg>
+            <span>0904 851 8418</span>
+          </a>
+          <a href="mailto:dmrickfusionenergy@gmail.com" class="footer-link-item">
+            <svg viewBox="0 0 24 24" fill="currentColor" class="footer-icon"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
+            <span>dmrickfusionenergy@gmail.com</span>
+          </a>
+          <a href="https://wa.me/2349048518418?text=Hello%20Miracle%20Akujobi%2C%20I%20would%20like%20to%20request%20a%20site%20inspection." target="_blank" rel="noopener noreferrer" class="footer-link-item text-emerald">
+            <svg viewBox="0 0 24 24" fill="currentColor" class="footer-icon"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91C2.13 13.66 2.59 15.36 3.45 16.86L2.05 22L7.3 20.62C8.75 21.41 10.38 21.83 12.04 21.83C17.5 21.83 21.95 17.38 21.95 11.92C21.95 6.46 17.5 2 12.04 2ZM12.04 20.15C10.56 20.15 9.11 19.76 7.85 19.01L7.55 18.83L4.43 19.65L5.26 16.61L5.06 16.29C4.24 14.99 3.81 13.47 3.81 11.91C3.81 7.37 7.5 3.68 12.04 3.68C14.24 3.68 16.31 4.54 17.87 6.1C19.42 7.66 20.28 9.72 20.27 11.92C20.28 16.46 16.58 20.15 12.04 20.15Z"/></svg>
+            <span>Direct WhatsApp Support</span>
+          </a>
+          <div class="footer-social-row" style="margin-top: 0.95rem; display: flex; gap: 0.55rem; align-items: center; flex-wrap: wrap;">
+            <a href="https://wa.me/2349048518418?text=Hello%20Miracle%20Akujobi%2C%20I%20am%20reaching%20out%20from%20the%20DMFE%20website." target="_blank" rel="noopener noreferrer" class="btn-3d-app btn-3d-wa" title="WhatsApp: Miracle Akujobi" aria-label="WhatsApp">
+              <svg viewBox="0 0 24 24" fill="currentColor" class="btn-3d-icon"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91C2.13 13.66 2.59 15.36 3.45 16.86L2.05 22L7.3 20.62C8.75 21.41 10.38 21.83 12.04 21.83C17.5 21.83 21.95 17.38 21.95 11.92C21.95 6.46 17.5 2 12.04 2ZM12.04 20.15C10.56 20.15 9.11 19.76 7.85 19.01L7.55 18.83L4.43 19.65L5.26 16.61L5.06 16.29C4.24 14.99 3.81 13.47 3.81 11.91C3.81 7.37 7.5 3.68 12.04 3.68C14.24 3.68 16.31 4.54 17.87 6.1C19.42 7.66 20.28 9.72 20.27 11.92C20.28 16.46 16.58 20.15 12.04 20.15Z"/></svg>
+            </a>
+            <a href="mailto:dmrickfusionenergy@gmail.com" class="btn-3d-app btn-3d-gmail" title="Email: Miracle Akujobi" aria-label="Gmail">
+              <svg viewBox="0 0 24 24" fill="currentColor" class="btn-3d-icon"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
+            </a>
+            <a href="https://www.instagram.com/dmf_energy?psln=MWlxYTdwdjkybzBoZg%3D%3D&utm_source=qr" target="_blank" rel="noopener noreferrer" class="btn-3d-app btn-3d-ig" title="Instagram: @dmf_energy" aria-label="Instagram">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="btn-3d-icon"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
+            </a>
+            <a href="https://www.facebook.com/share/1F4jLKihN8/?mibextid=wwXIfr" target="_blank" rel="noopener noreferrer" class="btn-3d-app btn-3d-fb" title="Facebook: DMF Energy" aria-label="Facebook">
+              <svg viewBox="0 0 24 24" fill="currentColor" class="btn-3d-icon"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <div class="footer-bottom-bar">
+        <p>&copy; 2026 D-MRICK FUSION ENERGY (DMFE). All rights reserved. Engineered Solar, Electrical &amp; Battery Systems.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Interactive Instant Quote Modal -->
+  <div class="modal-backdrop" id="quote-modal" role="dialog" aria-modal="true" aria-labelledby="modal-heading">
+    <div class="modal-card">
+      <button class="modal-close-btn" id="btn-close-quote" aria-label="Close modal">&times;</button>
+      
+      <div class="modal-header">
+        <div class="modal-icon-badge">
+          <svg viewBox="0 0 24 24" fill="currentColor">
+            <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z" />
+          </svg>
+        </div>
+        <h2 id="modal-heading">Estimate Your Energy Costs</h2>
+        <p>Use this planning estimate to discuss your energy needs with <strong>D-Mrick Fusion Energy (DMFE)</strong>. It is not a quote or savings guarantee; final costs depend on a site assessment and written proposal.</p>
+      </div>
+
+      <div class="modal-calculator-body">
+        <div class="calc-group">
+          <label for="monthly-bill-input">Current Monthly Power & Fuel Bill: <strong id="bill-display">₦280,000 / mo</strong></label>
+          <input type="range" id="monthly-bill-input" min="50000" max="800000" value="280000" step="10000">
+          <div class="range-labels">
+            <span>₦50,000/mo</span>
+            <span>₦400,000/mo</span>
+            <span>₦800,000/mo</span>
+          </div>
+        </div>
+
+        <div class="calc-group">
+          <label>Property / Roof Size:</label>
+          <div class="roof-options-grid">
+            <button class="option-pill active" data-multiplier="1.0">Residential (3-4 Bed)</button>
+            <button class="option-pill" data-multiplier="1.3">Executive (5+ Bed / Pool)</button>
+            <button class="option-pill" data-multiplier="0.8">Compact (1-2 Bed)</button>
+          </div>
+        </div>
+
+        <div class="guarantee-summary-card">
+          <div class="summary-row">
+            <span>Projected Cumulative Spend at Current Usage:</span>
+            <span class="slashed-price" id="calc-bill-slashed"><s>₦23,520,000</s></span>
+          </div>
+          <div class="summary-row">
+            <span>Potential Monthly Grid Spend:</span>
+            <strong class="text-free">Depends on system</strong>
+          </div>
+          <div class="summary-row">
+            <span>Potential Grid Spend Offset:</span>
+            <strong class="text-savings" id="calc-savings-total">Potential offset: ₦23,520,000</strong>
+          </div>
+          <div class="summary-row">
+            <span>Service scope:</span>
+            <span class="badge-included">Confirm in proposal</span>
+          </div>
+        </div>
+
+        <div class="modal-claim-action-box">
+          <a id="btn-claim-whatsapp" href="https://wa.me/2349048518418?text=Hello%20DMFE%2C%20I%20used%20the%20planning%20estimate%20and%20would%20like%20to%20discuss%20a%20system%20for%20my%20site." target="_blank" rel="noopener noreferrer" class="btn-claim-whatsapp-direct">
+            <svg viewBox="0 0 24 24" fill="currentColor" class="btn-wa-icon-large">
+              <path d="M12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21 5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.816 9.816 0 0 0 12.04 2zm0 17.8c-1.5 0-2.97-.4-4.26-1.16l-.31-.18-3.15.83.84-3.07-.2-.32a8.04 8.04 0 0 1-1.23-4.29c0-4.46 3.63-8.09 8.09-8.09 2.16 0 4.19.84 5.72 2.37 1.53 1.53 2.37 3.56 2.37 5.72 0 4.46-3.63 8.09-8.09 8.09z"/>
+            </svg>
+            <span>Get a Quote Now</span>
+          </a>
+          <p class="modal-instant-dispatch-note">⚡ Directly opens WhatsApp chat with Founder Miracle Akujobi (0904 851 8418)</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
