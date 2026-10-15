@@ -3,8 +3,16 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Emmanuel Oyewole &mdash; Systems Architect &amp; Aerospace Portfolio</title>
-  <link rel="icon" type="image/png" href="https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260827_202005_3346cc4d-ec3b-44ab-825c-b18e49f5021a.png">
+  <title>Planetary Gateway | Emmanuel Oyewole</title>
+  <link rel="icon" type="image/svg+xml" href="./assets/favicon.svg">
+  <meta name="description" content="Planetary Gateway: Interactive 3D planetary switching between Project SERAPH, CHERUB, and ELYRA by Emmanuel Oyewole.">
+  <meta property="og:title" content="Planetary Gateway | Emmanuel Oyewole">
+  <meta property="og:description" content="Interactive 3D planetary switching between Project SERAPH, CHERUB, and ELYRA by Emmanuel Oyewole.">
+  <meta property="og:image" content="./assets/og-image.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Planetary Gateway | Emmanuel Oyewole">
+  <meta name="twitter:description" content="Interactive 3D planetary switching between Project SERAPH, CHERUB, and ELYRA by Emmanuel Oyewole.">
+  <meta name="twitter:image" content="./assets/og-image.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600;700&family=Poppins:wght@500;600;700&family=Prata&display=swap" rel="stylesheet">
@@ -43,7 +51,7 @@
     /* BACKDROP */
     .stage{position:fixed; inset:0; overflow:hidden; isolation:isolate}
     .sky{position:absolute; inset:0; z-index:0;
-      background-image:url("https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260827_202133_508c64b8-a31e-4290-bdfc-1187df70e0a6.png");
+      background-image:url("./assets/media/hf_20260827_202133_508c64b8-a31e-4290-bdfc-1187df70e0a6.webp");
       background-size:cover; background-position:center; background-repeat:no-repeat}
     .sky video{position:absolute; inset:0; width:100%; height:100%; object-fit:cover;
       display:block; opacity:0; transition:opacity .22s linear}
@@ -356,9 +364,9 @@
 <body>
   <div class="stage">
     <div class="sky">
-      <video class="is-active" data-project="seraph" data-planet="earth" autoplay muted loop playsinline preload="auto" src="https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260827_202422_3ffb4889-c520-432d-8458-038009eb40df.mp4" poster="https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260827_202133_508c64b8-a31e-4290-bdfc-1187df70e0a6.png" aria-hidden="true"></video>
-      <video data-project="cherub" data-planet="venus" muted loop playsinline preload="none" data-src="https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260827_202422_b211cd74-013b-4dd3-bfd0-64491d8696fa.mp4" poster="https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260827_202133_cf55d1d8-7b59-4a64-80da-d72052ae974e.png" aria-hidden="true"></video>
-      <video data-project="elyra" data-planet="mars" muted loop playsinline preload="none" data-src="https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260827_202422_51eae59a-2459-4c84-907c-cc5edfe5fea7.mp4" poster="https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260827_202133_0ba6de7c-285d-43dc-b7ab-8c54c73707cb.png" aria-hidden="true"></video>
+      <video class="is-active" data-project="seraph" data-planet="earth" autoplay muted loop playsinline preload="auto" src="./assets/media/hf_20260827_202422_3ffb4889-c520-432d-8458-038009eb40df.mp4" poster="./assets/media/hf_20260827_202133_508c64b8-a31e-4290-bdfc-1187df70e0a6.webp" aria-hidden="true"></video>
+      <video data-project="cherub" data-planet="venus" muted loop playsinline preload="none" data-src="./assets/media/hf_20260827_202422_b211cd74-013b-4dd3-bfd0-64491d8696fa.mp4" poster="./assets/media/hf_20260827_202133_cf55d1d8-7b59-4a64-80da-d72052ae974e.webp" aria-hidden="true"></video>
+      <video data-project="elyra" data-planet="mars" muted loop playsinline preload="none" data-src="./assets/media/hf_20260827_202422_51eae59a-2459-4c84-907c-cc5edfe5fea7.mp4" poster="./assets/media/hf_20260827_202133_0ba6de7c-285d-43dc-b7ab-8c54c73707cb.webp" aria-hidden="true"></video>
     </div>
     <div class="ui">
       <header class="navbar">
@@ -367,7 +375,8 @@
           <nav class="links" id="site-nav">
             <a href="project-seraph.html" aria-current="page">SERAPH C2</a>
             <a href="main.html">ELYRA AI</a>
-            <a href="main.html#architecture">Architecture</a>
+            <a href="./assets/Emmanuel_Oyewole_Resume.pdf" download="Emmanuel_Oyewole_Resume.pdf" target="_blank" rel="noopener noreferrer">Resume</a>
+        <a href="main.html#architecture">Architecture</a>
             <a href="https://github.com/freshstart2066-create" target="_blank" rel="noopener noreferrer">GitHub</a>
             <a class="enroll" href="index.html">Overview</a>
           </nav>
@@ -384,14 +393,14 @@
         <p class="col lede">Autonomous aerospace command &amp; control (C2), real-time SGP4 orbital propagation, <br>conjunction matrix tracking, and multi-satellite constellation telemetry streaming.</p>
         <div class="col cta">
           <button class="planet planet-l" type="button" data-slot="l">
-            <img data-project="seraph" data-planet="earth" alt="" src="https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260827_202005_3346cc4d-ec3b-44ab-825c-b18e49f5021a.png">
-            <img data-project="cherub" data-planet="venus" alt="" src="https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260827_202012_640b239a-d08a-4200-adb2-741bbe129ac8.png">
-            <img data-project="elyra" data-planet="mars" alt="" src="https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260827_202018_3d559490-f613-4ed7-a3bb-3b7e9fc90fb8.png">
+            <img data-project="seraph" data-planet="earth" alt="" src="./assets/media/hf_20260827_202005_3346cc4d-ec3b-44ab-825c-b18e49f5021a.webp">
+            <img data-project="cherub" data-planet="venus" alt="" src="./assets/media/hf_20260827_202012_640b239a-d08a-4200-adb2-741bbe129ac8.webp">
+            <img data-project="elyra" data-planet="mars" alt="" src="./assets/media/hf_20260827_202018_3d559490-f613-4ed7-a3bb-3b7e9fc90fb8.webp">
           </button>
           <button class="planet planet-r" type="button" data-slot="r">
-            <img data-project="seraph" data-planet="earth" alt="" src="https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260827_202005_3346cc4d-ec3b-44ab-825c-b18e49f5021a.png">
-            <img data-project="cherub" data-planet="venus" alt="" src="https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260827_202012_640b239a-d08a-4200-adb2-741bbe129ac8.png">
-            <img data-project="elyra" data-planet="mars" alt="" src="https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260827_202018_3d559490-f613-4ed7-a3bb-3b7e9fc90fb8.png">
+            <img data-project="seraph" data-planet="earth" alt="" src="./assets/media/hf_20260827_202005_3346cc4d-ec3b-44ab-825c-b18e49f5021a.webp">
+            <img data-project="cherub" data-planet="venus" alt="" src="./assets/media/hf_20260827_202012_640b239a-d08a-4200-adb2-741bbe129ac8.webp">
+            <img data-project="elyra" data-planet="mars" alt="" src="./assets/media/hf_20260827_202018_3d559490-f613-4ed7-a3bb-3b7e9fc90fb8.webp">
           </button>
           <a href="main.html" id="cta-button">VIEW PORTFOLIO</a>
           <span class="label label-l"></span>
@@ -450,22 +459,22 @@
           planetKey: 'earth',
           eyebrow: '👋 WELCOME! HI, I AM EMMANUEL &bull; HERE ARE SOME OF MY PROJECTS &bull; PROJECT SERAPH // ORBITAL C2',
           name: 'SERAPH',
-          still: 'https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260827_202133_508c64b8-a31e-4290-bdfc-1187df70e0a6.png',
+          still: './assets/media/hf_20260827_202133_508c64b8-a31e-4290-bdfc-1187df70e0a6.webp',
           lede: 'Autonomous aerospace command &amp; control (C2), real-time SGP4 orbital propagation, <br>conjunction matrix tracking, and multi-satellite constellation telemetry streaming.'
         },
         cherub: {
           planetKey: 'venus',
           eyebrow: '👋 WELCOME! HI, I AM EMMANUEL &bull; HERE ARE SOME OF MY PROJECTS &bull; PROJECT CHERUB // VENUSIAN MESH',
           name: 'CHERUB',
-          still: 'https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260827_202133_cf55d1d8-7b59-4a64-80da-d72052ae974e.png',
+          still: './assets/media/hf_20260827_202133_cf55d1d8-7b59-4a64-80da-d72052ae974e.webp',
           lede: 'Coordinated Heterogeneous Environmental Reconnaissance Under-cloud Balloon &amp; Probe Mesh.<br>Autonomous aerostat super-rotation station-keeping, SiC avionics, and extreme-environment planetary observation.'
         },
         elyra: {
           planetKey: 'mars',
           eyebrow: '👋 WELCOME! HI, I AM EMMANUEL &bull; HERE ARE SOME OF MY PROJECTS &bull; PROJECT ELYRA // TACTICAL EDGE AI',
           name: 'ELYRA',
-          still: 'https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260827_202133_0ba6de7c-285d-43dc-b7ab-8c54c73707cb.png',
-          lede: 'On-device tactical neural intelligence, distributed robotic formation control, <br>and decentralized aerospace edge computing operating with zero cloud latency.'
+          still: './assets/media/hf_20260827_202133_0ba6de7c-285d-43dc-b7ab-8c54c73707cb.webp',
+          lede: 'On-device tactical neural intelligence, distributed robotic formation control, <br>and decentralized aerospace edge computing runs local models when available, with optional cloud routing.'
         }
       };
 

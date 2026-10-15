@@ -1,242 +1,60 @@
-# 🛰️ Emmanuel Oyewole — Systems Engineering & AI Architecture Portfolio
+# 🛰️ Emmanuel Oyewole — Systems & AI Architecture Portfolio
 
-> **High-Performance Multi-Page Showcase**: Autonomous Aerospace Command & Control (**Project SERAPH**) and Air-Gapped On-Device Edge AI Intelligence (**Project ELYRA**).
+> **Live Portfolio**: [freshstart2066-create.github.io](https://freshstart2066-create.github.io/)
 
-[![Status](https://img.shields.io/badge/Status-Production%20Ready-00e5ff?style=flat-square)](#)
-[![Zero Build Tools](https://img.shields.io/badge/Architecture-Zero%20Build%20Step%20%7C%20Self--Contained-22c55e?style=flat-square)](#)
-[![Live Preview](https://img.shields.io/badge/Local%20Server-Port%208080-blue?style=flat-square)](#)
-[![Sync](https://img.shields.io/badge/Multi--Target-Dual%20Directory%20Synchronized-purple?style=flat-square)](#)
+A high-performance interactive portfolio showcasing production-grade architectures in **aerospace command and control (C2)**, **real-time orbital mechanics (SGP4/SDP4)**, **WebGL 3D visualization**, and **quantized edge AI runtimes**.
 
 ---
 
-## 📌 Executive Summary for Incoming AI Agents
+## 🚀 Featured Projects
 
-This repository houses the professional engineering portfolio of **Emmanuel Oyewole**, Systems Architect and Autonomous Software Engineer. The portfolio is engineered to pitch and demonstrate mastery in **aerospace command and control (C2)**, **applied orbital mechanics (SGP4/SDP4)**, **resilient distributed systems**, and **quantized edge AI computing**.
+### 1. [Project SERAPH — Aerospace C2 Platform](https://freshstart2066-create.github.io/project-seraph.html)
+* **Description**: Interactive orbital mechanics simulation and spacecraft C2 cockpit-view interface built on public NORAD/Space-Track TLE ephemeris datasets.
+* **Key Features**: 60 FPS WebGL 3D canvas viewport, SIMD-accelerated SGP4/SDP4 orbit propagation across 100,000+ resident space objects, autonomous conjunction screening ($P_c < 10^{-4}$), and CCSDS telemetry packet framing.
+* **Repository**: [github.com/freshstart2066-create/project-seraph](https://github.com/freshstart2066-create/project-seraph)
 
-The site is built across three primary, highly optimized, self-contained web experiences designed for instant deployment on GitHub Pages without bundler or transpile steps:
+### 2. [Project ELYRA — Autonomous Mobile Edge AI Assistant](https://freshstart2066-create.github.io/main.html)
+* **Description**: Edge AI runtime and mobile telemetry companion running local quantized models with optional cloud routing for tactical field operations.
+* **Key Features**: Dynamic routing across quantized GGUF models (Qwen 2.5 3B, Llama 3.2 1B), bounded 2,048-token sliding-window memory buffer, sub-50ms WebSocket streaming bridge, and real-time $z$-score hardware anomaly detection.
+* **Repository**: [github.com/freshstart2066-create/elyra](https://github.com/freshstart2066-create/elyra)
 
-1. **[`index.html`](file:///C:/Users/Archangel/.gemini/antigravity/scratch/freshstart2066-create.github.io/index.html)** — **Cinematic Landing Gateway**: High-impact portal introducing Emmanuel Oyewole, featuring dual planetary switching between SERAPH and ELYRA with dynamic background video streaming and responsive typography.
-2. **[`project-seraph.html`](file:///C:/Users/Archangel/.gemini/antigravity/scratch/freshstart2066-create.github.io/project-seraph.html)** — **Project SERAPH (Flagship Space C2 Experience)**: Single-page immersive "Planet Jumping" experience with a canvas-driven 3D parallax portal, pointer tilt physics, video preloader sequence, logo flight docking, and an in-depth **Architectural Briefing & Telemetry HUD Drawer** ("The Biggest Pitch").
-3. **[`main.html`](file:///C:/Users/Archangel/.gemini/antigravity/scratch/freshstart2066-create.github.io/main.html)** — **Project ELYRA (Autonomous Edge AI Command Center)**: Dedicated entirely to Project ELYRA, featuring 5 interactive subsystem avatars, live $z$-score hardware telemetry triage simulator, quantized local LLM router benchmarks, 2,048-token sliding memory buffer, and a `Cmd+K` diagnostic command palette.
+### 3. [Project CHERUB — Planetary Atmospheric Mesh](https://freshstart2066-create.github.io/project-seraph.html#cherub)
+* **Description**: Extreme-environment planetary exploration simulation and delay-tolerant sensor mesh architecture.
+* **Key Features**: Super-rotation aerostat buoyancy control, high-temperature silicon carbide (SiC) avionics modeling, and optical inter-platform relay routing.
+* **Repository**: [github.com/freshstart2066-create/project-cherub](https://github.com/freshstart2066-create/project-cherub)
 
----
+### 4. [Nival Protocol & SpaceEDU](https://freshstart2066-create.github.io/nival-identity.html)
+* **Description**: Cryptographic identity verification architecture and interactive educational orbital physics engines.
+* **Repository**: [github.com/freshstart2066-create](https://github.com/freshstart2066-create)
 
-## 🧭 Project Architecture & Directory Map
-
-```
-scratch/
-├── freshstart2066-create.github.io/    # PRIMARY PRODUCTION GITHUB PAGES ROOT
-│   ├── index.html                      # Landing Gateway & Project Switcher
-│   ├── project-seraph.html             # Project SERAPH (Planet Jumping 3D C2 Portal)
-│   ├── main.html                       # Project ELYRA (Autonomous Edge AI Command Center)
-│   ├── .nojekyll                       # Prevents GitHub Pages Jekyll preprocessing
-│   └── README.md                       # This document
-│
-├── portfolio-v3/                       # MIRROR WORKSPACE
-│   ├── index.html                      # Synchronized with freshstart2066 root
-│   ├── project-seraph.html             # Synchronized with freshstart2066 root
-│   ├── main.html                       # Synchronized with freshstart2066 root
-│   └── README.md                       # Synchronized with freshstart2066 root
-│
-├── build_seraph_page.py                # Automated Generator for project-seraph.html
-├── audit_buttons.py                    # Automated Interactivity & Button Audit Script
-└── README.md                           # Scratch root documentation
-```
-
-> [!IMPORTANT]
-> **Dual-Directory Synchronization Contract**:
-> Whenever you modify `index.html`, `main.html`, or `project-seraph.html`, **both** `freshstart2066-create.github.io/` and `portfolio-v3/` must remain bit-for-bit identical. Use [`build_seraph_page.py`](file:///C:/Users/Archangel/.gemini/antigravity/scratch/build_seraph_page.py) to generate and sync `project-seraph.html` to both targets automatically.
+### 5. [AnyPS5 — Low-Level Systems & Runtime Emulation](https://github.com/boykopovar/AnyPS5)
+* **Description**: Native reverse engineering and guest runtime reimplementation for PlayStation 5 binary translation (`boykopovar/AnyPS5`).
+* **Key Features**: Authored 12 merged and active PRs implementing 30+ native POSIX, libc, and kernel primitives, C11 Annex K safe wide string operations, and IEEE-754 guest ABI functions unblocking commercial AAA game titles.
+* **Repository**: [boykopovar/AnyPS5](https://github.com/boykopovar/AnyPS5)
 
 ---
 
-## 🌌 Flagship 1: Project SERAPH (`project-seraph.html`)
+## 💻 Local Development
 
-### 1. Vision & Architectural Pitch
-**SERAPH** (*Spacecraft Ephemeris Real-Time Autonomous Propagation & Hazard-Avoidance*) represents an autonomous aerospace C2 platform designed for sovereign satellite constellations, space traffic management (STM), and interplanetary communications.
+Run the portfolio locally with a single command:
 
-### 2. Core Technical Pillars
-- **SGP4/SDP4 Analytical Orbital Propagation**:
-  - Continuous trajectory computation for $100,000+$ resident space objects (RSOs).
-  - WGS-84 gravitational constants, Earth oblateness zonal harmonics ($J_2, J_3, J_4$), atmospheric drag decay (Jacchia-Roberts model), and third-body lunisolar perturbations with SIMD vectorization.
-- **Conjunction Assessment & Automated Avoidance Matrix**:
-  - Ingests two-line element (TLE) catalogs and Orbit Ephemeris Messages (OEM).
-  - 3D covariance ellipsoid projection across Radial, In-Track, and Cross-Track ($R, T, N$) frames.
-  - Autonomous collision hazard screening with an avoidance maneuver floor of $P_c < 10^{-4}$, computing impulsive $\Delta v$ thrust vectors.
-- **Interplanetary Delay-Tolerant Telemetry Mesh**:
-  - Relativistic Doppler shift compensation and delay-tolerant networking (DTN) handling 4 to 20 minute light-time transmission latencies over Mars-Earth-Venus links.
-  - CCSDS Space Packet Protocol streaming over Ka-band DSN carriers and Optical Inter-Satellite Laser links (OISL).
+```bash
+# Using Python:
+python -m http.server 8080
 
-### 3. Visual & Interactive Implementation
-- **3D Canvas "Window" Portal**: 44-point perspective-projected rounded rectangle drawn onto an HTML5 `<canvas>` at 60 FPS, with dynamic pointer tilt ($\text{rotX} \approx \pm 16.5^\circ$, $\text{rotY} \approx \pm 18.7^\circ$).
-- **Video Preloader**: Sequential Mars transit video with percentage counter ($0 \rightarrow 100\%$) and an SVG logo that ascends into the navigation bar via cubic bezier easing.
-- **Interplanetary State Transitions**: Smooth camera zooms and video transitions chaining `Mars` $\rightarrow$ `Earth` $\rightarrow$ `Venus` at $1.3\times$ speed.
-- **Sidebar Planet Jump List**: All 8 solar system planets (`Mercury`, `Venus`, `Earth`, `Mars`, `Jupiter`, `Saturn`, `Uranus`, `Neptune`) are interactive via click or keyboard (`Enter`/`Space`), with HUD toast feedback.
-- **Pitch Drawer (`#seraph-modal`)**: Modal sheet displaying live telemetry figures:
-  - *Orbital Velocity*: `7.66 km/s` (LEO Nominal Vector)
-  - *Apogee / Perigee*: `540 × 525 km` (Circularity: 99.8%)
-  - *Conjunction Risk ($P_c$)*: `2.1 × 10⁻⁷` (Avoidance floor $< 10^{-4}$)
-  - *DSN Link Margin*: `+14.2 dB` (Ka-Band Carrier Lock)
-
-### 4. Remote CDN Assets (Do Not Modify / Substitute)
-```javascript
-BASE = "https://d2ol7oe51mr4n9.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P";
-MARS_BG   = `${BASE}/3c83091e-4046-4fd6-adbb-2edb728be79a.mp4`;
-TO_EARTH  = `${BASE}/fc3ded42-e845-41f3-a830-5cab512d79cd.mp4`;
-TO_VENUS  = `${BASE}/b30f64d9-1637-477a-83df-d0fc6461a422.mp4`;
-TO_MARS   = `${BASE}/5fc5651c-3b5d-4171-b507-87f7e635d1b4.mp4`;
-MERCURY   = `${BASE}/d6fb8b6b-c15e-4aaa-9cf7-45bbb5e33372.jpg`;
-LOGO      = `${BASE}/eb7e0f53-50cd-4af5-abc4-8b9a52cdc01b.svg`;
+# Or using Node:
+npx serve .
 ```
 
----
-
-## 🎈 Flagship 2: Project CHERUB (`project-seraph.html#cherub`)
-
-### 1. Vision & Planetary Deep-Space Mission
-**PROJECT CHERUB** (*Coordinated Heterogeneous Environmental Reconnaissance Under-cloud Balloon & Probe Mesh*) is an autonomous planetary exploration architecture designed for in-situ atmospheric science, extreme-environment sensor networking, and long-duration aerial sounding within the dense, corrosive atmosphere of Venus.
-
-### 2. Core Technical Pillars
-- **Aerostat Super-Rotation Station-Keeping**:
-  - Autonomous buoyancy altitude control utilizing dual-chamber helium and phase-change fluid bladders within the benign 50–65 km cloud layer (1.0 atm, 25 °C).
-  - Circumnavigates the planet along the 360 km/h zonal super-rotation wind streamlines every 96 Earth hours while profiling vertical shear gradients.
-- **Silicon Carbide (SiC) Extreme-Environment Avionics**:
-  - Radiation-hardened, wide-bandgap SiC semiconductor logic and Gallium Nitride (GaN) power conversion stages engineered to survive deep-descent atmospheric excursions into 465 °C, 92 bar supercritical $CO_2$.
-  - Multilayer fluoropolymer and polybenzimidazole (PBI) barrier coatings resistant to 96% concentrated sulfuric acid ($H_2SO_4$) aerosol clouds.
-- **Delay-Tolerant Optical & RF Sensor Mesh**:
-  - Multi-node aerostat and micro-probe cluster communicating via inter-platform optical laser links (OISL).
-  - Store-and-forward Delay-Tolerant Networking (DTN) streaming atmospheric chemistry, polarimetry, and acoustic infrasound seismology up to polar orbiters for deep-space relay to Earth's DSN.
-
-### 3. Planetary Telemetry Profile (Venus)
-- *Float Altitude Layer*: `54.2 km` (Temperate Cloud Zone / 1.0 atm / 25 °C)
-- *Zonal Super-Rotation*: `360 km/h` (Zonal Wind Lock / 96h Circumnavigation)
-- *Corrosion Shielding*: `99.98%` (Fluoropolymer / PBI Sulfuric Acid Barrier)
-- *Laser Link Margin (OISL)*: `+18.4 dB` (Orbiter Optical Relay Lock)
+Then navigate to `http://localhost:8080` in your browser.
 
 ---
 
-## ⚡ Flagship 3: Project ELYRA (`main.html`)
+## 📬 Contact & Links
 
-### 1. Vision & Architecture
-**ELYRA** is a private, air-gapped on-device Edge AI Companion designed for tactical Android devices, field terminals, and embedded edge nodes operating under constrained power and zero cloud connectivity.
+* **Engineer**: Emmanuel Oyewole (Full-Stack, Systems & AI Engineer)
+* **Email**: [bigferry24@gmail.com](mailto:bigferry24@gmail.com)
+* **GitHub**: [@freshstart2066-create](https://github.com/freshstart2066-create)
+* **Resume**: [Download Resume](https://freshstart2066-create.github.io/assets/Emmanuel_Oyewole_Resume.pdf)
 
-### 2. Core Technical Pillars
-- **Local Quantized Model Router**:
-  - Dynamically routes prompts between **Qwen 2.5 3B** (`Q4_K_M`, ~28.4 tok/s) and **Llama 3.2 1B** (`Q8_0`, ~42.1 tok/s).
-  - Operates strictly under a 2.0 GB memory ceiling on ARM64 / Snapdragon mobile chipsets.
-- **Sliding-Window Memory Buffer**:
-  - Fixed 2,048-token context window with pinned system instructions and strict FIFO turn eviction to prevent mobile OOM crashes.
-- **Real-Time Sensor Telemetry & Anomaly Engine**:
-  - High-frequency sampling of CPU load, RAM allocation, battery temperature, and network round-trip time.
-  - Rolling $z$-score calculation flags sensor anomalies before thermal throttling or link degradation occurs.
-- **Autonomous Tool Registry**:
-  - Deterministic JSON-schema based tool execution for offline device control, offline geofencing, and tactical hardware queries.
-- **Native Android APK Deployment**:
-  - Compiled using React Native and Expo SDK 51 with hermes engine optimizations for standalone offline APK packaging.
-
-### 3. Interactive Features
-- **5 Subsystem Avatars**: Interactive gallery that alters stage CSS variables (`--hero-hue`, `--hero-sat`) and opens specialized drawers.
-- **Action Dock (5 Buttons)**: Quick triggers for *Pipeline*, *Telemetry*, *Models*, *APK Build*, and *Terminal*.
-- **Live Device Triage Simulator**: Button (`⚡ Run Live Device Triage`) generates simulated real-time metric samples and refreshes animated gauge bars and log consoles.
-- **Web Audio Pulse Synthesizer**: Synthesizes authentic tactical audio chirps and sensor pulses (880 Hz / 587 Hz) via Web Audio API oscillators.
-- **Diagnostic Command Terminal (`Cmd+K`)**: Interactive CLI terminal supporting commands: `triage`, `models`, `memory`, `apk`, `arch`, `specs`, `help`, `clear`.
-
----
-
-## 🌐 Gateway: Landing Page (`index.html`)
-
-- **Interactive Carousel Switching**: Alternates smoothly between Project SERAPH and Project ELYRA.
-- **Dynamic CTA**: Automatically updates text and destination (`EXPLORE SERAPH` $\rightarrow$ `project-seraph.html` or `ENTER ELYRA AI` $\rightarrow$ `main.html`).
-- **Responsive Layout Formulas**: Mathematical clamp formulas (`--u`, `--vshift`) ensure pixel-perfect rendering across small mobile screens, tablets, and widescreen 4K displays.
-- **Accessible Navigation**: Keyboard-accessible hamburger drawer, skip navigation, and focus trapping.
-
----
-
-## 🛠️ Verification & Quality Assurance Suite
-
-We have instituted rigorous automated audits to ensure that the site never regresses. Incoming agents should run these tools before committing any changes.
-
-### 1. Button & Interactivity Audit
-Run the automated button audit script:
-```powershell
-python audit_buttons.py
-```
-**Expected Output**:
-- `index.html`: 4 buttons + 8 links — **All OK**
-- `main.html`: 31 buttons + 15 links — **All OK**
-- `project-seraph.html`: 5 buttons + 7 links + 8 planet items — **All OK**
-- **0 Dead links (`#` without event handlers)**.
-
-### 2. JavaScript Syntax Validation
-Verify that embedded scripts in `project-seraph.html` and `main.html` pass syntax checking without errors:
-```powershell
-python -c "
-import subprocess, tempfile, os, re
-for name in ['project-seraph.html', 'main.html']:
-    c = open(f'freshstart2066-create.github.io\\{name}', encoding='utf-8').read()
-    scripts = re.findall(r'<script>(.*?)</script>', c, re.DOTALL)
-    for i, s in enumerate(scripts):
-        with tempfile.NamedTemporaryFile('w', suffix='.js', delete=False, encoding='utf-8') as f:
-            f.write(s)
-            tmp = f.name
-        try:
-            res = subprocess.run(['node', '--check', tmp], capture_output=True, text=True)
-            assert res.returncode == 0, f'{name} script {i} error: {res.stderr}'
-            print(f'{name} script #{i+1}: Syntax OK')
-        finally:
-            os.remove(tmp)
-"
-```
-
-### 3. Local Development Server
-To serve the site locally:
-```powershell
-python -m http.server 8080 --directory "freshstart2066-create.github.io"
-```
-Endpoints:
-- Landing Gateway: `http://localhost:8080/index.html`
-- Project SERAPH: `http://localhost:8080/project-seraph.html`
-  - Direct modal link: `http://localhost:8080/project-seraph.html?skip_preload=1&modal=1`
-- Project ELYRA: `http://localhost:8080/main.html`
-
----
-
-## 📋 Strict Guidelines for Future AI Agents
-
-When working on this codebase, you **MUST** adhere to the following rules:
-
-1. **Self-Contained Architecture (No Build Dependencies)**:
-   - Do NOT add Webpack, Vite, Parcel, Babel, Tailwind, or complex npm build pipelines to the production pages (`freshstart2066-create.github.io`).
-   - All styles and logic must remain self-contained inline `<style>` and `<script>` blocks so they run natively in any modern browser and GitHub Pages without CI/CD build failures.
-2. **Preserve Exact Asset URLs**:
-   - Remote CloudFront video and SVG assets are immutable. Do not alter their filenames, hashes, or CDN domain.
-3. **Typography & Layout Integrity**:
-   - SF Pro, Aalto, and JetBrains Mono are the signature typography stacks. Maintain proportional leading, tracking, and letter-spacing.
-   - Avoid overlapping elements (`margin-left: 48px` on `.project-badge` prevents collision with the docked logo).
-4. **All Buttons Must Be Functional**:
-   - Every `<button>` or `<a>` must either perform an interactive action (open a panel, trigger an animation, play audio) or route to a valid URL.
-   - Never leave unattached buttons or empty `href="#"` dead ends.
-5. **Mirror Synchronization**:
-   - Every change made in `freshstart2066-create.github.io/` must also be mirrored in `portfolio-v3/`. If modifying `project-seraph.html`, update [`build_seraph_page.py`](file:///C:/Users/Archangel/.gemini/antigravity/scratch/build_seraph_page.py) and execute it. If modifying `main.html`, update [`build_elyra_page.py`](file:///C:/Users/Archangel/.gemini/antigravity/scratch/build_elyra_page.py) and execute it.
-6. **Multi-Device Fluid Auto-Resizing**:
-   - The entire portfolio is built to auto-resize fluidly across every device form factor: mobile portrait (320px–430px), mobile landscape (cockpit console layout for heights $\le 560\text{px}$), tablets (768px–1024px), standard desktops (1440px), and ultrawides ($1920\text{px}+$ and $2560\text{px}+$).
-   - Never use arbitrary fixed `min-height` rules combined with `overflow: hidden` that cause clipping on small screens. Use `100svh`/`100dvh` and safe area insets (`env(safe-area-inset-*)`).
-   - Canvas projections and layouts must bind to both `resize`, `orientationchange`, and `screen.orientation` events.
-7. **No Placeholder Words**:
-   - Keep all technical descriptions authentic to aerospace C2 and edge AI systems. Never inject generic placeholder lorem ipsum.
-
----
-
-## 🚀 Roadmap & High-Priority Next Tasks
-
-For AI agents taking over this repository, here are recommended enhancements to explore:
-
-- [ ] **Live SGP4 Satellite Integration**: Integrate a lightweight, vanilla WebAssembly or pure JS SGP4 propagator to calculate real-time ISS / Starlink coordinates in `project-seraph.html`.
-- [ ] **Interactive 3D Orbit Canvas**: Expand the 3D portal in `project-seraph.html` with a Three.js / WebGL toggle showing orbital inclination ($i$), eccentricity ($e$), and true anomaly ($\nu$).
-- [ ] **Deep Space Phase 2 Planets**: Add animated transition videos and fact sheets for Jupiter and Saturn in `project-seraph.html`.
-- [ ] **WebAssembly LLM Inference Demo**: In `main.html`, explore an optional in-browser ONNX Runtime / WebGPU micro-model demo for local text generation in the ELYRA terminal.
-- [ ] **PWA Offline Manifest**: Add a service worker (`sw.js`) and `manifest.json` for full air-gapped offline caching of the entire portfolio.
-
----
-
-**Maintained by Emmanuel Oyewole**  
-*Aerospace C2, Applied Cryptography, Edge AI, and Resilient Distributed Systems.*
+> *Note: Most client work is under NDA. These are demonstration builds.*

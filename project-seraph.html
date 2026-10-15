@@ -3,9 +3,22 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-  <title>SERAPH & CHERUB — Autonomous Aerospace C2 & Planetary Deep-Space Mesh | Emmanuel Oyewole</title>
-  <meta name="description" content="SERAPH & CHERUB: Flagship Autonomous Aerospace Command & Control (C2), Real-Time SGP4 Orbital Propagation, Venusian Aerostat Probe Mesh, and Interplanetary Telemetry by Emmanuel Oyewole.">
-  <link rel="icon" type="image/svg+xml" href="https://d2ol7oe51mr4n9.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/eb7e0f53-50cd-4af5-abc4-8b9a52cdc01b.svg">
+  <title>Project SERAPH — Aerospace C4ISR &amp; SAR Evidence Fusion Platform | Emmanuel Oyewole</title>
+  <meta name="description" content="Project SERAPH: Multi-domain Aerospace C4ISR, 6-DOF kinetic crash reconstruction, Bayesian SAR probability surfaces, and H3 hexagonal search graphs at 60 FPS WebGL by Emmanuel Oyewole.">
+  <link rel="icon" type="image/svg+xml" href="./assets/favicon.svg">
+  
+  <!-- Open Graph -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://freshstart2066-create.github.io/project-seraph.html">
+  <meta property="og:title" content="Project SERAPH — Aerospace C4ISR &amp; SAR Evidence Fusion Platform | Emmanuel Oyewole">
+  <meta property="og:description" content="Multi-domain Aerospace C4ISR, 6-DOF kinetic crash reconstruction, Bayesian SAR probability surfaces, and H3 hexagonal search graphs at 60 FPS WebGL.">
+  <meta property="og:image" content="./assets/og-image.png">
+
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Project SERAPH — Aerospace C4ISR &amp; SAR Evidence Fusion Platform | Emmanuel Oyewole">
+  <meta name="twitter:description" content="Multi-domain Aerospace C4ISR, 6-DOF kinetic crash reconstruction, Bayesian SAR probability surfaces, and H3 hexagonal search graphs at 60 FPS WebGL.">
+  <meta name="twitter:image" content="./assets/og-image.png">
   
   <style>
     @font-face {
@@ -1575,6 +1588,26 @@
       .seraph-box, .sim-panel, .seraph-telemetry-hud, .seraph-env-panel { border: 1px solid #ccc !important; background: #f9fafb !important; color: #000 !important; }
       .mission-tabs { display: none !important; }
     }
+  
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+      }
+      .background, video {
+        animation: none !important;
+      }
+      .custom-cursor {
+        display: none !important;
+      }
+    }
+    a:focus-visible, button:focus-visible, [tabindex]:focus-visible {
+      outline: 2px solid #79dce8 !important;
+      outline-offset: 2px !important;
+    }
+
   </style>
 </head>
 <body>
@@ -1582,18 +1615,18 @@
   <main class="experience" data-planet="mars">
     <!-- BACKGROUND VIDEOS -->
     <div class="backgrounds" aria-hidden="true">
-      <video id="mars-background"  class="background is-visible" muted playsinline preload="auto" src="https://d2ol7oe51mr4n9.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/3c83091e-4046-4fd6-adbb-2edb728be79a.mp4"></video>
-      <video id="earth-background" class="background"            muted playsinline preload="auto" src="https://d2ol7oe51mr4n9.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/fc3ded42-e845-41f3-a830-5cab512d79cd.mp4"></video>
-      <video id="venus-background" class="background"            muted playsinline preload="auto" src="https://d2ol7oe51mr4n9.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/b30f64d9-1637-477a-83df-d0fc6461a422.mp4"></video>
+      <video id="mars-background" class="background is-visible" muted playsinline preload="metadata" poster="./assets/media/3c83091e-4046-4fd6-adbb-2edb728be79a_poster.webp" src="./assets/media/3c83091e-4046-4fd6-adbb-2edb728be79a.mp4" loop></video></video>
+      <video id="earth-background" class="background" muted playsinline preload="metadata" poster="./assets/media/fc3ded42-e845-41f3-a830-5cab512d79cd_poster.webp" src="./assets/media/fc3ded42-e845-41f3-a830-5cab512d79cd.mp4" loop></video></video>
+      <video id="venus-background" class="background" muted playsinline preload="metadata" poster="./assets/media/b30f64d9-1637-477a-83df-d0fc6461a422_poster.webp" src="./assets/media/b30f64d9-1637-477a-83df-d0fc6461a422.mp4" loop></video></video>
     </div>
 
     <!-- PRELOADER -->
     <div class="preloader" id="preloader" aria-label="Loading Mars">
-      <video id="preloader-video" muted playsinline preload="auto" src="https://d2ol7oe51mr4n9.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/5fc5651c-3b5d-4171-b507-87f7e635d1b4.mp4"></video>
+      <video id="preloader-video" muted playsinline preload="metadata" poster="./assets/media/5fc5651c-3b5d-4171-b507-87f7e635d1b4_poster.webp" src="./assets/media/5fc5651c-3b5d-4171-b507-87f7e635d1b4.mp4"></video>
       <div class="preloader-shade"></div>
     </div>
     
-    <img class="floating-logo" id="floating-logo" src="https://d2ol7oe51mr4n9.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/eb7e0f53-50cd-4af5-abc4-8b9a52cdc01b.svg" alt="SERAPH & CHERUB">
+    <img class="floating-logo" id="floating-logo" src="./assets/media/eb7e0f53-50cd-4af5-abc4-8b9a52cdc01b.svg" alt="Project Seraph Logo" width="208" height="208">
     
     <div class="preloader-count" id="preloader-count" aria-live="polite">
       <span id="preloader-value">0</span><span class="percent">%</span>
@@ -1606,7 +1639,7 @@
     <header class="header chrome">
       <a href="#seraph" class="project-badge" onclick="jumpToPlanet('earth'); return false;" aria-label="Emmanuel's Systems Architecture">
         <span class="project-badge-dot"></span>
-        <span>👋 HI, I'M EMMANUEL &bull; EXPLORE MY PROJECTS</span>
+        <span>👋 HI, I'M EMMANUEL &bull; <em style="font-size:11px;font-style:normal;opacity:0.85;">Most client work is under NDA</em></span>
       </a>
 
       <div class="header-actions">
@@ -1633,8 +1666,8 @@
         <span><span id="next-number">[03]</span> <strong id="next-name">Earth</strong></span>
       </div>
       <button class="portal" id="portal" type="button" aria-label="Travel to Earth">
-        <video id="portal-video" muted playsinline preload="auto" src="https://d2ol7oe51mr4n9.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/fc3ded42-e845-41f3-a830-5cab512d79cd.mp4"></video>
-        <img id="portal-image" src="https://d2ol7oe51mr4n9.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/d6fb8b6b-c15e-4aaa-9cf7-45bbb5e33372.jpg" alt="Mercury">
+        <video id="portal-video" muted playsinline preload="metadata" poster="./assets/media/fc3ded42-e845-41f3-a830-5cab512d79cd_poster.webp" src="./assets/media/fc3ded42-e845-41f3-a830-5cab512d79cd.mp4"></video>
+        <img id="portal-image" src="./assets/media/d6fb8b6b-c15e-4aaa-9cf7-45bbb5e33372.webp" alt="Mercury planetary view" width="1920" height="1080" loading="lazy">
       </button>
     </section>
 
@@ -1643,7 +1676,7 @@
       <div class="planet-headline">
         <div class="mission-tag" id="mission-tag">PROJECT ELYRA // TACTICAL EDGE AI</div>
         <h1 id="planet-title">PROJECT ELYRA</h1>
-        <p class="planet-project-desc" id="planet-desc">Project ELYRA is an air-gapped, on-device neural reasoning companion compiled as a standalone Android APK for interplanetary transit and Martian surface operations. Running under a strict 2.0 GB memory envelope with bounded 2,048-token sliding-window memory, ELYRA executes quantized small language models (Qwen 2.5 &amp; Llama 3.2) at sub-50ms latency with rolling z-score hardware sensor anomaly triage.</p>
+        <p class="planet-project-desc" id="planet-desc">Project ELYRA is an on-device neural reasoning companion (runs local models when available, with optional cloud routing) compiled as a standalone Android APK for interplanetary transit and Martian surface operations. Running under a strict 2.0 GB memory envelope with bounded 2,048-token sliding-window memory, ELYRA executes quantized small language models (Qwen 2.5 &amp; Llama 3.2) at sub-50ms latency with rolling z-score hardware sensor anomaly triage.</p>
       </div>
       
       <!-- GLOWING READ MORE CALL TO ACTION (NO CLUTTER COVERING CELESTIAL BACKDROP) -->
@@ -1709,6 +1742,7 @@
         <button class="seraph-btn primary" type="button" onclick="exportWhitepaper()">📄 Export Technical Whitepaper</button>
         <a class="seraph-btn" href="main.html">Inspect ELYRA Edge AI Companion &rarr;</a>
         <button class="seraph-btn" type="button" onclick="cyclePlanet(); closeSeraphBriefing();">Next Destination Orbit &rarr;</button>
+        <a class="seraph-btn" href="./assets/Emmanuel_Oyewole_Resume.pdf" download="Emmanuel_Oyewole_Resume.pdf" target="_blank" rel="noopener noreferrer">📄 Download resume</a>
         <a class="seraph-btn" href="index.html">Return to Portal Home</a>
         <button class="seraph-btn" type="button" onclick="closeSeraphBriefing()">Continue Space Portal Tour</button>
       </div>
@@ -1722,12 +1756,12 @@
     'use strict';
 
     // 1. ASSET DEFINITIONS
-    const BASE = 'https://d2ol7oe51mr4n9.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P';
+    const BASE = './assets/media';
     const MARS_BG   = `${BASE}/3c83091e-4046-4fd6-adbb-2edb728be79a.mp4`;
     const TO_EARTH  = `${BASE}/fc3ded42-e845-41f3-a830-5cab512d79cd.mp4`;
     const TO_VENUS  = `${BASE}/b30f64d9-1637-477a-83df-d0fc6461a422.mp4`;
     const TO_MARS   = `${BASE}/5fc5651c-3b5d-4171-b507-87f7e635d1b4.mp4`;
-    const MERCURY   = `${BASE}/d6fb8b6b-c15e-4aaa-9cf7-45bbb5e33372.jpg`;
+    const MERCURY   = `${BASE}/d6fb8b6b-c15e-4aaa-9cf7-45bbb5e33372.webp`;
     const LOGO      = `${BASE}/eb7e0f53-50cd-4af5-abc4-8b9a52cdc01b.svg`;
 
     // 2. DATA MODEL & COMPREHENSIVE MISSION DOSSIERS
@@ -1735,30 +1769,30 @@
 
     const missionDossiers = {
       seraph: {
-        kicker: 'MISSION SYSTEMS • AUTONOMOUS AEROSPACE C2',
+        kicker: 'AEROSPACE C4ISR & SAR EVIDENCE FUSION PLATFORM',
         title: 'PROJECT SERAPH',
-        lede: 'Autonomous orbital command & control (C2), real-time SGP4/SDP4 satellite propagation, automated conjunction matrix avoidance, and sovereign megaconstellation coordination. Designed for complex LEO, MEO, and GEO regimes with sub-millisecond propagation vectorization.',
+        lede: 'Real-time multi-domain Aerospace C4ISR & Search and Rescue (SAR) incident intelligence platform. Built on CesiumJS (WGS84 WebGL at 60 FPS), PostGIS, and Uber H3 hexagonal search graphs. Reconstructs 6-DOF kinetic crash trajectories, computes continuous Bayesian posterior probability surfaces across complex terrain, fuses multi-source sensor evidence with strict provenance, and generates capability-weighted SAR team dispatch assignments.',
         hud: [
-          { label: 'ORBITAL VELOCITY', val: '7.66 km/s', sub: 'LEO Nominal Vector', color: '#79dce8' },
-          { label: 'APOGEE / PERIGEE', val: '540 × 525 km', sub: 'Circularity: 99.8%', color: '#79dce8' },
-          { label: 'CONJUNCTION RISK (Pc)', val: '2.1 × 10⁻⁷', sub: '< 10⁻⁴ Avoidance Floor', color: '#22c55e' },
-          { label: 'DSN LINK MARGIN', val: '+14.2 dB', sub: 'Ka-Band Carrier Lock', color: '#79dce8' }
+          { label: 'H3 SEARCH GRAPH', val: 'Res 7–10', sub: 'Hierarchical Global Grid', color: '#79dce8' },
+          { label: 'BAYESIAN INFERENCE', val: 'P_posterior', sub: 'Monte Carlo Kinetic Dispersion', color: '#79dce8' },
+          { label: 'SEARCH PRIORITY', val: 'POS = POA × POD', sub: 'Multi-Team Capability Match', color: '#22c55e' },
+          { label: 'EVIDENCE VAULT', val: 'Zero-Egress', sub: 'Ollama AI & OTB Remote Sensing', color: '#79dce8' }
         ],
         pillars: [
           {
-            icon: '🛰️',
-            title: 'SGP4 Analytical Propagation',
-            desc: 'High-throughput orbit estimation processing over 100,000 resident space objects (RSOs). Implements WGS-84 oblate Earth J2/J3/J4 gravitational harmonics, Jacchia-Roberts atmospheric drag decay, and third-body lunisolar perturbations with SIMD vectorization.'
+            icon: '⬡',
+            title: 'H3 Hierarchical Search Graph & Prioritization',
+            desc: 'Continuous Bayesian probability surfaces discretized into H3 hexagonal search cells (Resolutions 7 to 10). Solves operational priority via P_posterior × P_detection × Terrain Accessibility × Team Capability, guaranteeing that inaccessible high-probability cells are preserved and rerouted rather than dropped.'
           },
           {
-            icon: '⚡',
-            title: 'Conjunction Matrix Triage',
-            desc: 'Continuous screening against two-line element (TLE) and high-precision orbit ephemeris (OEM) message catalogs. Evaluates 3D covariance ellipsoids in radial/in-track/cross-track frames, triggering autonomous impulsive Δv collision maneuvers.'
+            icon: '✈️',
+            title: 'Kinetic Crash Reconstruction & Monte Carlo Engine',
+            desc: '6-DOF aerodynamic equations of motion integrating gravity, atmospheric density decay, ballistic drag, and high-altitude wind drift. Simulates stochastic Monte Carlo parameter uncertainty to compute 1-sigma / 2-sigma impact dispersion envelopes and ground CEP.'
           },
           {
-            icon: '🌌',
-            title: 'Sovereign Constellation Management',
-            desc: 'Automated phase-keeping, cross-plane station-keeping, and RF slot deconfliction for sovereign megaconstellations in LEO, MEO, and GEO regimes without operator fatigue or cloud dependency.'
+            icon: '🛡️',
+            title: 'Air-Gapped Evidence Fusion & Remote Sensing',
+            desc: 'Multi-source evidence vault with immutable provenance (GDAL raster tiling, Orfeo ToolBox multispectral filtering, PDAL LiDAR ground models, and local Ollama LLM). Enforces the strict rule that AI detections remain probationary evidence until human analyst verification.'
           }
         ]
       },
@@ -1769,7 +1803,7 @@
         hud: [
           { label: 'FLOAT ALTITUDE LAYER', val: '54.2 km', sub: 'Temperate Cloud Zone (1.0 atm / 25 °C)', color: '#79dce8' },
           { label: 'ZONAL SUPER-ROTATION', val: '360 km/h', sub: 'Zonal Wind Lock (96h Circumnavigation)', color: '#79dce8' },
-          { label: 'CORROSION SHIELDING', val: '99.98%', sub: 'Fluoropolymer / PBI Sulfuric Acid Barrier', color: '#22c55e' },
+          { label: 'CORROSION SHIELDING', val: '99.98%', sub: 'High-Temperature Acid Barrier', color: '#22c55e' },
           { label: 'LASER LINK MARGIN (OISL)', val: '+18.4 dB', sub: 'Orbiter Optical Relay Lock', color: '#79dce8' }
         ],
         pillars: [
@@ -1793,7 +1827,7 @@
       elyra: {
         kicker: 'TACTICAL EDGE AI • INTERPLANETARY OPERATIONAL AUTONOMY',
         title: 'PROJECT ELYRA',
-        lede: 'Private, air-gapped on-device neural reasoning companion and distributed robotic formation controller. Operates with zero cloud latency under a strict 2.0 GB memory envelope during interplanetary transit and Martian surface operations.',
+        lede: 'Private on-device neural reasoning companion (runs local models when available, with optional cloud routing) and distributed robotic formation controller. Runs local models when available, with optional cloud routing, under a strict 2.0 GB memory envelope during interplanetary transit and Martian surface operations.',
         hud: [
           { label: 'LIGHT-TIME DELAY (RTT)', val: '14.6 min', sub: 'Store-and-Forward DTN Buffer', color: '#79dce8' },
           { label: 'ON-DEVICE INFERENCE', val: '38.2 tok/s', sub: 'Quantized Qwen 2.5 / Llama 3.2', color: '#79dce8' },
@@ -1804,7 +1838,7 @@
           {
             icon: '⚡',
             title: 'Local Quantized Model Routing',
-            desc: 'Adaptive thresholding between Qwen 2.5 3B (Q4_K_M) and Llama 3.2 1B (Q8_0) running on ARM64 NPU with zero cloud dependency and sub-50ms initial token latency.'
+            desc: 'Adaptive thresholding between Qwen 2.5 3B (Q4_K_M) and Llama 3.2 1B (Q8_0) running on ARM64 NPU (runs local models when available, with optional cloud routing) and sub-50ms initial token latency.'
           },
           {
             icon: '🧠',
@@ -1824,7 +1858,7 @@
       mars: {
         name: 'Mars',
         projectTitle: 'PROJECT ELYRA',
-        projectSummary: 'Project ELYRA is an air-gapped, on-device neural reasoning companion compiled as a standalone Android APK for interplanetary transit and Martian surface operations. Running under a strict 2.0 GB memory envelope with bounded 2,048-token sliding-window memory, ELYRA executes quantized small language models (Qwen 2.5 & Llama 3.2) at sub-50ms latency with rolling z-score hardware sensor anomaly triage.',
+        projectSummary: 'Project ELYRA is an on-device neural reasoning companion (runs local models when available, with optional cloud routing) compiled as a standalone Android APK for interplanetary transit and Martian surface operations. Running under a strict 2.0 GB memory envelope with bounded 2,048-token sliding-window memory, ELYRA executes quantized small language models (Qwen 2.5 & Llama 3.2) at sub-50ms latency with rolling z-score hardware sensor anomaly triage.',
         missionTag: 'PROJECT ELYRA // TACTICAL EDGE AI',
         dossierKey: 'elyra',
         dossierBtnKicker: 'PROJECT ELYRA // EDGE AI',
@@ -1834,7 +1868,7 @@
         portal: TO_EARTH,
         background: 'mars-background',
         facts: [
-          ['Mission:', 'PROJECT ELYRA — Air-Gapped Edge AI & Surface Ops.'],
+          ['Mission:', 'PROJECT ELYRA — Tactical Edge AI & Surface Ops.'],
           ['Inference:', 'Quantized Qwen 2.5 3B & Llama 3.2 1B (~38 tok/s).'],
           ['Latency Buffer:', 'Store-and-Forward DTN (4 to 20 min light-time RTT).'],
           ['Memory Guard:', '2,048-Token Sliding Buffer with FIFO turn eviction.']
@@ -1843,20 +1877,20 @@
       earth: {
         name: 'Earth',
         projectTitle: 'PROJECT SERAPH',
-        projectSummary: 'Project SERAPH is an autonomous aerospace command & control (C2) architecture engineered for high-density orbital regimes. Powered by SIMD-vectorized SGP4/SDP4 analytical propagation across 100,000+ resident space objects, SERAPH screens high-precision ephemeris catalogs in real time, executing autonomous impulsive Δv collision evasion maneuvers and sovereign megaconstellation RF slot deconfliction with sub-millisecond latency.',
-        missionTag: 'PROJECT SERAPH // ORBITAL C2',
+        projectSummary: 'Project SERAPH is a multi-domain Aerospace C4ISR & Search and Rescue (SAR) incident intelligence platform built on CesiumJS (60 FPS WebGL), PostGIS, and Uber H3 hexagonal search graphs. It reconstructs 6-DOF kinetic crash trajectories, computes Bayesian posterior probability surfaces across complex terrain, fuses multi-source sensor evidence with strict provenance, and generates capability-weighted SAR team assignments.',
+        missionTag: 'PROJECT SERAPH // AEROSPACE C4ISR & SAR',
         dossierKey: 'seraph',
-        dossierBtnKicker: 'PROJECT SERAPH // ORBITAL C2',
+        dossierBtnKicker: 'PROJECT SERAPH // SAR INTELLIGENCE',
         dossierBtnText: 'READ MORE • SERAPH BRIEFING',
         next: 'Venus',
         number: '[02]',
         portal: TO_VENUS,
         background: 'earth-background',
         facts: [
-          ['Mission:', 'PROJECT SERAPH — Autonomous Aerospace C2.'],
-          ['Propagation:', 'SGP4/SDP4 Analytical Vectorization (100k+ RSOs).'],
-          ['Hazard Floor:', 'Autonomous Conjunction Screening (Floor Pc < 10⁻⁴).'],
-          ['Physics Model:', 'WGS-84 J2/J3/J4 Oblate Harmonics & Jacchia Drag.']
+          ['Mission:', 'PROJECT SERAPH — Aerospace C4ISR & SAR Intelligence.'],
+          ['Search Grid:', 'H3 Hierarchical Hexagonal Search Graph (Res 7–10).'],
+          ['Reconstruction:', '6-DOF Aerodynamic Kinetics & Monte Carlo Dispersion.'],
+          ['Inference:', 'Bayesian Posterior Probability & Terrain Friction Scoring.']
         ]
       },
       venus: {
@@ -2767,7 +2801,7 @@
               <span class="sim-icon">⚡</span>
               <div>
                 <h3 class="sim-title">ARM64 QUANTIZED SLM INFERENCE &amp; MEMORY BENCHMARK</h3>
-                <p class="sim-subtitle">Local neural routing performance with zero cloud latency under a strict 2.0 GB memory envelope.</p>
+                <p class="sim-subtitle">Local neural routing performance with local models and optional cloud routing under a strict 2.0 GB memory envelope.</p>
               </div>
             </div>
             <div style="font-family:monospace;font-size:12px;color:#79dce8;">RUNTIME: GGUF / LLAMA.CPP</div>

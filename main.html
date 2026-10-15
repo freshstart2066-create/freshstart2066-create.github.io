@@ -4,13 +4,18 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
   <meta name="theme-color" content="#d6e6f5">
-  <meta name="description" content="ELYRA: Autonomous Mobile Edge AI & Telemetry Assistant. Quantized on-device model routing, bounded 2,048-token sliding memory, and sub-50ms hardware telemetry triage.">
+    <meta name="description" content="ELYRA: Autonomous Mobile Edge AI & Telemetry Assistant by Emmanuel Oyewole. Local model routing, bounded sliding memory, and real-time telemetry triage.">
   <meta name="keywords" content="ELYRA, edge AI, Android APK, Qwen 2.5, Llama 3.2, sliding window memory, hardware telemetry, on-device AI, Emmanuel Oyewole">
-  <meta property="og:title" content="ELYRA &mdash; Autonomous Mobile Edge AI &amp; Telemetry Assistant">
-  <meta property="og:description" content="Quantized local-first model routing, bounded sliding memory, and real-time hardware telemetry triage compiled for standalone Android APK deployment.">
+  <meta property="og:title" content="ELYRA — Autonomous Mobile Edge AI &amp; Telemetry | Emmanuel Oyewole">
+  <meta property="og:description" content="Quantized local-first model routing, bounded sliding memory, and real-time hardware telemetry triage.">
   <meta property="og:url" content="https://freshstart2066-create.github.io/main.html">
   <meta property="og:type" content="website">
-  <title>ELYRA &mdash; Autonomous Mobile Edge AI &amp; Telemetry Assistant</title>
+  <meta property="og:image" content="./assets/og-image.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="ELYRA — Autonomous Mobile Edge AI &amp; Telemetry | Emmanuel Oyewole">
+  <meta name="twitter:description" content="Quantized local-first model routing, bounded sliding memory, and real-time hardware telemetry triage.">
+  <meta name="twitter:image" content="./assets/og-image.png">
+  <title>ELYRA — Autonomous Mobile Edge AI &amp; Telemetry | Emmanuel Oyewole</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
@@ -357,6 +362,23 @@
       .diagram-flow{grid-template-columns:1fr}
       .telemetry-dashboard{grid-template-columns:1fr}
     }
+  
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+      }
+      .stage, .viewport {
+        animation: none !important;
+      }
+      .wave span {
+        animation: none !important;
+        height: 12px !important;
+      }
+    }
+    
   </style>
 </head>
 <body>
@@ -402,7 +424,8 @@
           <a href="#models" data-panel="models">Model Benchmarks</a>
           <a href="project-seraph.html">SERAPH Space C2 Portal &rarr;</a>
           <a href="#specs" data-panel="specs">System Specs</a>
-          <a class="menu-join" href="https://github.com/freshstart2066-create/elyra" target="_blank" rel="noopener noreferrer">
+          <a class="menu-join" href="./assets/Emmanuel_Oyewole_Resume.pdf" download="Emmanuel_Oyewole_Resume.pdf" target="_blank" rel="noopener noreferrer">📄 Download resume</a>
+        <a class="menu-join" href="https://github.com/freshstart2066-create/elyra" target="_blank" rel="noopener noreferrer">
             <span class="join-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 .9a11.1 11.1 0 0 0-3.51 21.63c.56.1.76-.24.76-.54v-2.1c-3.1.68-3.76-1.31-3.76-1.31-.51-1.3-1.24-1.65-1.24-1.65-1.02-.7.08-.69.08-.69 1.13.08 1.72 1.16 1.72 1.16 1 .1 1.8-.71 2.23-1.13-.98-.12-2.02-.49-2.02-2.22 0-.49.18-.89.47-1.2-.05-.12-.2-.6.05-1.2 0 0 .38-.12 1.22.46a4.2 4.2 0 0 1 2.22-.06c.84-.58 1.22-.46 1.22-.46.25.6.1 1.08.05 1.2.3.31.47.71.47 1.2 0 1.74-1.04 2.1-2.03 2.22.16.14.3.4.3.8v2.98c0 .3.2.65.77.54A11.1 11.1 0 0 0 12 .9Z"/></svg></span>
             <span>View Source Code</span>
           </a>
@@ -421,7 +444,7 @@
       <!-- PILLARS -->
       <div class="features" aria-label="ELYRA Architecture Focus">
         <div class="feature"><b>Local-First</b><span>/01</span></div>
-        <div class="feature"><b>Air-Gapped</b><span>/02</span></div>
+        <div class="feature"><b>Hybrid Edge</b><span>/02</span></div>
         <div class="feature"><b>Sub-50ms</b><span>/03</span></div>
       </div>
 
@@ -430,7 +453,7 @@
         <span class="verified" aria-label="Verified architect"><svg viewBox="0 0 12 12" aria-hidden="true"><path d="M2.2 6.2 4.7 8.5 9.8 3"/></svg></span>
         <div class="creator-copy">
           👋 Welcome! Hi, I am <strong>Emmanuel</strong> &bull; Here are some of my projects
-          <span class="series">Systems Architect &bull; 2026</span>
+          <span class="series">Systems Architect &bull; 2026 &bull; <em style="color:#57718a;font-style:italic;">Most client work is under NDA. These are quick demonstration builds.</em></span>
         </div>
       </div>
 
@@ -566,8 +589,8 @@
               <p>Designed for mission-critical operations where latency directly impacts situational awareness. The bi-directional WebSocket interface streams partial tokens in real-time, delivering immediate visual and audio feedback to operators.</p>
             </article>
             <article class="elyra-feature-box">
-              <h3>🔒 Air-Gapped Zero Data Leakage</h3>
-              <p>Operates completely disconnected from the public internet. All weights, embeddings, and context memories reside on the local physical device, ensuring 100% compliance with sovereign data requirements.</p>
+              <h3>🔒 Local-First Data Privacy</h3>
+              <p>Runs local models when available, with optional cloud routing. All local weights, embeddings, and context memories reside on the device, ensuring responsive and private operations.</p>
             </article>
             <article class="elyra-feature-box">
               <h3>🛠️ Deterministic Tool Calling</h3>
@@ -586,7 +609,7 @@
         <section class="content-panel" id="panel-telemetry" role="dialog" aria-modal="true" aria-labelledby="telem-title" tabindex="-1" hidden>
           <header class="panel-heading">
             <div>
-              <p class="eyebrow">HARDWARE SENSORS &bull; ANOMALY TRIAGE</p>
+              <p class="eyebrow">HARDWARE SENSORS &bull; ANOMALY TRIAGE &bull; <span style="color:#0284c7;font-weight:700;">(Simulated demo values)</span></p>
               <h2 id="telem-title">Real-Time Sensor &amp; Telemetry Matrix</h2>
               <p>High-frequency rolling window anomaly detection tracking thermal spikes, memory saturation, and network jitter to prevent device throttling in demanding field operations.</p>
             </div>
@@ -658,7 +681,11 @@
           </header>
 
           <div class="benchmark-table-wrap">
-            <table class="benchmark-table">
+            <div style="padding:8px 14px;background:rgba(11,43,80,0.08);border-bottom:1px solid rgba(43,78,109,0.12);display:flex;justify-content:space-between;align-items:center;font-size:12px;font-family:'JetBrains Mono',monospace;">
+  <span style="color:#0b2b50;font-weight:700;">HARDWARE BENCHMARK ESTIMATES</span>
+  <span style="background:rgba(2,132,199,0.18);color:#0369a1;padding:2px 8px;border-radius:6px;font-weight:700;">Simulated demo values</span>
+</div>
+<table class="benchmark-table">
               <thead>
                 <tr>
                   <th>HARDWARE PROFILE</th>
@@ -724,7 +751,7 @@
           <!-- INTERACTIVE QUANTIZED SLM STREAMING RUNNER -->
           <div class="terminal-card" style="margin-top:20px;">
             <div class="terminal-card-head">
-              <span>LIVE SLM TOKEN STREAM RUNNER // ARM64 NPU EMULATOR</span>
+              <span>LIVE SLM TOKEN STREAM RUNNER // ARM64 NPU EMULATOR</span><span style="font-size:11px;color:#79dce8;margin-left:auto;margin-right:12px;font-weight:600;">(Simulated demo values)</span>
               <span id="slm-stream-status">STANDBY</span>
             </div>
             <div style="padding:14px;background:rgba(255,255,255,0.03);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;border-bottom:1px solid rgba(255,255,255,0.08);">
@@ -784,9 +811,9 @@ Click "Run Quantized SLM Streaming" to test on-device token generation throughpu
         <section class="content-panel" id="panel-mobile" role="dialog" aria-modal="true" aria-labelledby="mobile-title" tabindex="-1" hidden>
           <header class="panel-heading">
             <div>
-              <p class="eyebrow">STANDALONE APK &bull; AIR-GAPPED DEPLOYMENT</p>
+              <p class="eyebrow">STANDALONE APK &bull; ON-DEVICE &amp; CLOUD ROUTING</p>
               <h2 id="mobile-title">Standalone Android APK &amp; Deployment</h2>
-              <p>Compiled for Android phones, tablets, and rugged tactical displays using React Native 0.74 and Expo SDK 51, providing a full-featured cyber glassmorphic HUD without external cloud dependencies.</p>
+              <p>Compiled for Android phones, tablets, and rugged tactical displays using React Native 0.74 and Expo SDK 51, providing a full-featured cyber glassmorphic HUD that runs local models when available, with optional cloud routing.</p>
             </div>
             <button class="close-panel" type="button" onclick="closePanel()" aria-label="Close mobile panel">&times;</button>
           </header>
@@ -936,15 +963,15 @@ Type: triage, models, memory, telemetry, apk, specs, clear, help</div>
 
     // 1. VISUAL ASSETS
     const IMAGE_URLS = {
-      heroFront: 'https://d2ol7oe51mr4n9.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/658f62c6-fdb2-41b9-aa0f-10837f9e72cb.png',
-      heroBack: 'https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260914_123603_5ac5732a-900b-4919-9d9c-3c454194b0a5.png',
-      material: 'https://d2ol7oe51mr4n9.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/96ef2bcd-ed69-4b7e-ab83-8a18d2129d99.png',
+      heroFront: './assets/media/658f62c6-fdb2-41b9-aa0f-10837f9e72cb.webp',
+      heroBack: './assets/media/hf_20260914_123603_5ac5732a-900b-4919-9d9c-3c454194b0a5.webp',
+      material: './assets/media/96ef2bcd-ed69-4b7e-ab83-8a18d2129d99.webp',
       avatars: [
-        'https://d2ol7oe51mr4n9.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/caf08036-c63c-4d0c-9b81-43c5a7a49343.png',
-        'https://d2ol7oe51mr4n9.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/599a5a28-c9f1-44f9-b01b-adb8b22e8c12.png',
-        'https://d2ol7oe51mr4n9.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/fc804805-b23c-40ba-97b0-9ab2ba3efb5d.png',
-        'https://d2ol7oe51mr4n9.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/0cb0c1f0-f84a-47bb-bfa1-43b6c7f1575d.png',
-        'https://d2ol7oe51mr4n9.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/64e651b1-a8ba-44e8-8fbe-e85fcd6e5cf0.png'
+        './assets/media/caf08036-c63c-4d0c-9b81-43c5a7a49343.webp',
+        './assets/media/599a5a28-c9f1-44f9-b01b-adb8b22e8c12.webp',
+        './assets/media/fc804805-b23c-40ba-97b0-9ab2ba3efb5d.webp',
+        './assets/media/0cb0c1f0-f84a-47bb-bfa1-43b6c7f1575d.webp',
+        './assets/media/64e651b1-a8ba-44e8-8fbe-e85fcd6e5cf0.webp'
       ]
     };
 
@@ -1499,7 +1526,7 @@ Type "help" for a list of available diagnostic commands.`;
 
     // 11. QUICK TOUR
     const quickSteps = [
-      { title: 'Autonomous On-Device AI', text: 'Welcome to ELYRA. Built for air-gapped field operations, sub-second telemetry triage, and private on-device intelligence.', panel: 'architecture' },
+      { title: 'Autonomous On-Device AI', text: 'Welcome to ELYRA. Built for local model field operations with optional cloud routing, sub-second telemetry triage, and private on-device intelligence.', panel: 'architecture' },
       { title: 'Quantized Model Router', text: 'Adaptive local routing across Qwen 2.5 3B and Llama 3.2 delivers 28-42 tokens/sec under a 2GB RAM budget on ARM64.', panel: 'models' },
       { title: 'Sliding-Window Memory', text: 'A bounded 2,048-token context prevents mobile OOM crashes while maintaining tactical situational awareness.', panel: 'memory' },
       { title: 'Hardware Sensor Telemetry', text: 'Rolling z-score anomaly detection flags CPU surges, thermal spikes, and link latency in real time.', panel: 'telemetry' },
